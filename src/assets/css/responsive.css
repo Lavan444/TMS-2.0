@@ -1,0 +1,1012 @@
+/* @media screen and (max-width:332px){
+    .addcan-ac button{
+        margin-bottom: 8px;
+    }
+} */
+
+@media screen and (max-width:575px) {
+    .changestatus-popup {
+        width: 90vw !important;
+    }
+
+    .interview-popup.p-dialog.p-component {
+        width: 80vw !important;
+    }
+
+    .popup-header-bg .d-flex {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .popup-header-bg .d-flex .p-component {
+        margin-bottom: 4px;
+    }
+
+    .popup-header-bg .d-flex .preview-btn.ms-auto {
+        margin: 0 auto !important;
+    }
+
+    .candidate-form .container-fluid {
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+
+    .candidate-form .p-tabview-nav {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 4px !important;
+    }
+
+    .footer.detailsformfooter .container-fluid {
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+
+    .p-dialog .p-dialog-content {
+        padding: 20px 20px;
+    }
+
+    .view-form-sidebar .p-tabview.tabview-sett .p-tabview-nav {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0px 14px;
+        margin-bottom: 0px;
+        margin-top: 8px;
+    }
+
+    .view-form-sidebar .p-tabview.tabview-sett .p-tabview-nav .p-unselectable-text {
+        margin-bottom: 10px;
+    }
+
+    .breadcrumb-card.addcandid-sec {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .view-form-sidebar .p-tabview .p-tabview-nav .p-unselectable-text {
+        margin-bottom: 10px;
+        margin-right: 10px;
+    }
+
+    .view-form-sidebar.p-sidebar {
+        width: 90vw;
+    }
+
+    .view-form-sidebar .pipelinetabs .p-tabview.p-component.p-tabview-scrollable {
+        max-width: 700px !important;
+        overflow: hidden;
+    }
+
+    .breadcrumb-card.addcandid-sec .action-items {
+        margin-bottom: 10px;
+    }
+
+    .importres-sec {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: start !important;
+    }
+
+    .importres-sec .action-items {
+        margin-bottom: 10px;
+    }
+
+    .action-items button {
+        /* margin-bottom: 10px !important; */
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .action-items button:not(:disabled).mainbtn.resbtn {
+        margin-bottom: 0px !important;
+    }
+
+    .action-items .linkjobs {
+        margin-bottom: 10px !important;
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .action-items button.resbtn {
+        margin-bottom: 0px !important;
+    }
+
+    .action-items .linkjobs {
+        margin-bottom: 10px !important;
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .action-items .p-dropdown {
+        margin-bottom: 10px !important;
+    }
+
+    .action-items .p-dropdown span {
+        font-size: 14px !important;
+        line-height: 20px;
+    }
+
+    .action-items .p-dropdown .p-button-label span {
+        font-size: 14px !important;
+        line-height: 20px;
+    }
+
+    .print-actitems {
+        display: block;
+    }
+
+    .action-items .p-fileupload {
+        margin-bottom: 10px !important;
+    }
+
+    .canprint-actitems {
+        display: flex;
+        justify-content: start;
+        flex-wrap: wrap;
+    }
+
+    .actjobsum .allbtns {
+        display: flex;
+        gap: .5rem !important;
+        justify-content: start !important
+    }
+
+    .p-sidebar-right .p-sidebar {
+        width: 80vw;
+        height: 100%;
+    }
+
+    .address-popup.p-dialog.p-component {
+        width: 85vw !important;
+    }
+
+    .view-form-sidebar .p-tabview .p-tabview-nav {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .p-sidebar-right .view-form-sidebar.p-sidebar {
+        width: 80vw !important;
+    }
+
+    .p-component * {
+        font-size: 14px;
+    }
+
+    .actjobsumtable .p-datatable .p-datatable-thead>tr>th {
+        padding: 8px 8px 8px 8px;
+    }
+
+    .actjobsumtable .p-datatable .p-datatable-tbody>tr>td {
+        padding: 8px 8px 8px 8px;
+    }
+
+    .allact-tabs .import-res-btn {
+        font-size: 14px;
+    }
+
+    body[data-sidebar=dark] #sidebar-menu ul li ul.sub-menu li a {
+        font-size: 14px;
+    }
+
+    #sidebar-menu ul li a {
+        font-size: 15px;
+    }
+
+    .p-dialog .p-dialog-header .p-dialog-title {
+        font-size: 18px;
+    }
+
+    .view-form-sidebar .tabview-sett .crudbtn {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .view-form-sidebar .tabview-sett .crudbtn .btn {
+        margin-bottom: 6px;
+    }
+
+    .sett-popup .p-tabview .p-tabview-panels {
+        padding: 0px;
+    }
+
+    .sett-popup.p-dialog .p-dialog-content {
+        padding: 10px 20px 20px 20px;
+    }
+
+    .page-title-box .page-title {
+        font-size: 20px;
+    }
+
+    .sidebar-header h3 {
+        font-size: 18px;
+    }
+
+    .addfield-pop {
+        font-size: 14px !important;
+    }
+
+    .header-pop {
+        width: 85vw;
+    }
+
+    .advan-modal h4 {
+        font-size: 14px !important;
+    }
+
+    .footer-tabsec {
+        display: none;
+    }
+
+    .footer-back .paginator-custom.pagination-border.p-paginator.p-component {
+        padding: 0rem 0rem !important;
+    }
+
+    .footer-popup.p-dialog.p-component {
+        width: 80vw !important;
+    }
+
+    .footer-back .gear-picklist {
+        padding-top: 0px;
+    }
+
+    .footericons {
+        padding-top: 10px;
+    }
+
+    /* 4-2-2025 */
+    .clr-icons2 {
+        display: block;
+    }
+
+    .clr-icons1 {
+        display: none;
+    }
+
+    /* .icons-ac button{
+        margin-bottom: 8px;
+    } */
+    /* .drop-ac .p-cascadeselect{
+        margin-bottom: 8px;
+    } */
+    .clr-icons {
+        float: left;
+    }
+
+    /* .allact-tabs .drop-ac button {
+        margin-bottom: 8px;
+    } */
+    /* .allact-tabs .drop-ac .import-res-btn{
+        margin-bottom: 8px;
+    } */
+    /* 
+    .addcan-ac button{
+        margin-bottom: 8px;
+    }
+    .icons-ac button{
+        margin-bottom: 8px;
+    }
+    .drop-ac .p-cascadeselect{
+        margin-bottom: 8px;
+    } */
+
+    .link-candidates.p-dialog.p-component {
+        width: 80vw !important;
+    }
+
+    .cand-details.p-dialog.p-component {
+        width: 90vw !important;
+    }
+
+    .footer.footer-back {
+        display: none;
+    }
+}
+
+@media screen and (min-width:576px) and (max-width:767px) {
+    .changestatus-popup {
+        width: 70vw !important;
+    }
+    .interview-popup.p-dialog.p-component {
+        width: 60vw !important;
+    }
+
+    .popup-header-bg .d-flex {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .popup-header-bg .d-flex .p-component {
+        margin-bottom: 4px;
+    }
+
+    .popup-header-bg .d-flex .preview-btn.ms-auto {
+        margin: 0 auto !important;
+    }
+
+    .footer.footer-back {
+        display: none;
+    }
+
+    .link-candidates.p-dialog.p-component {
+        width: 75vw !important;
+    }
+
+    .cand-details.p-dialog.p-component {
+        width: 90vw !important;
+    }
+
+    .clr-icons {
+        float: left;
+    }
+
+    .footer-tabsec {
+        display: none;
+    }
+
+    .footer-back .paginator-custom.pagination-border.p-paginator.p-component {
+        padding: 0rem 0rem !important;
+    }
+
+    .footer-popup.p-dialog.p-component {
+        width: 80vw !important;
+    }
+
+    .footer-back .gear-picklist {
+        padding-top: 0px;
+    }
+
+    .footericons {
+        padding-top: 10px;
+    }
+
+    .candidate-form .container-fluid {
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+
+    .candidate-form .p-tabview-nav {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 4px !important;
+    }
+
+    .footer.detailsformfooter .container-fluid {
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+
+    .view-form-sidebar .p-tabview.tabview-sett .p-tabview-nav {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0px 14px;
+        margin-bottom: 0px;
+        margin-top: 0px;
+    }
+
+    .view-form-sidebar .p-tabview.tabview-sett .p-tabview-nav .p-unselectable-text {
+        margin-bottom: 10px;
+    }
+
+    .view-form-sidebar .p-tabview.tabview-sett .p-tabview-nav .p-unselectable-text {
+        margin-bottom: 10px;
+    }
+
+    .view-form-sidebar.p-sidebar {
+        width: 90vw;
+    }
+
+    .view-form-sidebar.canviewform .p-tabview .p-tabview-nav {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .breadcrumb-card.addcandid-sec {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .breadcrumb-card.addcandid-sec .action-items {
+        margin-bottom: 10px;
+    }
+
+    .importres-sec {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: start;
+    }
+
+    .importres-sec .action-items {
+        margin-bottom: 10px;
+    }
+
+    .action-items button {
+        /* margin-bottom: 10px !important; */
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .p-component * {
+        font-size: 14px;
+    }
+
+    .action-items button.resbtn {
+        margin-bottom: 0px !important;
+    }
+
+    /* .action-items button {
+        margin-bottom: 10px !important;
+    } */
+
+    .action-items button:not(:disabled).mainbtn.resbtn {
+        margin-bottom: 0px !important;
+    }
+
+    .action-items .linkjobs {
+        margin-bottom: 10px !important;
+    }
+
+    .action-items .p-dropdown {
+        margin-bottom: 10px !important;
+    }
+
+    .print-actitems {
+        display: block;
+    }
+
+    .canprint-actitems {
+        display: flex;
+        justify-content: start;
+    }
+
+    .p-sidebar-right .p-sidebar {
+        width: 60vw;
+        height: 100%;
+    }
+
+    .view-form-sidebar .p-tabview .p-tabview-nav {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .p-sidebar-right .view-form-sidebar.p-sidebar {
+        width: 75vw !important;
+    }
+
+    .actjobsumtable .p-datatable .p-datatable-thead>tr>th {
+        padding: 8px 8px 8px 8px;
+    }
+
+    .actjobsumtable .p-datatable .p-datatable-tbody>tr>td {
+        padding: 8px 8px 8px 8px;
+    }
+
+    .allact-tabs .import-res-btn {
+        font-size: 14px;
+    }
+
+    body[data-sidebar=dark] #sidebar-menu ul li ul.sub-menu li a {
+        font-size: 14px;
+    }
+
+    #sidebar-menu ul li a {
+        font-size: 15px;
+    }
+
+    .p-dialog .p-dialog-header .p-dialog-title {
+        font-size: 18px;
+    }
+
+    .sett-popup .p-tabview .p-tabview-panels {
+        padding: 0px;
+    }
+
+    .page-title-box .page-title {
+        font-size: 20px;
+    }
+
+    .sidebar-header h3 {
+        font-size: 18px;
+    }
+
+    .header-pop {
+        width: 80vw;
+    }
+
+    /* .addcan-ac button{
+        margin-bottom: 8px;
+    } */
+    /* .icons-ac button{
+        margin-bottom: 8px;
+    } */
+    /* .drop-ac .p-cascadeselect{
+        margin-bottom: 8px;
+    } */
+}
+
+@media screen and (min-width:768px) and (max-width:991px) {
+
+    .changestatus-popup {
+        width: 70vw !important;
+    }
+
+    .popup-header-bg .d-flex {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .popup-header-bg .d-flex .p-component {
+        margin-bottom: 4px;
+    }
+
+    .popup-header-bg .d-flex .preview-btn.ms-auto {
+        margin: 0 auto !important;
+    }
+
+    .footer.footer-back {
+        display: none;
+    }
+
+    .footer.footer-back {
+        display: none;
+    }
+
+    .link-candidates.p-dialog.p-component {
+        width: 70vw !important;
+    }
+
+    .cand-details.p-dialog.p-component {
+        width: 90vw !important;
+    }
+
+    .clr-icons {
+        float: left;
+    }
+
+    .footer-tabsec {
+        display: none;
+    }
+
+    .footer-back .paginator-custom.pagination-border.p-paginator.p-component {
+        padding: 0rem 0rem !important;
+    }
+
+    .footer-popup.p-dialog.p-component {
+        width: 80vw !important;
+    }
+
+    .footer-back .gear-picklist {
+        padding-top: 0px;
+    }
+
+    .footericons {
+        padding-top: 10px;
+    }
+
+    /* .addcan-ac button{
+        margin-bottom: 8px;
+    } */
+    /* .icons-ac button{
+        margin-bottom: 8px;
+    } */
+    /* .drop-ac .p-cascadeselect{
+        margin-bottom: 8px;
+    } */
+    .header-pop {
+        width: 80vw;
+    }
+
+    .candidate-form .container-fluid {
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+    .candidate-form .p-tabview-nav {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 4px !important;
+    }
+
+    .footer.detailsformfooter .container-fluid {
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+    .view-form-sidebar .p-tabview.tabview-sett .p-tabview-nav {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 8px;
+    }
+
+    .view-form-sidebar .p-tabview.tabview-sett .p-tabview-nav .p-unselectable-text {
+        margin-bottom: 10px;
+    }
+
+    .view-form-sidebar.p-sidebar {
+        width: 80vw;
+    }
+
+    .view-form-sidebar.canviewform .p-tabview .p-tabview-nav {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .view-form-sidebar.canviewform .p-tabview .p-tabview-nav .p-unselectable-text {
+        margin-bottom: 10px;
+    }
+
+    .breadcrumb-card.addcandid-sec {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .breadcrumb-card.addcandid-sec .action-items {
+        margin-bottom: 10px;
+    }
+
+    .importres-sec {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: start;
+    }
+
+    .importres-sec .action-items {
+        margin-bottom: 10px;
+    }
+
+    /* 
+    .action-items button {
+        margin-bottom: 10px !important;
+    } */
+
+    .action-items button:not(:disabled).mainbtn.resbtn {
+        margin-bottom: 0px !important;
+    }
+
+    .action-items .linkjobs {
+        margin-bottom: 10px !important;
+    }
+
+    .action-items button.resbtn {
+        margin-bottom: 0px !important;
+    }
+
+    .action-items .linkjobs {
+        margin-bottom: 10px !important;
+    }
+
+    .action-items .p-dropdown {
+        margin-bottom: 10px !important;
+    }
+
+    .print-actitems {
+        display: block;
+    }
+
+    .canprint-actitems {
+        display: flex;
+        justify-content: start;
+    }
+
+    .p-sidebar-right .p-sidebar {
+        width: 60vw;
+        height: 100%;
+    }
+
+    .view-form-sidebar .p-tabview .p-tabview-nav {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .p-sidebar-right .view-form-sidebar.p-sidebar {
+        width: 70vw !important;
+    }
+}
+
+@media screen and (min-width:992px) and (max-width:1199px) {
+    .changestatus-popup {
+        width: 60vw !important;
+    }
+
+    .footer.footer-back {
+        display: none;
+    }
+
+    .link-candidates.p-dialog.p-component {
+        width: 65vw !important;
+    }
+
+    .cand-details.p-dialog.p-component {
+        width: 85vw !important;
+    }
+
+    .clr-icons {
+        float: left;
+    }
+
+    .footer-tabsec {
+        display: none;
+    }
+
+    .footer-back .paginator-custom.pagination-border.p-paginator.p-component {
+        padding: 0rem 0rem !important;
+    }
+
+    .footer-popup.p-dialog.p-component {
+        width: 80vw !important;
+    }
+
+    .footer-back .gear-picklist {
+        padding-top: 0px;
+    }
+
+    .footericons {
+        padding-top: 10px;
+    }
+
+    /* .addcan-ac button{
+        margin-bottom: 8px;
+    } */
+    /* .icons-ac button{
+        margin-bottom: 8px;
+    } */
+    /* .drop-ac .p-cascadeselect{
+        margin-bottom: 8px;
+    } */
+    .header-pop {
+        width: 75vw;
+    }
+
+    .view-form-sidebar .p-tabview.tabview-sett .p-tabview-nav {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 8px;
+    }
+
+    .view-form-sidebar .p-tabview.tabview-sett .p-tabview-nav .p-unselectable-text {
+        margin-bottom: 10px;
+    }
+
+    .view-form-sidebar.p-sidebar {
+        width: 80vw;
+    }
+
+    .breadcrumb-card.addcandid-sec {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .breadcrumb-card.addcandid-sec .action-items {
+        margin-bottom: 10px;
+    }
+
+    .importres-sec {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: start;
+    }
+
+    .importres-sec .action-items {
+        margin-bottom: 10px;
+    }
+
+    .print-actitems {
+        display: block;
+    }
+
+    /* .action-items button {
+        margin-bottom: 10px !important;
+    } */
+
+    .action-items button:not(:disabled).mainbtn.resbtn {
+        margin-bottom: 0px !important;
+    }
+
+    .action-items .linkjobs {
+        margin-bottom: 10px !important;
+    }
+
+    .action-items button.resbtn {
+        margin-bottom: 0px !important;
+    }
+
+    .action-items .linkjobs {
+        margin-bottom: 10px !important;
+    }
+
+    .action-items .p-dropdown {
+        margin-bottom: 10px !important;
+    }
+
+    .canprint-actitems {
+        display: flex;
+        justify-content: start;
+    }
+
+    .p-sidebar-right .p-sidebar {
+        width: 45vw;
+        height: 100%;
+    }
+
+    .view-form-sidebar .p-tabview .p-tabview-nav {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .p-sidebar-right .view-form-sidebar.p-sidebar {
+        width: 70vw !important;
+    }
+}
+
+@media screen and (min-width:1200px) and (max-width:1399px) {
+    .footer.footer-back {
+        display: none;
+    }
+
+    .link-candidates.p-dialog.p-component {
+        width: 60vw !important;
+    }
+
+    .cand-details.p-dialog.p-component {
+        width: 80vw !important;
+    }
+
+    .clr-icons {
+        float: left;
+    }
+
+    .footer-tabsec {
+        display: none;
+    }
+
+    .footer-back .paginator-custom.pagination-border.p-paginator.p-component {
+        padding: 0rem 0rem !important;
+    }
+
+    .footer-popup.p-dialog.p-component {
+        width: 80vw !important;
+    }
+
+    .footer-back .gear-picklist {
+        padding-top: 0px;
+    }
+
+    .footericons {
+        padding-top: 10px;
+    }
+
+    /* .addcan-ac button{
+        margin-bottom: 8px;
+    } */
+    /* .icons-ac button{
+        margin-bottom: 8px;
+    } */
+    /* .drop-ac .p-cascadeselect{
+        margin-bottom: 8px;
+    } */
+    .header-pop {
+        width: 60vw;
+    }
+
+    .importres-sec {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: start;
+    }
+
+    .importres-sec .action-items {
+        margin-bottom: 10px;
+    }
+
+    .view-form-sidebar .p-tabview.tabview-sett .p-tabview-nav {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 8px;
+    }
+
+    /* .action-items button {
+        margin-bottom: 10px !important;
+    } */
+
+    .action-items button:not(:disabled).mainbtn.resbtn {
+        margin-bottom: 0px !important;
+    }
+
+    .action-items .linkjobs {
+        margin-bottom: 10px !important;
+    }
+
+    .action-items button.resbtn {
+        margin-bottom: 0px !important;
+    }
+
+    .action-items .linkjobs {
+        margin-bottom: 10px !important;
+    }
+
+    .action-items .p-dropdown {
+        margin-bottom: 10px !important;
+    }
+
+    .print-actitems {
+        display: block;
+    }
+
+    .p-sidebar-right .p-sidebar {
+        width: 40vw;
+        height: 100%;
+    }
+
+    .view-form-sidebar .p-tabview .p-tabview-nav {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .p-sidebar-right .view-form-sidebar.p-sidebar {
+        width: 70vw !important;
+    }
+}
+
+@media screen and (min-width:1400px) and (max-width:1599px) {
+
+    /* .addcan-ac button{
+        margin-bottom: 8px;
+    } */
+    /* .icons-ac button{
+        margin-bottom: 8px;
+    }
+    .drop-ac .p-cascadeselect{
+        margin-bottom: 8px;
+    } */
+    .header-pop {
+        width: 50vw;
+    }
+
+    .view-form-sidebar .p-tabview.tabview-sett .p-tabview-nav {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 8px;
+    }
+
+    .view-form-sidebar .p-tabview.tabview-sett .p-tabview-nav .p-unselectable-text {
+        margin-bottom: 10px;
+    }
+
+    .action-items button:not(:disabled).mainbtn.resbtn {
+        margin-bottom: 0px !important;
+    }
+
+    .action-items .linkjobs {
+        margin-bottom: 10px !important;
+    }
+
+    .action-items button.resbtn {
+        margin-bottom: 0px !important;
+    }
+
+    .action-items .linkjobs {
+        margin-bottom: 10px !important;
+    }
+
+    .action-items .p-dropdown {
+        margin-bottom: 10px !important;
+    }
+
+    .print-actitems {
+        display: block;
+    }
+
+    .p-sidebar-right .p-sidebar {
+        width: 40vw;
+        height: 100%;
+    }
+
+    .view-form-sidebar .p-tabview .p-tabview-nav {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .p-sidebar-right .view-form-sidebar.p-sidebar {
+        width: 70vw !important;
+    }
+}

@@ -1,0 +1,4 @@
+.custom-hover-button:hover {
+    color: white !important; /* Change icon color to white on hover */
+    background-color: #4f46e5 !important; /* Optional: Add a background color on hover */
+}
