@@ -2558,13 +2558,13 @@ const ContactsAllActive = () => {
                 </span>
                 <span className="drop-ac">
 
-                  <SubmitContacttoCandidate />
+                  {/* <SubmitContacttoCandidate /> */}
 
-                  <AddJob />
+                  {/* <AddJob /> */}
 
-                  <EmailContacts />
+                  {/* <EmailContacts /> */}
 
-                  <CascadeSelect
+                  {/* <CascadeSelect
                     // value={selectedSchedule}
                     onChange={handleScheduleChange}
                     options={actScheduleOptions}
@@ -2574,9 +2574,9 @@ const ContactsAllActive = () => {
                     optionGroupChildren={['subItems', 'subItems']}
                     breakpoint="767px"
                     placeholder="Schedule"
-                  />
+                  /> */}
 
-                  <CascadeSelect
+                  {/* <CascadeSelect
                     value={selectedActSms}
                     // onChange={(e) => setSelectedActSms(e.value)}
                     options={actSmsOptions}
@@ -2586,7 +2586,7 @@ const ContactsAllActive = () => {
                     className="md:w-8rem me-1"
                     breakpoint="767px"
                     placeholder="SMS"
-                  />
+                  /> */}
 
                   <MoreACcontacts />
 

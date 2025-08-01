@@ -37,6 +37,8 @@ import dropbox from "../../assets/images/dropbox.png"
 import onedrive from "../../assets/images/one-drive.png"
 import { Radius } from "lucide-react"
 import profileImage from "../../assets/images/mahesh.png"
+import LinkEmployessPopup from "pms/common-for-all/LinkEmployessPopup"
+
 
 
 const AdminDashboard = () => {
@@ -6120,8 +6122,8 @@ const handlePermissionChange = (tabIdx, permIdx) => {
                             </div> */}
 
                             <div className="field mb-2">
-                              <label htmlFor="status">Link a contact</label>
-                              <Dropdown
+                              {/* <label htmlFor="status">Link a Employee</label> */}
+                              {/* <Dropdown
                                 id="status"
                                 className="w-full bgclr"
                                 value={formData.status}
@@ -6132,9 +6134,11 @@ const handlePermissionChange = (tabIdx, permIdx) => {
                                 }
                                 optionLabel="label"
                                 optionValue="value"
-                                filter // Enable search functionality
-                                filterBy="label" // Search by label (text)
-                              />
+                                filter 
+                                filterBy="label" 
+                              /> */}
+
+                              <LinkEmployessPopup />
                             </div>
 
                              {/* <div className="field mb-2">

@@ -3040,9 +3040,9 @@ const EmployeeAllActive = () => {
                 </span>
 
                 <span className="drop-ac">
-                  <EmailAC />
+                  {/* <EmailAC /> */}
 
-                  <CascadeSelect
+                  {/* <CascadeSelect
                     // value={selectedActSms}
                     options={actSmsOptions}
                     optionLabel="name"
@@ -3051,8 +3051,8 @@ const EmployeeAllActive = () => {
                     className="md:w-8rem me-1"
                     breakpoint="767px"
                     placeholder="SMS"
-                  />
-
+                  /> */}
+{/* 
                   <CascadeSelect
                     // value={selectedSchedule}
                     onChange={handleScheduleChange}
@@ -3063,15 +3063,15 @@ const EmployeeAllActive = () => {
                     optionGroupChildren={["subItems", "subItems"]}
                     breakpoint="767px"
                     placeholder="Schedule"
-                  />
+                  /> */}
 
-                  <SubmitCandidatetoJob />
+                  {/* <SubmitCandidatetoJob />
 
                   {selectedCustomers.length > 1 && (
                     <TalentScan />
                   )}
 
-                  <LinkJobs />
+                  <LinkJobs /> */}
 
                 </span>
               </Col>

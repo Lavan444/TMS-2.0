@@ -2391,8 +2391,7 @@ const CompaniesAllActive = () => {
 
                   <AddContact />
 
-                  <CascadeSelect
-                    // value={selectedSchedule}
+                  {/* <CascadeSelect
                     onChange={handleScheduleChange}
                     options={actScheduleOptions}
                     optionLabel="name"
@@ -2401,7 +2400,7 @@ const CompaniesAllActive = () => {
                     optionGroupChildren={['subItems', 'subItems']}
                     breakpoint="767px"
                     placeholder="Schedule"
-                  />
+                  /> */}
                   <MoreACcompanies />
                 </span>
               </Col>

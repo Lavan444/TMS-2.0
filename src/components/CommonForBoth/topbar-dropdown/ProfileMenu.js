@@ -467,7 +467,7 @@ They are an excellent mentor to groups and individuals within and outside of the
                 <Button icon="pi pi-user" className="mr-2" onClick={(event) => menuLeft.current.toggle(event)} aria-controls="popup_menu_left" aria-haspopup />
               </div> */}
               <div className="profilebtn">
-                <Tooltip target=".custom-profile-icon" content="Profile" position="bottom" style={{ marginTop: "5px" }} />
+                <Tooltip target=".custom-profile-avatar" content="Profile" position="bottom" style={{ marginTop: "5px" }} />
                 <CascadeSelect
                   // value={selectedActEmail}
                   onChange={handleSelectChange}
@@ -476,7 +476,37 @@ They are an excellent mentor to groups and individuals within and outside of the
                   optionGroupLabel="name"
                   optionGroupChildren={['subItems']}
                   className="addcus-cassel custom-cascadeselect"
-                  dropdownIcon={<i className="pi pi-user custom-profile-icon" onClick={handlePlusIconClick}></i>}
+                  dropdownIcon={
+                    <div 
+                      className="custom-profile-avatar" 
+                      onClick={handlePlusIconClick}
+                      style={{
+                        width: '32px',
+                        height: '32px',
+                        borderRadius: '50%',
+                        background: 'linear-gradient(90deg, #0e527d, #1a87cb)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: 'white',
+                        fontWeight: 'bold',
+                        fontSize: '12px',
+                        cursor: 'pointer',
+                        boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                        transition: 'all 0.3s ease'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.target.style.transform = 'scale(1.05)';
+                        e.target.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.target.style.transform = 'scale(1)';
+                        e.target.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+                      }}
+                    >
+                      MK
+                    </div>
+                  }
                   itemTemplate={itemTemplate}
                 />
               </div>
