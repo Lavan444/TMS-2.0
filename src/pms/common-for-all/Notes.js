@@ -36,13 +36,13 @@ const Notes = () => {
     const [subject, setSubject] = useState("");
     const [notes, setNotes] = useState("");
 
-    const [selectedJobs, setSelectedJobs] = useState([]);
+    const [selectedJobs, setSelectedJobs] = useState(null);
     const [jobs] = useState([
-        { id: "LavanKumar Kalvala", title: 'Frontend', contact: 'lavan9@infosys.com' },
-        { id: "Venkata Laxmi Valli", title: 'Frontend', contact: 'venkatalaxmi9@cognizant.com' },
-        { id: "Bhargavi Sunanda", title: 'SEO', contact: 'bhargavi9@capgemini.com' },
-        { id: "Nagendra Merga ", title: 'Content Writer', contact: 'nagendra9@catechnologies.com' },
-        { id: "Saikumar Kunda", title: 'Backend', contact: 'Saikumar9@l&tmindtre.com' },
+        { id: "Task-101", title: 'Add User Role Feature', contact: 'AI Generator (Proj-101)' },
+        { id: "STask-101.1", title: 'Generate Monthly Report', contact: 'AI Generator (Proj-101)' },
+        { id: "STask-101.2", title: 'Payroll Management', contact: 'AI Generator (Proj-101)' },
+        { id: "Bug-101.1", title: 'Content Writer', contact: 'AI Generator (Proj-101)' },
+        { id: "Task-102", title: 'E-Invoice Integration', contact: 'AI Generator (Proj-101)' },
     ]);
 
     const [searchText, setSearchText] = useState('');
@@ -54,15 +54,15 @@ const Notes = () => {
     };
 
     const handleSave = () => {
-        const selectedJobTitles = selectedJobs.map((job) => job.id).join(', ');
-        setSelectedJobTitles(selectedJobTitles);
-        setJobDetailsVisible(false);
-    };
+    const selectedJobTitles = selectedJobs ? `${selectedJobs.id}, ${selectedJobs.title}` : '';
+    setSelectedJobTitles(selectedJobTitles);
+    setJobDetailsVisible(false);
+};
 
     const handleRefresh = () => {
-        setSelectedJobs([]);
-        setSearchText('');
-    };
+    setSelectedJobs(null); // Change from [] to null
+    setSearchText('');
+};
 
     const filteredJobs = jobs.filter(
         (job) =>
@@ -143,13 +143,13 @@ const Notes = () => {
 
                     <Col lg={12}>
                         <div className="field">
-                            <label htmlFor="job" className="block mb-0">Candidates</label>
+                            <label htmlFor="job" className="block mb-0">Work Type</label>
                             <div className="d-flex align-items-center" style={{ position: 'relative' }}>
                                 <InputText
                                     id="job"
                                     value={selectedJobTitles}
                                     onChange={(e) => setSelectedJobTitles(e.target.value)}
-                                    placeholder="Select candidate"
+                                    placeholder="Select Work Type"
                                     className="w-full"
                                     style={{ paddingRight: '2rem' }} // Ensure space for the icon
                                 />
@@ -166,7 +166,7 @@ const Notes = () => {
                                 ></i>
                             </div>
                             <Dialog
-                                header="Candidate Details"
+                                header="Work Type Details"
                                 visible={jobDetailsVisible}
                                 onHide={() => setJobDetailsVisible(false)}
                                 style={{ width: '40vw' }}
@@ -178,7 +178,7 @@ const Notes = () => {
                                     <Col lg={12}>
                                         <div className="p-inputgroup mb-3" style={{ position: 'relative' }}>
                                             <InputText
-                                                placeholder="Search Candidates"
+                                                placeholder="Search Work Type"
                                                 value={searchText}
                                                 onInput={(e) => setSearchText(e.target.value)}
                                                 style={{ paddingRight: '2rem' }} // Space for the icon
@@ -207,10 +207,10 @@ const Notes = () => {
                                     rowsPerPageOptions={[5, 10, 25]}
                                     size="small" // Set size to small
                                 >
-                                    <Column selectionMode="multiple" style={{ width: '3em' }} />
-                                    <Column field="id" header="Candidate Name" />
-                                    <Column field="title" header="Designation" />
-                                    <Column field="contact" header="Email" />
+                                    <Column selectionMode="single" style={{ width: '3em' }} />
+                                    <Column field="id" header="Work Type code" />
+                                    <Column field="title" header="Description" />
+                                    <Column field="contact" header="Project" />
                                 </DataTable>
 
                                 {/* Actions */}

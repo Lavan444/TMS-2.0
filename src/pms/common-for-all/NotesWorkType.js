@@ -37,11 +37,13 @@ const NotesCandidate = () => {
 
     const [selectedJobs, setSelectedJobs] = useState([]);
     const [jobs] = useState([
-        { id: "LavanKumar Kalvala", title: 'Frontend', contact: 'lavan9@infosys.com' },
-        { id: "Venkata Laxmi Valli", title: 'Frontend', contact: 'venkatalaxmi9@cognizant.com' },
-        { id: "Bhargavi Sunanda", title: 'SEO', contact: 'bhargavi9@capgemini.com' },
-        { id: "Nagendra Merga ", title: 'Content Writer', contact: 'nagendra9@catechnologies.com' },
-        { id: "Saikumar Kunda", title: 'Backend', contact: 'Saikumar9@l&tmindtre.com' },
+       
+
+         { id: "Task-101", title: 'Add User Role Feature', contact: 'AI Generator (Proj-101)' },
+        { id: "STask-101.1", title: 'Generate Monthly Report', contact: 'AI Generator (Proj-101)' },
+        { id: "STask-101.2", title: 'Payroll Management', contact: 'AI Generator (Proj-101)' },
+        { id: "Bug-101.1", title: 'Content Writer', contact: 'AI Generator (Proj-101)' },
+        { id: "Task-102", title: 'E-Invoice Integration', contact: 'AI Generator (Proj-101)' },
     ]);
 
     const [searchText, setSearchText] = useState('');
@@ -86,7 +88,7 @@ const NotesCandidate = () => {
                 <i class="pi pi-file"></i>
             </button>
 
-            <Dialog header="NOTE - LavanKumar Kalvala, Frontend Developer" visible={visibleLinkJob} onHide={() => setVisibleLinkJob(false)}
+            <Dialog header="NOTE - Task-101, Add User Role Feature" visible={visibleLinkJob} onHide={() => setVisibleLinkJob(false)}
                 style={{ width: '50vw' }} breakpoints={{ '960px': '75vw', '641px': '100vw' }} className="link-candidates">
                 <Row>
                     <Col lg={6}>
@@ -148,7 +150,7 @@ const NotesCandidate = () => {
                                     id="job"
                                     value={selectedJobTitles}
                                     onChange={(e) => setSelectedJobTitles(e.target.value)}
-                                    placeholder="Lavankumar kalvala, Frontend Developer"
+                                    placeholder="Task-101, Add User Role Feature"
                                     className="w-full"
                                     style={{ paddingRight: '2rem' }} // Ensure space for the icon
                                     disabled

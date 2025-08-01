@@ -60,6 +60,8 @@ import WorkType from "../common-for-all/WorkType"
 import ProjectOverview from '../../features/projects/components/ProjectOverview';;;
 import AddProjectDetails from "pms/common-for-all/AddProjectDetails"
 
+import LinkJobsPopup from "pms/common-for-all/LinkCandidatesPopup"
+
 const AllActiveemp = ({ workTypes }) => {
   const Type = workTypes
   console.log(Type, "kdsfhbdhb");
@@ -2557,44 +2559,77 @@ const AllActiveemp = ({ workTypes }) => {
 
   const [selectedSchedule, setSelectedSchedule] = useState(null)
 
-  const actScheduleOptions = [
-    // {
-    //   name: "Interview",
-    //   code: "SCH-IN",
-    //   icon: "pi pi-user",
-    //   action: () => SetInterviewpop(true),
-    // },
-    {
-      name: "Call",
-      code: "SCH-CA",
-      icon: "pi pi-phone",
-      action: () => SetInterviewpopCall(true),
-    },
-    {
-      name: "Meeting",
-      code: "SCH-ME",
-      icon: "pi pi-calendar",
-      action: () => SetInterviewpopMeeting(true),
-    },
-    {
-      name: "Task",
-      code: "SCH-TA",
-      icon: "pi pi-check-square",
-      action: () => SetInterviewpopTask(true),
-    },
-    // {
-    //   name: "Event",
-    //   code: "SCH-EV",
-    //   icon: "pi pi-bell",
-    //   action: () => SetInterviewpopEvent(true),
-    // },
-    {
-      name: "Other",
-      code: "SCH-OT",
-      icon: "pi pi-ellipsis-h",
-      action: () => SetInterviewpopOther(true),
-    },
-  ]
+ const actScheduleOptions = [
+  {
+    name: "Call",
+    code: "SCH-CA",
+    icon: "pi pi-phone",
+    action: () => setScheduleDialog({ visible: true, type: 'call', title: 'Schedule Call' }),
+  },
+  {
+    name: "Meeting",
+    code: "SCH-ME",
+    icon: "pi pi-calendar",
+    action: () => setScheduleDialog({ visible: true, type: 'meeting', title: 'Schedule Meeting' }),
+  },
+  // {
+  //   name: "Task",
+  //   code: "SCH-TA",
+  //   icon: "pi pi-check-square",
+  //   action: () => setScheduleDialog({ visible: true, type: 'task', title: 'Schedule Task' }),
+  // },
+  {
+    name: "Event",
+    code: "SCH-EV",
+    icon: "pi pi-bell",
+    action: () => setScheduleDialog({ visible: true, type: 'event', title: 'Schedule Event' }),
+  },
+  {
+    name: "Other",
+    code: "SCH-OT",
+    icon: "pi pi-ellipsis-h",
+    action: () => setScheduleDialog({ visible: true, type: 'other', title: 'Schedule Other' }),
+  },
+];
+
+
+const getSubTypeOptions = (type) => {
+  switch (type) {
+    case 'call':
+      return typeCall;
+    case 'meeting':
+      return typeMeeting;
+    case 'task':
+    case 'event':
+    case 'other':
+    default:
+      return typeInterview;
+  }
+};
+
+const getTypeValue = (type) => {
+  switch (type) {
+    case 'call':
+      return intertype3;
+    case 'meeting':
+      return intertype2;
+    case 'task':
+      return intertype1;
+    case 'event':
+      return intertype4;
+    case 'other':
+      return intertype5;
+    default:
+      return '';
+  }
+};
+
+
+const [scheduleDialog, setScheduleDialog] = useState({
+  visible: false,
+  type: '', // 'call', 'meeting', 'task', 'event', 'other'
+  title: ''
+});
 
   const handleScheduleChange = e => {
     setSelectedSchedule(e.value)
@@ -3661,6 +3696,77 @@ const AllActiveemp = ({ workTypes }) => {
 
   // Company end
 
+  // subtype worktype  start
+  
+  const [selectedProjectStatus, setSelectedProjectStatus] = useState("Active")
+    const [statusWorkTypes1, setStatusWorkTypes1] = useState([
+      {
+        name: 'Introductory Call',
+        color: '#000000',
+        id: 'custom-task',
+        statuses: ['Pending', 'Processing', 'Completed']
+      },
+      {
+        name: 'Requirement Discussion',
+        color: '#000000',
+        id: 'in-active',
+        statuses: ['Pending', 'Processing', 'Completed']
+      },
+      {
+        name: 'Daily Stand-up',
+        color: '#000000',
+        id: 'dnd',
+        statuses: ['Pending', 'Processing', 'Completed']
+      },
+      {
+        name: 'Client Meeting',
+        color: '#000000',
+        id: 'custom-task',
+        statuses: ['Pending', 'Processing', 'Completed']
+      },
+      {
+        name: 'Feedback Session',
+        color: '#000000',
+        id: 'in-active',
+        statuses: ['Pending', 'Processing', 'Completed']
+      },
+      {
+        name: 'Follow-up Call',
+        color: '#000000',
+        id: 'dnd',
+        statuses: ['Pending', 'Processing', 'Completed']
+      },
+      {
+        name: 'Training Session',
+        color: '#000000',
+        id: 'dnd',
+        statuses: ['Pending', 'Processing', 'Completed']
+      },
+    ]);
+  
+  
+    const statusDropdownWorkTypes1 = [
+      ...statusWorkTypes1,
+      { id: 'divider', disabled: true },
+      { name: 'Add Subtype', id: 'create-new-work-type' },
+      { name: 'Edit Subtype', id: 'edit-selected-work-type' }
+    ];
+  
+    const handleStatusWorkTypesChange1 = (updatedWorkTypes) => {
+      setStatusWorkTypes1(updatedWorkTypes);
+    };
+  
+    const handleStatusSelectionChange1 = (selectedWorkType) => {
+      setSelectedProjectStatus(selectedWorkType);
+    };
+  
+    // subtype worktype  end
+
+     // schedule text editor start
+
+      const [scheduleText, setScheduleText] = useState("The Minutes of Meeting (MoM) document captures the key points discussed, decisions made, and action items agreed upon during the meeting. It serves as a record for reference and accountability, ensuring all participants are aligned on the outcomes and next steps.")
+
+     // schedule text editor end
 
 
   return (
@@ -3811,9 +3917,9 @@ const AllActiveemp = ({ workTypes }) => {
                       placeholder="Schedule"
                     />
 
-                    <SubmitCandidatetoJob />
+                    {/* <SubmitCandidatetoJob /> */}
 
-                    {selectedCustomers.length > 1 && <TalentScan />}
+                    {/* {selectedCustomers.length > 1 && <TalentScan />} */}
 
                     <LinkJobs />
                   </span>
@@ -3821,7 +3927,7 @@ const AllActiveemp = ({ workTypes }) => {
               </Col>
               <Col xxl={2} xl={12} lg={12} sm={12}>
                 <div className="clr-icons">
-                  {selectedCustomers.length > 0 ? (
+                  {selectedTasksData.length > 0 ? (
                     <NotesCandidate />
                   ) : (
                     <Notes />
@@ -3837,7 +3943,7 @@ const AllActiveemp = ({ workTypes }) => {
                       maxFileSize={1000000}
                       onUpload={onUpload}
                       chooseLabel="" // Remove text
-                      chooseOptions={{
+                      chooseOptions={{  
                         className: "p-button p-button-icon-only mr-1 icons-btn",
                         icon: "pi pi-file-import",
                         iconOnly: true,
@@ -4188,7 +4294,7 @@ const AllActiveemp = ({ workTypes }) => {
                           Parent Work Type
                         </label>
 
-                        {/* <AddProjectDetails /> */}
+                        <AddProjectDetails />
 
                         {/* {
                           
@@ -6822,2306 +6928,298 @@ const AllActiveemp = ({ workTypes }) => {
 
         {/* view employee end */}
 
-        {/* Interview schedule start */}
-        <Dialog
-          header="Interview Schedule"
-          visible={interviewpop}
-          className="interview-popup"
-          style={{ width: "50vw" }}
-          // onHide={() => { if (!interviewpop) return; SetInterviewpop(false); }}
-          onHide={() => {
-            SetInterviewpop(false)
-          }}
-        >
-          <form>
-            <p className="bg-form">
-              <div className="mb-4">
-                <Row className="mb-2">
-                  <Col xl={6}>
-                    <div className="p-field flex flex-column">
-                      <label htmlFor="interview">Type</label>
-                      <InputText
-                        disabled
-                        value={intertype}
-                        onChange={e => setintertype(e.target.value)}
-                      />
-                      {/* <Dropdown 
-                                                            // disabled
-                                                            value={intertype}
-                                                            onChange={(e) => setintertype(e.target.value)}
-                                                            options={interviewdroptype}
-                                                            className="w-full search-option" /> */}
-                    </div>
-                  </Col>
+       
 
+      
+
+      
+
+        
+
+       
+
+       
+
+{/* Replace all individual Dialog components with this single one: */} 
+
+<Dialog
+  header={scheduleDialog.title}
+  visible={scheduleDialog.visible}
+  className="interview-popup"
+  style={{ width: "50vw" }}
+  onHide={() => setScheduleDialog({ visible: false, type: '', title: '' })}
+>
+  <form>
+    <p className="bg-form">
+      <div className="mb-0">
+        <Row className="mb-2">
+          <Col xl={6}>
+            <div className="p-field flex flex-column">
+              <label htmlFor="interview">Type</label>
+              <InputText
+                disabled
+                value={getTypeValue(scheduleDialog.type)}
+                readOnly
+              />
+            </div>
+          </Col>
+
+          <Col xl={6}>
+            <div className="p-field flex flex-column">
+              <label htmlFor="integer" className="block">
+                Sub-Type
+              </label>
+              {/* <Dropdown
+                value={subtype}
+                onChange={e => setSubtype(e.value)}
+                options={getSubTypeOptions(scheduleDialog.type)}
+                optionLabel="name"
+                placeholder="Subtype"
+                className="w-full search-option"
+              /> */}
+
+              <WorkType1
+                                  initialWorkTypes={statusWorkTypes1}
+                                  dropdownWorkTypes={statusDropdownWorkTypes1}
+                                  onWorkTypesChange={handleStatusWorkTypesChange1}
+                                  onSelectionChange={handleStatusSelectionChange1}
+                                />
+
+
+            </div>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col xl={6}>
+            <Row className="mb-2">
+              <Col xl={6}>
+                <div className="p-field flex-auto">
+                  <label htmlFor="buttondisplay" className="block">
+                    Start date
+                  </label>
+                  <Calendar
+                    value={startdate}
+                    onChange={e => setStartdate(e.value)}
+                    showIcon
+                  />
+                </div>
+              </Col>
+
+              <Col xl={6}>
+                <div className="p-field flex-auto">
+                  <label htmlFor="buttondisplay" className="block">
+                    Time
+                  </label>
+                  <Calendar
+                    value={starttime}
+                    onChange={e => setStarttime(e.value)}
+                    showIcon
+                    timeOnly
+                    icon={() => <i className="pi pi-clock" />}
+                  />
+                </div>
+              </Col>
+            </Row>
+          </Col>
+
+          <Col xl={6}>
+            <Row className="mb-2">
+              <Col xl={6}>
+                <div className="flex-auto">
+                  <label htmlFor="buttondisplay" className="block">
+                    End date
+                  </label>
+                  <Calendar
+                    value={enddate}
+                    onChange={e => setenddate(e.value)}
+                    showIcon
+                  />
+                </div>
+              </Col>
+
+              <Col xl={6}>
+                <div className="flex-auto">
+                  <label htmlFor="buttondisplay" className="block">
+                    Time
+                  </label>
+                  <Calendar
+                    value={endtime}
+                    onChange={e => setendtime(e.value)}
+                    showIcon
+                    timeOnly
+                    icon={() => <i className="pi pi-clock" />}
+                  />
+                </div>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </div>
+
+      <div className="mb-0">
+        <Row className="mb-0">
+          
+            <Col xl={6}>
+              <div className="p-field flex flex-column">
+                                <label For="Candidate">Project</label>
+                                <MultiSelect
+                                  value={condidatevalu}
+                                  disabled
+                                  onChange={e => {
+                                    condidatelist(e)
+                                  }}
+                                  options={typeInterviewcondi}
+                                  optionLabel="name"
+                                  placeholder={`AI Generator (Proj-101)`}
+                                  maxSelectedLabels={0}
+                                  className="w-full"
+                                />
+                              </div>
+            </Col>
+         
+            <LinkJobsPopup />
+
+
+        </Row>
+
+        <Row className="mb-2">
+         
+          <Col xl={6}>
+            <div className="p-field flex flex-column">
+              <label htmlFor="username">Subject</label>
+              <InputText
+                placeholder="Call Request to Discuss Project Updates"
+                value={subjectval}
+                onChange={e => setsubjectval(e.target.value)}
+              />
+            </div>
+          </Col>
+        </Row>
+
+        <Row className="mb-2 mt-3">
+          <Col xl={12}>
+            <div className="">
+              <InputTextarea
+                className="w-full"
+                value={popTextares}
+                onChange={e => setPopTextares(e.target.value)}
+                placeholder="This is to schedule a quick sync-up regarding our ongoing tasks and any blockers. We’ll keep it short and focused on progress tracking and planning ahead."
+                rows={3}
+                cols={20}
+              />
+            </div>
+          </Col>
+        </Row>
+      </div>
+
+     
+
+
+      <div>
+        <Row className="mb-2">
+          <Col lg={6}>
+            <Row>
+              <Col xl={6}>
+                <div className="p-field flex flex-column">
+                  <label htmlFor="Priority" className="block">
+                    Priority
+                  </label>
+                  <Dropdown
+                    value={priority}
+                    onChange={e => setPriority(e.value)}
+                    options={priorityValue}
+                    optionLabel="name"
+                    placeholder="Priority"
+                    className="w-full search-option"
+                  />
+                </div>
+              </Col>
+              <Col xl={6}>
+                <Row className="mt-2">
                   <Col xl={6}>
-                    <div className="p-field flex flex-column">
-                      <label htmlFor="integer" className=" block">
-                        Sub-Type
+                    <div className="d-flex align-items-center mt-4">
+                      <Checkbox
+                        inputId="checkbox"
+                        checked={popchecked}
+                        onChange={handlePopupCheckbox}
+                      />
+                      <label htmlFor="username" className="ms-1 mt-2">
+                        Completed
                       </label>
-                      <Dropdown
-                        value={subtype}
-                        onChange={e => setSubtype(e.value)}
-                        options={typeInterview}
-                        optionLabel="name"
-                        placeholder="Subtype"
-                        className="w-full search-option"
-                      />
                     </div>
                   </Col>
-                </Row>
-
-                <Row>
-                  <Col xl={6}>
-                    <Row className="mb-2">
-                      <Col xl={6}>
-                        <div className="p-field flex-auto">
-                          <label htmlFor="buttondisplay" className="block">
-                            Start date
-                          </label>
-                          <Calendar
-                            value={startdate}
-                            onChange={e => setStartdate(e.value)}
-                            showIcon
-                          />
-                        </div>
-                      </Col>
-
-                      <Col xl={6}>
-                        <div className="p-field flex-auto">
-                          <label htmlFor="buttondisplay" className="block">
-                            Time
-                          </label>
-                          <Calendar
-                            value={starttime}
-                            onChange={e => setStarttime(e.value)}
-                            showIcon
-                            timeOnly
-                            icon={() => <i className="pi pi-clock" />}
-                          />
-                        </div>
-                      </Col>
-                    </Row>
-                  </Col>
 
                   <Col xl={6}>
-                    <Row className="mb-2">
-                      <Col xl={6}>
-                        <div className="flex-auto">
-                          <label htmlFor="buttondisplay" className="block">
-                            End date
-                          </label>
-                          <Calendar
-                            value={enddate}
-                            onChange={e => setenddate(e.value)}
-                            showIcon
-                          />
-                        </div>
-                      </Col>
-
-                      <Col xl={6}>
-                        <div className="flex-auto">
-                          <label htmlFor="buttondisplay" className="block">
-                            Time
-                          </label>
-
-                          <Calendar
-                            value={endtime}
-                            onChange={e => setendtime(e.value)}
-                            showIcon
-                            timeOnly
-                            icon={() => <i className="pi pi-clock" />}
-                          />
-                        </div>
-                      </Col>
-                    </Row>
-                  </Col>
-                </Row>
-              </div>
-
-              <div className="mb-4">
-                <Row className="mb-2">
-                  {/* <Col xl={6}>
-                    <div className="flex flex-column">
-                      <label For="Priority">Jobs List</label>
-                      <Dropdown
-                        value={subtypeget}
-                        onChange={e => setsubtypeget(e.value)}
-                        options={jobStatusDrop}
-                        optionLabel="name"
-                        placeholder="Select a Status"
-                        className="w-full search-option"
+                    <div className="d-flex align-items-center mt-4">
+                      <Checkbox
+                        inputId="checkbox"
+                        checked={popchecked2}
+                        onChange={handlePopupCheckbox2}
                       />
-                    </div>
-                  </Col> */}
-                  <LinkContactsPopup />
-
-                  <Col xl={6}>
-                    {/* <div className="p-field flex flex-column">
-                      <label
-                        For="Priority"
-                        className=" block"
-                      >
-                        Contact
+                      <label htmlFor="username" className="ms-1 mt-2">
+                        Private
                       </label>
-
-                      <Dropdown
-                        value={prioritycontact}
-                        onChange={(e) => setprioritycontact(e.value)}
-                        options={typeInterviewcontact}
-                        optionLabel="name"
-                        placeholder="Contact"
-                        className="w-full search-option"
-                      />
-                    </div> */}
-                    {/* <LinkContactsPopup/> */}
-                    <LinkContact2Popup />
-                  </Col>
-                </Row>
-
-                <Row className="mb-2">
-                  <Col xl={6}>
-                    <div className="p-field flex flex-column">
-                      <label For="Candidate">Candidate</label>
-                      <MultiSelect
-                        value={condidatevalu}
-                        disabled
-                        onChange={e => {
-                          condidatelist(e)
-                        }}
-                        options={typeInterviewcondi}
-                        optionLabel="name"
-                        placeholder={`Lavankumar Kalvala`}
-                        maxSelectedLabels={0}
-                        className="w-full"
-                      />
-                      {/* <Dropdown
-                                                            value={condidatevalu}
-                                                            onChange={e => setcondidatevalu(e.value)}
-                                                            options={typeInterviewcondi}
-                                                            optionLabel="name"
-                                                            placeholder="Select a Status"
-                                                            className="w-full search-option"
-                                    
-                                                          /> */}
-                    </div>
-                  </Col>
-                  <Col xl={6}>
-                    <div className="p-field flex flex-column">
-                      <label htmlFor="username">Subject</label>
-                      <InputText
-                        placeholder="Subject"
-                        value={subjectval}
-                        onChange={e => setsubjectval(e.target.value)}
-                      />
                     </div>
                   </Col>
                 </Row>
+              </Col>
+            </Row>
+          </Col>
+          <Col xl={6}>
+            <label htmlFor="username">User Id's</label>
+            <Chips
+              value={userid}
+              onChange={e => setUserid(e.value)}
+              itemTemplate={customChip}
+              className="w-full"
+            />
+          </Col>
+        </Row>
 
-                <Row className="mb-2 mt-3">
-                  <Col xl={12}>
-                    <div className="">
-                      <InputTextarea
-                        className="w-full"
-                        value={popTextares}
-                        onChange={e => setPopTextares(e.target.value)}
-                        placeholder="Interview Test"
-                        rows={3}
-                        cols={20}
-                      />
-                    </div>
-                  </Col>
-                </Row>
-              </div>
-
-              <div>
-                <Row className="mb-2">
-                  <Col lg={6}>
-                    <Row>
-                      <Col xl={6}>
-                        <div className="p-field flex flex-column">
-                          <label For="Priority" className=" block">
-                            Priority
-                          </label>
-                          <Dropdown
-                            value={priority}
-                            onChange={e => setPriority(e.value)}
-                            options={priorityValue}
-                            optionLabel="name"
-                            placeholder="Priority"
-                            className="w-full search-option"
-                          />
-                        </div>
-                      </Col>
-                      <Col xl={6}>
-                        <Row className="mt-2">
-                          <Col xl={6}>
-                            <div className="d-flex align-items-center mt-4">
-                              <Checkbox
-                                inputId="checkbox"
-                                checked={popchecked}
-                                onChange={handlePopupCheckbox}
+         {popchecked && (
+                        <Row>
+                          <Col xl={12} className="mt-2">
+                            <label className="mb-1">Minutes of Meeting</label>
+                            <div className="schedule-editor">
+                              <Editor
+                                value={scheduleText}
+                                onTextChange={e => setScheduleText(e.htmlValue)}
+                                style={{ height: "auto" }}
                               />
-                              <label htmlFor="username" className="ms-1 mt-2">
-                                Completed
-                              </label>
-                            </div>
-                          </Col>
-
-                          <Col xl={6}>
-                            <div className="d-flex align-items-center mt-4">
-                              <Checkbox
-                                inputId="checkbox"
-                                checked={popchecked2}
-                                onChange={handlePopupCheckbox2}
-                              />
-                              <label htmlFor="username" className="ms-1 mt-2">
-                                Private
-                              </label>
                             </div>
                           </Col>
                         </Row>
-                      </Col>
-                    </Row>
-                  </Col>
-                  <Col xl={6}>
-                    <label htmlFor="username">User Id's</label>
-                    <Chips
-                      value={userid}
-                      onChange={e => setUserid(e.value)}
-                      itemTemplate={customChip}
-                      className="w-full"
-                    />
-                  </Col>
-                </Row>
-              </div>
+                      )}
+      </div>
+
+      <Row className="mt-3">
+        <Col xl={12}>
+          <div className="d-flex justify-content-end">
+            <button
+              type="submit"
+              className="btn btn-primary waves-effect waves-light btn btn-primary me-2 btn-main"
+            >
+              <i className="pi pi-save me-1"></i>
+              Save
+            </button>
+            <button
+              type="button"
+              className="btn btn-primary waves-effect waves-light me-2 cancel-outlinebtn"
+              onClick={() => setScheduleDialog({ visible: false, type: '', title: '' })}
+            >
+              <i className="pi pi-times me-1"></i>
+              Cancel
+            </button>
+          </div>
+        </Col>
+      </Row>
+    </p>
+  </form>
+</Dialog>
 
-              <Row className="mt-2">
-                <Col xl={12}>
-                  <div className="d-flex justify-content-end">
-                    <button
-                      type="submit"
-                      class="btn btn-primary waves-effect waves-light btn btn-primary me-2 btn-main"
-                    >
-                      <i className="pi pi-save me-1"></i>
-                      Save
-                    </button>
-                    <button
-                      color="primary"
-                      className="btn btn-primary waves-effect waves-light me-2 cancel-outlinebtn"
-                    >
-                      <i className="pi pi-times me-1"></i>
-                      Cancel
-                    </button>
-                  </div>
-                </Col>
-              </Row>
-            </p>
-          </form>
-        </Dialog>
-        {/* Interview schedule end */}
 
-        {/* Interview schedule call start */}
-        <Dialog
-          header="Schedule Call"
-          visible={interviewpopCall}
-          className="interview-popup"
-          style={{ width: "50vw" }}
-          // onHide={() => { if (!interviewpop) return; SetInterviewpop(false); }}
-          onHide={() => {
-            SetInterviewpopCall(false)
-          }}
-        >
-          <form>
-            <p className="bg-form">
-              <div className="mb-4">
-                <Row className="mb-2">
-                  <Col xl={6}>
-                    <div className="p-field flex flex-column">
-                      <label htmlFor="interview">Type</label>
-                      <InputText
-                        disabled
-                        value={intertype3}
-                        onChange={e => setintertype1(e.target.value)}
-                      />
-                      {/* <Dropdown 
-                                                            // disabled
-                                                            value={intertype}
-                                                            onChange={(e) => setintertype(e.target.value)}
-                                                            options={interviewdroptype}
-                                                            className="w-full search-option" /> */}
-                    </div>
-                  </Col>
 
-                  <Col xl={6}>
-                    <div className="p-field flex flex-column">
-                      <label htmlFor="integer" className=" block">
-                        Sub-Type
-                      </label>
-                      <Dropdown
-                        value={subtype}
-                        onChange={e => setSubtype(e.value)}
-                        options={typeCall}
-                        optionLabel="name"
-                        placeholder="Subtype"
-                        className="w-full search-option"
-                      />
-                    </div>
-                  </Col>
-                </Row>
-
-                <Row>
-                  <Col xl={6}>
-                    <Row className="mb-2">
-                      <Col xl={6}>
-                        <div className="p-field flex-auto">
-                          <label htmlFor="buttondisplay" className="block">
-                            Start date
-                          </label>
-                          <Calendar
-                            value={startdate}
-                            onChange={e => setStartdate(e.value)}
-                            showIcon
-                          />
-                        </div>
-                      </Col>
-
-                      <Col xl={6}>
-                        <div className="p-field flex-auto">
-                          <label htmlFor="buttondisplay" className="block">
-                            Time
-                          </label>
-                          <Calendar
-                            value={starttime}
-                            onChange={e => setStarttime(e.value)}
-                            showIcon
-                            timeOnly
-                            icon={() => <i className="pi pi-clock" />}
-                          />
-                        </div>
-                      </Col>
-                    </Row>
-                  </Col>
-
-                  <Col xl={6}>
-                    <Row className="mb-2">
-                      <Col xl={6}>
-                        <div className="flex-auto">
-                          <label htmlFor="buttondisplay" className="block">
-                            End date
-                          </label>
-                          <Calendar
-                            value={enddate}
-                            onChange={e => setenddate(e.value)}
-                            showIcon
-                          />
-                        </div>
-                      </Col>
-
-                      <Col xl={6}>
-                        <div className="flex-auto">
-                          <label htmlFor="buttondisplay" className="block">
-                            Time
-                          </label>
-
-                          <Calendar
-                            value={endtime}
-                            onChange={e => setendtime(e.value)}
-                            showIcon
-                            timeOnly
-                            icon={() => <i className="pi pi-clock" />}
-                          />
-                        </div>
-                      </Col>
-                    </Row>
-                  </Col>
-                </Row>
-              </div>
-
-              <div className="mb-4">
-                <Row className="mb-2">
-                  <Col xl={6}>
-                    <div className="flex flex-column">
-                      <label For="Priority">Job Status</label>
-                      <Dropdown
-                        value={subtypeget}
-                        onChange={e => setsubtypeget(e.value)}
-                        options={jobStatusDrop}
-                        optionLabel="name"
-                        placeholder="Select a Status"
-                        className="w-full search-option"
-                      />
-                    </div>
-                  </Col>
-
-                  <LinkContactsPopup />
-                </Row>
-
-                <Row className="mb-2">
-                  <Col xl={6}>
-                    <div className="p-field flex flex-column">
-                      <label For="Candidate">Candidate</label>
-                      <MultiSelect
-                        value={condidatevalu}
-                        disabled
-                        onChange={e => {
-                          condidatelist(e)
-                        }}
-                        options={typeInterviewcondi}
-                        optionLabel="name"
-                        placeholder={`Lavankumar Kalvala`}
-                        maxSelectedLabels={0}
-                        className="w-full"
-                      />
-                      {/* <Dropdown
-                                                            value={condidatevalu}
-                                                            onChange={e => setcondidatevalu(e.value)}
-                                                            options={typeInterviewcondi}
-                                                            optionLabel="name"
-                                                            placeholder="Select a Status"
-                                                            className="w-full search-option"
-                                    
-                                                          /> */}
-                    </div>
-                  </Col>
-                  <Col xl={6}>
-                    <div className="p-field flex flex-column">
-                      <label htmlFor="username">Subject</label>
-                      <InputText
-                        placeholder="Subject"
-                        value={subjectval}
-                        onChange={e => setsubjectval(e.target.value)}
-                      />
-                    </div>
-                  </Col>
-                </Row>
-
-                <Row className="mb-2 mt-3">
-                  <Col xl={12}>
-                    <div className="">
-                      <InputTextarea
-                        className="w-full"
-                        value={popTextares}
-                        onChange={e => setPopTextares(e.target.value)}
-                        placeholder="Interview Test"
-                        rows={3}
-                        cols={20}
-                      />
-                    </div>
-                  </Col>
-                </Row>
-              </div>
-
-              <div>
-                <Row className="mb-2">
-                  <Col lg={6}>
-                    <Row>
-                      <Col xl={6}>
-                        <div className="p-field flex flex-column">
-                          <label For="Priority" className=" block">
-                            Priority
-                          </label>
-                          <Dropdown
-                            value={priority}
-                            onChange={e => setPriority(e.value)}
-                            options={priorityValue}
-                            optionLabel="name"
-                            placeholder="Priority"
-                            className="w-full search-option"
-                          />
-                        </div>
-                      </Col>
-                      <Col xl={6}>
-                        <Row className="mt-2">
-                          <Col xl={6}>
-                            <div className="d-flex align-items-center mt-4">
-                              <Checkbox
-                                inputId="checkbox"
-                                checked={popchecked}
-                                onChange={handlePopupCheckbox}
-                              />
-                              <label htmlFor="username" className="ms-1 mt-2">
-                                Completed
-                              </label>
-                            </div>
-                          </Col>
-
-                          <Col xl={6}>
-                            <div className="d-flex align-items-center mt-4">
-                              <Checkbox
-                                inputId="checkbox"
-                                checked={popchecked2}
-                                onChange={handlePopupCheckbox2}
-                              />
-                              <label htmlFor="username" className="ms-1 mt-2">
-                                Private
-                              </label>
-                            </div>
-                          </Col>
-                        </Row>
-                      </Col>
-                    </Row>
-                  </Col>
-                  <Col xl={6}>
-                    <label htmlFor="username">User Id's</label>
-                    <Chips
-                      value={userid}
-                      onChange={e => setUserid(e.value)}
-                      itemTemplate={customChip}
-                      className="w-full"
-                    />
-                  </Col>
-                </Row>
-              </div>
-
-              <Row className="">
-                <Col xl={12}>
-                  <div className="d-flex justify-content-end">
-                    <button
-                      type="submit"
-                      class="btn btn-primary waves-effect waves-light btn btn-primary me-2 btn-main"
-                    >
-                      <i className="pi pi-save me-1"></i>
-                      Save
-                    </button>
-                    <button
-                      color="primary"
-                      className="btn btn-primary waves-effect waves-light me-2 cancel-outlinebtn"
-                    >
-                      <i className="pi pi-times me-1"></i>
-                      Cancel
-                    </button>
-                  </div>
-                </Col>
-              </Row>
-            </p>
-          </form>
-        </Dialog>
-        {/* Interview schedule call end */}
-
-        {/* Interview schedule meeting start */}
-        <Dialog
-          header="Schedule Meeting"
-          visible={interviewpopMeeting}
-          className="interview-popup"
-          style={{ width: "50vw" }}
-          // onHide={() => { if (!interviewpop) return; SetInterviewpop(false); }}
-          onHide={() => {
-            SetInterviewpopMeeting(false)
-          }}
-        >
-          <form>
-            <p className="bg-form">
-              <div className="mb-4">
-                <Row className="mb-2">
-                  <Col xl={6}>
-                    <div className="p-field flex flex-column">
-                      <label htmlFor="interview">Type</label>
-                      <InputText
-                        disabled
-                        value={intertype2}
-                        onChange={e => setintertype(e.target.value)}
-                      />
-                      {/* <Dropdown 
-                                                            // disabled
-                                                            value={intertype}
-                                                            onChange={(e) => setintertype(e.target.value)}
-                                                            options={interviewdroptype}
-                                                            className="w-full search-option" /> */}
-                    </div>
-                  </Col>
-
-                  <Col xl={6}>
-                    <div className="p-field flex flex-column">
-                      <label htmlFor="integer" className=" block">
-                        Sub-Type
-                      </label>
-                      <Dropdown
-                        value={subtype}
-                        onChange={e => setSubtype(e.value)}
-                        options={typeMeeting}
-                        optionLabel="name"
-                        placeholder="Subtype"
-                        className="w-full search-option"
-                      />
-                    </div>
-                  </Col>
-                </Row>
-
-                <Row>
-                  <Col xl={6}>
-                    <Row className="mb-2">
-                      <Col xl={6}>
-                        <div className="p-field flex-auto">
-                          <label htmlFor="buttondisplay" className="block">
-                            Start date
-                          </label>
-                          <Calendar
-                            value={startdate}
-                            onChange={e => setStartdate(e.value)}
-                            showIcon
-                          />
-                        </div>
-                      </Col>
-
-                      <Col xl={6}>
-                        <div className="p-field flex-auto">
-                          <label htmlFor="buttondisplay" className="block">
-                            Time
-                          </label>
-                          <Calendar
-                            value={starttime}
-                            onChange={e => setStarttime(e.value)}
-                            showIcon
-                            timeOnly
-                            icon={() => <i className="pi pi-clock" />}
-                          />
-                        </div>
-                      </Col>
-                    </Row>
-                  </Col>
-
-                  <Col xl={6}>
-                    <Row className="mb-2">
-                      <Col xl={6}>
-                        <div className="flex-auto">
-                          <label htmlFor="buttondisplay" className="block">
-                            End date
-                          </label>
-                          <Calendar
-                            value={enddate}
-                            onChange={e => setenddate(e.value)}
-                            showIcon
-                          />
-                        </div>
-                      </Col>
-
-                      <Col xl={6}>
-                        <div className="flex-auto">
-                          <label htmlFor="buttondisplay" className="block">
-                            Time
-                          </label>
-
-                          <Calendar
-                            value={endtime}
-                            onChange={e => setendtime(e.value)}
-                            showIcon
-                            timeOnly
-                            icon={() => <i className="pi pi-clock" />}
-                          />
-                        </div>
-                      </Col>
-                    </Row>
-                  </Col>
-                </Row>
-              </div>
-
-              <div className="mb-4">
-                <Row className="mb-2">
-                  <Col xl={6}>
-                    <div className="flex flex-column">
-                      <label For="Priority">Job</label>
-                      <Dropdown
-                        value={subtypeget}
-                        onChange={e => setsubtypeget(e.value)}
-                        options={jobStatusDrop}
-                        optionLabel="name"
-                        placeholder="Select a Status"
-                        className="w-full search-option"
-                      />
-                    </div>
-                  </Col>
-
-                  <LinkContactsPopup />
-                </Row>
-
-                <Row className="mb-2">
-                  <Col xl={6}>
-                    <div className="p-field flex flex-column">
-                      <label For="Candidate">Candidate</label>
-                      <MultiSelect
-                        value={condidatevalu}
-                        disabled
-                        onChange={e => {
-                          condidatelist(e)
-                        }}
-                        options={typeInterviewcondi}
-                        optionLabel="name"
-                        placeholder={`Lavankumar Kalvala`}
-                        maxSelectedLabels={0}
-                        className="w-full"
-                      />
-                      {/* <Dropdown
-                                                            value={condidatevalu}
-                                                            onChange={e => setcondidatevalu(e.value)}
-                                                            options={typeInterviewcondi}
-                                                            optionLabel="name"
-                                                            placeholder="Select a Status"
-                                                            className="w-full search-option"
-                                    
-                                                          /> */}
-                    </div>
-                  </Col>
-                  <Col xl={6}>
-                    <div className="p-field flex flex-column">
-                      <label htmlFor="username">Subject</label>
-                      <InputText
-                        placeholder="Subject"
-                        value={subjectval}
-                        onChange={e => setsubjectval(e.target.value)}
-                      />
-                    </div>
-                  </Col>
-                </Row>
-
-                <Row className="mb-2 mt-3">
-                  <Col xl={12}>
-                    <div className="">
-                      <InputTextarea
-                        className="w-full"
-                        value={popTextares}
-                        onChange={e => setPopTextares(e.target.value)}
-                        placeholder="Interview Test"
-                        rows={3}
-                        cols={20}
-                      />
-                    </div>
-                  </Col>
-                </Row>
-              </div>
-
-              <div>
-                <Row className="mb-2">
-                  <Col xl={6}>
-                    <div className="p-field">
-                      <label htmlFor="username">Auto Followup</label>
-                      <Dropdown
-                        value={followup}
-                        onChange={e => setFollowup(e.value)}
-                        options={followupOptions}
-                        optionLabel="name"
-                        placeholder="Select a Followup Interval"
-                        className="w-full search-option"
-                      />
-                    </div>
-                  </Col>
-
-                  <Col xl={6}>
-                    <Row>
-                      <Col xl={6}>
-                        <div className="p-field flex flex-column">
-                          <label htmlFor="username">Repeat</label>
-                          <Dropdown
-                            value={repeat}
-                            onChange={e => setRepeat(e.value)}
-                            options={repeatOptions}
-                            optionLabel="name"
-                            placeholder="Select a Repeat Option"
-                            className="w-full search-option"
-                          />
-                        </div>
-                      </Col>
-
-                      <Col xl={6}>
-                        <div className="p-field flex flex-column">
-                          <label htmlFor="username">Reminder</label>
-                          <Dropdown
-                            value={reminder}
-                            onChange={e => setReminder(e.value)}
-                            options={reminderOptions}
-                            optionLabel="name"
-                            placeholder="Select a Reminder"
-                            className="w-full search-option"
-                          />
-                        </div>
-                      </Col>
-                    </Row>
-                  </Col>
-                </Row>
-                <Row className="mb-2">
-                  <Col lg={6}>
-                    <Row>
-                      <Col xl={6}>
-                        <div className="p-field flex flex-column">
-                          <label For="Priority" className=" block">
-                            Priority
-                          </label>
-                          <Dropdown
-                            value={priority}
-                            onChange={e => setPriority(e.value)}
-                            options={priorityValue}
-                            optionLabel="name"
-                            placeholder="Priority"
-                            className="w-full search-option"
-                          />
-                        </div>
-                      </Col>
-                      <Col xl={6}>
-                        <Row className="mt-2">
-                          <Col xl={6}>
-                            <div className="d-flex align-items-center mt-4">
-                              <Checkbox
-                                inputId="checkbox"
-                                checked={popchecked}
-                                onChange={handlePopupCheckbox}
-                              />
-                              <label htmlFor="username" className="ms-1 mt-2">
-                                Completed
-                              </label>
-                            </div>
-                          </Col>
-
-                          <Col xl={6}>
-                            <div className="d-flex align-items-center mt-4">
-                              <Checkbox
-                                inputId="checkbox"
-                                checked={popchecked2}
-                                onChange={handlePopupCheckbox2}
-                              />
-                              <label htmlFor="username" className="ms-1 mt-2">
-                                Private
-                              </label>
-                            </div>
-                          </Col>
-                        </Row>
-                      </Col>
-                    </Row>
-                  </Col>
-                  <Col xl={6}>
-                    <label htmlFor="username">User Id's</label>
-                    <Chips
-                      value={userid}
-                      onChange={e => setUserid(e.value)}
-                      itemTemplate={customChip}
-                      className="w-full"
-                    />
-                  </Col>
-                </Row>
-              </div>
-
-              <Row className="">
-                <Col xl={12}>
-                  <div className="d-flex justify-content-end">
-                    <button
-                      type="submit"
-                      class="btn btn-primary waves-effect waves-light btn btn-primary me-2 btn-main"
-                    >
-                      <i className="pi pi-save me-1"></i>
-                      Save
-                    </button>
-                    <button
-                      color="primary"
-                      className="btn btn-primary waves-effect waves-light me-2 cancel-outlinebtn"
-                    >
-                      <i className="pi pi-times me-1"></i>
-                      Cancel
-                    </button>
-                  </div>
-                </Col>
-              </Row>
-            </p>
-          </form>
-        </Dialog>
-        {/* Interview schedule meeting end */}
-
-        {/* Interview schedule Task start */}
-        <Dialog
-          header="Schedule Task"
-          visible={interviewpopTask}
-          className="interview-popup"
-          style={{ width: "50vw" }}
-          // onHide={() => { if (!interviewpop) return; SetInterviewpop(false); }}
-          onHide={() => {
-            SetInterviewpopTask(false)
-          }}
-        >
-          <form>
-            <p className="bg-form">
-              <div className="mb-4">
-                <Row className="mb-2">
-                  <Col xl={6}>
-                    <div className="p-field flex flex-column">
-                      <label htmlFor="interview">Type</label>
-                      <InputText
-                        disabled
-                        value={intertype1}
-                        onChange={e => setintertype1(e.target.value)}
-                      />
-                      {/* <Dropdown 
-                                                            // disabled
-                                                            value={intertype}
-                                                            onChange={(e) => setintertype(e.target.value)}
-                                                            options={interviewdroptype}
-                                                            className="w-full search-option" /> */}
-                    </div>
-                  </Col>
-
-                  <Col xl={6}>
-                    <div className="p-field flex flex-column">
-                      <label htmlFor="integer" className=" block">
-                        Sub-Type
-                      </label>
-                      <Dropdown
-                        value={subtype}
-                        onChange={e => setSubtype(e.value)}
-                        options={typeInterview}
-                        optionLabel="name"
-                        placeholder="Subtype"
-                        className="w-full search-option"
-                      />
-                    </div>
-                  </Col>
-                </Row>
-
-                <Row>
-                  <Col xl={6}>
-                    <Row className="mb-2">
-                      <Col xl={6}>
-                        <div className="p-field flex-auto">
-                          <label htmlFor="buttondisplay" className="block">
-                            Start date
-                          </label>
-                          <Calendar
-                            value={startdate}
-                            onChange={e => setStartdate(e.value)}
-                            showIcon
-                          />
-                        </div>
-                      </Col>
-
-                      <Col xl={6}>
-                        <div className="p-field flex-auto">
-                          <label htmlFor="buttondisplay" className="block">
-                            Time
-                          </label>
-                          <Calendar
-                            value={starttime}
-                            onChange={e => setStarttime(e.value)}
-                            showIcon
-                            timeOnly
-                            icon={() => <i className="pi pi-clock" />}
-                          />
-                        </div>
-                      </Col>
-                    </Row>
-                  </Col>
-
-                  <Col xl={6}>
-                    <Row className="mb-2">
-                      <Col xl={6}>
-                        <div className="flex-auto">
-                          <label htmlFor="buttondisplay" className="block">
-                            End date
-                          </label>
-                          <Calendar
-                            value={enddate}
-                            onChange={e => setenddate(e.value)}
-                            showIcon
-                          />
-                        </div>
-                      </Col>
-
-                      <Col xl={6}>
-                        <div className="flex-auto">
-                          <label htmlFor="buttondisplay" className="block">
-                            Time
-                          </label>
-
-                          <Calendar
-                            value={endtime}
-                            onChange={e => setendtime(e.value)}
-                            showIcon
-                            timeOnly
-                            icon={() => <i className="pi pi-clock" />}
-                          />
-                        </div>
-                      </Col>
-                    </Row>
-                  </Col>
-                </Row>
-              </div>
-
-              <div className="mb-4">
-                <Row className="mb-2">
-                  <Col xl={6}>
-                    <div className="flex flex-column">
-                      <label For="Priority">Job</label>
-                      <Dropdown
-                        value={subtypeget}
-                        onChange={e => setsubtypeget(e.value)}
-                        options={jobStatusDrop}
-                        optionLabel="name"
-                        placeholder="Select a Status"
-                        className="w-full search-option"
-                      />
-                    </div>
-                  </Col>
-
-                  <LinkContactsPopup />
-                </Row>
-
-                <Row className="mb-2">
-                  <Col xl={6}>
-                    <div className="p-field flex flex-column">
-                      <label For="Candidate">Candidate</label>
-                      <MultiSelect
-                        value={condidatevalu}
-                        disabled
-                        onChange={e => {
-                          condidatelist(e)
-                        }}
-                        options={typeInterviewcondi}
-                        optionLabel="name"
-                        placeholder={`Lavankumar Kalvala`}
-                        maxSelectedLabels={0}
-                        className="w-full"
-                      />
-                      {/* <Dropdown
-                                                            value={condidatevalu}
-                                                            onChange={e => setcondidatevalu(e.value)}
-                                                            options={typeInterviewcondi}
-                                                            optionLabel="name"
-                                                            placeholder="Select a Status"
-                                                            className="w-full search-option"
-                                    
-                                                          /> */}
-                    </div>
-                  </Col>
-                  <Col xl={6}>
-                    <div className="p-field flex flex-column">
-                      <label htmlFor="username">Subject</label>
-                      <InputText
-                        placeholder="Subject"
-                        value={subjectval}
-                        onChange={e => setsubjectval(e.target.value)}
-                      />
-                    </div>
-                  </Col>
-                </Row>
-
-                <Row className="mb-2 mt-3">
-                  <Col xl={12}>
-                    <div className="">
-                      <InputTextarea
-                        className="w-full"
-                        value={popTextares}
-                        onChange={e => setPopTextares(e.target.value)}
-                        placeholder="Interview Test"
-                        rows={3}
-                        cols={20}
-                      />
-                    </div>
-                  </Col>
-                </Row>
-              </div>
-
-              <div>
-                <Row className="mb-2">
-                  <Col xl={6}>
-                    <div className="p-field">
-                      <label htmlFor="username">Auto Followup</label>
-                      <Dropdown
-                        value={followup}
-                        onChange={e => setFollowup(e.value)}
-                        options={followupOptions}
-                        optionLabel="name"
-                        placeholder="Select a Followup Interval"
-                        className="w-full search-option"
-                      />
-                    </div>
-                  </Col>
-
-                  <Col xl={6}>
-                    <Row>
-                      <Col xl={6}>
-                        <div className="p-field flex flex-column">
-                          <label htmlFor="username">Repeat</label>
-                          <Dropdown
-                            value={repeat}
-                            onChange={e => setRepeat(e.value)}
-                            options={repeatOptions}
-                            optionLabel="name"
-                            placeholder="Select a Repeat Option"
-                            className="w-full search-option"
-                          />
-                        </div>
-                      </Col>
-
-                      <Col xl={6}>
-                        <div className="p-field flex flex-column">
-                          <label htmlFor="username">Reminder</label>
-                          <Dropdown
-                            value={reminder}
-                            onChange={e => setReminder(e.value)}
-                            options={reminderOptions}
-                            optionLabel="name"
-                            placeholder="Select a Reminder"
-                            className="w-full search-option"
-                          />
-                        </div>
-                      </Col>
-                    </Row>
-                  </Col>
-                </Row>
-                <Row className="mb-2">
-                  <Col lg={6}>
-                    <Row>
-                      <Col xl={6}>
-                        <div className="p-field flex flex-column">
-                          <label For="Priority" className=" block">
-                            Priority
-                          </label>
-                          <Dropdown
-                            value={priority}
-                            onChange={e => setPriority(e.value)}
-                            options={priorityValue}
-                            optionLabel="name"
-                            placeholder="Priority"
-                            className="w-full search-option"
-                          />
-                        </div>
-                      </Col>
-                      <Col xl={6}>
-                        <Row className="mt-2">
-                          <Col xl={6}>
-                            <div className="d-flex align-items-center mt-4">
-                              <Checkbox
-                                inputId="checkbox"
-                                checked={popchecked}
-                                onChange={handlePopupCheckbox}
-                              />
-                              <label htmlFor="username" className="ms-1 mt-2">
-                                Completed
-                              </label>
-                            </div>
-                          </Col>
-
-                          <Col xl={6}>
-                            <div className="d-flex align-items-center mt-4">
-                              <Checkbox
-                                inputId="checkbox"
-                                checked={popchecked2}
-                                onChange={handlePopupCheckbox2}
-                              />
-                              <label htmlFor="username" className="ms-1 mt-2">
-                                Private
-                              </label>
-                            </div>
-                          </Col>
-                        </Row>
-                      </Col>
-                    </Row>
-                  </Col>
-                  <Col xl={6}>
-                    <label htmlFor="username">User Id's</label>
-                    <Chips
-                      value={userid}
-                      onChange={e => setUserid(e.value)}
-                      itemTemplate={customChip}
-                      className="w-full"
-                    />
-                  </Col>
-                </Row>
-              </div>
-
-              <Row className="">
-                <Col xl={12}>
-                  <div className="d-flex justify-content-end">
-                    <button
-                      type="submit"
-                      class="btn btn-primary waves-effect waves-light btn btn-primary me-2 btn-main"
-                    >
-                      <i className="pi pi-save me-1"></i>
-                      Save
-                    </button>
-                    <button
-                      color="primary"
-                      className="btn btn-primary waves-effect waves-light me-2 cancel-outlinebtn"
-                    >
-                      <i className="pi pi-times me-1"></i>
-                      Cancel
-                    </button>
-                  </div>
-                </Col>
-              </Row>
-            </p>
-          </form>
-        </Dialog>
-        {/* Interview schedule Task end */}
-
-        {/* Interview schedule Event start */}
-        <Dialog
-          header="Schedule Event"
-          visible={interviewpopEvent}
-          className="interview-popup"
-          style={{ width: "50vw" }}
-          // onHide={() => { if (!interviewpop) return; SetInterviewpop(false); }}
-          onHide={() => {
-            SetInterviewpopEvent(false)
-          }}
-        >
-          <form>
-            <p className="bg-form">
-              <div className="mb-4">
-                <Row className="mb-2">
-                  <Col xl={6}>
-                    <div className="p-field flex flex-column">
-                      <label htmlFor="interview">Type</label>
-                      <InputText
-                        disabled
-                        value={intertype4}
-                        onChange={e => setintertype1(e.target.value)}
-                      />
-                      {/* <Dropdown 
-                                                            // disabled
-                                                            value={intertype}
-                                                            onChange={(e) => setintertype(e.target.value)}
-                                                            options={interviewdroptype}
-                                                            className="w-full search-option" /> */}
-                    </div>
-                  </Col>
-
-                  <Col xl={6}>
-                    <div className="p-field flex flex-column">
-                      <label htmlFor="integer" className=" block">
-                        Sub-Type
-                      </label>
-                      <Dropdown
-                        value={subtype}
-                        onChange={e => setSubtype(e.value)}
-                        options={typeInterview}
-                        optionLabel="name"
-                        placeholder="Subtype"
-                        className="w-full search-option"
-                      />
-                    </div>
-                  </Col>
-                </Row>
-
-                <Row>
-                  <Col xl={6}>
-                    <Row className="mb-2">
-                      <Col xl={6}>
-                        <div className="p-field flex-auto">
-                          <label htmlFor="buttondisplay" className="block">
-                            Start date
-                          </label>
-                          <Calendar
-                            value={startdate}
-                            onChange={e => setStartdate(e.value)}
-                            showIcon
-                          />
-                        </div>
-                      </Col>
-
-                      <Col xl={6}>
-                        <div className="p-field flex-auto">
-                          <label htmlFor="buttondisplay" className="block">
-                            Time
-                          </label>
-                          <Calendar
-                            value={starttime}
-                            onChange={e => setStarttime(e.value)}
-                            showIcon
-                            timeOnly
-                            icon={() => <i className="pi pi-clock" />}
-                          />
-                        </div>
-                      </Col>
-                    </Row>
-                  </Col>
-
-                  <Col xl={6}>
-                    <Row className="mb-2">
-                      <Col xl={6}>
-                        <div className="flex-auto">
-                          <label htmlFor="buttondisplay" className="block">
-                            End date
-                          </label>
-                          <Calendar
-                            value={enddate}
-                            onChange={e => setenddate(e.value)}
-                            showIcon
-                          />
-                        </div>
-                      </Col>
-
-                      <Col xl={6}>
-                        <div className="flex-auto">
-                          <label htmlFor="buttondisplay" className="block">
-                            Time
-                          </label>
-
-                          <Calendar
-                            value={endtime}
-                            onChange={e => setendtime(e.value)}
-                            showIcon
-                            timeOnly
-                            icon={() => <i className="pi pi-clock" />}
-                          />
-                        </div>
-                      </Col>
-                    </Row>
-                  </Col>
-                </Row>
-              </div>
-
-              <div className="mb-4">
-                <Row className="mb-2">
-                  <Col xl={6}>
-                    <div className="flex flex-column">
-                      <label For="Priority">Job</label>
-                      <Dropdown
-                        value={subtypeget}
-                        onChange={e => setsubtypeget(e.value)}
-                        options={jobStatusDrop}
-                        optionLabel="name"
-                        placeholder="Select a Status"
-                        className="w-full search-option"
-                      />
-                    </div>
-                  </Col>
-
-                  <LinkContactsPopup />
-                </Row>
-
-                <Row className="mb-2">
-                  <Col xl={6}>
-                    <div className="p-field flex flex-column">
-                      <label For="Candidate">Candidate</label>
-                      <MultiSelect
-                        value={condidatevalu}
-                        disabled
-                        onChange={e => {
-                          condidatelist(e)
-                        }}
-                        options={typeInterviewcondi}
-                        optionLabel="name"
-                        placeholder={`Lavankumar Kalvala`}
-                        maxSelectedLabels={0}
-                        className="w-full"
-                      />
-                      {/* <Dropdown
-                                                            value={condidatevalu}
-                                                            onChange={e => setcondidatevalu(e.value)}
-                                                            options={typeInterviewcondi}
-                                                            optionLabel="name"
-                                                            placeholder="Select a Status"
-                                                            className="w-full search-option"
-                                    
-                                                          /> */}
-                    </div>
-                  </Col>
-                  <Col xl={6}>
-                    <div className="p-field flex flex-column">
-                      <label htmlFor="username">Subject</label>
-                      <InputText
-                        placeholder="Subject"
-                        value={subjectval}
-                        onChange={e => setsubjectval(e.target.value)}
-                      />
-                    </div>
-                  </Col>
-                </Row>
-
-                <Row className="mb-2 mt-3">
-                  <Col xl={12}>
-                    <div className="">
-                      <InputTextarea
-                        className="w-full"
-                        value={popTextares}
-                        onChange={e => setPopTextares(e.target.value)}
-                        placeholder="Interview Test"
-                        rows={3}
-                        cols={20}
-                      />
-                    </div>
-                  </Col>
-                </Row>
-              </div>
-
-              <div>
-                <Row className="mb-2">
-                  <Col xl={6}>
-                    <div className="p-field">
-                      <label htmlFor="username">Auto Followup</label>
-                      <Dropdown
-                        value={followup}
-                        onChange={e => setFollowup(e.value)}
-                        options={followupOptions}
-                        optionLabel="name"
-                        placeholder="Select a Followup Interval"
-                        className="w-full search-option"
-                      />
-                    </div>
-                  </Col>
-
-                  <Col xl={6}>
-                    <Row>
-                      <Col xl={6}>
-                        <div className="p-field flex flex-column">
-                          <label htmlFor="username">Repeat</label>
-                          <Dropdown
-                            value={repeat}
-                            onChange={e => setRepeat(e.value)}
-                            options={repeatOptions}
-                            optionLabel="name"
-                            placeholder="Select a Repeat Option"
-                            className="w-full search-option"
-                          />
-                        </div>
-                      </Col>
-
-                      <Col xl={6}>
-                        <div className="p-field flex flex-column">
-                          <label htmlFor="username">Reminder</label>
-                          <Dropdown
-                            value={reminder}
-                            onChange={e => setReminder(e.value)}
-                            options={reminderOptions}
-                            optionLabel="name"
-                            placeholder="Select a Reminder"
-                            className="w-full search-option"
-                          />
-                        </div>
-                      </Col>
-                    </Row>
-                  </Col>
-                </Row>
-                <Row className="mb-2">
-                  <Col lg={6}>
-                    <Row>
-                      <Col xl={6}>
-                        <div className="p-field flex flex-column">
-                          <label For="Priority" className=" block">
-                            Priority
-                          </label>
-                          <Dropdown
-                            value={priority}
-                            onChange={e => setPriority(e.value)}
-                            options={priorityValue}
-                            optionLabel="name"
-                            placeholder="Priority"
-                            className="w-full search-option"
-                          />
-                        </div>
-                      </Col>
-                      <Col xl={6}>
-                        <Row className="mt-2">
-                          <Col xl={6}>
-                            <div className="d-flex align-items-center mt-4">
-                              <Checkbox
-                                inputId="checkbox"
-                                checked={popchecked}
-                                onChange={handlePopupCheckbox}
-                              />
-                              <label htmlFor="username" className="ms-1 mt-2">
-                                Completed
-                              </label>
-                            </div>
-                          </Col>
-
-                          <Col xl={6}>
-                            <div className="d-flex align-items-center mt-4">
-                              <Checkbox
-                                inputId="checkbox"
-                                checked={popchecked2}
-                                onChange={handlePopupCheckbox2}
-                              />
-                              <label htmlFor="username" className="ms-1 mt-2">
-                                Private
-                              </label>
-                            </div>
-                          </Col>
-                        </Row>
-                      </Col>
-                    </Row>
-                  </Col>
-                  <Col xl={6}>
-                    <label htmlFor="username">User Id's</label>
-                    <Chips
-                      value={userid}
-                      onChange={e => setUserid(e.value)}
-                      itemTemplate={customChip}
-                      className="w-full"
-                    />
-                  </Col>
-                </Row>
-              </div>
-
-              <Row className="">
-                <Col xl={12}>
-                  <div className="d-flex justify-content-end">
-                    <button
-                      type="submit"
-                      class="btn btn-primary waves-effect waves-light btn btn-primary me-2 btn-main"
-                    >
-                      <i className="pi pi-save me-1"></i>
-                      Save
-                    </button>
-                    <button
-                      color="primary"
-                      className="btn btn-primary waves-effect waves-light me-2 cancel-outlinebtn"
-                    >
-                      <i className="pi pi-times me-1"></i>
-                      Cancel
-                    </button>
-                  </div>
-                </Col>
-              </Row>
-            </p>
-          </form>
-        </Dialog>
-        {/* Interview schedule Event end */}
-
-        {/* Interview schedule other start */}
-        <Dialog
-          header="Schedule Other"
-          visible={interviewpopOther}
-          className="interview-popup"
-          style={{ width: "50vw" }}
-          // onHide={() => { if (!interviewpop) return; SetInterviewpop(false); }}
-          onHide={() => {
-            SetInterviewpopOther(false)
-          }}
-        >
-          <form>
-            <p className="bg-form">
-              <div className="mb-4">
-                <Row className="mb-2">
-                  <Col xl={6}>
-                    <div className="p-field flex flex-column">
-                      <label htmlFor="interview">Type</label>
-                      <InputText
-                        disabled
-                        value={intertype5}
-                        onChange={e => setintertype1(e.target.value)}
-                      />
-                      {/* <Dropdown 
-                                                            // disabled
-                                                            value={intertype}
-                                                            onChange={(e) => setintertype(e.target.value)}
-                                                            options={interviewdroptype}
-                                                            className="w-full search-option" /> */}
-                    </div>
-                  </Col>
-
-                  <Col xl={6}>
-                    <div className="p-field flex flex-column">
-                      <label htmlFor="integer" className=" block">
-                        Sub-Type
-                      </label>
-                      <Dropdown
-                        value={subtype}
-                        onChange={e => setSubtype(e.value)}
-                        options={typeInterview}
-                        optionLabel="name"
-                        placeholder="Subtype"
-                        className="w-full search-option"
-                      />
-                    </div>
-                  </Col>
-                </Row>
-
-                <Row>
-                  <Col xl={6}>
-                    <Row className="mb-2">
-                      <Col xl={6}>
-                        <div className="p-field flex-auto">
-                          <label htmlFor="buttondisplay" className="block">
-                            Start date
-                          </label>
-                          <Calendar
-                            value={startdate}
-                            onChange={e => setStartdate(e.value)}
-                            showIcon
-                          />
-                        </div>
-                      </Col>
-
-                      <Col xl={6}>
-                        <div className="p-field flex-auto">
-                          <label htmlFor="buttondisplay" className="block">
-                            Time
-                          </label>
-                          <Calendar
-                            value={starttime}
-                            onChange={e => setStarttime(e.value)}
-                            showIcon
-                            timeOnly
-                            icon={() => <i className="pi pi-clock" />}
-                          />
-                        </div>
-                      </Col>
-                    </Row>
-                  </Col>
-
-                  <Col xl={6}>
-                    <Row className="mb-2">
-                      <Col xl={6}>
-                        <div className="flex-auto">
-                          <label htmlFor="buttondisplay" className="block">
-                            End date
-                          </label>
-                          <Calendar
-                            value={enddate}
-                            onChange={e => setenddate(e.value)}
-                            showIcon
-                          />
-                        </div>
-                      </Col>
-
-                      <Col xl={6}>
-                        <div className="flex-auto">
-                          <label htmlFor="buttondisplay" className="block">
-                            Time
-                          </label>
-
-                          <Calendar
-                            value={endtime}
-                            onChange={e => setendtime(e.value)}
-                            showIcon
-                            timeOnly
-                            icon={() => <i className="pi pi-clock" />}
-                          />
-                        </div>
-                      </Col>
-                    </Row>
-                  </Col>
-                </Row>
-              </div>
-
-              <div className="mb-4">
-                <Row className="mb-2">
-                  <Col xl={6}>
-                    <div className="flex flex-column">
-                      <label For="Priority">Job</label>
-                      <Dropdown
-                        value={subtypeget}
-                        onChange={e => setsubtypeget(e.value)}
-                        options={jobStatusDrop}
-                        optionLabel="name"
-                        placeholder="Select a Status"
-                        className="w-full search-option"
-                      />
-                    </div>
-                  </Col>
-
-                  <LinkContactsPopup />
-                </Row>
-
-                <Row className="mb-2">
-                  <Col xl={6}>
-                    <div className="p-field flex flex-column">
-                      <label For="Candidate">Candidate</label>
-                      <MultiSelect
-                        value={condidatevalu}
-                        disabled
-                        onChange={e => {
-                          condidatelist(e)
-                        }}
-                        options={typeInterviewcondi}
-                        optionLabel="name"
-                        placeholder={`Lavankumar Kalvala`}
-                        maxSelectedLabels={0}
-                        className="w-full"
-                      />
-                      {/* <Dropdown
-                                                            value={condidatevalu}
-                                                            onChange={e => setcondidatevalu(e.value)}
-                                                            options={typeInterviewcondi}
-                                                            optionLabel="name"
-                                                            placeholder="Select a Status"
-                                                            className="w-full search-option"
-                                    
-                                                          /> */}
-                    </div>
-                  </Col>
-                  <Col xl={6}>
-                    <div className="p-field flex flex-column">
-                      <label htmlFor="username">Subject</label>
-                      <InputText
-                        placeholder="Subject"
-                        value={subjectval}
-                        onChange={e => setsubjectval(e.target.value)}
-                      />
-                    </div>
-                  </Col>
-                </Row>
-
-                <Row className="mb-2 mt-3">
-                  <Col xl={12}>
-                    <div className="">
-                      <InputTextarea
-                        className="w-full"
-                        value={popTextares}
-                        onChange={e => setPopTextares(e.target.value)}
-                        placeholder="Interview Test"
-                        rows={3}
-                        cols={20}
-                      />
-                    </div>
-                  </Col>
-                </Row>
-              </div>
-
-              <div>
-                <Row className="mb-2">
-                  <Col lg={6}>
-                    <Row>
-                      <Col xl={6}>
-                        <div className="p-field flex flex-column">
-                          <label For="Priority" className=" block">
-                            Priority
-                          </label>
-                          <Dropdown
-                            value={priority}
-                            onChange={e => setPriority(e.value)}
-                            options={priorityValue}
-                            optionLabel="name"
-                            placeholder="Priority"
-                            className="w-full search-option"
-                          />
-                        </div>
-                      </Col>
-                      <Col xl={6}>
-                        <Row className="mt-2">
-                          <Col xl={6}>
-                            <div className="d-flex align-items-center mt-4">
-                              <Checkbox
-                                inputId="checkbox"
-                                checked={popchecked}
-                                onChange={handlePopupCheckbox}
-                              />
-                              <label htmlFor="username" className="ms-1 mt-2">
-                                Completed
-                              </label>
-                            </div>
-                          </Col>
-
-                          <Col xl={6}>
-                            <div className="d-flex align-items-center mt-4">
-                              <Checkbox
-                                inputId="checkbox"
-                                checked={popchecked2}
-                                onChange={handlePopupCheckbox2}
-                              />
-                              <label htmlFor="username" className="ms-1 mt-2">
-                                Private
-                              </label>
-                            </div>
-                          </Col>
-                        </Row>
-                      </Col>
-                    </Row>
-                  </Col>
-                  <Col xl={6}>
-                    <label htmlFor="username">User Id's</label>
-                    <Chips
-                      value={userid}
-                      onChange={e => setUserid(e.value)}
-                      itemTemplate={customChip}
-                      className="w-full"
-                    />
-                  </Col>
-                </Row>
-              </div>
-
-              <Row className="">
-                <Col xl={12}>
-                  <div className="d-flex justify-content-end">
-                    <button
-                      type="submit"
-                      class="btn btn-primary waves-effect waves-light btn btn-primary me-2 btn-main"
-                    >
-                      <i className="pi pi-save me-1"></i>
-                      Save
-                    </button>
-                    <button
-                      color="primary"
-                      className="btn btn-primary waves-effect waves-light me-2 cancel-outlinebtn"
-                    >
-                      <i className="pi pi-times me-1"></i>
-                      Cancel
-                    </button>
-                  </div>
-                </Col>
-              </Row>
-            </p>
-          </form>
-        </Dialog>
-
-
-        {/* Interview schedule call start */}
-        <Dialog
-          header="Add Sub Task"
-          visible={addSubTaskPopup}
-          className="interview-popup"
-          style={{ width: "50vw" }}
-          // onHide={() => { if (!interviewpop) return; SetInterviewpop(false); }}
-          onHide={() => {
-            SetAddSubTaskPopup(false)
-          }}
-        >
-          <form>
-            <p className="bg-form">
-
-
-              <div className="mb-4">
-                <Row className="mb-2">
-                  <Col xl={6}>
-                    <div className="flex flex-column">
-                      <label For="Priority">Job Status</label>
-                      <Dropdown
-                        value={subtypeget}
-                        onChange={e => setsubtypeget(e.value)}
-                        options={jobStatusDrop}
-                        optionLabel="name"
-                        placeholder="Select a Status"
-                        className="w-full search-option"
-                      />
-                    </div>
-                  </Col>
-
-                  <LinkContactsPopup />
-                </Row>
-
-                <Row className="mb-2">
-                  <Col xl={6}>
-                    <div className="p-field flex flex-column">
-                      <label For="Candidate">Candidate</label>
-                      <MultiSelect
-                        value={condidatevalu}
-                        disabled
-                        onChange={e => {
-                          condidatelist(e)
-                        }}
-                        options={typeInterviewcondi}
-                        optionLabel="name"
-                        placeholder={`Lavankumar Kalvala`}
-                        maxSelectedLabels={0}
-                        className="w-full"
-                      />
-                      {/* <Dropdown
-                                                            value={condidatevalu}
-                                                            onChange={e => setcondidatevalu(e.value)}
-                                                            options={typeInterviewcondi}
-                                                            optionLabel="name"
-                                                            placeholder="Select a Status"
-                                                            className="w-full search-option"
-                                    
-                                                          /> */}
-                    </div>
-                  </Col>
-                  <Col xl={6}>
-                    <div className="p-field flex flex-column">
-                      <label htmlFor="username">Subject</label>
-                      <InputText
-                        placeholder="Subject"
-                        value={subjectval}
-                        onChange={e => setsubjectval(e.target.value)}
-                      />
-                    </div>
-                  </Col>
-                </Row>
-
-                <Row className="mb-2 mt-3">
-                  <Col xl={12}>
-                    <div className="">
-                      <InputTextarea
-                        className="w-full"
-                        value={popTextares}
-                        onChange={e => setPopTextares(e.target.value)}
-                        placeholder="Interview Test"
-                        rows={3}
-                        cols={20}
-                      />
-                    </div>
-                  </Col>
-                </Row>
-              </div>
-
-              <div>
-                <Row className="mb-2">
-                  <Col lg={6}>
-                    <Row>
-                      <Col xl={6}>
-                        <div className="p-field flex flex-column">
-                          <label For="Priority" className=" block">
-                            Priority
-                          </label>
-                          <Dropdown
-                            value={priority}
-                            onChange={e => setPriority(e.value)}
-                            options={priorityValue}
-                            optionLabel="name"
-                            placeholder="Priority"
-                            className="w-full search-option"
-                          />
-                        </div>
-                      </Col>
-                      <Col xl={6}>
-                        <Row className="mt-2">
-                          <Col xl={6}>
-                            <div className="d-flex align-items-center mt-4">
-                              <Checkbox
-                                inputId="checkbox"
-                                checked={popchecked}
-                                onChange={handlePopupCheckbox}
-                              />
-                              <label htmlFor="username" className="ms-1 mt-2">
-                                Completed
-                              </label>
-                            </div>
-                          </Col>
-
-                          <Col xl={6}>
-                            <div className="d-flex align-items-center mt-4">
-                              <Checkbox
-                                inputId="checkbox"
-                                checked={popchecked2}
-                                onChange={handlePopupCheckbox2}
-                              />
-                              <label htmlFor="username" className="ms-1 mt-2">
-                                Private
-                              </label>
-                            </div>
-                          </Col>
-                        </Row>
-                      </Col>
-                    </Row>
-                  </Col>
-                  <Col xl={6}>
-                    <label htmlFor="username">User Id's</label>
-                    <Chips
-                      value={userid}
-                      onChange={e => setUserid(e.value)}
-                      itemTemplate={customChip}
-                      className="w-full"
-                    />
-                  </Col>
-                </Row>
-
-
-
-
-
-
-
-                <Row className="mb-2">
-                  <Col lg={6}>
-                    <div className="p-field">
-                      <label htmlFor="selectProject" className="block">
-                        Project
-                      </label>
-                      <WorkType1
-                        initialWorkTypes={moduleWorkTypes5}
-                        dropdownWorkTypes={moduleDropdownWorkTypes5}
-                        onWorkTypesChange={handleModuleWorkTypesChange}
-                        onSelectionChange={handleModuleSelectionChange}
-                      />
-                    </div>
-                  </Col>
-                  <Col lg={6}>
-                    <label htmlFor="city" className="mb-1">
-                      Select Module
-                    </label>
-                    <WorkType1
-                      initialWorkTypes={moduleWorkTypes}
-                      dropdownWorkTypes={moduleDropdownWorkTypes}
-                      onWorkTypesChange={handleModuleWorkTypesChange}
-                      onSelectionChange={handleModuleSelectionChange}
-                    />
-                  </Col>
-                </Row>
-                <Row className="mb-2 mt-3">
-                  <Col lg={6} className="mt-2">
-                    <div className="p-field">
-                      <label htmlFor="jobType" className="block">
-                        Work Type
-                      </label>
-
-                      <WorkType />
-
-                      {/* <label htmlFor="jobType" className="block">
-                            Task Description
-                          </label>
-                          <InputTextarea
-                            // autoResize
-                            value={taskDesc}
-                            // readOnly
-                            // onChange={e => setDescription(e.target.value)}
-                            rows={3}
-                            cols={40}
-                            placeholder=""
-                            className="w-full "
-                          /> */}
-                    </div>
-                  </Col>
-
-                  <Col lg={6} className="mb-2">
-                    <label htmlFor="city" className="mb-0 mt-2">
-                      Priority
-                    </label>
-                    <Dropdown
-                      value={selectedPriority}
-                      onChange={e => setSelectedPriority(e.value)}
-                      options={priorityOptions}
-                      optionLabel="name"
-                      placeholder="--select--"
-                      className="bgclr mt-1"
-                    />
-                  </Col>
-
-                  <Col lg={12}>
-                    <label htmlFor="city" className="mb-1">
-                      Summary
-                    </label>
-                    <InputText
-                      placeholder="Add User Role Feature"
-                      value={taskAssigned}
-                    />
-                  </Col>
-
-                  {/* <Col lg={6} className="mb-2 mt-2">
-                        <label htmlFor="city" className="mb-1">
-                          Status
-                        </label>
-                        <WorkType1
-                          initialWorkTypes={moduleWorkTypes1}
-                          dropdownWorkTypes={moduleDropdownWorkTypes1}
-                          onWorkTypesChange={handleModuleWorkTypesChange}
-                          onSelectionChange={handleModuleSelectionChange}
-                        />
-                      </Col> */}
-
-
-
-                  <Col lg={6} className="mb-2 mt-2">
-                    <label htmlFor="city" className="mb-1">
-                      Assigned to
-                    </label>
-                    <WorkType1
-                      initialWorkTypes={moduleWorkTypes2}
-                      dropdownWorkTypes={moduleDropdownWorkTypes2}
-                      onWorkTypesChange={handleModuleWorkTypesChange}
-                      onSelectionChange={handleModuleSelectionChange}
-                    />
-                  </Col>
-
-                  <Col lg={6} className="mb-3 mt-2">
-                    <label htmlFor="city" className="mb-1">
-                      Add Watcher
-                    </label>
-                    <WorkType1
-                      initialWorkTypes={moduleWorkTypes22}
-                      dropdownWorkTypes={moduleDropdownWorkTypes22}
-                      onWorkTypesChange={handleModuleWorkTypesChange}
-                      onSelectionChange={handleModuleSelectionChange}
-                    />
-                  </Col>
-                </Row>
-
-                <Row className="mb-2 mt-1">
-                  <Col lg={6}>
-                    <label htmlFor="city" className="mb-1">
-                      Work Hours (in hours)
-                    </label>
-                    <InputText
-                      placeholder="4 hours"
-                    // value={createFirst}
-                    />
-                  </Col>
-                  <Col lg={6}>
-                    <label htmlFor="jobStartDate" className="p-mb-2">
-                      Start Date
-                    </label>
-                    <Calendar
-                      id="jobStartDate"
-                      value={jobStartDate}
-                      onChange={e => setJobStartDate(e.value)}
-                      dateFormat="dd/mm/yy"
-                      placeholder="20/05/2025"
-                      className="w-full activejobdrop"
-                      showIcon
-                    />
-                  </Col>
-                </Row>
-                <Row className="mb-3">
-                  <Col lg={6}>
-                    <label htmlFor="jobEndDate" className="mr-2">
-                      End Date
-                    </label>
-                    <Calendar
-                      id="jobEndDate"
-                      value={jobEndDate}
-                      onChange={e => setJobEndDate(e.value)}
-                      dateFormat="dd/mm/yy"
-                      placeholder="26/05/2025"
-                      className="w-full activejobdrop"
-                      showIcon
-                    />
-                  </Col>
-                  <Col lg={6}>
-                    <label htmlFor="jobStartDate" className="p-mb-2">
-                      Actual End Date
-                    </label>
-                    <Calendar
-                      id="jobStartDate"
-                      value={jobStartDate}
-                      onChange={e => setJobStartDate(e.value)}
-                      dateFormat="dd/mm/yy"
-                      placeholder="26/05/2025"
-                      className="w-full activejobdrop"
-                      showIcon
-                    />
-                  </Col>
-                </Row>
-
-                <Row className="mb-3 mt-2">
-
-                  <Col lg={6} >
-                    <label htmlFor="city" className="mb-0">
-                      Work Type Status
-                    </label>
-                    <WorkType1
-                      initialWorkTypes={moduleWorkTypes1}
-                      dropdownWorkTypes={moduleDropdownWorkTypes1}
-                      onWorkTypesChange={handleModuleWorkTypesChange}
-                      onSelectionChange={handleModuleSelectionChange}
-                    />
-                  </Col>
-                  {/* <Col lg={6}>
-                        <label htmlFor="city" className="mb-0">
-                          Work Type Status
-                        </label>
-                       <WorkType1
-                          initialWorkTypes={moduleWorkTypes2}
-                          dropdownWorkTypes={moduleDropdownWorkTypes2}
-                          onWorkTypesChange={handleModuleWorkTypesChange}
-                          onSelectionChange={handleModuleSelectionChange}
-                        />
-                      </Col> */}
-                  <Col lg={6}>
-                    <label htmlFor="city" className="mb-0">
-                      Approval Status
-                    </label>
-                    <Dropdown
-                      value={selectedStatus}
-                      onChange={e => setSelectedStatus(e.value)}
-                      options={statusOptions}
-                      optionLabel="name"
-                      placeholder="--select--"
-                      className="bgclr"
-                    />
-                  </Col>
-                  {/* <Col lg={6}>
-                        <label htmlFor="city" className="mb-0">
-                          Priority
-                        </label>
-                        <Dropdown
-                          value={selectedPriority}
-                          onChange={e => setSelectedPriority(e.value)}
-                          options={priorityOptions}
-                          optionLabel="name"
-                          placeholder="--select--"
-
-                          className="bgclr"
-                        />
-                      </Col> */}
-                </Row>
-
-                <Row className="mb-3 mt-2">
-                  <Col lg={12}>
-                    <label
-                      htmlFor="availabilityDate"
-                      className="mb-0 avbdate"
-                    >
-                      Choose/ Drag Attachment
-                    </label>
-
-                    <input
-                      type="file"
-                      accept="image/jpg,image/jpeg,image/png,image/pdf"
-                      className="form-control addEmp_ProfilePhoto"
-                      id="MyPro_UploadedProfilePhoto_Modal_FilesInput"
-                      multiple
-                    />
-
-                    <small className="text-danger">
-                      {" "}
-                      {PoliciesfilesErrorMessagepan}
-                    </small>
-                    <small className="text-muted">
-                      Eg: (jpeg,png,pdf,jpg)
-                    </small>
-                  </Col>
-                </Row>
-
-                <Row className="mb-3 mt-1">
-                  <Col lg={6}>
-                    <label
-                      htmlFor="availabilityDate"
-                      className="mb-1 avbdate"
-                    >
-                      Linked WorkType
-                    </label>
-                    <WorkType1
-                      initialWorkTypes={moduleWorkTypes3}
-                      dropdownWorkTypes={moduleDropdownWorkTypes3}
-                      onWorkTypesChange={handleModuleWorkTypesChange}
-                      onSelectionChange={handleModuleSelectionChange}
-                    />
-
-
-                  </Col>
-                </Row>
-                <Row className="mb-3 mt-0">
-                  <Col lg={6}>
-
-                    <WorkType1
-                      initialWorkTypes={moduleWorkTypes4}
-                      dropdownWorkTypes={moduleDropdownWorkTypes4}
-                      onWorkTypesChange={handleModuleWorkTypesChange}
-                      onSelectionChange={handleModuleSelectionChange}
-                      placeholder="Select Work Item"
-                    />
-
-
-                  </Col>
-                </Row>
-
-
-
-                <Row className="">
-                  <Col xl={12}>
-                    <div className="d-flex justify-content-end">
-                      <button
-                        type="submit"
-                        class="btn btn-primary waves-effect waves-light btn btn-primary me-2 btn-main"
-                        onClick={() => SetAddSubTaskPopup(false)}
-                      >
-                        {/* <i className="pi pi-save me-1"></i> */}
-                        Create
-                      </button>
-                      <button
-                        color="primary"
-                        className="btn btn-primary waves-effect waves-light me-2 cancel-outlinebtn"
-                      >
-                        <i className="pi pi-times me-1"></i>
-                        Cancel
-                      </button>
-                    </div>
-                  </Col>
-                </Row>
-              </div>
-
-
-
-            </p>
-          </form>
-        </Dialog>
-        {/* Interview schedule call end */}
       </div>
     </React.Fragment>
   )

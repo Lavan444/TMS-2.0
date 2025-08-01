@@ -28,30 +28,30 @@ const LinkJobs = () => {
     const [visibleSubmittedJob, setVisibleSubmittedJob] = useState(false);
 
     const moreoptions = [
-        {
-            name: 'Link Jobs',
-            jobs: [
-                {
-                    name: 'Received',
-                    onClick: () => setVisibleLinkJob(true)
-                },
-                {
-                    name: 'Potential',
-                    onClick: () => setVisiblePotentialJob(true)
-                },
-                {
-                    name: 'Submitted',
-                    onClick: () => setVisibleSubmittedJob(true)
-                }
-            ]
-        },
+        // {
+        //     name: 'Link Jobs',
+        //     jobs: [
+        //         {
+        //             name: 'Received',
+        //             onClick: () => setVisibleLinkJob(true)
+        //         },
+        //         {
+        //             name: 'Potential',
+        //             onClick: () => setVisiblePotentialJob(true)
+        //         },
+        //         {
+        //             name: 'Submitted',
+        //             onClick: () => setVisibleSubmittedJob(true)
+        //         }
+        //     ]
+        // },
         {
             name: 'Change Status',
             onClick: () => setChangeStatusAction(true)
         },
-        {
-            name: 'Merge'
-        },
+        // {
+        //     name: 'Merge'
+        // },
         {
             name: 'Delete'
         }

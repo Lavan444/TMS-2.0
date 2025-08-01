@@ -2762,7 +2762,10 @@ const JobAllActive = ({ toggleSidebar }) => {
         setActiveTabIndex(3)}}
     /> */}
 
-                      <WorkTypeSidebar />
+                       <WorkTypeSidebar
+        visible={showWorkTypeSidebar}
+        onHide={() => setShowWorkTypeSidebar(false)}
+      />
 
                     </div>
                   )}
@@ -6595,10 +6598,10 @@ const JobAllActive = ({ toggleSidebar }) => {
       </Dialog>
       {/* Interview schedule Other end */}
 
-      <WorkTypeSidebar
+      {/* <WorkTypeSidebar style={{dis}}
         visible={showWorkTypeSidebar}
         onHide={() => setShowWorkTypeSidebar(false)}
-      />
+      /> */}
     </React.Fragment>
   )
 }

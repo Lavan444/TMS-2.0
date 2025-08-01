@@ -78,99 +78,31 @@ const CandidateEditForm = props => {
 
     const groupedDocuments = [
         {
-            label: 'Proof of Identity',
+            label: 'Project Documentation',
             items: [
-                { label: 'Aadhaar Card', value: 'Aadhaar Card' },
-                { label: 'Passport', value: 'Passport' },
-                { label: 'Voter ID', value: 'Voter ID' },
-                { label: 'PAN Card', value: 'PAN Card' },
-                { label: 'Driver\'s License', value: 'Driver\'s License' }
+                { label: 'Project Requirements Document', value: 'Project Requirements Document' },
+                { label: 'Technical Specifications', value: 'Technical Specifications' },
+                { label: 'Design Documents', value: 'Design Documents' },
+                { label: 'User Stories', value: 'User Stories' },
+                { label: 'Test Plans', value: 'Test Plans' }
             ]
         },
         {
-            label: 'Educational Qualification Documents',
+            label: 'Legal and Compliance',
             items: [
-                { label: '10th, 12th Standard Mark Sheets', value: '10th, 12th Standard Mark Sheets' },
-                { label: 'Degree/Diploma Certificates', value: 'Degree/Diploma Certificates' },
-                { label: 'Consolidated Mark Sheets', value: 'Consolidated Mark Sheets' },
-                { label: 'Professional Certification Documents', value: 'Professional Certification Documents' }
+                { label: 'Project Charter', value: 'Project Charter' },
+                { label: 'Stakeholder Agreement', value: 'Stakeholder Agreement' },
+                { label: 'Risk Assessment', value: 'Risk Assessment' },
+                { label: 'Compliance Documentation', value: 'Compliance Documentation' }
             ]
         },
         {
-            label: 'Employment-Related Documents',
+            label: 'Development Assets',
             items: [
-                { label: 'Offer Letter', value: 'Offer Letter' },
-                { label: 'Appointment Letter', value: 'Appointment Letter' },
-                { label: 'Resume/Curriculum Vitae', value: 'Resume/Curriculum Vitae' },
-                { label: 'Previous Employment Experience Certificates', value: 'Previous Employment Experience Certificates' },
-                { label: 'Relieving Letters from Previous Employers', value: 'Relieving Letters from Previous Employers' },
-                { label: 'Service Certificate', value: 'Service Certificate' },
-                { label: 'Last Drawn Salary Slip', value: 'Last Drawn Salary Slip' }
-            ]
-        },
-        {
-            label: 'Contact and Address Proof',
-            items: [
-                { label: 'Permanent Address Proof', value: 'Permanent Address Proof' },
-                { label: 'Current Residential Address Proof', value: 'Current Residential Address Proof' },
-                { label: 'Local Address Proof', value: 'Local Address Proof' },
-                { label: 'Address Verification Documents', value: 'Address Verification Documents' },
-                { label: 'Contact Information Form', value: 'Contact Information Form' }
-            ]
-        },
-        {
-            label: 'Financial and Tax-Related Documents',
-            items: [
-                { label: 'PAN Card', value: 'PAN Card' },
-                { label: 'Bank Account Details', value: 'Bank Account Details' },
-                { label: 'Cancelled Cheque', value: 'Cancelled Cheque' },
-                { label: 'Form 16 from Previous Employer', value: 'Form 16 from Previous Employer' },
-                { label: 'Tax Identification Documents', value: 'Tax Identification Documents' }
-            ]
-        },
-        {
-            label: 'Personal and Medical Documents',
-            items: [
-                { label: 'Passport-Size Photographs', value: 'Passport-Size Photographs' },
-                { label: 'Birth Certificate', value: 'Birth Certificate' },
-                { label: 'Marriage Certificate (if applicable)', value: 'Marriage Certificate (if applicable)' },
-                { label: 'Passport Details', value: 'Passport Details' },
-                { label: 'Medical Fitness Certificate', value: 'Medical Fitness Certificate' },
-                { label: 'Police Verification Certificate', value: 'Police Verification Certificate' }
-            ]
-        },
-        {
-            label: 'Legal and Compliance Documents',
-            items: [
-                { label: 'Background Verification Consent Form', value: 'Background Verification Consent Form' },
-                { label: 'Non-Disclosure Agreement (NDA)', value: 'Non-Disclosure Agreement (NDA)' },
-                { label: 'Employment Bond (if applicable)', value: 'Employment Bond (if applicable)' },
-                { label: 'Declaration of No Criminal Record', value: 'Declaration of No Criminal Record' }
-            ]
-        },
-        {
-            label: 'Statutory Documentation',
-            items: [
-                { label: 'Employee Provident Fund (EPF) Registration Form', value: 'Employee Provident Fund (EPF) Registration Form' },
-                { label: 'Employee State Insurance (ESI) Form', value: 'Employee State Insurance (ESI) Form' },
-                { label: 'Professional Tax Registration Details', value: 'Professional Tax Registration Details' }
-            ]
-        },
-        {
-            label: 'Emergency Contact and Nominee Details',
-            items: [
-                { label: 'Emergency Contact Information Form', value: 'Emergency Contact Information Form' },
-                { label: 'Nominee Details for Insurance and Other Benefits', value: 'Nominee Details for Insurance and Other Benefits' },
-                { label: 'Personal References', value: 'Personal References' }
-            ]
-        },
-        {
-            label: 'Additional Specialized Documents (Depending on Role/Industry)',
-            items: [
-                { label: 'Professional License Certificates', value: 'Professional License Certificates' },
-                { label: 'Specialized Skill Certification', value: 'Specialized Skill Certification' },
-                { label: 'Work Permit/Visa Documents (for Foreign Nationals)', value: 'Work Permit/Visa Documents (for Foreign Nationals)' },
-                { label: 'Security Clearance Certificates', value: 'Security Clearance Certificates' }
+                { label: 'Source Code Documentation', value: 'Source Code Documentation' },
+                { label: 'API Documentation', value: 'API Documentation' },
+                { label: 'Database Schema', value: 'Database Schema' },
+                { label: 'Deployment Guide', value: 'Deployment Guide' }
             ]
         }
     ];
@@ -187,9 +119,9 @@ const CandidateEditForm = props => {
     // WorkType configurations with state management
     const [projectNameWorkTypes, setProjectNameWorkTypes] = useState([
         {
-            name: 'E-Commerce Platform Development',
+            name: 'AI Generator (Proj-101)',
             color: '#4c9aff',
-            id: 'ecommerce-project',
+            id: 'ai-generator',
             statuses: ['Planning', 'In Progress', 'Testing', 'Completed']
         },
         {
@@ -208,7 +140,7 @@ const CandidateEditForm = props => {
 
     const [moduleWorkTypes, setModuleWorkTypes] = useState([
         {
-            name: 'User Management Module',
+            name: 'User Management',
             color: '#4c9aff',
             id: 'user-management',
             statuses: ['To Do', 'In Progress', 'Done']
@@ -230,9 +162,9 @@ const CandidateEditForm = props => {
 
     const [watcherWorkTypes, setWatcherWorkTypes] = useState([
         {
-            name: 'Rohit Kumar - Developer',
+            name: 'Ravi Sharma',
             color: '#4c9aff',
-            id: 'rohit-kumar',
+            id: 'ravi-sharma',
             statuses: ['Available', 'Busy', 'Offline']
         },
         {
@@ -683,7 +615,7 @@ As the assigned team member, you will be responsible for managing your specific 
                                                     <Col xl={9}>
                                                         <InputText
                                                             id="projectManager"
-                                                            value="Sneha Mehta - Senior PM"
+                                                            value="Mahesh Kumar Bhoga"
                                                             readOnly
                                                             className="w-full"
                                                             style={{ border: '1px solid #ced4da' }}
