@@ -304,6 +304,101 @@ const CompanyEditForm = () => {
                                     </Row>
                                 </CardBody>
                             </Card>
+
+                             <Card className="bg-form">
+                                <CardBody>
+                                    <h4 className="card-title mb-2">System Fields</h4>
+                                    <Row>
+                                        <Col xl={12}>
+                                            <div className="">
+                                                <Row>
+                                                    <Col xl={12}>
+                                                        <Row className="mt-2 align-items-center">
+                                                            <Col xl={3}>
+                                                                <label
+
+                                                                    className=" block"
+                                                                >
+                                                                    Create Date
+                                                                </label>
+                                                            </Col>
+                                                            <Col xl={9}>
+                                                                <Calendar
+                                                                    id="createDate"
+                                                                    placeholder="27/02/2025"
+                                                                    className="w-full"
+                                                                    disabled
+                                                                />
+                                                            </Col>
+                                                        </Row>
+
+                                                        <Row className="mt-2 align-items-center">
+                                                            <Col xl={3}>
+                                                                <label
+
+                                                                    className=" block"
+                                                                >
+                                                                    Edit Date
+                                                                </label>
+                                                            </Col>
+                                                            <Col xl={9}>
+                                                                <Calendar
+                                                                    id="editDate"
+                                                                    disabled
+                                                                    className="w-full"
+                                                                    placeholder="27/02/2025"
+                                                                />
+                                                            </Col>
+                                                        </Row>
+
+                                                        <Row className="mt-2 align-items-center">
+                                                            <Col xl={3}>
+                                                                <label
+
+                                                                    className=" block"
+                                                                >
+                                                                    Created By
+                                                                </label>
+                                                            </Col>
+                                                            <Col xl={9}>
+                                                                <InputText
+                                                                    id="integer"
+                                                                    className="w-full"
+                                                                    disabled
+                                                                    value={createdBy}
+                                                                />
+                                                            </Col>
+                                                        </Row>
+
+                                                        <Row className="mt-2 align-items-center">
+                                                            <Col xl={3}>
+                                                                <label
+
+                                                                    className=" block"
+                                                                >
+                                                                    Edited By
+                                                                </label>
+                                                            </Col>
+                                                            <Col xl={9}>
+                                                                <InputText
+                                                                    id="integer"
+                                                                    className="w-full"
+                                                                    placeholder="Harish"
+                                                                    disabled
+                                                                />
+                                                            </Col>
+                                                        </Row>
+
+                                                        
+
+
+                                                    </Col>
+                                                </Row>
+                                            </div>
+                                        </Col>
+                                    </Row>
+                                </CardBody>
+                            </Card>
                         </Col>
 
 
@@ -643,125 +738,8 @@ const CompanyEditForm = () => {
                                     </Row>
                                 </CardBody>
                             </Card>
-                        </Col>
-                    </Row >
 
-                    <Row>
-                        <Col xl={6}>
-                            <Card className="bg-form">
-                                <CardBody>
-                                    <h4 className="card-title mb-2">System Fields</h4>
-                                    <Row>
-                                        <Col xl={12}>
-                                            <div className="">
-                                                <Row>
-                                                    <Col xl={12}>
-                                                        <Row className="mt-2 align-items-center">
-                                                            <Col xl={3}>
-                                                                <label
-
-                                                                    className=" block"
-                                                                >
-                                                                    Create Date
-                                                                </label>
-                                                            </Col>
-                                                            <Col xl={9}>
-                                                                <Calendar
-                                                                    id="createDate"
-                                                                    placeholder="27/02/2025"
-                                                                    className="w-full"
-                                                                    disabled
-                                                                />
-                                                            </Col>
-                                                        </Row>
-
-                                                        <Row className="mt-2 align-items-center">
-                                                            <Col xl={3}>
-                                                                <label
-
-                                                                    className=" block"
-                                                                >
-                                                                    Edit Date
-                                                                </label>
-                                                            </Col>
-                                                            <Col xl={9}>
-                                                                <Calendar
-                                                                    id="editDate"
-                                                                    disabled
-                                                                    className="w-full"
-                                                                    placeholder="27/02/2025"
-                                                                />
-                                                            </Col>
-                                                        </Row>
-
-                                                        <Row className="mt-2 align-items-center">
-                                                            <Col xl={3}>
-                                                                <label
-
-                                                                    className=" block"
-                                                                >
-                                                                    Created By
-                                                                </label>
-                                                            </Col>
-                                                            <Col xl={9}>
-                                                                <InputText
-                                                                    id="integer"
-                                                                    className="w-full"
-                                                                    disabled
-                                                                    value={createdBy}
-                                                                />
-                                                            </Col>
-                                                        </Row>
-
-                                                        <Row className="mt-2 align-items-center">
-                                                            <Col xl={3}>
-                                                                <label
-
-                                                                    className=" block"
-                                                                >
-                                                                    Last Activity Type
-                                                                </label>
-                                                            </Col>
-                                                            <Col xl={9}>
-                                                                <InputText
-                                                                    id="integer"
-                                                                    className="w-full"
-                                                                    placeholder="Interview"
-                                                                    disabled
-                                                                />
-                                                            </Col>
-                                                        </Row>
-
-                                                        <Row className="mt-2 align-items-center">
-                                                            <Col xl={3}>
-                                                                <label
-
-                                                                    className=" block"
-                                                                >
-                                                                    Last Activity Date
-                                                                </label>
-                                                            </Col>
-                                                            <Col xl={9}>
-                                                                <Calendar
-                                                                    id="lastActivityDate"
-                                                                    className="w-full"
-                                                                    placeholder="27/02/2025"
-                                                                    disabled
-                                                                />
-                                                            </Col>
-                                                        </Row>
-
-
-                                                    </Col>
-                                                </Row>
-                                            </div>
-                                        </Col>
-                                    </Row>
-                                </CardBody>
-                            </Card>
-                        </Col>
-                        <Col xl={6}>
-                            <Card className="bg-form">
+                              <Card className="bg-form">
                                 <CardBody>
                                     <h4 className="card-title mb-2">Social Pages</h4>
                                     <Row>
@@ -905,7 +883,9 @@ const CompanyEditForm = () => {
                                 </CardBody>
                             </Card>
                         </Col>
-                    </Row>
+                    </Row >
+
+                   
 
                     <Row className="align-items-center mb-3">
                         <Col md={12}>

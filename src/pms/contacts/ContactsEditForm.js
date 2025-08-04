@@ -398,37 +398,20 @@ const ContactEditForm = () => {
 
                                                                     className=" block"
                                                                 >
-                                                                    Last Activity Type
+                                                                    Edited By
                                                                 </label>
                                                             </Col>
                                                             <Col xl={9}>
                                                                 <InputText
                                                                     id="integer"
                                                                     className="w-full"
-                                                                    placeholder="Interview"
+                                                                    placeholder="Harish"
                                                                     disabled
                                                                 />
                                                             </Col>
                                                         </Row>
 
-                                                        <Row className="mt-2 align-items-center">
-                                                            <Col xl={3}>
-                                                                <label
-
-                                                                    className=" block"
-                                                                >
-                                                                    Last Activity Date
-                                                                </label>
-                                                            </Col>
-                                                            <Col xl={9}>
-                                                                <Calendar
-                                                                    id="lastActivityDate"
-                                                                    className="w-full"
-                                                                    placeholder="27/02/2025"
-                                                                    disabled
-                                                                />
-                                                            </Col>
-                                                        </Row>
+                                                       
 
 
                                                     </Col>

@@ -60,7 +60,7 @@ const EmployeeEditForm = props => {
   const [fullname, setFullname] = useState("Lavankumar Kalvala");
   const [fullNameDialogVisible, setFullNameDialogVisible] = useState(false);
 
-  const [company, setCompany] = useState("Infosys Limited");
+  const [company, setCompany] = useState("Varun Digital Media");
   const [jobtitle, setJobtitle] = useState("Frontend Developer");
   const [email, setEmail] = useState(null);
   const [totalExperience, setTotalExperience] = useState("2");
@@ -441,7 +441,7 @@ const EmployeeEditForm = props => {
   //  work experience variables start
 
   const [workExperiences, setWorkExperiences] = useState([{
-    company: "Infosys",
+    company: "Varun Digital Media",
     jobTitle: "Frotend Developoer",
     fromDate: new Date(2023, 2, 15),
     toDate: new Date(2025, 1, 21),
@@ -1035,7 +1035,7 @@ const EmployeeEditForm = props => {
                                       // },
                                       // onChange: (event) => event.target.value = event.target.value.toLowerCase()
                                     })}
-                                    placeholder="lavan9@infosys.com"
+                                    placeholder="lavan@varundigitalmedia.com"
                                   />
 
                                   {/* {errors.personal_email && (<small id='personalEmailHelp' className='form-text text-danger'>{errors.personal_email.message}</small>)} */}
@@ -2323,37 +2323,20 @@ const EmployeeEditForm = props => {
 
                                     className=" block"
                                   >
-                                    Last Activity Type
+                                    Edited By
                                   </label>
                                 </Col>
                                 <Col xl={9}>
                                   <InputText
                                     id="integer"
                                     className="w-full"
-                                    placeholder="Interview"
+                                    placeholder="Harish"
                                     disabled
                                   />
                                 </Col>
                               </Row>
 
-                              <Row className="mt-2 align-items-center">
-                                <Col xl={3}>
-                                  <label
-
-                                    className=" block"
-                                  >
-                                    Last Activity Date
-                                  </label>
-                                </Col>
-                                <Col xl={9}>
-                                  <Calendar
-                                    id="lastActivityDate"
-                                    className="w-full"
-                                    placeholder="27/02/2025"
-                                    disabled
-                                  />
-                                </Col>
-                              </Row>
+                            
 
 
                             </Col>

@@ -1830,6 +1830,318 @@ const ContactsAllActive = () => {
   const [selectedPlacedJobs, setSelectedPlacedJobs] = useState([]);
 
   // view form pipeline ends
+
+
+  // view form Projects start
+  
+    const [projectData, setProjectData] = useState([
+      {
+        project_code: "Proj-101",
+        project_name: "AI Generator",
+        project_manager: "Mahesh Kumar Bhoga",
+        task_count: "13",
+        completed_tasks: "9",
+        delay_reason: "Due to some issues",
+        status: "Open",
+        extended_end_date: "24-05-2025",
+        experience_required: "3 Years",
+        project_start_date: "01-01-2025",
+        project_end_date: "31-12-2025",
+      },
+    ]);
+  
+    const [selectedProjects, setSelectedProjects] = useState([]);
+  
+    const [projectDataFilters, setProjectDataFilters] = useState({
+      global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+      project_code: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+      project_name: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+      project_manager: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+      task_count: { value: null, matchMode: FilterMatchMode.EQUALS },
+      completed_tasks: { value: null, matchMode: FilterMatchMode.EQUALS },
+      delay_reason: { value: null, matchMode: FilterMatchMode.CONTAINS },
+      status: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+      extended_end_date: { value: null, matchMode: FilterMatchMode.CONTAINS },
+      experience_required: { value: null, matchMode: FilterMatchMode.CONTAINS },
+      project_start_date: { value: null, matchMode: FilterMatchMode.CONTAINS },
+      project_end_date: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    });
+  
+    const dateFilterTemplate = (options) => {
+      return (
+        <Calendar
+          value={options.value}
+          onChange={(e) => options.filterCallback(e.value, options.index)}
+          dateFormat="dd-mm-yy"
+          placeholder="dd-mm-yyyy"
+          mask="99-99-9999"
+        />
+      );
+    };
+  
+    // view form Projects end
+
+     // View worktype start
+    
+      const CompanyProjects = [
+        {
+          task_code: "Task-101",
+          task_type: "Task",
+          project_name: "AI Generator (Proj-101)",
+          project_manager: "Sneha Mehta",
+          module_name: "User Management",
+          task_name: "Add User Role Feature",
+          task_description: "Implement feature to add roles to a user account.",
+          created_by: "Ravi Sharma",
+          assigned_by: "Sneha Mehta",
+          assigned_to: "Amit Verma",
+          watchers: "Ravi Sharma, Sneha Mehta",
+          start_date: "01-05-2025",
+          work_hours: 12,
+          end_date: "03-05-2025",
+          actual_end_date: "02-05-2025",
+          task_status: "To Do",
+          priority: "High",
+          approval_status: "Approved",
+        },
+        {
+          task_code: "STask-101.1",
+          task_type: "Sub Task",
+          project_name: "AI Generator (Proj-101)",
+          project_manager: "Ankit Sinha",
+          module_name: "Reporting",
+          task_name: "Generate Monthly Report",
+          task_description: "Automate monthly report generation for sales team.",
+          created_by: "Priya Desai",
+          assigned_by: "Ankit Sinha",
+          assigned_to: "Kiran Rao",
+          watchers: "Ankit Sinha",
+          start_date: "04-05-2025",
+          work_hours: 8,
+          end_date: "05-05-2025",
+          actual_end_date: "08-05-2025",
+          task_status: "In Progress",
+          priority: "Medium",
+          approval_status: "Pending",
+        },
+        {
+          task_code: "STask-101.2",
+          task_type: "Sub Task",
+          project_name: "AI Generator (Proj-101)",
+          project_manager: "Rahul Nair",
+          module_name: "Authentication",
+          task_name: "Fix Login Timeout Bug",
+          task_description: "Resolve issue where session times out too early.",
+          created_by: "Meena Iyer",
+          assigned_by: "Rahul Nair",
+          assigned_to: "Vikram Joshi",
+          watchers: "Meena Iyer, Rahul Nair",
+          start_date: "02-05-2025",
+          work_hours: 5,
+          end_date: "03-05-2025",
+          actual_end_date: "03-05-2025",
+          task_status: "In Review",
+          priority: "High",
+          approval_status: "Approved",
+        },
+        {
+          task_code: "Bug-101.1",
+          task_type: "Bug",
+          project_name: "AI Generator (Proj-101)",
+          project_manager: "Rakesh Kumar",
+          module_name: "Payroll Management",
+          task_name: "Integrate PF Calculation",
+          task_description:
+            "Add logic to calculate Provident Fund based on salary slabs.",
+          created_by: "Anita Reddy",
+          assigned_by: "Rakesh Kumar",
+          assigned_to: "Sanjay Mishra",
+          watchers: "Anita Reddy, Rakesh Kumar",
+          start_date: "04-05-2025",
+          work_hours: 10,
+          end_date: "06-05-2025",
+          actual_end_date: "06-05-2025",
+          task_status: "Testing / QA",
+          priority: "Medium",
+          approval_status: "Approved",
+        },
+        {
+          task_code: "Task-102",
+          task_type: "Task",
+          project_name: "AI Generator (Proj-101)",
+          project_manager: "Neha Jain",
+          module_name: "E-Invoice Integration",
+          task_name: "Connect with GSTN APIs",
+          task_description:
+            "Establish API connectivity with the GST Network for invoice validation.",
+          created_by: "Suresh Babu",
+          assigned_by: "Neha Jain",
+          assigned_to: "Rajeev Menon",
+          watchers: "Suresh Babu, Neha Jain",
+          start_date: "03-05-2025",
+          work_hours: 16,
+          end_date: "07-05-2025",
+          actual_end_date: "07-05-2025",
+          task_status: "Blocked",
+          priority: "High",
+          approval_status: "Pending",
+        },
+        {
+          task_code: "STask-102.1",
+          task_type: "Sub Task",
+          project_name: "AI Generator (Proj-101)",
+          project_manager: "Vikas Patil",
+          module_name: "Attendance Tracking",
+          task_name: "Add Biometric Sync",
+          task_description:
+            "Implement sync between biometric device and central attendance module.",
+          created_by: "Harsha Shetty",
+          assigned_by: "Vikas Patil",
+          assigned_to: "Nikhil Kapoor",
+          watchers: "Harsha Shetty",
+          start_date: "01-05-2025",
+          work_hours: 6,
+          end_date: "02-05-2025",
+          actual_end_date: "02-05-2025",
+          task_status: "Done",
+          priority: "Low",
+          approval_status: "Approved",
+        },
+        {
+          task_code: "Bug-102.1",
+          task_type: "Bug",
+          project_name: "AI Generator (Proj-101)",
+          project_manager: "Manoj Bhatt",
+          module_name: "Leave Management",
+          task_name: "Bug Fix - Overlapping Leaves",
+          task_description:
+            "Fix the bug where multiple overlapping leaves are allowed.",
+          created_by: "Deepika Saini",
+          assigned_by: "Manoj Bhatt",
+          assigned_to: "Alok Yadav",
+          watchers: "Deepika Saini, Manoj Bhatt",
+          start_date: "05-05-2025",
+          work_hours: 4,
+          end_date: "06-05-2025",
+          actual_end_date: "07-05-2025",
+          task_status: "Cancelled",
+          priority: "Medium",
+          approval_status: "Pending",
+        },
+        {
+          task_code: "Bug-102.2",
+          task_type: "Bug",
+          project_name: "AI Generator (Proj-101)",
+          project_manager: "Karthik Rao",
+          module_name: "Performance Evaluation",
+          task_name: "Add Employee Self-Review",
+          task_description:
+            "Develop form for employees to submit self-evaluation before appraisals.",
+          created_by: "Anjali Menon",
+          assigned_by: "Karthik Rao",
+          assigned_to: "Tarun Singh",
+          watchers: "Anjali Menon",
+          start_date: "02-05-2025",
+          work_hours: 9,
+          end_date: "04-05-2025",
+          actual_end_date: "03-05-2025",
+          task_status: "To Do",
+          priority: "High",
+          approval_status: "Approved",
+        },
+        // {
+        //   task_code: "Task-103",
+        //   task_type: "Task",
+        //   project_name: "AI Generator (Proj-101)",
+        //   project_manager: "Nitin Sharma",
+        //   module_name: "Project Dashboard",
+        //   task_name: "Create Gantt Chart View",
+        //   task_description: "Add a Gantt chart to visualize project timelines.",
+        //   created_by: "Rajashree Banerjee",
+        //   assigned_by: "Nitin Sharma",
+        //   assigned_to: "Amit Choudhary",
+        //   watchers: "Rajashree Banerjee, Nitin Sharma",
+        //   start_date: "06-05-2025",
+        //   work_hours: 14,
+        //   end_date: "09-05-2025",
+        //   actual_end_date: "07-05-2025",
+        //   task_status: "In Progress",
+        //   priority: "High",
+        //   approval_status: "Pending",
+        // },
+        // {
+        //   task_code: "STask-103.1",
+        //   task_type: "Sub Task",
+        //   project_name: "AI Generator (Proj-101)",
+        //   project_manager: "Arun Pillai",
+        //   module_name: "Notification Center",
+        //   task_name: "Add SMS Alert Integration",
+        //   task_description: "Integrate Twilio API to send SMS alerts to users.",
+        //   created_by: "Pooja Srinivasan",
+        //   assigned_by: "Arun Pillai",
+        //   assigned_to: "Rohit Varma",
+        //   watchers: "Pooja Srinivasan",
+        //   start_date: "04-05-2025",
+        //   work_hours: 7,
+        //   end_date: "05-05-2025",
+        //   actual_end_date: "05-05-2025",
+        //   task_status: "In Review",
+        //   priority: "Medium",
+        //   approval_status: "Approved",
+        // },
+        // {
+        //   task_code: "Bug-103.1",
+        //   task_type: "Bug",
+        //   project_name: "AI Generator (Proj-101)",
+        //   project_manager: "Devansh Goyal",
+        //   module_name: "File Management",
+        //   task_name: "Optimize File Uploads",
+        //   task_description: "Improve file upload speed and add progress indicator.",
+        //   created_by: "Sneha Rathi",
+        //   assigned_by: "Devansh Goyal",
+        //   assigned_to: "Ravi Sekhar",
+        //   watchers: "Sneha Rathi, Devansh Goyal",
+        //   start_date: "03-05-2025",
+        //   work_hours: 6,
+        //   end_date: "04-05-2025",
+        //   actual_end_date: "04-05-2025",
+        //   task_status: "Completed",
+        //   priority: "Low",
+        //   approval_status: "Approved",
+        // },
+      ]
+    
+      const [companyProjects, setCompanyProjects] = useState(CompanyProjects)
+      const [selectedCompanyProjects, setSelectedCompanyProjects] = useState([])
+    
+      const [companyProjectFilters, setCompanyProjectFilters] = useState({
+        global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+        task_code: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+        task_type: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+        project_name: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+        project_manager: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+        module_name: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+        task_name: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+        task_description: { value: null, matchMode: FilterMatchMode.CONTAINS },
+        created_by: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+        assigned_by: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+        assigned_to: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+        watchers: { value: null, matchMode: FilterMatchMode.CONTAINS },
+        start_date: { value: null, matchMode: FilterMatchMode.DATE_IS },
+        end_date: { value: null, matchMode: FilterMatchMode.DATE_IS },
+        actual_end_date: { value: null, matchMode: FilterMatchMode.DATE_IS },
+        work_hours: { value: null, matchMode: FilterMatchMode.EQUALS },
+        task_status: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+        priority: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+        approval_status: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+      })
+    
+      
+    
+      // View worktype end
+
+
+
   // view form activities starts
 
   const [activitiesFilters, setActivitiesFilters] = useState({
@@ -1843,45 +2155,45 @@ const ContactsAllActive = () => {
   });
 
   const activities = [
-    {
-      type: "Technical",
-      sub_type: "Software",
+     {
+      type: "Call",
+      sub_type: "Introductory Call",
       priority: "High",
-      subject: "Job Interview",
-      date_time: "2025-01-01 10:00",
-      user_id: "12345",
+      subject: "Call Request to Discuss Project Updates",
+      date_time: "01-01-2025 10:00",
+      user_id: "mahesh",
     },
     {
-      type: "Technical",
-      sub_type: "Project Management",
+      type: "Meeting",
+      sub_type: "Daily Stand-up",
       priority: "Medium",
-      subject: "Project Kickoff",
-      date_time: "2024-12-05 09:00",
-      user_id: "54321",
+      subject: "Project Progress and Next Steps",
+      date_time: "05-12-2024 09:00",
+      user_id: "lavan",
     },
     {
-      type: "Technical",
-      sub_type: "Data Analysis",
+      type: "Event",
+      sub_type: "Follow-up Call",
       priority: "Low",
-      subject: "Data Review",
-      date_time: "2025-01-15 14:00",
-      user_id: "98765",
+      subject: "Meeting Request",
+      date_time: "15-01-2025 14:00",
+      user_id: "ruchitha",
     },
     {
-      type: "Non-Technical",
-      sub_type: "Marketing",
+      type: "Others",
+      sub_type: "Requirement Discussion",
       priority: "High",
-      subject: "Strategy Discussion",
-      date_time: "2025-02-01 11:00",
-      user_id: "67890",
+      subject: "Discussion on Future Milestones",
+      date_time: "01-02-2025 11:00",
+      user_id: "laxmi",
     },
     {
-      type: "Non-Technical",
-      sub_type: "Human Resources",
+      type: "Call",
+      sub_type: "Follow-up Call",
       priority: "Critical",
-      subject: "Employee Review",
-      date_time: "2025-03-01 13:00",
-      user_id: "11223",
+      subject: "Need to Discuss Project Status",
+      date_time: "01-03-2025 13:00",
+      user_id: "rajashekar",
     },
   ];
 
@@ -1904,44 +2216,45 @@ const ContactsAllActive = () => {
 
   const history = [
     {
-      type: "Technical",
-      sub_type: "Software",
-      priority: "High",
-      subject: "Job Interview",
-      date_time: "2025-01-01 10:00",
-      user_id: "12345",
-    },
-    {
-      type: "Technical",
-      sub_type: "Project Management",
+      type: "Meeting",
+      sub_type: "Daily Stand-up",
       priority: "Medium",
-      subject: "Project Kickoff",
-      date_time: "2024-12-05 09:00",
-      user_id: "54321",
+      subject: "Project Progress and Next Steps",
+      date_time: "05-12-2024 09:00",
+      user_id: "lavan",
     },
     {
-      type: "Technical",
-      sub_type: "Data Analysis",
-      priority: "Low",
-      subject: "Data Review",
-      date_time: "2025-01-15 14:00",
-      user_id: "98765",
-    },
-    {
-      type: "Non-Technical",
-      sub_type: "Marketing",
+      type: "Call",
+      sub_type: "Introductory Call",
       priority: "High",
-      subject: "Strategy Discussion",
-      date_time: "2025-02-01 11:00",
-      user_id: "67890",
+      subject: "Call Request to Discuss Project Updates",
+      date_time: "01-01-2025 10:00",
+      user_id: "mahesh",
     },
     {
-      type: "Non-Technical",
-      sub_type: "Human Resources",
+      type: "Event",
+      sub_type: "Follow-up Call",
+      priority: "Low",
+      subject: "Meeting Request",
+      date_time: "15-01-2025 14:00",
+      user_id: "ruchitha",
+    },
+   
+    {
+      type: "Call",
+      sub_type: "Follow-up Call",
       priority: "Critical",
-      subject: "Employee Review",
-      date_time: "2025-03-01 13:00",
-      user_id: "11223",
+      subject: "Need to Discuss Project Status",
+      date_time: "01-03-2025 13:00",
+      user_id: "rajashekar",
+    },
+     {
+      type: "Others",
+      sub_type: "Requirement Discussion",
+      priority: "High",
+      subject: "Discussion on Future Milestones",
+      date_time: "01-02-2025 11:00",
+      user_id: "laxmi",
     },
   ];
 
@@ -2689,7 +3002,12 @@ const ContactsAllActive = () => {
                         <p className="mb-0 text-white"> <i class="fa-regular fa-pen-to-square me-3"></i> </p>
                       </Link> */}
                       <Tooltip target=".closeside" content="Close" position="bottom" style={{ marginBottom: "5px" }} />
-
+                        <Link to="/contacts-editform">
+                                                <p className="mb-0 text-white">
+                                                  {" "}
+                                                  <i class="fa-regular fa-pen-to-square me-3"></i>{" "}
+                                                </p>
+                                              </Link>
                       <Button
                         icon="pi pi-times"
                         className="p-button-text close-btn closeside"
@@ -3296,504 +3614,259 @@ const ContactsAllActive = () => {
                   </Col>
                 </Row>
               </TabPanel>
-              <TabPanel header="Pipeline" leftIcon="pi pi-cog mr-2" >
+
+               <TabPanel header="Projects" leftIcon="pi pi-calendar mr-2" >
                 <Row>
                   <Col lg={12}>
-                    <div className="pipelinetabs">
-                      <TabView scrollable style={{ maxWidth: '1200px', overflow: 'hidden' }}>
-                        <TabPanel header="Received" rightIcon={
-                          <Badge value={receivedJobs.length} severity="success" className="ml-2" />
-                        } leftIcon="pi pi-cog mr-1">
-                          <Row>
-                            <Col lg={12}>
-                              <section className="job-datatable-section">
-                                <div className="card1 mt-3 mb-4 actjobsumtable">
-                                  <DataTable
-                                    value={receivedJobs}
-                                    responsiveLayout="scroll"
-                                    showGridlines
-                                    tableStyle={{
-                                      minWidth: "60rem",
-                                      borderRadius: "8px",
-                                      boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
-                                    }}
-                                    paginator
-                                    rows={10}
-                                    rowsPerPageOptions={[5, 10, 25]}
-                                    paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
-                                    currentPageReportTemplate="{first} to {last} of {totalRecords}"
-                                    filters={receivedJobsFilters}
-                                    filterDisplay="row"
-                                    globalFilterFields={[
-                                      "status",
-                                      "jobid",
-                                      "job_title",
-                                      "candidate",
-                                      "contact",
-                                      "company",
-                                      "date_time",
-                                      "user_id",
-                                    ]}
-                                    emptyMessage="No jobs found."
-                                    selection={selectedReceivedJobs}
-                                    onSelectionChange={(e) => setSelectedReceivedJobs(e.value)}
-                                    selectionMode="multiple"
-                                    resizableColumns
-                                    columnResizeMode="expand"
-                                  >
-                                    <Column
-                                      selectionMode="multiple"
-                                      headerStyle={{ width: "3em" }}
-                                    />
-                                    <Column
-                                      field="status"
-                                      header="Status"
-                                      sortable
-                                      filter
-                                      style={{ minWidth: "10rem" }}
-                                    />
-                                    <Column
-                                      field="jobid"
-                                      header="Job ID"
-                                      sortable
-                                      filter
-                                      style={{ minWidth: "10rem" }}
-                                    />
-                                    <Column
-                                      field="job_title"
-                                      header="Job Title"
-                                      sortable
-                                      filter
-                                      style={{ minWidth: "10rem" }}
-                                    />
-                                    <Column
-                                      field="candidate"
-                                      header="Candidate"
-                                      sortable
-                                      filter
-                                      style={{ minWidth: "10rem" }}
-                                    />
-                                    <Column
-                                      field="contact"
-                                      header="Contact"
-                                      sortable
-                                      filter
-                                      style={{ minWidth: "10rem" }}
-                                    />
-                                    <Column
-                                      field="company"
-                                      header="Company"
-                                      sortable
-                                      filter
-                                      style={{ minWidth: "10rem" }}
-                                    />
-                                    <Column
-                                      field="date_time"
-                                      header="Date & Time"
-                                      sortable
-                                      filter
-                                      style={{ minWidth: "12rem" }}
-                                    />
-                                    <Column
-                                      field="user_id"
-                                      header="User ID"
-                                      sortable
-                                      filter
-                                      style={{ minWidth: "10rem" }}
-                                    />
-                                  </DataTable>
-                                </div>
-                              </section>
-                            </Col>
-                          </Row>
-                        </TabPanel>
-                        <TabPanel header="Potential" rightIcon={
-                          <Badge value="3" severity="success" className="ml-2" />
-                        } leftIcon="pi pi-cog mr-1">
-                          <Row>
-                            <Col lg={12}>
-                              <section className="job-datatable-section">
-                                <div className="card1 mt-3 mb-4 actjobsumtable">
-                                  <DataTable
-                                    value={potentialJobs}
-                                    responsiveLayout="scroll"
-                                    showGridlines
-                                    tableStyle={{
-                                      minWidth: "60rem",
-                                      borderRadius: "8px",
-                                      boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
-                                    }}
-                                    paginator
-                                    rows={10}
-                                    rowsPerPageOptions={[5, 10, 25]}
-                                    paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
-                                    currentPageReportTemplate="{first} to {last} of {totalRecords}"
-                                    filters={potentialJobsFilters}
-                                    filterDisplay="row"
-                                    globalFilterFields={[
-                                      "status",
-                                      "jobid",
-                                      "job_title",
-                                      "candidate",
-                                      "contact",
-                                      "company",
-                                      "date_time",
-                                      "user_id",
-                                    ]}
-                                    emptyMessage="No potential jobs found."
-                                    selection={selectedPotentialJobs}
-                                    onSelectionChange={(e) => setSelectedPotentialJobs(e.value)}
-                                    selectionMode="multiple"
-                                    resizableColumns
-                                    columnResizeMode="expand"
-                                  >
-                                    <Column
-                                      selectionMode="multiple"
-                                      headerStyle={{ width: "3em" }}
-                                    />
-                                    <Column
-                                      field="status"
-                                      header="Status"
-                                      sortable
-                                      filter
-                                      style={{ minWidth: "10rem" }}
-                                    />
-                                    <Column
-                                      field="jobid"
-                                      header="Job ID"
-                                      sortable
-                                      filter
-                                      style={{ minWidth: "10rem" }}
-                                    />
-                                    <Column
-                                      field="job_title"
-                                      header="Job Title"
-                                      sortable
-                                      filter
-                                      style={{ minWidth: "10rem" }}
-                                    />
-                                    <Column
-                                      field="candidate"
-                                      header="Candidate"
-                                      sortable
-                                      filter
-                                      style={{ minWidth: "10rem" }}
-                                    />
-                                    <Column
-                                      field="contact"
-                                      header="Contact"
-                                      sortable
-                                      filter
-                                      style={{ minWidth: "10rem" }}
-                                    />
-                                    <Column
-                                      field="company"
-                                      header="Company"
-                                      sortable
-                                      filter
-                                      style={{ minWidth: "10rem" }}
-                                    />
-                                    <Column
-                                      field="date_time"
-                                      header="Date & Time"
-                                      sortable
-                                      filter
-                                      style={{ minWidth: "12rem" }}
-                                    />
-                                    <Column
-                                      field="user_id"
-                                      header="User ID"
-                                      sortable
-                                      filter
-                                      style={{ minWidth: "10rem" }}
-                                    />
-                                  </DataTable>
-                                </div>
-                              </section>
-                            </Col>
-                          </Row>
-                        </TabPanel>
-                        <TabPanel header="Submitted" rightIcon={
-                          <Badge value="10" severity="success" className="ml-2" />
-                        } leftIcon="pi pi-cog mr-1">
-                          <Row>
-                            <Col lg={12}>
-                              <section className="job-datatable-section">
-                                <div className="card1 mt-3 mb-4 actjobsumtable">
-                                  <DataTable
-                                    value={submittedJobs}
-                                    responsiveLayout="scroll"
-                                    showGridlines
-                                    tableStyle={{
-                                      minWidth: "60rem",
-                                      borderRadius: "8px",
-                                      boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
-                                    }}
-                                    paginator
-                                    rows={10}
-                                    rowsPerPageOptions={[5, 10, 25]}
-                                    paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
-                                    currentPageReportTemplate="{first} to {last} of {totalRecords}"
-                                    filters={submittedJobsFilters}
-                                    filterDisplay="row"
-                                    globalFilterFields={[
-                                      "status",
-                                      "jobid",
-                                      "job_title",
-                                      "candidate",
-                                      "contact",
-                                      "company",
-                                      "date_time",
-                                      "user_id",
-                                    ]}
-                                    emptyMessage="No submitted jobs found."
-                                    selection={selectedSubmittedJobs}
-                                    onSelectionChange={(e) => setSelectedSubmittedJobs(e.value)}
-                                    selectionMode="multiple"
-                                    resizableColumns
-                                    columnResizeMode="expand"
-                                  >
-                                    <Column selectionMode="multiple" headerStyle={{ width: "3em" }} />
-                                    <Column field="status" header="Status" sortable filter style={{ minWidth: "10rem" }} />
-                                    <Column field="jobid" header="Job ID" sortable filter style={{ minWidth: "10rem" }} />
-                                    <Column field="job_title" header="Job Title" sortable filter style={{ minWidth: "10rem" }} />
-                                    <Column field="candidate" header="Candidate" sortable filter style={{ minWidth: "10rem" }} />
-                                    <Column field="contact" header="Contact" sortable filter style={{ minWidth: "10rem" }} />
-                                    <Column field="company" header="Company" sortable filter style={{ minWidth: "10rem" }} />
-                                    <Column field="date_time" header="Date & Time" sortable filter style={{ minWidth: "12rem" }} />
-                                    <Column field="user_id" header="User ID" sortable filter style={{ minWidth: "10rem" }} />
-                                  </DataTable>
-                                </div>
-                              </section>
-                            </Col>
-                          </Row>
-                        </TabPanel>
-                        <TabPanel header="Offer" rightIcon={
-                          <Badge value="4" severity="success" className="ml-2" />
-                        } leftIcon="pi pi-cog mr-1">
+                    <section className="job-datatable-section">
+                      <div className="card1 mt-3 mb-4 actjobsumtable">
+                       
+                       <DataTable
+                                                 value={projectData}
+                                                 selection={selectedProjects}
+                                                 onSelectionChange={(e) => setSelectedProjects(e.value)}
+                                                 selectionMode="multiple"
+                                                 filters={projectDataFilters}
+                                                 onFilter={(e) => setProjectDataFilters(e.filters)}
+                                                 filterDisplay="row"
+                                                 paginator
+                                                 rows={5}
+                                                 rowsPerPageOptions={[5, 10, 25, 50]}
+                                                 responsiveLayout="scroll"
+                                                 showGridlines
+                                                 resizableColumns
+                                                 columnResizeMode="expand"
+                                                 emptyMessage="No projects found."
+                                                 tableStyle={{
+                                                   minWidth: "120rem",
+                                                   borderRadius: "8px",
+                                                   boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
+                                                 }}
+                                               >
+                                                 <Column selectionMode="multiple" headerStyle={{ width: "3rem" }} />
+                                                 <Column field="project_code" header="Project Code" filter style={{ minWidth: "10rem" }} />
+                                                 <Column field="project_name" header="Project Name" filter style={{ minWidth: "10rem" }} />
+                                                 {/* <Column field="project_manager" header="Project Manager" filter style={{ minWidth: "14rem" }} /> */}
+                                                 {/* <Column field="task_count" header="# Tasks" filter style={{ minWidth: "10rem" }} /> */}
+                                                 {/* <Column field="completed_tasks" header="# Completed Tasks" filter style={{ minWidth: "14rem" }} /> */}
+                                                 
+                                                 
+                                                 {/* <Column
+                                                   field="extended_end_date"
+                                                   header="Extended End Date"
+                                                   filter
+                                                   filterElement={dateFilterTemplate}
+                                                   style={{ minWidth: "14rem" }}
+                                                 /> */}
+                                                
+                                                 <Column
+                                                   field="project_start_date"
+                                                   header="Project Start Date"
+                                                   filter
+                                                   // filterElement={dateFilterTemplate}
+                                                   style={{ minWidth: "10rem" }}
+                                                 />
+                                                 <Column
+                                                   field="project_end_date"
+                                                   header="Project End Date"
+                                                   filter
+                                                   // filterElement={dateFilterTemplate}
+                                                   style={{ minWidth: "10rem" }}
+                                                 />
+                                                 <Column field="status" header="Status" filter style={{ minWidth: "10rem" }} />
+                                                 <Column field="delay_reason" header="Reason for Delay" filter style={{ minWidth: "10rem" }} />
+                                               </DataTable>
 
-                          <Row>
-                            <Col lg={12}>
-                              <section className="job-datatable-section">
-                                <div className="card1 mt-3 mb-4 actjobsumtable">
-                                  <DataTable
-                                    value={offerJobs}
-                                    responsiveLayout="scroll"
-                                    showGridlines
-                                    tableStyle={{
-                                      minWidth: "60rem",
-                                      borderRadius: "8px",
-                                      boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
-                                    }}
-                                    paginator
-                                    rows={10}
-                                    rowsPerPageOptions={[5, 10, 25]}
-                                    paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
-                                    currentPageReportTemplate="{first} to {last} of {totalRecords}"
-                                    filters={offerJobsFilters}
-                                    filterDisplay="row"
-                                    globalFilterFields={[
-                                      "status",
-                                      "jobid",
-                                      "job_title",
-                                      "candidate",
-                                      "contact",
-                                      "company",
-                                      "date_time",
-                                      "user_id",
-                                    ]}
-                                    emptyMessage="No offer jobs found."
-                                    selection={selectedOfferJobs}
-                                    onSelectionChange={(e) => setSelectedOfferJobs(e.value)}
-                                    selectionMode="multiple"
-                                    resizableColumns
-                                    columnResizeMode="expand"
-                                  >
-                                    <Column selectionMode="multiple" headerStyle={{ width: "3em" }} />
-                                    <Column field="status" header="Status" sortable filter style={{ minWidth: "10rem" }} />
-                                    <Column field="jobid" header="Job ID" sortable filter style={{ minWidth: "10rem" }} />
-                                    <Column field="job_title" header="Job Title" sortable filter style={{ minWidth: "10rem" }} />
-                                    <Column field="candidate" header="Candidate" sortable filter style={{ minWidth: "10rem" }} />
-                                    <Column field="contact" header="Contact" sortable filter style={{ minWidth: "10rem" }} />
-                                    <Column field="company" header="Company" sortable filter style={{ minWidth: "10rem" }} />
-                                    <Column field="date_time" header="Date & Time" sortable filter style={{ minWidth: "12rem" }} />
-                                    <Column field="user_id" header="User ID" sortable filter style={{ minWidth: "10rem" }} />
-                                  </DataTable>
-                                </div>
-                              </section>
-                            </Col>
-                          </Row>
-                        </TabPanel>
-                        <TabPanel header="Rejected" rightIcon={
-                          <Badge value="2" severity="success" className="ml-2" />
-                        } leftIcon="pi pi-cog mr-1">
-                          <Row>
-                            <Col lg={12}>
-                              <section className="job-datatable-section">
-                                <div className="card1 mt-3 mb-4 actjobsumtable">
-                                  <DataTable
-                                    value={rejectedJobs}
-                                    responsiveLayout="scroll"
-                                    showGridlines
-                                    tableStyle={{
-                                      minWidth: "60rem",
-                                      borderRadius: "8px",
-                                      boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
-                                    }}
-                                    paginator
-                                    rows={10}
-                                    rowsPerPageOptions={[5, 10, 25]}
-                                    paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
-                                    currentPageReportTemplate="{first} to {last} of {totalRecords}"
-                                    filters={rejectedJobsFilters}
-                                    filterDisplay="row"
-                                    globalFilterFields={[
-                                      "status",
-                                      "jobid",
-                                      "job_title",
-                                      "candidate",
-                                      "contact",
-                                      "company",
-                                      "date_time",
-                                      "user_id",
-                                    ]}
-                                    emptyMessage="No rejected jobs found."
-                                    selection={selectedRejectedJobs}
-                                    onSelectionChange={(e) => setSelectedRejectedJobs(e.value)}
-                                    selectionMode="multiple"
-                                    resizableColumns
-                                    columnResizeMode="expand"
-                                  >
-                                    <Column selectionMode="multiple" headerStyle={{ width: "3em" }} />
-                                    <Column field="status" header="Status" sortable filter style={{ minWidth: "10rem" }} />
-                                    <Column field="jobid" header="Job ID" sortable filter style={{ minWidth: "10rem" }} />
-                                    <Column field="job_title" header="Job Title" sortable filter style={{ minWidth: "10rem" }} />
-                                    <Column field="candidate" header="Candidate" sortable filter style={{ minWidth: "10rem" }} />
-                                    <Column field="contact" header="Contact" sortable filter style={{ minWidth: "10rem" }} />
-                                    <Column field="company" header="Company" sortable filter style={{ minWidth: "10rem" }} />
-                                    <Column field="date_time" header="Date & Time" sortable filter style={{ minWidth: "12rem" }} />
-                                    <Column field="user_id" header="User ID" sortable filter style={{ minWidth: "10rem" }} />
-                                  </DataTable>
-                                </div>
-                              </section>
-                            </Col>
-                          </Row>
-                        </TabPanel>
-                        <TabPanel header="Interview" rightIcon={
-                          <Badge value="5" severity="success" className="ml-2" />
-                        } leftIcon="pi pi-cog mr-1">
-                          <Row>
-                            <Col lg={12}>
-                              <section className="job-datatable-section">
-                                <div className="card1 mt-3 mb-4 actjobsumtable">
-                                  <DataTable
-                                    value={interviewJobs}
-                                    responsiveLayout="scroll"
-                                    showGridlines
-                                    tableStyle={{
-                                      minWidth: "60rem",
-                                      borderRadius: "8px",
-                                      boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
-                                    }}
-                                    paginator
-                                    rows={10}
-                                    rowsPerPageOptions={[5, 10, 25]}
-                                    paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
-                                    currentPageReportTemplate="{first} to {last} of {totalRecords}"
-                                    filters={interviewJobsFilters}
-                                    filterDisplay="row"
-                                    globalFilterFields={[
-                                      "status",
-                                      "jobid",
-                                      "job_title",
-                                      "candidate",
-                                      "contact",
-                                      "company",
-                                      "date_time",
-                                      "user_id",
-                                    ]}
-                                    emptyMessage="No interview jobs found."
-                                    selection={selectedInterviewJobs}
-                                    onSelectionChange={(e) => setSelectedInterviewJobs(e.value)}
-                                    selectionMode="multiple"
-                                    resizableColumns
-                                    columnResizeMode="expand"
-                                  >
-                                    <Column selectionMode="multiple" headerStyle={{ width: "3em" }} />
-                                    <Column field="status" header="Status" sortable filter style={{ minWidth: "10rem" }} />
-                                    <Column field="jobid" header="Job ID" sortable filter style={{ minWidth: "10rem" }} />
-                                    <Column field="job_title" header="Job Title" sortable filter style={{ minWidth: "10rem" }} />
-                                    <Column field="candidate" header="Candidate" sortable filter style={{ minWidth: "10rem" }} />
-                                    <Column field="contact" header="Contact" sortable filter style={{ minWidth: "10rem" }} />
-                                    <Column field="company" header="Company" sortable filter style={{ minWidth: "10rem" }} />
-                                    <Column field="date_time" header="Date & Time" sortable filter style={{ minWidth: "12rem" }} />
-                                    <Column field="user_id" header="User ID" sortable filter style={{ minWidth: "10rem" }} />
-                                  </DataTable>
-                                </div>
-                              </section>
-                            </Col>
-                          </Row>
-                        </TabPanel>
-                        <TabPanel header="Placed" rightIcon={
-                          <Badge value="5" severity="success" className="ml-2" />
-                        } leftIcon="pi pi-cog mr-1">
-                          <Row>
-                            <Col lg={12}>
-                              <section className="job-datatable-section">
-                                <div className="card1 mt-3 mb-4 actjobsumtable">
-                                  <DataTable
-                                    value={placedJobs}
-                                    responsiveLayout="scroll"
-                                    showGridlines
-                                    tableStyle={{
-                                      minWidth: "60rem",
-                                      borderRadius: "8px",
-                                      boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
-                                    }}
-                                    paginator
-                                    rows={10}
-                                    rowsPerPageOptions={[5, 10, 25]}
-                                    paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
-                                    currentPageReportTemplate="{first} to {last} of {totalRecords}"
-                                    filters={placedJobsFilters}
-                                    filterDisplay="row"
-                                    globalFilterFields={[
-                                      "status",
-                                      "jobid",
-                                      "job_title",
-                                      "candidate",
-                                      "contact",
-                                      "company",
-                                      "date_time",
-                                      "user_id",
-                                    ]}
-                                    emptyMessage="No placed jobs found."
-                                    selection={selectedPlacedJobs}
-                                    onSelectionChange={(e) => setSelectedPlacedJobs(e.value)}
-                                    selectionMode="multiple"
-                                    resizableColumns
-                                    columnResizeMode="expand"
-                                  >
-                                    <Column selectionMode="multiple" headerStyle={{ width: "3em" }} />
-                                    <Column field="status" header="Status" sortable filter style={{ minWidth: "10rem" }} />
-                                    <Column field="jobid" header="Job ID" sortable filter style={{ minWidth: "10rem" }} />
-                                    <Column field="job_title" header="Job Title" sortable filter style={{ minWidth: "10rem" }} />
-                                    <Column field="candidate" header="Candidate" sortable filter style={{ minWidth: "10rem" }} />
-                                    <Column field="contact" header="Contact" sortable filter style={{ minWidth: "10rem" }} />
-                                    <Column field="company" header="Company" sortable filter style={{ minWidth: "10rem" }} />
-                                    <Column field="date_time" header="Date & Time" sortable filter style={{ minWidth: "12rem" }} />
-                                    <Column field="user_id" header="User ID" sortable filter style={{ minWidth: "10rem" }} />
-                                  </DataTable>
-                                </div>
-                              </section>
-                            </Col>
-                          </Row>
-                        </TabPanel>
-                      </TabView>
-                    </div>
+
+                      </div>
+                    </section>
                   </Col>
                 </Row>
               </TabPanel>
+
+
+               <TabPanel header="Work Type" leftIcon="pi pi-calendar mr-2" >
+                <Row>
+                  <Col lg={12}>
+                    <section className="job-datatable-section">
+                      <div className="card1 mt-3 mb-4 actjobsumtable">
+                         <DataTable
+                                                 value={companyProjects}
+                                                 filters={companyProjectFilters}
+                                                 globalFilterFields={[
+                                                   "task_code",
+                                                   "task_type",
+                                                   "project_name",
+                                                   "project_manager",
+                                                   "module_name",
+                                                   "task_name",
+                                                   "task_description",
+                                                   "created_by",
+                                                   "assigned_by",
+                                                   "assigned_to",
+                                                   "watchers",
+                                                   "start_date",
+                                                   "end_date",
+                                                   "actual_end_date",
+                                                   "work_hours",
+                                                   "task_status",
+                                                   "priority",
+                                                   "approval_status",
+                                                 ]}
+                                                 filterDisplay="row"
+                                                 selection={selectedCompanyProjects}
+                                                 onSelectionChange={e =>
+                                                   setSelectedCompanyProjects(e.value)
+                                                 }
+                                                 selectionMode="multiple"
+                                                 paginator
+                                                 rows={5}
+                                                 rowsPerPageOptions={[5, 10, 25, 50]}
+                                                 responsiveLayout="scroll"
+                                                 showGridlines
+                                                 resizableColumns
+                                                 columnResizeMode="expand"
+                                                 emptyMessage="No tasks found."
+                                                 tableStyle={{
+                                                   minWidth: "120rem",
+                                                   borderRadius: "8px",
+                                                   boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
+                                                 }}
+                                               >
+                                                 <Column
+                                                   selectionMode="multiple"
+                                                   headerStyle={{ width: "3em" }}
+                                                 />
+                                                 <Column
+                                                   field="task_code"
+                                                   header="Work Type Code"
+                                                   style={{ minWidth: "10rem" }}
+                                                   sortable
+                                                   filter
+                                                 />
+                                                 <Column
+                                                   field="task_type"
+                                                   header="Work Type"
+                                                   style={{ minWidth: "10rem" }}
+                                                   sortable
+                                                   filter
+                                                 />
+                                                 {/* <Column
+                                                   field="project_name"
+                                                   header="Project Name"
+                                                   sortable
+                                                   filter
+                                                 />
+                                                 <Column
+                                                   field="project_manager"
+                                                   header="Project Manager"
+                                                   sortable
+                                                   filter
+                                                 />
+                                                 <Column
+                                                   field="module_name"
+                                                   header="Module Name"
+                                                   sortable
+                                                   filter
+                                                 /> */}
+                                                 <Column
+                                                   field="task_name"
+                                                   header="Summary"
+                                                   style={{ minWidth: "10rem" }}
+                                                   sortable
+                                                   filter
+                                                 />
+                                                 {/* <Column
+                                                   field="task_description"
+                                                   header="Task Description"
+                                                   sortable
+                                                   filter
+                                                   style={{ minWidth: "15rem" }}
+                                                 />
+                                                 <Column
+                                                   field="created_by"
+                                                   header="Created By"
+                                                   sortable
+                                                   filter
+                                                 /> */}
+                                                 {/* <Column
+                                                   field="assigned_by"
+                                                   header="Assigned By"
+                                                   sortable
+                                                   filter
+                                                 /> */}
+                                                 <Column
+                                                   field="assigned_to"
+                                                   header="Assigned To"
+                                                   style={{ minWidth: "10rem" }}
+                                                   sortable
+                                                   filter
+                                                 />
+                                                 {/* <Column
+                                                   field="watchers"
+                                                   header="Watchers"
+                                                   sortable
+                                                   filter
+                                                   style={{ minWidth: "12rem" }}
+                                                 />
+                                                 <Column
+                                                   field="start_date"
+                                                   header="Start Date"
+                                                   sortable
+                                                   filter
+                                                 />
+                                                 <Column
+                                                   field="end_date"
+                                                   header="End Date"
+                                                   sortable
+                                                   filter
+                                                 />
+                                                 <Column
+                                                   field="actual_end_date"
+                                                   header="Actual End Date"
+                                                   sortable
+                                                   filter
+                                                 />
+                                                 <Column
+                                                   field="work_hours"
+                                                   header="Work Hours"
+                                                   sortable
+                                                   filter
+                                                 /> */}
+                                                 <Column
+                                                   field="task_status"
+                                                   header="Work Type Status"
+                                                   style={{ minWidth: "10rem" }}
+                                                   sortable
+                                                   filter
+                                                 />
+                       
+                                                 <Column
+                                                   field="project_name"
+                                                   header="Project Name"
+                                                   style={{ minWidth: "10rem" }}
+                                                   sortable
+                                                   filter
+                                                 />
+                                                 {/* <Column
+                                                   field="priority"
+                                                   header="Priority"
+                                                   sortable
+                                                   filter
+                                                 />
+                                                 <Column
+                                                   field="approval_status"
+                                                   header="Approval Status"
+                                                   sortable
+                                                   filter
+                                                 /> */}
+                                               </DataTable>
+                      </div>
+                    </section>
+                  </Col>
+                </Row>
+              </TabPanel>
+             
               <TabPanel header="Activities" leftIcon="pi pi-calendar mr-2" >
                 <Row>
                   <Col lg={12}>
