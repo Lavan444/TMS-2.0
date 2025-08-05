@@ -23,6 +23,7 @@ import { ConfirmDialog } from "primereact/confirmdialog";
 import { InputNumber } from "primereact/inputnumber";
 import { TreeSelect } from "primereact/treeselect";
 import { Checkbox } from "primereact/checkbox";
+import { MultiSelect } from "primereact/multiselect";
 import { Editor } from "primereact/editor";
 import Select from 'react-select';
 import { Toast } from 'primereact/toast';
@@ -45,6 +46,25 @@ const CandidateEditForm = props => {
     const [subject, setSubject] = useState('');
     const [file, setFile] = useState(null);
     const [selectedStatus1, setSelectedStatus1] = useState(null);
+
+    // Private functionality
+    const [privateDrop, setPrivateDrop] = useState([]);
+    const [popchecked2, setPopchecked2] = useState(false);
+    
+    const PrivetDropdownValues = [
+        { name: "Harish", value: "Harish" },
+        { name: "Mahesh", value: "Mahesh" },
+        { name: "Lavan", value: "Lavan" },
+        { name: "Vinay", value: "Vinay" },
+        { name: "Vasanth", value: "Vasanth" }
+    ];
+    
+    const handlePopupCheckbox2 = e => {
+        setPopchecked2(e.checked);
+        if (!e.checked) {
+            setPrivateDrop([]);
+        }
+    };
 
     const handleUpload = (e) => {
         setFile(e.files[0]);
@@ -1161,6 +1181,46 @@ As the assigned team member, you will be responsible for managing your specific 
                                                                         />
                                                                     </Col>
                                                                 </Row>
+
+                                                                {/* Private Section */}
+                                                                <Row className="mt-3 align-items-center">
+                                                                    <Col xl={12}>
+                                                                        <div className="d-flex align-items-center">
+                                                                            <Checkbox
+                                                                                inputId="checkbox"
+                                                                                checked={popchecked2}
+                                                                                onChange={handlePopupCheckbox2}
+                                                                            />
+                                                                            <label htmlFor="checkbox" className="ms-2">
+                                                                                Private
+                                                                            </label>
+                                                                        </div>
+                                                                    </Col>
+                                                                </Row>
+                                                                
+                                                                {popchecked2 && (
+                                                                    <Row className="mt-2 align-items-center">
+                                                                        <Col xl={3}>
+                                                                            <label htmlFor="privateUsers" className="block">
+                                                                                User Id's
+                                                                            </label>
+                                                                        </Col>
+                                                                        <Col xl={9}>
+                                                                            <MultiSelect
+                                                                                value={privateDrop}
+                                                                                onChange={e => setPrivateDrop(e.value)}
+                                                                                options={PrivetDropdownValues}
+                                                                                optionLabel="name"
+                                                                                optionValue="value"
+                                                                                placeholder="Select Users"
+                                                                                className="w-full"
+                                                                                style={{border: '1px solid #ced4da'}}
+                                                                                display="comma"
+                                                                                maxSelectedLabels={3}
+                                                                            />
+                                                                        </Col>
+                                                                    </Row>
+                                                                )}
 
                                                                 {/* <Row className="mt-2 align-items-center">
                                                             <Col xl={3}>

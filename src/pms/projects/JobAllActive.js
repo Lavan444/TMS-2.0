@@ -2309,15 +2309,15 @@ const JobAllActive = ({ toggleSidebar }) => {
   }
 
   const PrivetDropdownValues = [
-    { name: "Mahesh Kumar Bhoga", value: "Mahesh Kumar Bhoga" },
-    { name: "Lavan", value: "Lavan" },
-    { name: "Vinay", value: "Vinay" },
+    { name: "mahesh", value: "Mahesh" },
+    { name: "lavan", value: "Lavan" },
+    { name: "vinay", value: "Vinay" },
   ]
 
   const typeInterviewcontact = [
-    { name: "Harish", value: "Harish" },
-    { name: "Giri", value: "Giri" },
-    { name: "Pavan", value: "Pavan" },
+    { name: "harish", value: "Harish" },
+    { name: "giri", value: "Giri" },
+    { name: "pavan", value: "Pavan" },
   ]
 
   const typeInterviewval = [
@@ -3220,14 +3220,42 @@ const JobAllActive = ({ toggleSidebar }) => {
 
                     </Row>
 
-                    <Row className="justify-content-end align-items-end mt-2">
-                      <Col lg={6}>
-                        <div className="p-field">
-                          <input type="checkbox" className="me-2" checked />
-                          <label htmlFor="jobType">Private</label>
+                     <Row className="justify-content-start align-items-end mt-2">
+                      <Col xl={2}>
+                        <div className="d-flex align-items-center mt-4">
+                          <Checkbox
+                            inputId="checkbox"
+                            checked={popchecked2}
+                            onChange={handlePopupCheckbox2}
+                          />
+                          <label htmlFor="username" className="ms-1 mt-2">
+                            Private
+                          </label>
                         </div>
                       </Col>
-                      <Col lg={6} className="d-flex justify-content-end">
+
+                      {popchecked2 && (
+                        <Col xl={4}>
+                          <label htmlFor="username">User Id's</label>
+                          <MultiSelect
+                            value={privateDrop}
+                            onChange={e => setPrivateDrop(e.value)}
+                            options={PrivetDropdownValues}
+                            optionLabel="name"
+                            optionValue="value"
+                            placeholder="Select Users"
+                            className="w-full"
+                            style={{border: '1px solid #ced4da'}}
+                            display="comma"
+                          />
+                        </Col>
+                      )}
+                       </Row>
+
+                    <Row className="justify-content-start align-items-end mt-2">
+                     
+
+                      <Col lg={12} className="d-flex justify-content-end">
                         <Button
                           color="primary"
                           className="btn btn-primary waves-effect waves-light me-2 btn-main"
@@ -5351,7 +5379,7 @@ const JobAllActive = ({ toggleSidebar }) => {
                     placeholder="Select Users"
                     className="w-full"
                     style={{border: '1px solid #ced4da'}}
-                    display="chip"
+                    display="comma"
                     maxSelectedLabels={3}
                   />
                 </Col>
@@ -5667,15 +5695,33 @@ const JobAllActive = ({ toggleSidebar }) => {
                     </Col>
                   </Row>
                 </Col>
+               {popchecked2 && (
+
                 <Col xl={6}>
                   <label htmlFor="username">User Id's</label>
-                  <Chips
-                    value={userid}
-                    onChange={e => setUserid(e.value)}
-                    itemTemplate={customChip}
+                  <MultiSelect
+                    value={privateDrop}
+                    onChange={e => setPrivateDrop(e.value)}
+                    options={PrivetDropdownValues}
+                    optionLabel="name"
+                    optionValue="value"
+                    placeholder="Select Users"
                     className="w-full"
+                    style={{border: '1px solid #ced4da'}}
+                    display="comma"
+                    maxSelectedLabels={3}
                   />
                 </Col>
+      // <Col xl={6}>
+      //   <label htmlFor="username">User Id's</label>
+      //   <Chips
+      //     value={userid}
+      //     onChange={e => setUserid(e.value)}
+      //     itemTemplate={customChip}
+      //     className="w-full"
+      //   />
+      // </Col>
+    )}
               </Row>
 
               {popchecked && (
@@ -5981,15 +6027,33 @@ const JobAllActive = ({ toggleSidebar }) => {
                     </Col>
                   </Row>
                 </Col>
+                {popchecked2 && (
+
                 <Col xl={6}>
                   <label htmlFor="username">User Id's</label>
-                  <Chips
-                    value={userid}
-                    onChange={e => setUserid(e.value)}
-                    itemTemplate={customChip}
+                  <MultiSelect
+                    value={privateDrop}
+                    onChange={e => setPrivateDrop(e.value)}
+                    options={PrivetDropdownValues}
+                    optionLabel="name"
+                    optionValue="value"
+                    placeholder="Select Users"
                     className="w-full"
+                    style={{border: '1px solid #ced4da'}}
+                    display="comma"
+                    maxSelectedLabels={3}
                   />
                 </Col>
+      // <Col xl={6}>
+      //   <label htmlFor="username">User Id's</label>
+      //   <Chips
+      //     value={userid}
+      //     onChange={e => setUserid(e.value)}
+      //     itemTemplate={customChip}
+      //     className="w-full"
+      //   />
+      // </Col>
+    )}
               </Row>
 
               {popchecked && (
@@ -6296,15 +6360,33 @@ const JobAllActive = ({ toggleSidebar }) => {
                     </Col>
                   </Row>
                 </Col>
+                {popchecked2 && (
+
                 <Col xl={6}>
                   <label htmlFor="username">User Id's</label>
-                  <Chips
-                    value={userid}
-                    onChange={e => setUserid(e.value)}
-                    itemTemplate={customChip}
+                  <MultiSelect
+                    value={privateDrop}
+                    onChange={e => setPrivateDrop(e.value)}
+                    options={PrivetDropdownValues}
+                    optionLabel="name"
+                    optionValue="value"
+                    placeholder="Select Users"
                     className="w-full"
+                    style={{border: '1px solid #ced4da'}}
+                    display="comma"
+                    maxSelectedLabels={3}
                   />
                 </Col>
+      // <Col xl={6}>
+      //   <label htmlFor="username">User Id's</label>
+      //   <Chips
+      //     value={userid}
+      //     onChange={e => setUserid(e.value)}
+      //     itemTemplate={customChip}
+      //     className="w-full"
+      //   />
+      // </Col>
+    )}
               </Row>
 
               {popchecked && (
@@ -6574,15 +6656,33 @@ const JobAllActive = ({ toggleSidebar }) => {
                     </Col>
                   </Row>
                 </Col>
+                {popchecked2 && (
+
                 <Col xl={6}>
                   <label htmlFor="username">User Id's</label>
-                  <Chips
-                    value={userid}
-                    onChange={e => setUserid(e.value)}
-                    itemTemplate={customChip}
+                  <MultiSelect
+                    value={privateDrop}
+                    onChange={e => setPrivateDrop(e.value)}
+                    options={PrivetDropdownValues}
+                    optionLabel="name"
+                    optionValue="value"
+                    placeholder="Select Users"
                     className="w-full"
+                    style={{border: '1px solid #ced4da'}}
+                    display="comma"
+                    maxSelectedLabels={3}
                   />
                 </Col>
+      // <Col xl={6}>
+      //   <label htmlFor="username">User Id's</label>
+      //   <Chips
+      //     value={userid}
+      //     onChange={e => setUserid(e.value)}
+      //     itemTemplate={customChip}
+      //     className="w-full"
+      //   />
+      // </Col>
+    )}
               </Row>
               {popchecked && (
                 <Row>

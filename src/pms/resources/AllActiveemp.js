@@ -502,6 +502,17 @@ const AllActiveemp = ({ workTypes }) => {
   // interview
 
   const [primarySkillsvalu, setprimarySkillsvalu] = useState([])
+  
+  // Private functionality
+  const [privateDrop, setPrivateDrop] = useState([])
+  
+  const PrivetDropdownValues = [
+    { name: "Harish", value: "Harish" },
+    { name: "Mahesh", value: "Mahesh" },
+    { name: "Lavan", value: "Lavan" },
+    { name: "Vinay", value: "Vinay" },
+    { name: "Vasanth", value: "Vasanth" }
+  ]
   const getprimary = async () => {
     try {
       const response = await axios.get(
@@ -3074,6 +3085,9 @@ const [scheduleDialog, setScheduleDialog] = useState({
   const [popchecked2, setPopchecked2] = useState(false)
   const handlePopupCheckbox2 = e => {
     setPopchecked2(e.checked)
+    if (!e.checked) {
+      setPrivateDrop([])
+    }
   }
 
   const typeInterviewcontact = [
@@ -4597,8 +4611,44 @@ const [scheduleDialog, setScheduleDialog] = useState({
 
                       </Col>
                     </Row>
+                    
+                    {/* Private Section */}
+                    <Row className="mb-3 mt-3 justify-content-start align-items-center">
+                      <Col lg={2}>
+                        <div className="d-flex align-items-center">
+                          <Checkbox
+                            inputId="checkbox"
+                            checked={popchecked2}
+                            onChange={handlePopupCheckbox2}
+                          />
+                          <label htmlFor="checkbox" className="ms-2">
+                            Private
+                          </label>
+                        </div>
+                      </Col>
 
-                    <div className="buttons float-end mt-0">
+                         {popchecked2 && (
+                        <Col lg={6}>
+                          <label htmlFor="privateUsers" className="mb-2">User Id's</label>
+                          <MultiSelect
+                            value={privateDrop}
+                            onChange={e => setPrivateDrop(e.value)}
+                            options={PrivetDropdownValues}
+                            optionLabel="name"
+                            optionValue="value"
+                            placeholder="Select Users"
+                            className="w-full"
+                            style={{border: '1px solid #ced4da'}}
+                            display="comma"
+                            maxSelectedLabels={3}
+                          />
+                        </Col>
+                    )}
+                    </Row>
+                    
+                 
+
+                    <div className="buttons d-flex justify-content-end  mt-0">
                       <Button
                         type="submit"
                         color="primary"
@@ -7085,7 +7135,7 @@ const [scheduleDialog, setScheduleDialog] = useState({
 
         <Row className="mb-2">
          
-          <Col xl={6}>
+          <Col xl={12}>
             <div className="p-field flex flex-column">
               <label htmlFor="username">Subject</label>
               <InputText
@@ -7100,6 +7150,9 @@ const [scheduleDialog, setScheduleDialog] = useState({
         <Row className="mb-2 mt-3">
           <Col xl={12}>
             <div className="">
+              <label htmlFor="description" className="block">
+                    Description
+                  </label>
               <InputTextarea
                 className="w-full"
                 value={popTextares}
@@ -7166,15 +7219,33 @@ const [scheduleDialog, setScheduleDialog] = useState({
               </Col>
             </Row>
           </Col>
-          <Col xl={6}>
-            <label htmlFor="username">User Id's</label>
-            <Chips
-              value={userid}
-              onChange={e => setUserid(e.value)}
-              itemTemplate={customChip}
-              className="w-full"
-            />
-          </Col>
+          {popchecked2 && (
+
+            <Col xl={6}>
+              <label htmlFor="username">User Id's</label>
+              <MultiSelect
+                value={privateDrop}
+                onChange={e => setPrivateDrop(e.value)}
+                options={PrivetDropdownValues}
+                optionLabel="name"
+                optionValue="value"
+                placeholder="Select Users"
+                className="w-full"
+                style={{border: '1px solid #ced4da'}}
+                display="comma"
+                maxSelectedLabels={3}
+              />
+            </Col>
+            // <Col xl={6}>
+            //   <label htmlFor="username">User Id's</label>
+            //   <Chips
+            //     value={userid}
+            //     onChange={e => setUserid(e.value)}
+            //     itemTemplate={customChip}
+            //     className="w-full"
+            //   />
+            // </Col>
+          )}
         </Row>
 
          {popchecked && (

@@ -10,6 +10,7 @@ import { Column } from 'primereact/column';
 import { Calendar } from 'primereact/calendar';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { Chips } from 'primereact/chips';
+import { MultiSelect } from 'primereact/multiselect';
 import { Checkbox } from 'primereact/checkbox';
 import { Tooltip } from 'primereact/tooltip';
 
@@ -26,8 +27,22 @@ const Notes = () => {
     const [valueNotes, setValueNotes] = useState(['Harish']);
     const [popchecked, setPopchecked] = useState(false)
 
+    // Private functionality
+    const [privateDrop, setPrivateDrop] = useState([])
+    
+    const PrivetDropdownValues = [
+        { name: "Harish", value: "Harish" },
+        { name: "Mahesh", value: "Mahesh" },
+        { name: "Lavan", value: "Lavan" },
+        { name: "Vinay", value: "Vinay" },
+        { name: "Vasanth", value: "Vasanth" }
+    ]
+
     const handlePopupCheckbox = e => {
         setPopchecked(e.checked)
+        if (!e.checked) {
+            setPrivateDrop([])
+        }
     }
 
     const [candidateName, setCandidateName] = useState("Anupam Diridhar, John Doe, Amith, Sagar");
@@ -276,14 +291,34 @@ const Notes = () => {
                             </label>
                         </div>
                     </Col>
-                    <Col lg={6}>
+                    {popchecked && (
+                        <Col lg={6}>
+                            <div className="field notes-chip">
+                                <label htmlFor="userId" className="block mb-0">
+                                    User IDs
+                                </label>
+                                <MultiSelect
+                                    value={privateDrop}
+                                    onChange={e => setPrivateDrop(e.value)}
+                                    options={PrivetDropdownValues}
+                                    optionLabel="name"
+                                    optionValue="value"
+                                    placeholder="Select Users"
+                                    className="w-full"
+                                    style={{border: '1px solid #ced4da'}}
+                                    display="comma"
+                                />
+                            </div>
+                        </Col>
+                    )}
+                    {/* <Col lg={6}>
                         <div className="field notes-chip">
                             <label htmlFor="userId" className="block mb-0">
                                 User IDs
                             </label>
                             <Chips value={valueNotes} onChange={(e) => setValueNotes(e.value)} className="w-full" />
                         </div>
-                    </Col>
+                    </Col> */}
 
 
 

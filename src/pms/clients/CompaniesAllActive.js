@@ -379,6 +379,16 @@ const CompaniesAllActive = () => {
   const [compamyitem, setcompamyitem] = useState([])
   const [year, setYear] = useState(null)
 
+  // Private state variables
+  const [privateDrop, setPrivateDrop] = useState(false)
+  const [PrivetDropdown, setPrivetDropdown] = useState([])
+  const PrivetDropdownValues = [
+    { name: "mahesh", code: "mahesh" },
+    { name: "lavan", code: "lavan" },
+    { name: "vinay", code: "vinay" },
+    { name: "vasanth", code: "vasanth" },
+  ]
+
   const [address, setAddress] = useState("")
   const [selectedState, setSelectedState] = useState("Telangana")
   const [selectedCity, setSelectedCity] = useState("Hyderabad")
@@ -3343,7 +3353,7 @@ const CompaniesAllActive = () => {
                       </Col>
                     </Row>
 
-                    <Row className="mb-2">
+                    <Row className="mb-3">
                       <Col lg={12}>
                         <div className="p-field">
                           <label htmlFor="jobType">Attach Document</label>
@@ -3360,21 +3370,33 @@ const CompaniesAllActive = () => {
                       </Col>
                     </Row>
 
-                    <Row className="align-items-end mb-2">
-                      <Col lg={6}>
-                        <div className="p-field">
-                          <label htmlFor="jobType">UserIDs</label>
-                          <InputText
-                            placeholder="Enter User IDs"
-                            value={userid1}
+                    <Row className="align-items-end justify-content-start mb-2 mt-2">
+                      <Col lg={2}>
+                        <div className="p-field d-flex align-items-center">
+                          <Checkbox
+                            inputId="privateCheckbox"
+                            checked={privateDrop}
+                            onChange={(e) => setPrivateDrop(e.checked)}
                           />
+                          <label htmlFor="privateCheckbox" className="ms-2">Private</label>
                         </div>
                       </Col>
                       <Col lg={6}>
-                        <div className="p-field">
-                          <input type="checkbox" className="me-2" checked />
-                          <label htmlFor="jobType">Private</label>
-                        </div>
+                        {privateDrop && (
+                          <div className="p-field">
+                            <label htmlFor="jobType">User Id's</label>
+                            <MultiSelect
+                              value={PrivetDropdown}
+                              onChange={(e) => setPrivetDropdown(e.value)}
+                              options={PrivetDropdownValues}
+                              optionLabel="name"
+                              display="comma"
+                              placeholder="Select User Id's"
+                              className="w-full"
+                              maxSelectedLabels={8}
+                            />
+                          </div>
+                        )}
                       </Col>
                     </Row>
 

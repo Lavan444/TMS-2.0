@@ -18,6 +18,8 @@ import { Dropdown } from "primereact/dropdown"
 import { Calendar } from 'primereact/calendar';
 import { Dialog } from 'primereact/dialog';
 import { Toast } from 'primereact/toast';
+import { MultiSelect } from "primereact/multiselect"
+import { Checkbox } from "primereact/checkbox"
 import { Link } from "react-router-dom";
 import { InputTextarea } from "primereact/inputtextarea";
 import { FileUpload } from "primereact/fileupload";
@@ -147,6 +149,15 @@ const CompanyEditForm = () => {
     ])
     const [createdBy, setcreatedBy] = useState("Harish")
 
+    // Private state variables
+    const [privateDrop, setPrivateDrop] = useState(false)
+    const [PrivetDropdown, setPrivetDropdown] = useState([])
+    const PrivetDropdownValues = [
+        { name: "Mahesh", code: "mahesh" },
+        { name: "Lavan", code: "lavan" },
+        { name: "Vinay", code: "vinay" },
+        { name: "Vasanth", code: "vasanth" },
+    ]
 
     // company edit form ends
 
@@ -733,11 +744,52 @@ const CompanyEditForm = () => {
 
                                                 </Row>
 
+                                                  <Row className="mt-2 align-items-center">
+                                                    <Col xl={3}>
+                                                        <div className="p-field d-flex align-items-center">
+                                                            
+                                                            <label htmlFor="privateCheckbox" className="ms-2">Private</label>
+                                                        </div>
+                                                    </Col>
+                                                    <Col xl={2}>
+                                                        <div className="p-field d-flex align-items-center">
+                                                            <Checkbox
+                                                                inputId="privateCheckbox"
+                                                                checked={privateDrop}
+                                                                onChange={(e) => setPrivateDrop(e.checked)}
+                                                            />
+                                                           
+                                                        </div>
+                                                    </Col>
+                                                    <Col xl={7}>
+                                                        {privateDrop && (
+                                                            <div className="p-field">
+                                                                <label htmlFor="userIds">User Id's</label>
+                                                                <MultiSelect
+                                                                    value={PrivetDropdown}
+                                                                    onChange={(e) => setPrivetDropdown(e.value)}
+                                                                    options={PrivetDropdownValues}
+                                                                    optionLabel="name"
+                                                                    display="comma"
+                                                                    placeholder="Select User Id's"
+                                                                    maxSelectedLabels={8}
+                                                                    className="w-full"
+                                                                />
+                                                            </div>
+                                                        )}
+                                                    </Col>
+                                                </Row>
+
+                                                
+
                                             </div>
+
                                         </Col>
                                     </Row>
                                 </CardBody>
                             </Card>
+
+                          
 
                               <Card className="bg-form">
                                 <CardBody>

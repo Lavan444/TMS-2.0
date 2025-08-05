@@ -8,6 +8,7 @@ import { FileUpload } from 'primereact/fileupload';
 import { InputText } from "primereact/inputtext";
 import { Checkbox } from "primereact/checkbox";
 import { Chips } from "primereact/chips";
+import { MultiSelect } from "primereact/multiselect";
 import { Editor } from "primereact/editor";
 import { Sidebar } from "primereact/sidebar";
 import { Link, useLocation } from "react-router-dom";
@@ -27,6 +28,17 @@ const AddContact = () => {
     const [phno1, setPhno1] = useState("9876543210");
   
     const [userid1, setUserid1] = useState("Harish");
+
+    // Private state variables
+    const [privateDrop, setPrivateDrop] = useState(false)
+    const [PrivetDropdown, setPrivetDropdown] = useState([])
+    const PrivetDropdownValues = [
+        { name: "Mahesh", code: "M1" },
+        { name: "Lavan", code: "L1" },
+        { name: "Vinay", code: "V1" },
+        { name: "Vasantha", code: "V2" },
+    ]
+
     const [selectedCategory1, setSelectedCategory1] = useState(null);
     const categoryOptions = [
         { label: "Micro Enterprise", value: "micro" },
@@ -463,23 +475,33 @@ const AddContact = () => {
                             </Col>
                         </Row >
 
-                        <Row className="d-flex align-items-end mb-2">
+                        <Row className="d-flex align-items-end mb-2 mt-2Avuna">
                             <Col lg={6}>
-                                <div className="p-field">
-                                    <label htmlFor="jobType">UserIDs</label>
-                                    <InputText
-                                        placeholder="Enter User ID" value={userid1} />
+                                <div className="p-field d-flex align-items-center">
+                                    <Checkbox
+                                        inputId="privateCheckbox"
+                                        checked={privateDrop}
+                                        onChange={(e) => setPrivateDrop(e.checked)}
+                                    />
+                                    <label htmlFor="privateCheckbox" className="ms-2">Private</label>
                                 </div>
                             </Col>
                             <Col lg={6}>
-                                <div className="p-field">
-                                    <input
-                                        type='checkbox'
-                                        className="me-2"
-                                        checked
-                                    />
-                                    <label htmlFor="jobType">Private</label>
-                                </div>
+                                {privateDrop && (
+                                    <div className="p-field">
+                                        <label htmlFor="userIds">User Id's</label>
+                                        <MultiSelect
+                                            value={PrivetDropdown}
+                                            onChange={(e) => setPrivetDropdown(e.value)}
+                                            options={PrivetDropdownValues}
+                                            optionLabel="name"
+                                            display="comma"
+                                            placeholder="Select User Id's"
+                                            maxSelectedLabels={3}
+                                            className="w-full"
+                                        />
+                                    </div>
+                                )}
                             </Col>
                         </Row>
 

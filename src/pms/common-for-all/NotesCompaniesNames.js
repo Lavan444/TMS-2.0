@@ -11,6 +11,7 @@ import { Calendar } from 'primereact/calendar';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { Chips } from 'primereact/chips';
 import { Checkbox } from 'primereact/checkbox';
+import { MultiSelect } from 'primereact/multiselect';
 
 
 
@@ -25,9 +26,19 @@ const NotesCompanies1 = () => {
     const [valueNotes, setValueNotes] = useState(['Tech Corp']);
     const [popchecked, setPopchecked] = useState(false)
     
+    // Private state variables
+    const [privateDrop, setPrivateDrop] = useState(false)
+    const [PrivetDropdown, setPrivetDropdown] = useState([])
+    const PrivetDropdownValues = [
+        { name: "Mahesh", code: "mahesh" },
+        { name: "Lavan", code: "lavan" },
+        { name: "Vinay", code: "vinay" },
+        { name: "Vasanth", code: "vasanth" },
+    ]
+    
     const handlePopupCheckbox = e => {
         setPopchecked(e.checked)
-      }
+    }
 
     const [candidateName, setCandidateName] = useState("Anupam Diridhar, John Doe, Amith, Sagar");
     const [currentDateTime, setCurrentDateTime] = useState(new Date());
@@ -287,22 +298,33 @@ const NotesCompanies1 = () => {
                 <Col lg={2}>
                          <div className="d-flex align-items-center">
                                 <Checkbox
-                                  inputId="checkbox"
-                                  checked={popchecked}
-                                  onChange={handlePopupCheckbox}
+                                  inputId="privateCheckbox"
+                                  checked={privateDrop}
+                                  onChange={(e) => setPrivateDrop(e.checked)}
                                 />
-                                <label htmlFor="username" className="ms-2 mt-2">
+                                <label htmlFor="privateCheckbox" className="ms-2 mt-2">
                                   Private
                                 </label>
                               </div>
                     </Col>
                     <Col lg={6}>
-                    <div className="field notes-chip">
-                            <label htmlFor="userId" className="block mb-0">
-                                User IDs
-                            </label>
-                            <Chips value={valueNotes} onChange={(e) => setValueNotes(e.value)} className="w-full"/>
-                        </div>
+                        {privateDrop && (
+                            <div className="field notes-chip">
+                                <label htmlFor="userId" className="block mb-0">
+                                    User Id's
+                                </label>
+                                <MultiSelect
+                                    value={PrivetDropdown}
+                                    onChange={(e) => setPrivetDropdown(e.value)}
+                                    options={PrivetDropdownValues}
+                                    optionLabel="name"
+                                    display="comma"
+                                    placeholder="Select User Id's"
+                                    maxSelectedLabels={8}
+                                    className="w-full"
+                                />
+                            </div>
+                        )}
                     </Col>
 
                    

@@ -18,6 +18,7 @@ import { ConfirmDialog } from "primereact/confirmdialog";
 import { InputNumber } from "primereact/inputnumber";
 import { TreeSelect } from "primereact/treeselect";
 import { Checkbox } from "primereact/checkbox";
+import { MultiSelect } from "primereact/multiselect";
 import { Editor } from "primereact/editor";
 import { Toast } from 'primereact/toast';
 import { Button as PrimeButton } from "primereact/button";
@@ -73,6 +74,21 @@ const CandidateEditForm = () => {
     const [subject, setSubject] = useState('');
     const [file, setFile] = useState(null);
     const [selectedStatus1, setSelectedStatus1] = useState(null);
+
+    // Private checkbox and MultiSelect states
+    const [popchecked2, setPopchecked2] = useState(false);
+    const [privateDrop, setPrivateDrop] = useState([]);
+
+    const handlePopupCheckbox2 = e => {
+        setPopchecked2(e.checked);
+    };
+
+    const PrivetDropdownValues = [
+        { name: 'mahesh', value: 'Mahesh' },
+        { name: 'lavan', value: 'lavan' },
+        { name: 'vinay', value: 'vinay' },
+        { name: 'vasanth', value: 'vasanth' }
+    ];
 
     const handleUpload = (e) => {
         setFile(e.files[0]);
@@ -802,6 +818,47 @@ As the assigned team member, you will be responsible for managing your specific 
                                                             showIcon
                                                         />
                                                     </Col>
+                                                </Row>
+
+                                                <Row className="justify-content-start align-items-end mt-0">
+                                                    <Col xl={12}>
+                                                        <div className="d-flex align-items-center mt-1">
+                                                            <Checkbox
+                                                                inputId="checkbox"
+                                                                checked={popchecked2}
+                                                                onChange={handlePopupCheckbox2}
+                                                            />
+                                                            <label htmlFor="username" className="ms-1 mt-2">
+                                                                Private
+                                                            </label>
+                                                        </div>
+                                                    </Col>
+
+                                                    {popchecked2 && (
+                                                        <Col xl={12}>
+
+                                                             <Row className="mt-2 align-items-center">
+                                                    <Col xl={3}>
+                                                        <label htmlFor="username">User Id's</label>
+                                                    </Col>
+                                                    <Col xl={9}>
+                                                        <MultiSelect
+                                                                value={privateDrop}
+                                                                onChange={e => setPrivateDrop(e.value)}
+                                                                options={PrivetDropdownValues}
+                                                                optionLabel="name"
+                                                                optionValue="value"
+                                                                placeholder="Select Users"
+                                                                className="w-full"
+                                                                style={{border: '1px solid #ced4da'}}
+                                                                display="comma"
+                                                            />
+                                                    </Col>
+                                                </Row>
+                                                           
+                                                            
+                                                        </Col>
+                                                    )}
                                                 </Row>
                                             </div>
                                         </Col>

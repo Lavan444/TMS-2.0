@@ -10,6 +10,7 @@ import { Column } from 'primereact/column';
 import { Calendar } from 'primereact/calendar';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { Chips } from 'primereact/chips';
+import { MultiSelect } from 'primereact/multiselect';
 import { Checkbox } from 'primereact/checkbox';
 import { Tooltip } from 'primereact/tooltip';
 
@@ -29,6 +30,17 @@ const NotesJobs = () => {
     const handlePopupCheckbox = e => {
         setPopchecked(e.checked)
     }
+
+    // Private MultiSelect dropdown values
+    const [privateDrop, setPrivateDrop] = useState([]);
+    
+    const PrivetDropdownValues = [
+        { name: 'Harish', value: 'Harish' },
+        { name: 'Mahesh', value: 'Mahesh' },
+        { name: 'Lavan', value: 'Lavan' },
+        { name: 'Vinay', value: 'Vinay' },
+        { name: 'Vasanth', value: 'Vasanth' }
+    ];
 
     const [candidateName, setCandidateName] = useState("Anupam Diridhar, John Doe, Amith, Sagar");
     const [currentDateTime, setCurrentDateTime] = useState(new Date());
@@ -282,30 +294,35 @@ const NotesJobs = () => {
 
                 </Row>
                 <Row className="align-items-center">
-                    <Col lg={2}>
-                        <div className="d-flex align-items-center">
+                    <Col xl={2}>
+                        <div className="d-flex align-items-center mt-4">
                             <Checkbox
                                 inputId="checkbox"
                                 checked={popchecked}
                                 onChange={handlePopupCheckbox}
                             />
-                            <label htmlFor="username" className="ms-2 mt-2">
+                            <label htmlFor="username" className="ms-1 mt-2">
                                 Private
                             </label>
                         </div>
                     </Col>
-                    <Col lg={6}>
-                        <div className="field notes-chip">
-                            <label htmlFor="userId" className="block mb-0">
-                                User IDs
-                            </label>
-                            <Chips value={valueNotes} onChange={(e) => setValueNotes(e.value)} className="w-full" />
-                        </div>
-                    </Col>
 
-
-
-
+                    {popchecked && (
+                        <Col xl={4}>
+                            <label htmlFor="username">User Id's</label>
+                            <MultiSelect
+                                value={privateDrop}
+                                onChange={e => setPrivateDrop(e.value)}
+                                options={PrivetDropdownValues}
+                                optionLabel="name"
+                                optionValue="value"
+                                placeholder="Select Users"
+                                className="w-full"
+                                style={{border: '1px solid #ced4da'}}
+                                display="comma"
+                            />
+                        </Col>
+                    )}
                 </Row>
 
                 <Row>

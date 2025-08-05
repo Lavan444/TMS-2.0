@@ -12,6 +12,7 @@ import { InputTextarea } from 'primereact/inputtextarea';
 import { Chips } from 'primereact/chips';
 import { Checkbox } from 'primereact/checkbox';
 import { Tooltip } from 'primereact/tooltip';
+import { MultiSelect } from 'primereact/multiselect';
 
 
 
@@ -25,6 +26,16 @@ const NotesCompanies = () => {
 
     const [valueNotes, setValueNotes] = useState(['Varun Digital Media']);
     const [popchecked, setPopchecked] = useState(false)
+
+    // Private state variables
+    const [privateDrop, setPrivateDrop] = useState(false)
+    const [PrivetDropdown, setPrivetDropdown] = useState([])
+    const PrivetDropdownValues = [
+        { name: "Mahesh", code: "M1" },
+        { name: "Lavan", code: "L1" },
+        { name: "Vinay", code: "V1" },
+        { name: "Vasantha", code: "V2" },
+    ]
 
     const handlePopupCheckbox = e => {
         setPopchecked(e.checked)
@@ -288,22 +299,33 @@ const NotesCompanies = () => {
                     <Col lg={2}>
                         <div className="d-flex align-items-center">
                             <Checkbox
-                                inputId="checkbox"
-                                checked={popchecked}
-                                onChange={handlePopupCheckbox}
+                                inputId="privateCheckbox"
+                                checked={privateDrop}
+                                onChange={(e) => setPrivateDrop(e.checked)}
                             />
-                            <label htmlFor="username" className="ms-2 mt-2">
+                            <label htmlFor="privateCheckbox" className="ms-2 mt-2">
                                 Private
                             </label>
                         </div>
                     </Col>
                     <Col lg={6}>
-                        <div className="field notes-chip">
-                            <label htmlFor="userId" className="block mb-0">
-                                User IDs
-                            </label>
-                            <Chips value={valueNotes} onChange={(e) => setValueNotes(e.value)} className="w-full" />
-                        </div>
+                        {privateDrop && (
+                            <div className="field notes-chip">
+                                <label htmlFor="userId" className="block mb-0">
+                                    User Id's
+                                </label>
+                                <MultiSelect
+                                    value={PrivetDropdown}
+                                    onChange={(e) => setPrivetDropdown(e.value)}
+                                    options={PrivetDropdownValues}
+                                    optionLabel="name"
+                                    display="comma"
+                                    placeholder="Select User Id's"
+                                    maxSelectedLabels={10}
+                                    className="w-full"
+                                />
+                            </div>
+                        )}
                     </Col>
 
 
