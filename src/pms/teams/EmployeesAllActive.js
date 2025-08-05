@@ -55,6 +55,7 @@ import LinkContact2Popup from "pms/common-for-all/LinkContact2Popup"
 import { useSelector } from "react-redux"
 import TalentScan from "./TalentScan"
 import ImportResume from "./ImportResumeCan"
+import WorkType1 from "../common-for-all/WorkTypeOne"
 
 
 const EmployeeAllActive = () => {
@@ -2553,15 +2554,15 @@ const EmployeeAllActive = () => {
     )
   }
 
-  const [selectedCity, setSelectedCity] = useState(null)
+  const [selectedCompany, setSelectedCompany] = useState(null)
+  const CompanyOptions = [
+    { name: "Pranathi Software Services", code: "Pranathi" },
+    { name: "Varun Digital Media", code: "Varun" },
+    { name: "Vitel Global Communications", code: "Vitel" },
+    { name: "SPG America", code: "SPG" },
 
-  const cityOptions = [
-    { name: "Hyderabad", code: "HYD" },
-    { name: "Chennai", code: "CHN" },
-    { name: "Mumbai", code: "MUM" },
-    { name: "Bangalore", code: "BLR" },
-    { name: "Delhi", code: "DEL" },
   ]
+
   // short form ends
 
   const [categories] = useState([
@@ -3000,6 +3001,449 @@ const EmployeeAllActive = () => {
       console.error("Error during file upload:", error)
     }
   }
+
+   // Company work type start
+  
+  
+    const [selectedModule, setSelectedModule] = useState(null)
+  
+    const [moduleWorkTypes, setModuleWorkTypes] = useState([
+      {
+        name: "Pranathi Software Services",
+        color: "#000000",
+        id: "custom-task",
+        statuses: ["Pending", "Processing", "Completed"],
+      },
+      {
+        name: "Varun Digital Media",
+        color: "#000000",
+        id: "custom-task1",
+        statuses: ["Pending", "Processing", "Completed"],
+      },
+      {
+        name: "Vitel Global Communication",
+        color: "#000000",
+        id: "custom-task2",
+        statuses: ["Pending", "Processing", "Completed"],
+      },
+      {
+        name: "SPG",
+        color: "#000000",
+        id: "custom-task3",
+        statuses: ["Pending", "Processing", "Completed"],
+      },
+    ])
+  
+    const moduleDropdownWorkTypes = [
+      ...moduleWorkTypes,
+      { id: "divider", disabled: true },
+      { name: "Add Company", id: "create-new-work-type" },
+      { name: "Edit Company", id: "edit-selected-work-type" },
+    ]
+  
+    const handleModuleWorkTypesChange = updatedWorkTypes => {
+      setModuleWorkTypes(updatedWorkTypes)
+    }
+  
+    const handleModuleSelectionChange = selectedWorkType => {
+      setSelectedModule(selectedWorkType)
+    }
+  
+    // Company work type end
+
+    // Designation work type start
+    const [selectedDesignation, setSelectedDesignation] = useState(null)
+    
+    const [designationWorkTypes, setDesignationWorkTypes] = useState([
+      {
+        name: "Software Engineer",
+        color: "#000000",
+        id: "designation-1",
+        statuses: ["Junior", "Mid", "Senior"],
+      },
+      {
+        name: "Senior Software Engineer",
+        color: "#000000",
+        id: "designation-2",
+        statuses: ["Team Lead", "Technical Lead", "Architect"],
+      },
+      {
+        name: "Team Lead",
+        color: "#000000",
+        id: "designation-3",
+        statuses: ["Active", "Training", "Available"],
+      },
+      {
+        name: "Project Manager",
+        color: "#000000",
+        id: "designation-4",
+        statuses: ["Active", "Planning", "Delivery"],
+      },
+      {
+        name: "Tech Lead",
+        color: "#000000",
+        id: "designation-5",
+        statuses: ["Active", "Mentoring", "Development"],
+      },
+      {
+        name: "Full Stack Developer",
+        color: "#000000",
+        id: "designation-6",
+        statuses: ["Frontend", "Backend", "Full Stack"],
+      },
+    ])
+    
+    const designationDropdownWorkTypes = [
+      ...designationWorkTypes,
+      { id: "divider", disabled: true },
+      { name: "Add Designation", id: "create-new-designation-type" },
+      { name: "Edit Designation", id: "edit-selected-designation-type" },
+    ]
+    
+    const handleDesignationWorkTypesChange = updatedWorkTypes => {
+      setDesignationWorkTypes(updatedWorkTypes)
+    }
+    
+    const handleDesignationSelectionChange = selectedWorkType => {
+      setSelectedDesignation(selectedWorkType)
+    }
+    // Designation work type end
+
+    // Employee Type work type start
+    const [selectedEmployeeType, setSelectedEmployeeType] = useState(null)
+    
+    const [employeeTypeWorkTypes, setEmployeeTypeWorkTypes] = useState([
+      {
+        name: "Full-time",
+        color: "#000000",
+        id: "emp-type-1",
+        statuses: ["Permanent", "Probation", "Confirmed"],
+      },
+      {
+        name: "Part-time",
+        color: "#000000",
+        id: "emp-type-2",
+        statuses: ["Active", "Flexible", "Fixed Hours"],
+      },
+      {
+        name: "Contract",
+        color: "#000000",
+        id: "emp-type-3",
+        statuses: ["Active", "Renewal", "Completed"],
+      },
+      {
+        name: "Intern",
+        color: "#000000",
+        id: "emp-type-4",
+        statuses: ["Training", "Active", "Graduated"],
+      },
+      {
+        name: "Consultant",
+        color: "#000000",
+        id: "emp-type-5",
+        statuses: ["Available", "Engaged", "Project Based"],
+      },
+      {
+        name: "Freelancer",
+        color: "#000000",
+        id: "emp-type-6",
+        statuses: ["Available", "Busy", "Project Based"],
+      },
+      {
+        name: "Temporary",
+        color: "#000000",
+        id: "emp-type-7",
+        statuses: ["Active", "Short Term", "Seasonal"],
+      },
+    ])
+    
+    const employeeTypeDropdownWorkTypes = [
+      ...employeeTypeWorkTypes,
+      { id: "divider", disabled: true },
+      { name: "Add Employee Type", id: "create-new-emp-type" },
+      { name: "Edit Employee Type", id: "edit-selected-emp-type" },
+    ]
+    
+    const handleEmployeeTypeWorkTypesChange = updatedWorkTypes => {
+      setEmployeeTypeWorkTypes(updatedWorkTypes)
+    }
+    
+    const handleEmployeeTypeSelectionChange = selectedWorkType => {
+      setSelectedEmployeeType(selectedWorkType)
+    }
+    // Employee Type work type end
+
+    // Department work type start
+    const [selectedDepartment, setSelectedDepartment] = useState(null)
+    
+    const [departmentWorkTypes, setDepartmentWorkTypes] = useState([
+      {
+        name: "Engineering",
+        color: "#000000",
+        id: "dept-1",
+        statuses: ["Development", "Testing", "DevOps"],
+      },
+      {
+        name: "Human Resources",
+        color: "#000000",
+        id: "dept-2",
+        statuses: ["Recruitment", "Training", "Operations"],
+      },
+      {
+        name: "Finance",
+        color: "#000000",
+        id: "dept-3",
+        statuses: ["Accounting", "Payroll", "Budgeting"],
+      },
+      {
+        name: "Marketing",
+        color: "#000000",
+        id: "dept-4",
+        statuses: ["Digital", "Content", "Campaign"],
+      },
+      {
+        name: "Sales",
+        color: "#000000",
+        id: "dept-5",
+        statuses: ["Lead Generation", "Client Relations", "Business Development"],
+      },
+      {
+        name: "Operations",
+        color: "#000000",
+        id: "dept-6",
+        statuses: ["Admin", "Support", "Maintenance"],
+      },
+    ])
+    
+    const departmentDropdownWorkTypes = [
+      ...departmentWorkTypes,
+      { id: "divider", disabled: true },
+      { name: "Add Department", id: "create-new-dept-type" },
+      { name: "Edit Department", id: "edit-selected-dept-type" },
+    ]
+    
+    const handleDepartmentWorkTypesChange = updatedWorkTypes => {
+      setDepartmentWorkTypes(updatedWorkTypes)
+    }
+    
+    const handleDepartmentSelectionChange = selectedWorkType => {
+      setSelectedDepartment(selectedWorkType)
+    }
+    // Department work type end
+
+    // Work Location work type start
+    const [selectedWorkLocation, setSelectedWorkLocation] = useState(null)
+    
+    const [workLocationWorkTypes, setWorkLocationWorkTypes] = useState([
+      {
+        name: "Remote",
+        color: "#000000",
+        id: "location-1",
+        statuses: ["Full Remote", "Occasional Office", "International"],
+      },
+      {
+        name: "Office",
+        color: "#000000",
+        id: "location-2",
+        statuses: ["Main Office", "Branch Office", "Co-working"],
+      },
+      {
+        name: "Hybrid",
+        color: "#000000",
+        id: "location-3",
+        statuses: ["3 Days Office", "2 Days Office", "Flexible"],
+      },
+      {
+        name: "Client Site",
+        color: "#000000",
+        id: "location-4",
+        statuses: ["On-site", "Temporary", "Project Based"],
+      },
+    ])
+    
+    const workLocationDropdownWorkTypes = [
+      ...workLocationWorkTypes,
+      { id: "divider", disabled: true },
+      { name: "Add Work Location", id: "create-new-location-type" },
+      { name: "Edit Work Location", id: "edit-selected-location-type" },
+    ]
+    
+    const handleWorkLocationWorkTypesChange = updatedWorkTypes => {
+      setWorkLocationWorkTypes(updatedWorkTypes)
+    }
+    
+    const handleWorkLocationSelectionChange = selectedWorkType => {
+      setSelectedWorkLocation(selectedWorkType)
+    }
+    // Work Location work type end
+
+    // Shift Timings work type start
+    const [selectedShiftTiming, setSelectedShiftTiming] = useState(null)
+    
+    const [shiftTimingWorkTypes, setShiftTimingWorkTypes] = useState([
+      {
+        name: "Day Shift (9:00 AM - 6:00 PM)",
+        color: "#000000",
+        id: "shift-1",
+        statuses: ["Regular", "Extended", "Flexible Start"],
+      },
+      {
+        name: "Evening Shift (2:00 PM - 11:00 PM)",
+        color: "#000000",
+        id: "shift-2",
+        statuses: ["Regular", "Extended", "Weekend"],
+      },
+      {
+        name: "Night Shift (11:00 PM - 8:00 AM)",
+        color: "#000000",
+        id: "shift-3",
+        statuses: ["Regular", "Weekend", "Rotational"],
+      },
+      {
+        name: "Flexible Hours",
+        color: "#000000",
+        id: "shift-4",
+        statuses: ["Core Hours", "Full Flex", "Meeting Based"],
+      },
+      {
+        name: "US Shift (6:30 PM - 3:30 AM)",
+        color: "#000000",
+        id: "shift-5",
+        statuses: ["EST", "PST", "CST"],
+      },
+      {
+        name: "UK Shift (1:30 PM - 10:30 PM)",
+        color: "#000000",
+        id: "shift-6",
+        statuses: ["GMT", "BST", "Extended"],
+      },
+    ])
+    
+    const shiftTimingDropdownWorkTypes = [
+      ...shiftTimingWorkTypes,
+      { id: "divider", disabled: true },
+      { name: "Add Shift Timing", id: "create-new-shift-type" },
+      { name: "Edit Shift Timing", id: "edit-selected-shift-type" },
+    ]
+    
+    const handleShiftTimingWorkTypesChange = updatedWorkTypes => {
+      setShiftTimingWorkTypes(updatedWorkTypes)
+    }
+    
+    const handleShiftTimingSelectionChange = selectedWorkType => {
+      setSelectedShiftTiming(selectedWorkType)
+    }
+    // Shift Timings work type end
+
+    // City work type start
+    const [selectedCity, setSelectedCity] = useState(null)
+    
+    const [cityWorkTypes, setCityWorkTypes] = useState([
+      {
+        name: "Hyderabad",
+        color: "#000000",
+        id: "city-1",
+        statuses: ["Tech Hub", "IT Corridor", "HITEC City"],
+      },
+      {
+        name: "Chennai",
+        color: "#000000",
+        id: "city-2",
+        statuses: ["IT Hub", "OMR", "Sholinganallur"],
+      },
+      {
+        name: "Mumbai",
+        color: "#000000",
+        id: "city-3",
+        statuses: ["Financial Capital", "BKC", "Lower Parel"],
+      },
+      {
+        name: "Bangalore",
+        color: "#000000",
+        id: "city-4",
+        statuses: ["Silicon Valley", "Electronic City", "Whitefield"],
+      },
+      {
+        name: "Delhi",
+        color: "#000000",
+        id: "city-5",
+        statuses: ["NCR", "Gurgaon", "Noida"],
+      },
+    ])
+    
+    const cityDropdownWorkTypes = [
+      ...cityWorkTypes,
+      { id: "divider", disabled: true },
+      { name: "Add City", id: "create-new-city-type" },
+      { name: "Edit City", id: "edit-selected-city-type" },
+    ]
+    
+    const handleCityWorkTypesChange = updatedWorkTypes => {
+      setCityWorkTypes(updatedWorkTypes)
+    }
+    
+    const handleCitySelectionChange = selectedWorkType => {
+      setSelectedCity(selectedWorkType)
+    }
+    // City work type end
+
+    // Employee Status work type start
+    const [selectedEmployeeStatus, setSelectedEmployeeStatus] = useState(null)
+    
+    const [employeeStatusWorkTypes, setEmployeeStatusWorkTypes] = useState([
+      {
+        name: "Active",
+        color: "#28a745",
+        id: "emp-status-1",
+        statuses: ["Working", "Available", "On Project"],
+      },
+      {
+        name: "Inactive",
+        color: "#dc3545",
+        id: "emp-status-2",
+        statuses: ["Resigned", "Terminated", "Suspended"],
+      },
+      {
+        name: "On Leave",
+        color: "#ffc107",
+        id: "emp-status-3",
+        statuses: ["Sick Leave", "Annual Leave", "Maternity/Paternity"],
+      },
+      {
+        name: "Probation",
+        color: "#17a2b8",
+        id: "emp-status-4",
+        statuses: ["New Hire", "Under Review", "Extended"],
+      },
+      {
+        name: "Notice Period",
+        color: "#fd7e14",
+        id: "emp-status-5",
+        statuses: ["Serving Notice", "Last Week", "Knowledge Transfer"],
+      },
+      {
+        name: "Bench",
+        color: "#6f42c1",
+        id: "emp-status-6",
+        statuses: ["Awaiting Project", "Training", "Skill Development"],
+      },
+    ])
+    
+    const employeeStatusDropdownWorkTypes = [
+      ...employeeStatusWorkTypes,
+      { id: "divider", disabled: true },
+      { name: "Add Employee Status", id: "create-new-emp-status-type" },
+      { name: "Edit Employee Status", id: "edit-selected-emp-status-type" },
+    ]
+    
+    const handleEmployeeStatusWorkTypesChange = updatedWorkTypes => {
+      setEmployeeStatusWorkTypes(updatedWorkTypes)
+    }
+    
+    const handleEmployeeStatusSelectionChange = selectedWorkType => {
+      setSelectedEmployeeStatus(selectedWorkType)
+    }
+    // Employee Status work type end
 
   return (
     <React.Fragment>
@@ -3556,28 +4000,92 @@ const EmployeeAllActive = () => {
                     <Row className="mb-3">
                       <Col lg={6}>
                         <label htmlFor="jobTitle" className="mb-0">
-                          Job Title
+                          Designation
                         </label>
-                        <InputText
-                          id="jobTitle"
-                          name="jobTitle"
-                          placeholder="Enter job title"
-                          value={createJobTitle}
+                        <WorkType1
+                             initialWorkTypes={designationWorkTypes}
+                             dropdownWorkTypes={designationDropdownWorkTypes}
+                             onWorkTypesChange={handleDesignationWorkTypesChange}
+                             onSelectionChange={handleDesignationSelectionChange}
                         />
                       </Col>
                       <Col lg={6}>
                         <label htmlFor="company" className="mb-0">
                           Company
                         </label>
-                        <InputText
-                          id="company"
-                          name="company"
-                          placeholder="Enter company"
-                          value={createCompany}
-                        />
+
+                         {/* <Dropdown
+                          value={selectedCompany}
+                          onChange={e => setSelectedCompany(e.value)}
+                          options={CompanyOptions}
+                          optionLabel="name"
+                          placeholder="Company"
+                          filter
+                          className="bgclr"
+                        /> */}
+
+                         <WorkType1
+                             initialWorkTypes={moduleWorkTypes}
+                             dropdownWorkTypes={moduleDropdownWorkTypes}
+                             onWorkTypesChange={handleModuleWorkTypesChange}
+                             onSelectionChange={handleModuleSelectionChange}
+                                                />
                       </Col>
                     </Row>
                     <Row className="mb-3">
+                      <Col lg={6}>
+                        <label htmlFor="employeeType" className="mb-0">
+                          Employee Type
+                        </label>
+
+                         <WorkType1
+                             initialWorkTypes={employeeTypeWorkTypes}
+                             dropdownWorkTypes={employeeTypeDropdownWorkTypes}
+                             onWorkTypesChange={handleEmployeeTypeWorkTypesChange}
+                             onSelectionChange={handleEmployeeTypeSelectionChange}
+                         />
+                      </Col>
+                      <Col lg={6}>
+                        <label htmlFor="department" className="mb-0">
+                          Department
+                        </label>
+
+                         <WorkType1
+                             initialWorkTypes={departmentWorkTypes}
+                             dropdownWorkTypes={departmentDropdownWorkTypes}
+                             onWorkTypesChange={handleDepartmentWorkTypesChange}
+                             onSelectionChange={handleDepartmentSelectionChange}
+                         />
+                      </Col>
+                    </Row>
+                    <Row className="mb-3">
+                      <Col lg={6}>
+                        <label htmlFor="workLocation" className="mb-0">
+                          Work Location
+                        </label>
+
+                         <WorkType1
+                             initialWorkTypes={workLocationWorkTypes}
+                             dropdownWorkTypes={workLocationDropdownWorkTypes}
+                             onWorkTypesChange={handleWorkLocationWorkTypesChange}
+                             onSelectionChange={handleWorkLocationSelectionChange}
+                         />
+                      </Col>
+                      <Col lg={6}>
+                        <label htmlFor="shiftTiming" className="mb-0">
+                          Shift Timings
+                        </label>
+
+                         <WorkType1
+                             initialWorkTypes={shiftTimingWorkTypes}
+                             dropdownWorkTypes={shiftTimingDropdownWorkTypes}
+                             onWorkTypesChange={handleShiftTimingWorkTypesChange}
+                             onSelectionChange={handleShiftTimingSelectionChange}
+                         />
+                      </Col>
+                    </Row>
+                  
+                    {/* <Row className="mb-3">
                       <Col lg={12}>
                         <label htmlFor="primarySkills" className="mb-0">
                           Primary Skills
@@ -3594,47 +4102,10 @@ const EmployeeAllActive = () => {
                           placeholder="JavaScript, React"
                         />
                       </Col>
-                    </Row>
-                    <Row className="mb-3">
-                      <Col lg={6}>
-                        <label htmlFor="city" className="mb-0">
-                          City
-                        </label>
-                        <Dropdown
-                          value={selectedCity}
-                          onChange={e => setSelectedCity(e.value)}
-                          options={cityOptions}
-                          optionLabel="name"
-                          placeholder="Hyderabad"
-                          filter
-                          className="bgclr"
-                        />
-                      </Col>
+                    </Row> */}
+                    
 
-                      <Col lg={6}>
-                        <label
-                          htmlFor="availabilityDate"
-                          className="mb-0 avbdate"
-                        >
-                          Availability Date
-                        </label>
-                        <div>
-                          <Calendar value={createDate} className="w-100"
-                            placeholder="02-04-2025"
-                            onChange={e => setCreateDate(e.target.value)}
-                            showIcon />
-                        </div>
-                        {/* <input
-                            type="date"
-                            id="availabilityDate"
-                            name="availabilityDate"
-                            className="form-control"
-                         
-                          /> */}
-                      </Col>
-                    </Row>
-
-                    <Row className="mb-3">
+                    {/* <Row className="mb-3">
                       <Col lg={12}>
                         <label
                           htmlFor="availabilityDate"
@@ -3658,9 +4129,20 @@ const EmployeeAllActive = () => {
                           Eg: (jpeg,png,pdf,jpg)
                         </small>
                       </Col>
-                    </Row>
+                    </Row> */}
 
                     <Row className="mb-3">
+                      <Col lg={6}>
+                        <label htmlFor="city" className="mb-0">
+                          City
+                        </label>
+                        <WorkType1
+                             initialWorkTypes={cityWorkTypes}
+                             dropdownWorkTypes={cityDropdownWorkTypes}
+                             onWorkTypesChange={handleCityWorkTypesChange}
+                             onSelectionChange={handleCitySelectionChange}
+                        />
+                      </Col>
                       <Col lg={6}>
                         <div className="p-field">
                           <label htmlFor="company">Categories</label>
@@ -3675,7 +4157,7 @@ const EmployeeAllActive = () => {
                         </div>
                       </Col>
                       <Col lg={6}>
-                        <div className="p-field">
+                        <div className="p-field mt-2">
                           <label htmlFor="company">Group</label>
                           <TreeSelect
                             value={selectedGroupKey}
@@ -3688,11 +4170,8 @@ const EmployeeAllActive = () => {
                         </div>
                       </Col>
 
-                    </Row>
-
-                    <Row className="mb-2 align-items-end">
-                      <Col lg={6}>
-                        <div className="p-field">
+                       <Col lg={6}>
+                        <div className="p-field mt-2">
                           <label htmlFor="jobType">UserIDs</label>
                           <InputText
                             id="userIds"
@@ -3703,20 +4182,31 @@ const EmployeeAllActive = () => {
                           />
                         </div>
                       </Col>
+
+                    </Row>
+
+                    <Row className="mb-3">
+                      <Col lg={6}>
+                        <label htmlFor="employeeStatus" className="mb-0">
+                          Employee Status
+                        </label>
+                        <WorkType1
+                             initialWorkTypes={employeeStatusWorkTypes}
+                             dropdownWorkTypes={employeeStatusDropdownWorkTypes}
+                             onWorkTypesChange={handleEmployeeStatusWorkTypesChange}
+                             onSelectionChange={handleEmployeeStatusSelectionChange}
+                        />
+                      </Col>
+                      <Col lg={6}>
+                        {/* Placeholder for future field */}
+                      </Col>
+                    </Row>
+
+                    <Row className="mb-2 align-items-end">
+                     
                       <Col lg={6}>
                         <Row>
-                          <Col lg={6}>
-                            <div className="relocation">
-                              <input
-                                type="checkbox"
-                                className="me-2"
-                                checked
-                              />
-                              <label htmlFor="relocation" className="mb-2">
-                                Relocation
-                              </label>
-                            </div>
-                          </Col>
+                         
                           <Col lg={6}>
                             <div className="p-field">
                               <input type="checkbox" className="me-2" />
@@ -3918,7 +4408,7 @@ const EmployeeAllActive = () => {
                             <Col lg={4}>
                               <div className="p-field">
                                 <label htmlFor="jobTitle" className="block">
-                                  Job Title
+                                  Designation
                                 </label>
                                 <InputText
                                   id="jobTitle"
@@ -3984,7 +4474,7 @@ const EmployeeAllActive = () => {
                                 <Dropdown
                                   value={selectedCity}
                                   onChange={e => setSelectedCity(e.value)}
-                                  options={cityOptions}
+                                  options={cityWorkTypes}
                                   optionLabel="name"
                                   placeholder="Hyderabad"
                                   filter

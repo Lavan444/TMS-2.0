@@ -305,7 +305,7 @@ const WorkType1 = ({
             );
         }
 
-        if (option.id === 'create-new-work-type') {
+        if (option.id && option.id.startsWith('create-new-')) {
             return (
                 <div className="flex align-items-center gap-2 action-item-add">
                     <i className="pi pi-plus work-type-icon"></i>
@@ -314,7 +314,7 @@ const WorkType1 = ({
             );
         }
 
-        if (option.id === 'edit-selected-work-type') {
+        if (option.id && option.id.startsWith('edit-selected-')) {
             return (
                 <div className="flex align-items-center gap-2 action-item-edit">
                     <i className="pi pi-pencil work-type-icon"></i>
@@ -491,12 +491,12 @@ const WorkType1 = ({
 
     const handleInputChange = (field, value) => {
         if (field === 'workType') {
-            if (value && value.id === 'create-new-work-type') {
+            if (value && value.id && value.id.startsWith('create-new-')) {
                 openCreateWorkType();
                 setFormData(prev => ({ ...prev, workType: prev.workType || (workTypes.find(wt => wt.id === 'task') || workTypes[0]) }));
                 return;
             }
-            if (value && value.id === 'edit-selected-work-type') {
+            if (value && value.id && value.id.startsWith('edit-selected-')) {
                 if (formData.workType && formData.workType.id && workTypes.find(wt => wt.id === formData.workType.id)) {
                     openEditWorkType(formData.workType);
                 } else {

@@ -2308,6 +2308,12 @@ const JobAllActive = ({ toggleSidebar }) => {
     setPopchecked2(e.checked)
   }
 
+  const PrivetDropdownValues = [
+    { name: "Mahesh Kumar Bhoga", value: "Mahesh Kumar Bhoga" },
+    { name: "Lavan", value: "Lavan" },
+    { name: "Vinay", value: "Vinay" },
+  ]
+
   const typeInterviewcontact = [
     { name: "Harish", value: "Harish" },
     { name: "Giri", value: "Giri" },
@@ -2357,6 +2363,8 @@ const JobAllActive = ({ toggleSidebar }) => {
   const [notes1, setNotes1] = useState(
     "An AI-powered content generator that transforms user input into high-quality, context-aware content using advanced artificial intelligence models. Whether you need engaging blog posts, marketing copy, social media content, product descriptions, or creative storytelling, this tool uses state-of-the-art language models to instantly craft tailored results based on your instructions."
   )
+
+ const [privateDrop, setPrivateDrop] = useState(['Harish'])
 
   // input values ends
 
@@ -5330,15 +5338,33 @@ const JobAllActive = ({ toggleSidebar }) => {
                     </Col>
                   </Row>
                 </Col>
+              {popchecked2 && (
+
                 <Col xl={6}>
                   <label htmlFor="username">User Id's</label>
-                  <Chips
-                    value={userid}
-                    onChange={e => setUserid(e.value)}
-                    itemTemplate={customChip}
+                  <MultiSelect
+                    value={privateDrop}
+                    onChange={e => setPrivateDrop(e.value)}
+                    options={PrivetDropdownValues}
+                    optionLabel="name"
+                    optionValue="value"
+                    placeholder="Select Users"
                     className="w-full"
+                    style={{border: '1px solid #ced4da'}}
+                    display="chip"
+                    maxSelectedLabels={3}
                   />
                 </Col>
+      // <Col xl={6}>
+      //   <label htmlFor="username">User Id's</label>
+      //   <Chips
+      //     value={userid}
+      //     onChange={e => setUserid(e.value)}
+      //     itemTemplate={customChip}
+      //     className="w-full"
+      //   />
+      // </Col>
+    )}
               </Row>
 
               {popchecked && (

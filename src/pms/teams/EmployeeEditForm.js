@@ -33,6 +33,7 @@ import { InputTextarea } from 'primereact/inputtextarea';
 import { TreeSelect } from "primereact/treeselect";
 import { useForm } from "react-hook-form";
 import Select from 'react-select';
+import WorkType1 from "../common-for-all/WorkTypeOne"
 
 //i18n
 
@@ -61,6 +62,470 @@ const EmployeeEditForm = props => {
   const [fullNameDialogVisible, setFullNameDialogVisible] = useState(false);
 
   const [company, setCompany] = useState("Varun Digital Media");
+
+  // Company work type start
+  const [selectedModule, setSelectedModule] = useState(null)
+  
+  const [moduleWorkTypes, setModuleWorkTypes] = useState([
+    {
+      name: "Pranathi Software Services",
+      color: "#000000",
+      id: "custom-task",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+    {
+      name: "Varun Digital Media",
+      color: "#000000",
+      id: "custom-task1",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+    {
+      name: "Vitel Global Communication",
+      color: "#000000",
+      id: "custom-task2",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+    {
+      name: "SPG",
+      color: "#000000",
+      id: "custom-task3",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+  ])
+
+  const moduleDropdownWorkTypes = [
+    ...moduleWorkTypes,
+    { id: "divider", disabled: true },
+    { name: "Add Company", id: "create-new-work-type" },
+    { name: "Edit Company", id: "edit-selected-work-type" },
+  ]
+
+  const handleModuleWorkTypesChange = updatedWorkTypes => {
+    setModuleWorkTypes(updatedWorkTypes)
+  }
+
+  const handleModuleSelectionChange = selectedWorkType => {
+    setSelectedModule(selectedWorkType)
+  }
+  // Company work type end
+
+  // Designation work type start
+  const [selectedDesignation, setSelectedDesignation] = useState(null)
+  
+  const [designationWorkTypes, setDesignationWorkTypes] = useState([
+    {
+      name: "Software Engineer",
+      color: "#000000",
+      id: "designation-task1",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+    {
+      name: "Senior Software Engineer",
+      color: "#000000",
+      id: "designation-task2",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+    {
+      name: "Team Lead",
+      color: "#000000",
+      id: "designation-task3",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+    {
+      name: "Project Manager",
+      color: "#000000",
+      id: "designation-task4",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+    {
+      name: "Frontend Developer",
+      color: "#000000",
+      id: "designation-task5",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+  ])
+
+  const designationDropdownWorkTypes = [
+    ...designationWorkTypes,
+    { id: "divider", disabled: true },
+    { name: "Add Designation", id: "create-new-work-type" },
+    { name: "Edit Designation", id: "edit-selected-work-type" },
+  ]
+
+  const handleDesignationWorkTypesChange = updatedWorkTypes => {
+    setDesignationWorkTypes(updatedWorkTypes)
+  }
+
+  const handleDesignationSelectionChange = selectedWorkType => {
+    setSelectedDesignation(selectedWorkType)
+  }
+  // Designation work type end
+
+  // Department work type start
+  const [selectedDepartment, setSelectedDepartment] = useState(null)
+  
+  const [departmentWorkTypes, setDepartmentWorkTypes] = useState([
+    {
+      name: "Information Technology",
+      color: "#000000",
+      id: "department-task1",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+    {
+      name: "Human Resources",
+      color: "#000000",
+      id: "department-task2",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+    {
+      name: "Finance",
+      color: "#000000",
+      id: "department-task3",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+    {
+      name: "Marketing",
+      color: "#000000",
+      id: "department-task4",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+    {
+      name: "Sales",
+      color: "#000000",
+      id: "department-task5",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+  ])
+
+  const departmentDropdownWorkTypes = [
+    ...departmentWorkTypes,
+    { id: "divider", disabled: true },
+    { name: "Add Department", id: "create-new-work-type" },
+    { name: "Edit Department", id: "edit-selected-work-type" },
+  ]
+
+  const handleDepartmentWorkTypesChange = updatedWorkTypes => {
+    setDepartmentWorkTypes(updatedWorkTypes)
+  }
+
+  const handleDepartmentSelectionChange = selectedWorkType => {
+    setSelectedDepartment(selectedWorkType)
+  }
+  // Department work type end
+
+  // Work Location work type start
+  const [selectedWorkLocation, setSelectedWorkLocation] = useState(null)
+  
+  const [workLocationWorkTypes, setWorkLocationWorkTypes] = useState([
+    {
+      name: "Hyderabad Office",
+      color: "#000000",
+      id: "worklocation-task1",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+    {
+      name: "Bangalore Office",
+      color: "#000000",
+      id: "worklocation-task2",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+    {
+      name: "Mumbai Office",
+      color: "#000000",
+      id: "worklocation-task3",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+    {
+      name: "Remote Work",
+      color: "#000000",
+      id: "worklocation-task4",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+    {
+      name: "Client Location",
+      color: "#000000",
+      id: "worklocation-task5",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+  ])
+
+  const workLocationDropdownWorkTypes = [
+    ...workLocationWorkTypes,
+    { id: "divider", disabled: true },
+    { name: "Add Work Location", id: "create-new-work-type" },
+    { name: "Edit Work Location", id: "edit-selected-work-type" },
+  ]
+
+  const handleWorkLocationWorkTypesChange = updatedWorkTypes => {
+    setWorkLocationWorkTypes(updatedWorkTypes)
+  }
+
+  const handleWorkLocationSelectionChange = selectedWorkType => {
+    setSelectedWorkLocation(selectedWorkType)
+  }
+  // Work Location work type end
+
+  // Shift Timings work type start
+  const [selectedShiftTimings, setSelectedShiftTimings] = useState(null)
+  
+  const [shiftTimingsWorkTypes, setShiftTimingsWorkTypes] = useState([
+    {
+      name: "Day Shift (9:00 AM - 6:00 PM)",
+      color: "#000000",
+      id: "shift-task1",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+    {
+      name: "Night Shift (9:00 PM - 6:00 AM)",
+      color: "#000000",
+      id: "shift-task2",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+    {
+      name: "Evening Shift (2:00 PM - 11:00 PM)",
+      color: "#000000",
+      id: "shift-task3",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+    {
+      name: "Flexible Hours",
+      color: "#000000",
+      id: "shift-task4",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+    {
+      name: "Rotational Shift",
+      color: "#000000",
+      id: "shift-task5",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+  ])
+
+  const shiftTimingsDropdownWorkTypes = [
+    ...shiftTimingsWorkTypes,
+    { id: "divider", disabled: true },
+    { name: "Add Shift Timing", id: "create-new-work-type" },
+    { name: "Edit Shift Timing", id: "edit-selected-work-type" },
+  ]
+
+  const handleShiftTimingsWorkTypesChange = updatedWorkTypes => {
+    setShiftTimingsWorkTypes(updatedWorkTypes)
+  }
+
+  const handleShiftTimingsSelectionChange = selectedWorkType => {
+    setSelectedShiftTimings(selectedWorkType)
+  }
+  // Shift Timings work type end
+
+  // Employee Status work type start
+  const [selectedEmpStatus, setSelectedEmpStatus] = useState(null)
+  
+  const [empStatusWorkTypes, setEmpStatusWorkTypes] = useState([
+    {
+      name: "Active",
+      color: "#000000",
+      id: "empstatus-task1",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+    {
+      name: "Inactive",
+      color: "#000000",
+      id: "empstatus-task2",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+    {
+      name: "On Leave",
+      color: "#000000",
+      id: "empstatus-task3",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+    {
+      name: "Probation",
+      color: "#000000",
+      id: "empstatus-task4",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+    {
+      name: "Terminated",
+      color: "#000000",
+      id: "empstatus-task5",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+  ])
+
+  const empStatusDropdownWorkTypes = [
+    ...empStatusWorkTypes,
+    { id: "divider", disabled: true },
+    { name: "Add Employee Status", id: "create-new-work-type" },
+    { name: "Edit Employee Status", id: "edit-selected-work-type" },
+  ]
+
+  const handleEmpStatusWorkTypesChange = updatedWorkTypes => {
+    setEmpStatusWorkTypes(updatedWorkTypes)
+  }
+
+  const handleEmpStatusSelectionChange = selectedWorkType => {
+    setSelectedEmpStatus(selectedWorkType)
+  }
+  // Employee Status work type end
+
+  // Reporting Manager work type start
+  const [selectedReportingManager, setSelectedReportingManager] = useState(null)
+  
+  const [reportingManagerWorkTypes, setReportingManagerWorkTypes] = useState([
+    {
+      name: "John Smith - Project Manager",
+      color: "#000000",
+      id: "manager-task1",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+    {
+      name: "Sarah Johnson - Team Lead",
+      color: "#000000",
+      id: "manager-task2",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+    {
+      name: "Michael Brown - Senior Manager",
+      color: "#000000",
+      id: "manager-task3",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+    {
+      name: "Emily Davis - Technical Lead",
+      color: "#000000",
+      id: "manager-task4",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+    {
+      name: "David Wilson - Department Head",
+      color: "#000000",
+      id: "manager-task5",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+  ])
+
+  const reportingManagerDropdownWorkTypes = [
+    ...reportingManagerWorkTypes,
+    { id: "divider", disabled: true },
+    { name: "Add Reporting Manager", id: "create-new-work-type" },
+    { name: "Edit Reporting Manager", id: "edit-selected-work-type" },
+  ]
+
+  const handleReportingManagerWorkTypesChange = updatedWorkTypes => {
+    setReportingManagerWorkTypes(updatedWorkTypes)
+  }
+
+  const handleReportingManagerSelectionChange = selectedWorkType => {
+    setSelectedReportingManager(selectedWorkType)
+  }
+  // Reporting Manager work type end
+
+  // Employee Type work type start
+  const [selectedEmployeeType, setSelectedEmployeeType] = useState(null)
+  
+  const [employeeTypeWorkTypes, setEmployeeTypeWorkTypes] = useState([
+    {
+      name: "Full-time",
+      color: "#000000",
+      id: "emptype-task1",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+    {
+      name: "Part-time",
+      color: "#000000",
+      id: "emptype-task2",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+    {
+      name: "Contract",
+      color: "#000000",
+      id: "emptype-task3",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+    {
+      name: "Intern",
+      color: "#000000",
+      id: "emptype-task4",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+    {
+      name: "Consultant",
+      color: "#000000",
+      id: "emptype-task5",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+  ])
+
+  const employeeTypeDropdownWorkTypes = [
+    ...employeeTypeWorkTypes,
+    { id: "divider", disabled: true },
+    { name: "Add Employee Type", id: "create-new-work-type" },
+    { name: "Edit Employee Type", id: "edit-selected-work-type" },
+  ]
+
+  const handleEmployeeTypeWorkTypesChange = updatedWorkTypes => {
+    setEmployeeTypeWorkTypes(updatedWorkTypes)
+  }
+
+  const handleEmployeeTypeSelectionChange = selectedWorkType => {
+    setSelectedEmployeeType(selectedWorkType)
+  }
+  // Employee Type work type end
+
+  // Sub Department work type start
+  const [selectedSubDepartment, setSelectedSubDepartment] = useState(null)
+  
+  const [subDepartmentWorkTypes, setSubDepartmentWorkTypes] = useState([
+    {
+      name: "Frontend Development",
+      color: "#000000",
+      id: "subdept-task1",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+    {
+      name: "Backend Development",
+      color: "#000000",
+      id: "subdept-task2",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+    {
+      name: "Quality Assurance",
+      color: "#000000",
+      id: "subdept-task3",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+    {
+      name: "DevOps",
+      color: "#000000",
+      id: "subdept-task4",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+    {
+      name: "UI/UX Design",
+      color: "#000000",
+      id: "subdept-task5",
+      statuses: ["Pending", "Processing", "Completed"],
+    },
+  ])
+
+  const subDepartmentDropdownWorkTypes = [
+    ...subDepartmentWorkTypes,
+    { id: "divider", disabled: true },
+    { name: "Add Sub Department", id: "create-new-work-type" },
+    { name: "Edit Sub Department", id: "edit-selected-work-type" },
+  ]
+
+  const handleSubDepartmentWorkTypesChange = updatedWorkTypes => {
+    setSubDepartmentWorkTypes(updatedWorkTypes)
+  }
+
+  const handleSubDepartmentSelectionChange = selectedWorkType => {
+    setSelectedSubDepartment(selectedWorkType)
+  }
+  // Sub Department work type end
+
+  
   const [jobtitle, setJobtitle] = useState("Frontend Developer");
   const [email, setEmail] = useState(null);
   const [totalExperience, setTotalExperience] = useState("2");
@@ -434,6 +899,7 @@ const EmployeeEditForm = props => {
 
   const [dateAvalibility, setDateAvalibility] = useState(null);
   const [dob, setDob] = useState(null);
+  const [dateOfJoining, setDateOfJoining] = useState(null);
 
 
   const [EmployeeRec, setEmployeeRec] = useState("  ")
@@ -909,19 +1375,11 @@ const EmployeeEditForm = props => {
                                   </label>
                                 </Col>
                                 <Col xl={9}>
-                                  <InputText
-
-                                    className="w-full"
-                                    {...register("Company", {
-                                      required: "Company name is required",
-                                      pattern: {
-                                        value: /^[A-Za-z][A-Za-z-\s&]+$/,
-                                        // message:
-                                        //   "This field allows only alphabets and spaces, but does not accept a space as the first character.",
-                                      },
-                                    })}
-                                    onKeyUp={() => { trigger("Company") }}
-                                    value={company}
+                                  <WorkType1
+                                    initialWorkTypes={moduleWorkTypes}
+                                    dropdownWorkTypes={moduleDropdownWorkTypes}
+                                    onWorkTypesChange={handleModuleWorkTypesChange}
+                                    onSelectionChange={handleModuleSelectionChange}
                                   />
                                   {errors.Company && (<small id='personalEmailHelp' className='form-text text-danger'>{errors.Company.message}</small>)}
 
@@ -931,24 +1389,17 @@ const EmployeeEditForm = props => {
                               <Row className="mt-2 align-items-center">
                                 <Col xl={3}>
                                   <label className=" block mb-2">
-                                    JobTitle
+                                    Designation
                                   </label>
                                 </Col>
                                 <Col xl={9}>
-                                  <InputText
-                                    className="w-full"
-                                    {...register("JobTitle", {
-                                      required: "JobTitle  is required",
-                                      pattern: {
-                                        value: /^[A-Za-z][A-Za-z-\s&]+$/,
-                                        // message:
-                                        //   "This field allows only alphabets and spaces, but does not accept a space as the first character.",
-                                      },
-                                    })}
-                                    onKeyUp={() => { trigger("JobTitle") }}
-                                    value={jobtitle}
+                                  <WorkType1
+                                    initialWorkTypes={designationWorkTypes}
+                                    dropdownWorkTypes={designationDropdownWorkTypes}
+                                    onWorkTypesChange={handleDesignationWorkTypesChange}
+                                    onSelectionChange={handleDesignationSelectionChange}
                                   />
-                                  {errors.JobTitle && (<small id='personalEmailHelp' className='form-text text-danger'>{errors.JobTitle.message}</small>)}
+                                  {errors.Designation && (<small id='personalEmailHelp' className='form-text text-danger'>{errors.Designation.message}</small>)}
 
                                 </Col>
                               </Row>
@@ -1284,85 +1735,7 @@ const EmployeeEditForm = props => {
                   </CardBody>
                 </Card>
 
-                <Card className="bg-form">
-                  <CardBody>
-                    <h4 className="card-title mb-2">Skills</h4>
-                    <Row>
-                      <Col xl={12}>
-                        <div className="">
-                          <Row>
-                            <Col xl={12}>
-                              {/* Primary Skills Dropdown */}
-                              <Row className="mt-2 align-items-center">
-                                <Col xl={3}>
-                                  <label htmlFor="primary" className="block mb-2">Primary Skills</label>
-                                </Col>
-                                <Col xl={9}>
-                                  <div className="flex justify-content-center mb-0">
-                                    <Select
-                                      id="primarySkills"
-                                      name="primarySkills"
-                                      isMulti
-                                      options={skillsOptions}
-                                      value={skillsOptions.filter(option => selectedPrimarySkills.includes(option.value))}
-                                      onChange={handlePrimarySkillsChange}
-                                      placeholder="Javascript, React"
-                                      className="w-full"
-                                    />
-                                  </div>
-                                </Col>
-                              </Row>
-
-                              {/* Secondary Skills Dropdown */}
-                              <Row className="mt-2 align-items-center">
-                                <Col xl={3}>
-                                  <label htmlFor="secondary" className="block mb-2">Secondary Skills</label>
-                                </Col>
-                                <Col xl={9}>
-                                  <div className="card flex justify-content-center mb-0">
-                                    <Dropdown
-                                      value={secondarySkills}
-                                      onChange={(e) => setSecondarySkills(e.value)}
-                                      options={secondary}
-                                      optionLabel="name"
-                                      placeholder="Typescript"
-                                      className="w-full"
-                                      filter
-                                      editable
-                                      itemTemplate={skillOptionTemplate}
-                                    />
-                                  </div>
-                                </Col>
-                              </Row>
-
-                              {/* Other Skills Dropdown */}
-                              <Row className="mt-2 align-items-center">
-                                <Col xl={3}>
-                                  <label htmlFor="other" className="block mb-2">Other Skills</label>
-                                </Col>
-                                <Col xl={9}>
-                                  <div className="card flex justify-content-center mb-0">
-                                    <Dropdown
-                                      value={otherSkills}
-                                      onChange={(e) => setOtherSkills(e.value)}
-                                      options={other}
-                                      optionLabel="name"
-                                      placeholder="Python, Django"
-                                      className="w-full"
-                                      filter
-                                      editable
-                                      itemTemplate={skillOptionTemplate}
-                                    />
-                                  </div>
-                                </Col>
-                              </Row>
-                            </Col>
-                          </Row>
-                        </div>
-                      </Col>
-                    </Row>
-                  </CardBody>
-                </Card>
+             
 
 
               </Col>
@@ -1382,51 +1755,148 @@ const EmployeeEditForm = props => {
 
                               <Row className="mt-2 align-items-center">
                                 <Col xl={3}>
-                                  <label htmlFor="currentSalary" className="block mb-2">
-                                    Salary
-                                  </label>
+                                 
                                 </Col>
                                 <Col xl={9}>
-                                  <InputNumber
-                                    inputId="currentSalary"
-                                    value={currentSalary}
-                                    onValueChange={(e) => setCurrentSalary(e.value)}
-                                    mode="currency"
-                                    currency="INR"
-                                    locale="en-IN"
-                                    placeholder="Enter current salary"
-                                    className="w-full"
-                                  />
+                                 
                                 </Col>
                               </Row>
 
-                            
+                              <Row className="mt-2 align-items-center">
+                                <Col xl={3}>
+                                  <label className="block mb-2">
+                                    Department
+                                  </label>
+                                </Col>
+                                <Col xl={9}>
+                                  <WorkType1
+                                    initialWorkTypes={departmentWorkTypes}
+                                    dropdownWorkTypes={departmentDropdownWorkTypes}
+                                    onWorkTypesChange={handleDepartmentWorkTypesChange}
+                                    onSelectionChange={handleDepartmentSelectionChange}
+                                  />
+                                  {errors.Department && (<small id='personalEmailHelp' className='form-text text-danger'>{errors.Department.message}</small>)}
+                                </Col>
+                              </Row>
 
                               <Row className="mt-2 align-items-center">
                                 <Col xl={3}>
-                                  <label
-                                    htmlFor="employeeType"
-                                    className="block mb-2"
-                                  >
+                                  <label className="block mb-2">
+                                    Sub Department
+                                  </label>
+                                </Col>
+                                <Col xl={9}>
+                                  <WorkType1
+                                    initialWorkTypes={subDepartmentWorkTypes}
+                                    dropdownWorkTypes={subDepartmentDropdownWorkTypes}
+                                    onWorkTypesChange={handleSubDepartmentWorkTypesChange}
+                                    onSelectionChange={handleSubDepartmentSelectionChange}
+                                  />
+                                  {errors.SubDepartment && (<small id='personalEmailHelp' className='form-text text-danger'>{errors.SubDepartment.message}</small>)}
+                                </Col>
+                              </Row>
+
+                              <Row className="mt-2 align-items-center">
+                                <Col xl={3}>
+                                  <label className="block mb-2">
+                                    Work Location
+                                  </label>
+                                </Col>
+                                <Col xl={9}>
+                                  <WorkType1
+                                    initialWorkTypes={workLocationWorkTypes}
+                                    dropdownWorkTypes={workLocationDropdownWorkTypes}
+                                    onWorkTypesChange={handleWorkLocationWorkTypesChange}
+                                    onSelectionChange={handleWorkLocationSelectionChange}
+                                  />
+                                  {errors.WorkLocation && (<small id='personalEmailHelp' className='form-text text-danger'>{errors.WorkLocation.message}</small>)}
+                                </Col>
+                              </Row>
+
+                              <Row className="mt-2 align-items-center">
+                                <Col xl={3}>
+                                  <label className="block mb-2">
+                                    Shift Timings
+                                  </label>
+                                </Col>
+                                <Col xl={9}>
+                                  <WorkType1
+                                    initialWorkTypes={shiftTimingsWorkTypes}
+                                    dropdownWorkTypes={shiftTimingsDropdownWorkTypes}
+                                    onWorkTypesChange={handleShiftTimingsWorkTypesChange}
+                                    onSelectionChange={handleShiftTimingsSelectionChange}
+                                  />
+                                  {errors.ShiftTimings && (<small id='personalEmailHelp' className='form-text text-danger'>{errors.ShiftTimings.message}</small>)}
+                                </Col>
+                              </Row>
+
+                              <Row className="mt-2 align-items-center">
+                                <Col xl={3}>
+                                  <label className="block mb-2">
+                                    Employee Status
+                                  </label>
+                                </Col>
+                                <Col xl={9}>
+                                  <WorkType1
+                                    initialWorkTypes={empStatusWorkTypes}
+                                    dropdownWorkTypes={empStatusDropdownWorkTypes}
+                                    onWorkTypesChange={handleEmpStatusWorkTypesChange}
+                                    onSelectionChange={handleEmpStatusSelectionChange}
+                                  />
+                                  {errors.EmployeeStatus && (<small id='personalEmailHelp' className='form-text text-danger'>{errors.EmployeeStatus.message}</small>)}
+                                </Col>
+                              </Row>
+
+                              <Row className="mt-2 align-items-center">
+                                <Col xl={3}>
+                                  <label className="block mb-2">
                                     Employee Type
                                   </label>
                                 </Col>
                                 <Col xl={9}>
-
-                                  <div className="card flex justify-content-center mb-0">
-                                    <select
-                                      className='form-select profileDetailsInput' id="MyPro_EmpDet_Team_WorkInfo_DesSelBox"
-                                      aria-label='Default select example'
-                                    >
-                                      {/* <option value=''>--Select --</option> */}
-                                      <option value='Active'>Work From Office (WFO)</option>
-                                      <option value='Work From Home'>Work From Home (WFH)</option>
-                                      <option value='Work From Remote'>Work From Remote (WFR)</option>
-                                    </select>
-                                  </div>
+                                  <WorkType1
+                                    initialWorkTypes={employeeTypeWorkTypes}
+                                    dropdownWorkTypes={employeeTypeDropdownWorkTypes}
+                                    onWorkTypesChange={handleEmployeeTypeWorkTypesChange}
+                                    onSelectionChange={handleEmployeeTypeSelectionChange}
+                                  />
+                                  {errors.EmployeeType && (<small id='personalEmailHelp' className='form-text text-danger'>{errors.EmployeeType.message}</small>)}
                                 </Col>
                               </Row>
 
+                              <Row className="mt-2 align-items-center">
+                                <Col xl={3}>
+                                  <label className="block mb-2">
+                                    Reporting Manager
+                                  </label>
+                                </Col>
+                                <Col xl={9}>
+                                  <WorkType1
+                                    initialWorkTypes={reportingManagerWorkTypes}
+                                    dropdownWorkTypes={reportingManagerDropdownWorkTypes}
+                                    onWorkTypesChange={handleReportingManagerWorkTypesChange}
+                                    onSelectionChange={handleReportingManagerSelectionChange}
+                                  />
+                                  {errors.ReportingManager && (<small id='personalEmailHelp' className='form-text text-danger'>{errors.ReportingManager.message}</small>)}
+                                </Col>
+                              </Row>
+
+                              <Row className="mt-2 align-items-center">
+                                <Col xl={3}>
+                                  <label className="block mb-2">
+                                    Date of Joining
+                                  </label>
+                                </Col>
+                                <Col xl={9}>
+                                  <Calendar className="w-100"
+                                    id="dateOfJoining"
+                                    value={dateOfJoining}
+                                    onChange={(e) => setDateOfJoining(e.value)}
+                                    placeholder="01/01/2025"
+                                    showIcon
+                                  />
+                                </Col>
+                              </Row>
 
                               <Row className="mt-2 align-items-center">
                                 <Col xl={3}>
@@ -1450,7 +1920,7 @@ const EmployeeEditForm = props => {
 
 
 
-                              <Row className="mt-2 align-items-center">
+                              {/* <Row className="mt-2 align-items-center">
                                 <Col xl={3}>
                                   <label className=" block mb-2">
                                     Availability Date
@@ -1502,7 +1972,7 @@ const EmployeeEditForm = props => {
                                     placeholder="Salmanuddin Syed"
                                   />
                                 </Col>
-                              </Row>
+                              </Row> */}
 
                               <Row className="mt-2 align-items-center">
                                 <Col xl={3}>
@@ -1657,7 +2127,98 @@ const EmployeeEditForm = props => {
                   </CardBody>
                 </Card>
 
-                <Card className="bg-form">
+                
+              </Col>
+
+              {/* 2nd Row */}
+
+              {/* 3rd Row */}
+
+              <Col xl={4}>
+
+                 <Card className="bg-form">
+                  <CardBody>
+                    <h4 className="card-title mb-2">Skills</h4>
+                    <Row>
+                      <Col xl={12}>
+                        <div className="">
+                          <Row>
+                            <Col xl={12}>
+                              {/* Primary Skills Dropdown */}
+                              <Row className="mt-2 align-items-center">
+                                <Col xl={3}>
+                                  <label htmlFor="primary" className="block mb-2">Primary Skills</label>
+                                </Col>
+                                <Col xl={9}>
+                                  <div className="flex justify-content-center mb-0">
+                                    <Select
+                                      id="primarySkills"
+                                      name="primarySkills"
+                                      isMulti
+                                      options={skillsOptions}
+                                      value={skillsOptions.filter(option => selectedPrimarySkills.includes(option.value))}
+                                      onChange={handlePrimarySkillsChange}
+                                      placeholder="Javascript, React"
+                                      className="w-full"
+                                    />
+                                  </div>
+                                </Col>
+                              </Row>
+
+                              {/* Secondary Skills Dropdown */}
+                              <Row className="mt-2 align-items-center">
+                                <Col xl={3}>
+                                  <label htmlFor="secondary" className="block mb-2">Secondary Skills</label>
+                                </Col>
+                                <Col xl={9}>
+                                  <div className="card flex justify-content-center mb-0">
+                                    <Dropdown
+                                      value={secondarySkills}
+                                      onChange={(e) => setSecondarySkills(e.value)}
+                                      options={secondary}
+                                      optionLabel="name"
+                                      placeholder="Typescript"
+                                      className="w-full"
+                                      filter
+                                      editable
+                                      itemTemplate={skillOptionTemplate}
+                                    />
+                                  </div>
+                                </Col>
+                              </Row>
+
+                              {/* Other Skills Dropdown */}
+                              <Row className="mt-2 align-items-center">
+                                <Col xl={3}>
+                                  <label htmlFor="other" className="block mb-2">Other Skills</label>
+                                </Col>
+                                <Col xl={9}>
+                                  <div className="card flex justify-content-center mb-0">
+                                    <Dropdown
+                                      value={otherSkills}
+                                      onChange={(e) => setOtherSkills(e.value)}
+                                      options={other}
+                                      optionLabel="name"
+                                      placeholder="Python, Django"
+                                      className="w-full"
+                                      filter
+                                      editable
+                                      itemTemplate={skillOptionTemplate}
+                                    />
+                                  </div>
+                                </Col>
+                              </Row>
+                            </Col>
+                          </Row>
+                        </div>
+                      </Col>
+                    </Row>
+                  </CardBody>
+                </Card>
+
+
+                
+                                <Card className="bg-form">
                   <CardBody>
                     <h4 className="card-title mb-2">Documents</h4>
                     <Row>
@@ -1782,457 +2343,7 @@ const EmployeeEditForm = props => {
                     </Row>
                   </Dialog>
                 </Card>
-              </Col>
 
-              {/* 2nd Row */}
-
-              {/* 3rd Row */}
-
-              <Col xl={4}>
-                {/* work experience start */}
-
-
-                <div>
-                  <Card className="bg-form">
-                    <CardBody>
-                      <h4 className="card-title mb-3">Work Experience</h4>
-                      {/* Data Table */}
-                      <DataTable value={workExperiences} responsiveLayout="scroll" className="mt-2"
-                        emptyMessage={<div className="empty-message-custom">No education details found.</div>}>
-                        <Column field="company" header="Company" />
-                        {/* <Column field="website" header="Website" /> */}
-                        <Column field="jobTitle" header="Job Title" />
-                        <Column field="fromDate" header="From Date" body={(rowData) => rowData.fromDate?.toLocaleDateString()} placeholder="21/02/2025" />
-                        <Column field="toDate" header="To Date" body={(rowData) => rowData.toDate?.toLocaleDateString()} />
-                        {/* <Column field="description" header="Description" /> */}
-                        {/* <Column header="Actions" body={actionBodyTemplate} /> */}
-                      </DataTable>
-
-                      <div className="block d-flex align-items-center justify-content-end">
-                        <a color="primary" className="anchr-title  mt-3" onClick={() => setShowDialog(true)}>
-                          <i className="pi pi-plus me-1"></i> Add More
-                        </a>
-                      </div>
-
-
-
-                      {/* Dialog for Adding/Editing */}
-                      <Dialog
-                        header={editIndex !== null ? "Edit Work Experience" : "Add Work Experience"}
-                        visible={showDialog}
-                        style={{ width: "30vw" }}
-                        onHide={() => setShowDialog(false)}
-                      >
-                        <Row className="mb-2">
-                          <Col xl={12}>
-                            <label htmlFor="company" className="block">
-                              Company
-                            </label>
-                            <InputText
-                              className="w-full"
-                              value={formValues.company}
-                              onChange={(e) => handleInputChange("company", e.target.value)}
-                            // {...register("Company1", {
-                            //   required: "This field is required",
-                            //   pattern: {
-                            //     value: /^[a-zA-Z_ ]*$/,
-                            //     message:
-                            //       "Please enter valid Job Tittle ",
-                            //   },
-                            // })}
-                            // onKeyUp={() => { trigger("Company1") }}
-                            />
-                            {/* {errors.Company1 && (<small id='emailHelp' className='form-text text-danger'>{errors.Company1.message}</small>)} */}
-                          </Col>
-                        </Row>
-
-                        <Row className="mb-2">
-                          <Col xl={12}>
-                            <label htmlFor="website" className="block">
-                              Website
-                            </label>
-                            <InputText
-                              id="website"
-                              // value={formValues.company}
-                              // onChange={(e) => handleInputChange("company", e.target.value)}
-                              className="w-full"
-                            />
-                          </Col>
-                        </Row>
-
-
-                        <Row className="mb-2">
-
-                          <Col xl={12}>
-                            <label htmlFor="jobTitle" className="block">
-                              Job Title
-                            </label>
-                            <InputText
-                              id="jobTitle"
-                              value={formValues.jobTitle}
-                              onChange={(e) => handleInputChange("jobTitle", e.target.value)}
-                              className="w-full"
-                            />
-                          </Col>
-                        </Row>
-
-                        <Row className="mb-2">
-
-                          <Col xl={12}>
-                            <label htmlFor="fromDate" className="block">
-                              From Date
-                            </label>
-                            <Calendar
-                              id="fromDate"
-                              value={formValues.fromDate}
-                              onChange={(e) => handleInputChange("fromDate", e.value)}
-                              showIcon
-                              className="w-full"
-                            />
-                          </Col>
-                        </Row>
-
-                        <Row className="mb-2">
-
-                          <Col xl={12}>
-                            <label htmlFor="toDate" className="block">
-                              To Date
-                            </label>
-                            <Calendar
-                              id="toDate"
-                              value={formValues.toDate}
-                              onChange={(e) => handleInputChange("toDate", e.value)}
-                              showIcon
-                              className="w-full"
-                            />
-                          </Col>
-                        </Row>
-                        <Row>
-                          <Col xl={12}>
-                            <div className="d-flex justify-content-end mt-2">
-                              <Button color="primary btn-main mr-2" onClick={handleSave}>
-                                Ok
-                              </Button>
-                              {/* <Button color="btn btn-primary cancel-outlinebtn" onClick={() => setShowDialog(false)}>
-                              <i className="pi pi-times me-1"></i>
-                              Cancel
-                            </Button> */}
-                            </div>
-                          </Col>
-                        </Row>
-                      </Dialog>
-
-                      {/* Confirm Dialog */}
-                      <ConfirmDialog />
-                    </CardBody>
-                  </Card>
-                </div>
-
-                <Card className="bg-form">
-                  <CardBody>
-                    <h4 className="card-title mb-3">Education Details</h4>
-                    <Row>
-                      <Col xl={12}>
-                        <div className="">
-                          <Row>
-                            <Col xl={12}>
-                              <DataTable
-                                value={educationDetails}
-                                showGridlines
-                                emptyMessage={<div className="empty-message-custom">No education details found.</div>}
-                              // tableStyle={{ minWidth: '30rem' }}
-                              >
-                                <Column field="degree" header="Degree"></Column>
-                                <Column field="institution" header="School"></Column>
-                                <Column field="grade" header="Grade"></Column>
-                                <Column field="year" header="Year"></Column>
-                              </DataTable>
-
-                              <div className="block d-flex align-items-center justify-content-end">
-                                <a color="primary" className="anchr-title mt-3" onClick={() => setIsDialogVisible(true)}>
-                                  <i className="pi pi-plus me-1"></i> Add More
-                                </a>
-                              </div>
-
-
-                              {/* Dialog for Adding New Education */}
-                              <Dialog
-                                header="Add Education"
-                                visible={isDialogVisible}
-                                style={{ width: '30vw' }}
-                                onHide={() => setIsDialogVisible(false)}
-                              >
-                                <div className="field">
-                                  <label htmlFor="degree" className="block mb-2">
-                                    Degree
-                                  </label>
-                                  <InputText
-                                    id="degree"
-                                    value={newEducation.degree}
-                                    onChange={(e) => setNewEducation({ ...newEducation, degree: e.target.value })}
-                                    placeholder="Enter Degree"
-                                    className="w-full"
-                                  />
-                                </div>
-                                <div className="field mt-2">
-                                  <label htmlFor="institution" className="block mb-2">
-                                    School
-                                  </label>
-                                  <InputText
-                                    id="institution"
-                                    value={newEducation.institution}
-                                    onChange={(e) => setNewEducation({ ...newEducation, institution: e.target.value })}
-                                    placeholder="Enter Institution"
-                                    className="w-full"
-                                  />
-                                </div>
-                                <div className="field mt-2">
-                                  <label htmlFor="grade" className="block mb-2">
-                                    Grade
-                                  </label>
-                                  <InputText
-                                    id="grade"
-                                    value={newEducation.grade}
-                                    onChange={(e) => setNewEducation({ ...newEducation, grade: e.target.value })}
-                                    placeholder="Enter Grade/Percentage"
-                                    className="w-full"
-                                  />
-                                </div>
-
-                                <Row>
-                                  <Col xl={6}>
-                                    <div className="field">
-                                      <label htmlFor="year" className="block  mb-2">
-                                        Start Year
-                                      </label>
-                                      <Dropdown
-                                        id="year"
-                                        value={newEducation.year}
-                                        onChange={(e) => setNewEducation({ ...newEducation, year: e.value })}
-                                        options={years}
-                                        placeholder="Select Year"
-                                        className="w-full bgclr"
-                                      />
-                                    </div>
-                                  </Col>
-                                  <Col xl={6}>
-                                    <div className="field">
-                                      <label htmlFor="month" className="block  mb-2">
-                                        Start Month
-                                      </label>
-                                      <Dropdown
-                                        id="month"
-                                        value={newEducation.month}
-                                        onChange={(e) => setNewEducation({ ...newEducation, month: e.value })}
-                                        options={months}
-                                        placeholder="Select Month"
-                                        className="w-full bgclr"
-                                      />
-                                    </div>
-                                  </Col>
-                                </Row>
-
-                                <Row className="mt-2">
-                                  {/* End Date */}
-                                  <Col xl={6}>
-                                    <div className="field">
-                                      <label htmlFor="endYear" className="block">
-                                        End Year
-                                      </label>
-                                      <Dropdown
-                                        id="endYear"
-                                        value={newEducation.endYear}
-                                        onChange={(e) => setNewEducation({ ...newEducation, endYear: e.value })}
-                                        options={years}
-                                        placeholder="Select Year"
-                                        className="w-full bgclr"
-                                      />
-                                    </div>
-                                  </Col>
-                                  <Col xl={6}>
-                                    <div className="field">
-                                      <label htmlFor="endMonth" className="block">
-                                        End Month
-                                      </label>
-                                      <Dropdown
-                                        id="endMonth"
-                                        value={newEducation.endMonth}
-                                        onChange={(e) => setNewEducation({ ...newEducation, endMonth: e.value })}
-                                        options={months}
-                                        placeholder="Select Month"
-                                        className="w-full bgclr"
-                                      />
-                                    </div>
-                                  </Col>
-                                </Row>
-                                <Row>
-                                  <Col xl={12}>
-                                    <div className="d-flex justify-content-end mt-2">
-                                      <Button color="primary btn-main mr-2" onClick={() => setIsDialogVisible(false)}>
-                                        Ok
-                                      </Button>
-                                      {/* <Button color="btn btn-primary cancel-outlinebtn" onClick={handleAddEducation}>
-                                      <i className="pi pi-times me-1"></i>
-                                      Cancel
-                                    </Button> */}
-                                    </div>
-                                  </Col>
-                                </Row>
-
-                              </Dialog>
-                            </Col>
-                          </Row>
-                        </div>
-                      </Col>
-                    </Row>
-                  </CardBody>
-                </Card>
-
-                <Card className="bg-form">
-                  <CardBody>
-                    <h4 className="card-title mb-2">Social Pages</h4>
-                    <Row>
-                      <Col xl={12}>
-                        <div className="">
-                          <Row>
-                            <Col xl={12}>
-                              <Row className="align-items-center mt-2">
-                                <Col xl={3}>
-                                  <label
-
-                                    className=" block"
-                                  >
-                                    LinkedIn URL
-                                  </label>
-                                </Col>
-                                <Col xl={9}>
-                                  <InputText
-                                    id="integer"
-                                    className="w-full"
-                                    style={{ position: "relative" }}
-                                    placeholder="https://www.linkedin.com/in/"
-                                  />
-                                  <i
-                                    className="pi pi-linkedin linkd-icon"
-                                    style={{
-                                      position: "absolute",
-                                      right: "26px",
-                                      top: "34%",
-                                      transform: "translateY(-50%)",
-                                      // cursor: "pointer"
-                                    }}
-                                  ></i>
-                                </Col>
-                              </Row>
-
-                              <Row className="mt-2 align-items-center">
-                                <Col xl={3}>
-                                  <label
-
-                                    className=" block"
-                                  >
-                                    Facebook URL
-                                  </label>
-
-                                </Col>
-                                <Col xl={9}>
-                                  <InputText
-                                    id="integer"
-                                    className="w-full"
-                                    style={{ position: "relative" }}
-                                    placeholder="https://www.facebook.com/in/"
-                                  />
-                                  <i
-                                    className="pi pi-facebook facebook-icon"
-                                    style={{
-                                      position: "absolute",
-                                      right: "26px",
-                                      top: "51%",
-                                      transform: "translateY(-50%)",
-                                      // cursor: "pointer"
-                                    }}
-                                  ></i>
-                                </Col>
-                              </Row>
-
-                              <Row className="mt-2 align-items-center">
-                                <Col xl={3}>
-                                  <div className="d-flex align-items-start">
-                                    {/* <div>
-                                    <i className="pi pi-twitter me-1 twitter-icon"></i>
-                                  </div> */}
-
-                                    <label
-
-                                      className=" block"
-                                    >
-                                      Twitter URL
-                                    </label>
-                                  </div>
-
-                                </Col>
-                                <Col xl={9}>
-                                  <InputText
-                                    id="integer"
-                                    className="w-full"
-                                    style={{ position: "relative" }}
-                                    placeholder="https://www.twitter.com/in/"
-                                  />
-                                  <i
-                                    className="pi pi-twitter twitter-icon"
-                                    style={{
-                                      position: "absolute",
-                                      right: "26px",
-                                      top: "69%",
-                                      transform: "translateY(-50%)",
-                                      // cursor: "pointer"
-                                    }}
-                                  ></i>
-                                </Col>
-                              </Row>
-
-                              <Row className="mt-2 align-items-center">
-                                <Col xl={3}>
-
-                                  <div className="d-flex align-items-start">
-                                    {/* <div>
-                                    <i className="pi pi-info me-1 indeed-icon"></i>
-                                  </div> */}
-                                    <label
-
-                                      className=" block"
-                                    >
-                                      Indeed URL
-                                    </label>
-                                  </div>
-                                </Col>
-                                <Col xl={9}>
-                                  <InputText
-                                    id="integer"
-                                    className="w-full"
-                                    placeholder="https://www.indeed.com/in/"
-                                  />
-                                  <i
-                                    className="pi pi-info me-1 indeed-icon"
-                                    style={{
-                                      position: "absolute",
-                                      right: "22px",
-                                      top: "86%",
-                                      transform: "translateY(-50%)",
-                                      // cursor: "pointer"
-                                    }}
-                                  ></i>
-                                </Col>
-                              </Row>
-                            </Col>
-                          </Row>
-                        </div>
-                      </Col>
-                    </Row>
-                  </CardBody>
-                </Card>
-
-                {/* Documents end */}
 
                 <Card className="bg-form">
                   <CardBody>
