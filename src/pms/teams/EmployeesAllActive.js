@@ -800,7 +800,7 @@ const EmployeeAllActive = () => {
     {
       id: 2,
       Firstname: "Ruchitha",
-      Lastname: "Emmadi",
+      Lastname: "Kalvala",
       Company: "Vitel Global Communications",
       JobTitle: "Frontend Developer",
       PrimarySkills: "JavaScript, React",
@@ -3837,7 +3837,7 @@ const EmployeeAllActive = () => {
                   <i className="pi pi-users"></i> Employee - LavanKumar
                 </h3>
                 <div className="d-flex align-items-center">
-                  <Link to="/candidate-editform">
+                  <Link to="/employee-edit">
                     <p className="mb-0 text-white">
                       {" "}
                       <i class="fa-regular fa-pen-to-square me-3"></i>{" "}
@@ -4077,25 +4077,7 @@ const EmployeeAllActive = () => {
 
                           <Row className="mb-2"></Row>
 
-                          <Row>
-                            <Col lg={12}>
-                              <div className="p-field">
-                                <label htmlFor="jobType" className="block">
-                                  Notes
-                                </label>
-                                <InputTextarea
-                                  // autoResize
-                                  value={notes1}
-                                  readOnly
-                                  // onChange={e => setDescription(e.target.value)}
-                                  rows={3}
-                                  cols={40}
-                                  placeholder=""
-                                  className="w-full "
-                                />
-                              </div>
-                            </Col>
-                          </Row>
+                         
                         </AccordionTab>
                         <AccordionTab
                           header={

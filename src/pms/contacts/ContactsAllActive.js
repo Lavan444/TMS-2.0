@@ -3570,7 +3570,7 @@ const ContactsAllActive = () => {
                               />
                             </div>
                           </Col>
-                          <Col lg={12}>
+                          {/* <Col lg={12}>
                             <div className="p-field" >
                               <label htmlFor="jobType" className="block">Notes</label>
                               <InputTextarea
@@ -3582,7 +3582,7 @@ const ContactsAllActive = () => {
                                 value={notes1}
                               />
                             </div>
-                          </Col>
+                          </Col> */}
                         </Row>
 
 

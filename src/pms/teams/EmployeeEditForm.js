@@ -757,7 +757,7 @@ const EmployeeEditForm = props => {
           <div className="page-title-box">
             <Row className="align-items-center">
               <Col md={6}>
-                <h1 className="page-title">Create a employees</h1>
+                <h1 className="page-title">Create a Employees</h1>
                 <ol className="breadcrumb m-0">
                   <li className="breadcrumb-item active">
                     Add a new employees by entering their details, skills, and contact information to streamline recruitment.
@@ -1383,7 +1383,7 @@ const EmployeeEditForm = props => {
                               <Row className="mt-2 align-items-center">
                                 <Col xl={3}>
                                   <label htmlFor="currentSalary" className="block mb-2">
-                                    Current Salary
+                                    Salary
                                   </label>
                                 </Col>
                                 <Col xl={9}>
@@ -1400,25 +1400,7 @@ const EmployeeEditForm = props => {
                                 </Col>
                               </Row>
 
-                              <Row className="mt-2 align-items-center">
-                                <Col xl={3}>
-                                  <label htmlFor="expectedSalary" className="block mb-2">
-                                    Expected Salary
-                                  </label>
-                                </Col>
-                                <Col xl={9}>
-                                  <InputNumber
-                                    inputId="expectedSalary"
-                                    value={expectedSalary}
-                                    onValueChange={(e) => setExpectedSalary(e.value)}
-                                    mode="currency"
-                                    currency="INR"
-                                    locale="en-IN"
-                                    placeholder="Enter expected salary"
-                                    className="w-full"
-                                  />
-                                </Col>
-                              </Row>
+                            
 
                               <Row className="mt-2 align-items-center">
                                 <Col xl={3}>
@@ -1566,7 +1548,7 @@ const EmployeeEditForm = props => {
                               </Row>
 
                               <Row className="mt-2 align-items-center justify-content-end">
-                                <Col lg={6}>
+                                {/* <Col lg={12}>
                                   <Row>
                                     <Col xl={6}>
                                       <label
@@ -1586,10 +1568,10 @@ const EmployeeEditForm = props => {
                                       </div>
                                     </Col>
                                   </Row>
-                                </Col>
-                                <Col lg={6}>
+                                </Col> */}
+                                <Col lg={12}>
                                   <Row>
-                                    <Col xl={6}>
+                                    <Col xl={3}>
                                       <label
 
                                         className=" block mb-2"
@@ -1597,7 +1579,7 @@ const EmployeeEditForm = props => {
                                         Private
                                       </label>
                                     </Col>
-                                    <Col xl={6}>
+                                    <Col xl={9}>
                                       <div className="relocation">
                                         <input
                                           type='checkbox'
