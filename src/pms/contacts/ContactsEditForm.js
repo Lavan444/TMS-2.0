@@ -24,6 +24,7 @@ import { InputNumber } from "primereact/inputnumber";
 import { TreeSelect } from "primereact/treeselect";
 import { Checkbox } from "primereact/checkbox";
 import { Editor } from "primereact/editor";
+import { MultiSelect } from "primereact/multiselect";
 import Select from 'react-select';
 import { Toast } from 'primereact/toast';
 import { Link } from "react-router-dom";
@@ -93,6 +94,16 @@ const ContactEditForm = () => {
     ];
 
     const [userid1, setUserid1] = useState("Harish");
+
+    // Private functionality state
+    const [privateDrop, setPrivateDrop] = useState(false);
+    const [PrivetDropdown, setPrivetDropdown] = useState([]);
+    const PrivetDropdownValues = [
+        { name: 'Mahesh', value: 'mahesh' },
+        { name: 'Lavan', value: 'lavan' },
+        { name: 'Vinay', value: 'vinay' },
+        { name: 'Vasantha', value: 'vasantha' }
+    ];
 
     const onUpload = (event) => {
         toast.current.show({ severity: 'info', summary: 'Success', detail: `${event.files.length} file(s) uploaded` });
@@ -489,32 +500,7 @@ const ContactEditForm = () => {
                                                     </Col>
                                                 </Row>
 
-                                                <Row className="mt-2 align-items-center">
-                                                    <Col lg={3}>
-                                                        <Row>
-                                                            <Col lg={6}>
-                                                                <label htmlFor="userids" className="block mb-2">
-                                                                    UserIDs
-                                                                </label>
-                                                            </Col>
-                                                            
-                                                        </Row>
-                                                    </Col>
-                                                    <Col lg={9}>
-                                                        <Row className="align-items-center">
-                                                            <Col lg={6}>
-                                                                <InputText
-                                                                    placeholder="Enter User ID" value={userid1} className="w-full" />
-                                                            </Col>
-                                                            <Col xl={6}>
-                                                                <input type="checkbox" className="me-2" checked />
-                                                                <label htmlFor="jobType">Private</label>
-                                                            </Col>
-
-                                                        </Row>
-                                                    </Col>
-
-                                                </Row>
+                                              
 
 
                                                 <Row className="mt-2 align-items-center mb-2">
@@ -713,6 +699,44 @@ const ContactEditForm = () => {
                                                     </Dialog>
 
 
+                                                </Row>
+
+                                                  <Row className="mt-2 align-items-center">
+                                                    <Col lg={3}>
+                                                        <label htmlFor="userids" className="block mb-2">
+                                                            Private
+                                                        </label>
+                                                    </Col>
+                                                    <Col lg={9}>
+                                                        <Row className="align-items-center">
+                                                            <Col lg={3}>
+                                                                <div className="p-field d-flex align-items-center">
+                                                                    <Checkbox
+                                                                        inputId="privateCheckbox"
+                                                                        checked={privateDrop}
+                                                                        onChange={(e) => setPrivateDrop(e.checked)}
+                                                                    />
+                                                                    {/* <label htmlFor="privateCheckbox" className="ms-2">Private</label> */}
+                                                                </div>
+                                                            </Col>
+                                                            <Col xl={9}>
+                                                                {privateDrop && (
+                                                                    <div className="p-field">
+                                                                        <MultiSelect
+                                                                            value={PrivetDropdown}
+                                                                            onChange={(e) => setPrivetDropdown(e.value)}
+                                                                            options={PrivetDropdownValues}
+                                                                            optionLabel="name"
+                                                                            display="comma"
+                                                                            placeholder="Select User Id's"
+                                                                            maxSelectedLabels={3}
+                                                                            className="w-full"
+                                                                        />
+                                                                    </div>
+                                                                )}
+                                                            </Col>
+                                                        </Row>
+                                                    </Col>
                                                 </Row>
 
                                             </div>

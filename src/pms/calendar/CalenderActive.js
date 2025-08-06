@@ -13,15 +13,24 @@ import { Calendar } from "primereact/calendar"
 import { InputTextarea } from "primereact/inputtextarea"
 import { Checkbox } from "primereact/checkbox"
 import { Chips } from "primereact/chips"
+import { MultiSelect } from "primereact/multiselect";
+import { Tooltip } from "primereact/tooltip";
 import LinkContactsPopup from "pms/common-for-all/LinkContactsPopup";
 import LinkContact2Popup from "pms/common-for-all/LinkContact2Popup";
 import { useSelector } from "react-redux"
+import { Editor } from "primereact/editor"
+import LinkJobsPopup from "pms/common-for-all/LinkCandidatesPopup"
+
 
 const CalenderActive = () => {
 
   const { first, rows, } = useSelector(
     state => state.calendar.pagination
   )
+
+
+  const [scheduleText, setScheduleText] = useState("The Minutes of Meeting (MoM) document captures the key points discussed, decisions made, and action items agreed upon during the meeting. It serves as a record for reference and accountability, ensuring all participants are aligned on the outcomes and next steps.")
+
 
   const [selectedEmailOption, setSelectedEmailOption] = useState(null)
   const emailOptions = [
@@ -63,6 +72,8 @@ const CalenderActive = () => {
     type: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
     subtype: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
     subject: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    project: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    team: { value: null, matchMode: FilterMatchMode.CONTAINS },
     reminder: { value: null, matchMode: FilterMatchMode.EQUALS },
     reminderDate: { value: null, matchMode: FilterMatchMode.DATE_IS },
     startDate: { value: null, matchMode: FilterMatchMode.DATE_IS },
@@ -77,12 +88,13 @@ const CalenderActive = () => {
     {
       id: 1,
       type: "Call",
-      subtype: "Feedback Session",
+      subtype: "Introductory Call",
       subject: "Project Discussion",
-      reminder: false,
-      reminderDate: "17/01/2025",
+     project: "AI Generator (Proj-101)",
+      team: "mahesh, lavan, vinay, vasanth",
       startDate: "16/01/2025",
       endDate: "18/01/2025",
+      description: "This is to schedule a quick sync-up regarding our ongoing tasks and any blockers. We’ll keep it short and focused on progress tracking and planning ahead.",
       completed: true,
       private: true,
       userId: "Ushodaya",
@@ -93,10 +105,13 @@ const CalenderActive = () => {
       type: "Call",
       subtype: "Introductory Call",
       subject: "Complete Report",
+       project: "AI Generator (Proj-101)",
+      team: "mahesh, lavan, vinay, vasanth",
       reminder: false,
       reminderDate: "18/01/2025",
       startDate: "17/01/2025",
       endDate: "19/01/2025",
+       description: "This is to schedule a quick sync-up regarding our ongoing tasks and any blockers.",
       completed: false,
       private: true,
       userId: "Pavan",
@@ -107,10 +122,13 @@ const CalenderActive = () => {
       type: "Others",
       subtype: "Training Session",
       subject: "Market Analysis",
+      project: "AI Generator (Proj-101)",
+      team: "mahesh, lavan, vinay, vasanth",
       reminder: false,
       reminderDate: "19/01/2025",
       startDate: "18/01/2025",
       endDate: "20/01/2025",
+      description: "This is to schedule a quick sync-up regarding our ongoing tasks and any blockers.",
       completed: true,
       private: true,
       userId: "Bhavani",
@@ -121,10 +139,13 @@ const CalenderActive = () => {
       type: "Others",
       subtype: "Daily Stand-up",
       subject: "Update API Docs",
+      project: "AI Generator (Proj-101)",
+      team: "mahesh, lavan, vinay, vasanth",
       reminder: true,
       reminderDate: "20/01/2025",
       startDate: "19/01/2025",
       endDate: "21/01/2025",
+      description: "This is to schedule a quick sync-up regarding our ongoing tasks and any blockers.",
       completed: false,
       private: false,
       userId: "Karuna",
@@ -135,10 +156,13 @@ const CalenderActive = () => {
       type: "Call",
       subtype: "Follow-up Call",
       subject: "AI in Modern Applications",
+       project: "AI Generator (Proj-101)",
+      team: "mahesh, lavan, vinay, vasanth",
       reminder: true,
       reminderDate: "21/01/2025",
       startDate: "20/01/2025",
       endDate: "22/01/2025",
+      description: "This is to schedule a quick sync-up regarding our ongoing tasks and any blockers.",
       completed: false,
       private: true,
       userId: "Giri",
@@ -149,10 +173,13 @@ const CalenderActive = () => {
       type: "Meeting",
       subtype: "Requirement Discussion",
       subject: "Product Launch",
+       project: "AI Generator (Proj-101)",
+      team: "mahesh, lavan, vinay, vasanth",
       reminder: true,
       reminderDate: "22/01/2025",
       startDate: "21/01/2025",
       endDate: "23/01/2025",
+      description: "This is to schedule a quick sync-up regarding our ongoing tasks and any blockers.",
       completed: true,
       private: true,
       userId: "Deepika",
@@ -163,10 +190,13 @@ const CalenderActive = () => {
       type: "Call",
       subtype: "Requirement Discussion",
       subject: "Testing Process",
+       project: "AI Generator (Proj-101)",
+      team: "mahesh, lavan, vinay, vasanth",
       reminder: true,
       reminderDate: "23/01/2025",
       startDate: "22/01/2025",
       endDate: "24/01/2025",
+      description: "This is to schedule a quick sync-up regarding our ongoing tasks and any blockers.",
       completed: true,
       private: true,
       userId: "Giri",
@@ -177,10 +207,13 @@ const CalenderActive = () => {
       type: "Meeting",
       subtype: "Training Session",
       subject: "Sprint Planning",
+       project: "AI Generator (Proj-101)",
+      team: "mahesh, lavan, vinay, vasanth",
       reminder: true,
       reminderDate: "24/01/2025",
       startDate: "23/01/2025",
       endDate: "25/01/2025",
+      description: "This is to schedule a quick sync-up regarding our ongoing tasks and any blockers.",
       completed: false,
       private: false,
       userId: "Harish",
@@ -191,10 +224,13 @@ const CalenderActive = () => {
       type: "Others",
       subtype: "Requirement Discussion",
       subject: "Performance Reviews",
+       project: "AI Generator (Proj-101)",
+      team: "mahesh, lavan, vinay, vasanth",
       reminder: false,
       reminderDate: "25/01/2025",
       startDate: "24/01/2025",
       endDate: "26/01/2025",
+      description: "This is to schedule a quick sync-up regarding our ongoing tasks and any blockers.",
       completed: false,
       private: true,
       userId: "Deepika",
@@ -205,300 +241,33 @@ const CalenderActive = () => {
       type: "Call",
       subtype: "Client Meeting",
       subject: "Planning Session",
+       project: "AI Generator (Proj-101)",
+      team: "mahesh, lavan, vinay, vasanth",
       reminder: false,
       reminderDate: "26/01/2025",
       startDate: "25/01/2025",
       endDate: "27/01/2025",
+      description: "This is to schedule a quick sync-up regarding our ongoing tasks and any blockers.",
       completed: false,
       private: true,
       userId: "Giri",
       minutesOfMeeting: ""
     },
-    {
-      id: 11,
-      type: "Task",
-      subtype: "Feedback Session",
-      subject: "Marketing Planning",
-      reminder: false,
-      reminderDate: "27/01/2025",
-      startDate: "26/01/2025",
-      endDate: "28/01/2025",
-      completed: false,
-      private: false,
-      userId: "Bhavani",
-      minutesOfMeeting: ""
-    },
-    {
-      id: 12,
-      type: "Others",
-      subtype: "Follow-up Call",
-      subject: "Release New Version",
-      reminder: true,
-      reminderDate: "28/01/2025",
-      startDate: "27/01/2025",
-      endDate: "29/01/2025",
-      completed: false,
-      private: false,
-      userId: "Pavan",
-      minutesOfMeeting: ""
-    },
-    {
-      id: 13,
-      type: "Call",
-      subtype: "Introductory Call",
-      subject: "Code Implementation",
-      reminder: false,
-      reminderDate: "29/01/2025",
-      startDate: "28/01/2025",
-      endDate: "30/01/2025",
-      completed: true,
-      private: false,
-      userId: "Bhavani",
-      minutesOfMeeting: "Meeting held on \"Code Implementation\" and action items were noted."
-    },
-    {
-      id: 14,
-      type: "Others",
-      subtype: "Requirement Discussion",
-      subject: "React Training",
-      reminder: true,
-      reminderDate: "30/01/2025",
-      startDate: "29/01/2025",
-      endDate: "31/01/2025",
-      completed: false,
-      private: true,
-      userId: "Karuna",
-      minutesOfMeeting: ""
-    },
-    {
-      id: 15,
-      type: "Task",
-      subtype: "Client Meeting",
-      subject: "Hiring Manager Discussion",
-      reminder: true,
-      reminderDate: "31/01/2025",
-      startDate: "30/01/2025",
-      endDate: "01/02/2025",
-      completed: false,
-      private: true,
-      userId: "Deepika",
-      minutesOfMeeting: ""
-    },
-    {
-      id: 16,
-      type: "Call",
-      subtype: "Feedback Session",
-      subject: "Company-wide Coding Challenge",
-      reminder: false,
-      reminderDate: "01/02/2025",
-      startDate: "31/01/2025",
-      endDate: "02/02/2025",
-      completed: false,
-      private: false,
-      userId: "Bhavani",
-      minutesOfMeeting: ""
-    },
-    {
-      id: 17,
-      type: "Task",
-      subtype: "Follow-up Call",
-      subject: "Weekly Sync",
-      reminder: false,
-      reminderDate: "02/02/2025",
-      startDate: "01/02/2025",
-      endDate: "03/02/2025",
-      completed: false,
-      private: false,
-      userId: "Harish",
-      minutesOfMeeting: ""
-    },
-    {
-      id: 18,
-      type: "Task",
-      subtype: "Requirement Discussion",
-      subject: "Initial Candidate Screening",
-      reminder: true,
-      reminderDate: "03/02/2025",
-      startDate: "02/02/2025",
-      endDate: "04/02/2025",
-      completed: true,
-      private: false,
-      userId: "Pavan",
-      minutesOfMeeting: "Meeting held on \"Initial Candidate Screening\" and action items were noted."
-    },
-    {
-      id: 19,
-      type: "Call",
-      subtype: "Daily Stand-up",
-      subject: "Resolve UI Issues",
-      reminder: false,
-      reminderDate: "04/02/2025",
-      startDate: "03/02/2025",
-      endDate: "05/02/2025",
-      completed: false,
-      private: false,
-      userId: "Giri",
-      minutesOfMeeting: ""
-    },
-    {
-      id: 20,
-      type: "Task",
-      subtype: "Follow-up Call",
-      subject: "Final Round Interviews",
-      reminder: true,
-      reminderDate: "05/02/2025",
-      startDate: "04/02/2025",
-      endDate: "06/02/2025",
-      completed: false,
-      private: false,
-      userId: "Karuna",
-      minutesOfMeeting: ""
-    },
-    {
-      id: 21,
-      type: "Meeting",
-      subtype: "Introductory Call",
-      subject: "Daily Team Meeting",
-      reminder: false,
-      reminderDate: "06/02/2025",
-      startDate: "05/02/2025",
-      endDate: "07/02/2025",
-      completed: false,
-      private: true,
-      userId: "Pavan",
-      minutesOfMeeting: ""
-    },
-    {
-      id: 22,
-      type: "Call",
-      subtype: "Training Session",
-      subject: "Candidate Evaluation",
-      reminder: true,
-      reminderDate: "07/02/2025",
-      startDate: "06/02/2025",
-      endDate: "08/02/2025",
-      completed: false,
-      private: true,
-      userId: "Ushodaya",
-      minutesOfMeeting: ""
-    },
-    {
-      id: 23,
-      type: "Meeting",
-      subtype: "Requirement Discussion",
-      subject: "Complete Report",
-      reminder: false,
-      reminderDate: "08/02/2025",
-      startDate: "07/02/2025",
-      endDate: "09/02/2025",
-      completed: false,
-      private: false,
-      userId: "Karuna",
-      minutesOfMeeting: ""
-    },
-    {
-      id: 24,
-      type: "Call",
-      subtype: "Requirement Discussion",
-      subject: "Startup Mixer",
-      reminder: false,
-      reminderDate: "09/02/2025",
-      startDate: "08/02/2025",
-      endDate: "10/02/2025",
-      completed: true,
-      private: true,
-      userId: "Harish",
-      minutesOfMeeting: "Meeting held on \"Startup Mixer\" and action items were noted."
-    },
-    {
-      id: 25,
-      type: "Call",
-      subtype: "Client Meeting",
-      subject: "Daily Team Meeting",
-      reminder: true,
-      reminderDate: "10/02/2025",
-      startDate: "09/02/2025",
-      endDate: "11/02/2025",
-      completed: true,
-      private: true,
-      userId: "Giri",
-      minutesOfMeeting: "Meeting held on \"Daily Team Meeting\" and action items were noted."
-    },
-    {
-      id: 26,
-      type: "Others",
-      subtype: "Requirement Discussion",
-      subject: "Market Analysis",
-      reminder: true,
-      reminderDate: "11/02/2025",
-      startDate: "10/02/2025",
-      endDate: "12/02/2025",
-      completed: false,
-      private: true,
-      userId: "Deepika",
-      minutesOfMeeting: ""
-    },
-    {
-      id: 27,
-      type: "Call",
-      subtype: "Follow-up Call",
-      subject: "Planning Session",
-      reminder: true,
-      reminderDate: "12/02/2025",
-      startDate: "11/02/2025",
-      endDate: "13/02/2025",
-      completed: false,
-      private: false,
-      userId: "Karuna",
-      minutesOfMeeting: ""
-    },
-    {
-      id: 28,
-      type: "Others",
-      subtype: "Introductory Call",
-      subject: "Hiring Manager Discussion",
-      reminder: false,
-      reminderDate: "13/02/2025",
-      startDate: "12/02/2025",
-      endDate: "14/02/2025",
-      completed: true,
-      private: false,
-      userId: "Pavan",
-      minutesOfMeeting: "Meeting held on \"Hiring Manager Discussion\" and action items were noted."
-    },
-    {
-      id: 29,
-      type: "Task",
-      subtype: "Training Session",
-      subject: "Quarterly Review",
-      reminder: true,
-      reminderDate: "14/02/2025",
-      startDate: "13/02/2025",
-      endDate: "15/02/2025",
-      completed: false,
-      private: false,
-      userId: "Bhavani",
-      minutesOfMeeting: ""
-    },
-    {
-      id: 30,
-      type: "Call",
-      subtype: "Client Meeting",
-      subject: "React Training",
-      reminder: true,
-      reminderDate: "15/02/2025",
-      startDate: "14/02/2025",
-      endDate: "16/02/2025",
-      completed: false,
-      private: false,
-      userId: "Harish",
-      minutesOfMeeting: ""
-    }
   ]);
 
   const [selectedTableData, setSelectedTableData] = useState([])
   const [loading, setLoading] = useState(false)
   const [pageState, setPageState] = useState({ rows: 10, first: 0 })
+
+  // Private functionality states
+  const [privateDrop, setPrivateDrop] = useState(true)
+  const [PrivetDropdown, setPrivetDropdown] = useState([])
+  const PrivetDropdownValues = [
+    { name: 'Mahesh' },
+    { name: 'Lavan' },
+    { name: 'Vinay' },
+    { name: 'Vasantha' }
+  ]
 
   const onPage = event => {
     setPageState({ rows: event.rows, first: event.first })
@@ -598,21 +367,73 @@ const CalenderActive = () => {
   // interview start
 
   const [interviewpop, SetInterviewpop] = useState(false)
-  const [interview, setInterview] = useState("Interview")
-  const [subtype, setSubtype] = useState(null)
-  const [startdate, setStartdate] = useState(null)
-  const [starttime, setStarttime] = useState(null)
-  const [popTextares, setPopTextares] = useState("")
-  const [priority, setPriority] = useState(null)
+  const [interview, setInterview] = useState("Call")
+  const [subtype, setSubtype] = useState({
+    name: 'Introductory Call',
+    color: '#000000',
+    id: 'custom-task',
+    statuses: ['Pending', 'Processing', 'Completed']
+  })
+  const [project, setProject] = useState("AI Generator")
+  const [subject, setSubject] = useState("Project Discussion Meeting")
+  const [startdate, setStartdate] = useState(new Date())
+  const [starttime, setStarttime] = useState(new Date())
+  const [popTextares, setPopTextares] = useState("This is a scheduled meeting to discuss project requirements and updates.")
+  const [priority, setPriority] = useState("medium")
 
   const typeInterview = [
-    { name: "Screening Interviews", value: "SI" },
-    { name: "One-on-One Interviews", value: "OOI" },
-    { name: "Technical Interviews", value: "TI" },
-    { name: "Final Round Interviews ", value: "FRI" },
-    { name: "Video/Virtual Interviews", value: "VVI" },
+    {
+      name: 'Introductory Call',
+      color: '#000000',
+      id: 'custom-task',
+      statuses: ['Pending', 'Processing', 'Completed']
+    },
+    {
+      name: 'Requirement Discussion',
+      color: '#000000',
+      id: 'in-active',
+      statuses: ['Pending', 'Processing', 'Completed']
+    },
+    {
+      name: 'Daily Stand-up',
+      color: '#000000',
+      id: 'dnd',
+      statuses: ['Pending', 'Processing', 'Completed']
+    },
+    {
+      name: 'Client Meeting',
+      color: '#000000',
+      id: 'custom-task',
+      statuses: ['Pending', 'Processing', 'Completed']
+    },
+    {
+      name: 'Feedback Session',
+      color: '#000000',
+      id: 'in-active',
+      statuses: ['Pending', 'Processing', 'Completed']
+    },
+    {
+      name: 'Follow-up Call',
+      color: '#000000',
+      id: 'dnd',
+      statuses: ['Pending', 'Processing', 'Completed']
+    },
+    {
+      name: 'Training Session',
+      color: '#000000',
+      id: 'dnd',
+      statuses: ['Pending', 'Processing', 'Completed']
+    }
   ]
-  const [reminder, setReminder] = useState(null)
+
+  const typeOptions = [
+    { name: "Call", value: "Call" },
+    { name: "Meeting", value: "Meeting" },
+    { name: "Event", value: "Event" },
+    { name: "Others", value: "Others" }
+  ]
+
+  const [reminder, setReminder] = useState("15")
   const reminderOptions = [
     { name: "0 mins", value: "0" },
     { name: "5 mins", value: "5" },
@@ -620,7 +441,7 @@ const CalenderActive = () => {
     { name: "15 mins", value: "15" },
     { name: "30 mins", value: "30" },
   ]
-  const [repeat, setRepeat] = useState(null)
+  const [repeat, setRepeat] = useState("none")
   const repeatOptions = [
     { name: "Do not repeat", value: "none" },
     { name: "Daily", value: "daily" },
@@ -628,7 +449,7 @@ const CalenderActive = () => {
     { name: "Mon-Fri", value: "mon-fri" },
   ]
 
-  const [followup, setFollowup] = useState(null)
+  const [followup, setFollowup] = useState("1day")
 
   const followupOptions = [
     { name: "None", value: "none" },
@@ -638,7 +459,21 @@ const CalenderActive = () => {
     { name: "1 Week", value: "1week" },
   ]
 
-  const [popchecked, setPopchecked] = useState(false)
+  const priorityOptions = [
+    { name: "Low", value: "low" },
+    { name: "Medium", value: "medium" },
+    { name: "High", value: "high" },
+  ]
+
+  const projectOptions = [
+    { name: "AI Generator (proj-101)", value: "AI Generator" },
+    { name: "Resume Parser (proj-102)", value: "Resume Parser" },
+    { name: "Chatbot Assistant (proj-103)", value: "Chatbot Assistant" },
+    { name: "Image Enhancer AI (proj-104)", value: "Image Enhancer AI" },
+    { name: "Voice to Text Converter (proj-105)", value: "Voice to Text Converter" },
+  ]
+
+  const [popchecked, setPopchecked] = useState(true)
   const [popchecked2, setPopchecked2] = useState(false)
 
   const handlePopupCheckbox = e => {
@@ -730,8 +565,9 @@ const CalenderActive = () => {
   const [defaultDate] = useState(new Date())
 
   const [interviewpop1, SetInterviewpop1] = useState(false)
-  const [interview1, setInterview1] = useState("Interview")
-  const [subtype1, setSubtype1] = useState("Complete Report")
+  const [interview1, setInterview1] = useState("Call")
+  const [subtype1, setSubtype1] = useState("Call Request to Discuss Project Updates")
+  const [callsubject, setCallsubject] = useState("Call Request to Discuss Project Updates")
   const [startdate1, setStartdate1] = useState(defaultDate)
   const [starttime1, setStarttime1] = useState(null)
   const [popTextares1, setPopTextares1] = useState("")
@@ -870,6 +706,59 @@ const CalenderActive = () => {
                         filter
                         style={{ minWidth: "10rem" }}
                       />
+                       <Column
+                        field="project"
+                        header="Project"
+                        sortable
+                        filter
+                        style={{ minWidth: "12rem" }}
+                      />
+
+                       <Column
+                        field="description"
+                        header="Description"
+                        sortable
+                        filter
+                        style={{ minWidth: "12rem" , maxWidth: "20rem" }}
+                        body={(rowData) => (
+                          <span
+                            id="tooltip-description"
+                            data-pr-tooltip={rowData.description}
+                            style={{
+                              display: 'block',
+                              overflow: 'hidden',
+                              textOverflow: 'ellipsis',
+                              whiteSpace: 'nowrap',
+                            }}
+                          >
+                            {rowData.description}
+                          </span>
+                        )}
+                      />
+
+
+                       <Column
+                        field="team"
+                        header="Team"
+                        sortable
+                        filter
+                        style={{ minWidth: "12rem", maxWidth: "13rem" }}
+                         body={(rowData) => (
+                          <span
+                            id="tooltip-description"
+                            data-pr-tooltip={rowData.team}
+                            style={{
+                              display: 'block',
+                              overflow: 'hidden',
+                              textOverflow: 'ellipsis',
+                              whiteSpace: 'nowrap',
+                            }}
+                          >
+                            {rowData.team}
+                          </span>
+                        )}
+                      />
+
                       <Column
                         field="subject"
                         header="Subject"
@@ -877,7 +766,7 @@ const CalenderActive = () => {
                         filter
                         style={{ minWidth: "12rem" }}
                       />
-                      <Column
+                      {/* <Column
                         field="reminder"
                         header="Reminder"
                         body={reminderCheckboxTemplate}
@@ -889,7 +778,7 @@ const CalenderActive = () => {
                         sortable
                         filter
                         style={{ minWidth: "12rem" }}
-                      />
+                      /> */}
                       <Column
                         field="startDate"
                         header="Start Date"
@@ -947,6 +836,10 @@ const CalenderActive = () => {
 
                     </DataTable>
 
+                    {/* Tooltip components for columns */}
+                    <Tooltip target="#tooltip-description" />
+                    <Tooltip target="#tooltip-minutes" />
+
                     {/* Confirmation Dialog */}
                     <Dialog
                       visible={showConfirmDialog}
@@ -986,7 +879,7 @@ const CalenderActive = () => {
                       {/* <Button label="Show" onClick={SetInterviewpop(true)} /> */}
 
                       <Dialog
-                        header="Appointment - Lavankumar Kalvala"
+                        header={`Schedule ${interview || 'Call'}`}
                         visible={interviewpop}
                         className="interview-popup"
                         style={{ width: "50vw" }}
@@ -1001,12 +894,13 @@ const CalenderActive = () => {
                               <Col xl={6}>
                                 <div className="p-field flex flex-column">
                                   <label htmlFor="interview">Type</label>
-                                  <InputText
-                                    id="interview"
-                                    aria-describedby="username-help"
+                                  <Dropdown
                                     value={interview}
-                                    placeholder="Interview"
-                                    readOnly
+                                    onChange={(e) => setInterview(e.value)}
+                                    options={typeOptions}
+                                    optionLabel="name"
+                                    placeholder="Select Type"
+                                    className="w-full search-option"
                                   />
                                 </div>
                               </Col>
@@ -1114,20 +1008,22 @@ const CalenderActive = () => {
 
                           <div className="mb-2">
                             <Row className="mb-2">
-                              {/* <Col xl={6}>
+                              <Col xl={6}>
                                 <div className="flex flex-column">
-                                  <label For="Priority">Job</label>
+                                  <label For="Priority">Project</label>
                                   <Dropdown
-                                    value={subtype}
-                                    onChange={e => setSubtype(e.value)}
-                                    options={typeInterview}
-                                    optionLabel="job"
-                                    placeholder="Select a Status"
+                                    value={project}
+                                    onChange={e => setProject(e.value)}
+                                    options={projectOptions}
+                                    optionLabel="name"
+                                    placeholder="Select Project"
                                     className="w-full search-option"
                                   />
                                 </div>
-                              </Col> */}
-                              <LinkContactsPopup />
+                              </Col>
+                              {/* <LinkContactsPopup /> */}
+
+                              <LinkJobsPopup />
 
                               <Col xl={6}>
                                 {/* <div className="p-field flex flex-column">
@@ -1144,33 +1040,20 @@ const CalenderActive = () => {
                                     className="w-full search-option"
                                   />
                                 </div> */}
-                                <LinkContact2Popup />
                               </Col>
                             </Row>
 
                             <Row className="mb-2">
-                              <Col xl={6}>
-                                <div className="p-field flex flex-column">
-                                  <label For="Candidate">Candidate</label>
-                                  <Dropdown
-                                    value={subtype}
-                                    onChange={e => setSubtype(e.value)}
-                                    options={typeInterview}
-                                    optionLabel="Candidate"
-                                    placeholder="LavanKumar Kalvala"
-                                    className="w-full search-option"
-                                  />
-                                </div>
-                              </Col>
-                              <Col xl={6}>
+                             
+                              <Col xl={12}>
                                 <div className="p-field flex flex-column">
                                   <label htmlFor="username">Subject</label>
                                   <InputText
                                     id="interview"
                                     aria-describedby="username-help"
-                                    value={typeInterview}
-                                    placeholder="Select a Status"
-                                    onChange={e => setSubtype(e.value)}
+                                    value={subject}
+                                    placeholder="Enter Subject"
+                                    onChange={e => setSubject(e.target.value)}
                                   />
                                   {/* <Dropdown
                                     value={subtype}
@@ -1187,13 +1070,14 @@ const CalenderActive = () => {
                             <Row className="mb-2 mt-3">
                               <Col xl={12}>
                                 <div className="">
+                                  <label htmlFor="popTextares">Description</label>
                                   <InputTextarea
                                     className="w-full"
                                     value={popTextares}
                                     onChange={e =>
                                       setPopTextares(e.target.value)
                                     }
-                                    placeholder="Interview Test"
+                                    placeholder="Enter description"
                                     rows={3}
                                     cols={20}
                                   />
@@ -1203,55 +1087,7 @@ const CalenderActive = () => {
                           </div>
 
                           <div>
-                            <Row className="mb-2">
-                              <Col xl={6}>
-                                <div className="p-field">
-                                  <label htmlFor="username">
-                                    Auto Followup
-                                  </label>
-                                  <Dropdown
-                                    value={followup}
-                                    onChange={e => setFollowup(e.value)}
-                                    options={followupOptions}
-                                    optionLabel="name"
-                                    placeholder="Select a Followup Interval"
-                                    className="w-full search-option"
-                                  />
-                                </div>
-                              </Col>
-
-                              <Col xl={6}>
-                                <Row>
-                                  <Col xl={6}>
-                                    <div className="p-field flex flex-column">
-                                      <label htmlFor="username">Repeat</label>
-                                      <Dropdown
-                                        value={repeat}
-                                        onChange={e => setRepeat(e.value)}
-                                        options={repeatOptions}
-                                        optionLabel="name"
-                                        placeholder="Select a Repeat Option"
-                                        className="w-full search-option"
-                                      />
-                                    </div>
-                                  </Col>
-
-                                  <Col xl={6}>
-                                    <div className="p-field flex flex-column">
-                                      <label htmlFor="username">Reminder</label>
-                                      <Dropdown
-                                        value={reminder}
-                                        onChange={e => setReminder(e.value)}
-                                        options={reminderOptions}
-                                        optionLabel="name"
-                                        placeholder="Select a Reminder"
-                                        className="w-full search-option"
-                                      />
-                                    </div>
-                                  </Col>
-                                </Row>
-                              </Col>
-                            </Row>
+                           
                             <Row className="mb-2">
                               <Col lg={6}>
                                 <Row>
@@ -1263,7 +1099,7 @@ const CalenderActive = () => {
                                       <Dropdown
                                         value={priority}
                                         onChange={e => setPriority(e.value)}
-                                        options={typeInterview}
+                                        options={priorityOptions}
                                         optionLabel="name"
                                         placeholder="Priority"
                                         className="w-full search-option"
@@ -1292,8 +1128,8 @@ const CalenderActive = () => {
                                         <div className="d-flex align-items-center mt-4">
                                           <Checkbox
                                             inputId="checkbox"
-                                            checked={popchecked2}
-                                            onChange={handlePopupCheckbox2}
+                                            checked={privateDrop}
+                                            onChange={(e) => setPrivateDrop(e.checked)}
                                           />
                                           <label
                                             htmlFor="username"
@@ -1308,16 +1144,39 @@ const CalenderActive = () => {
                                 </Row>
                               </Col>
                               <Col xl={6}>
-                                <label htmlFor="username">User Id's</label>
-                                <Chips
-                                  value={userid}
-                                  onChange={e => setUserid(e.value)}
-                                  itemTemplate={customChip}
-                                  className="w-full"
-                                />
+                                {privateDrop && (
+                                  <div>
+                                    <label htmlFor="username">User Id's</label>
+                                    <MultiSelect
+                                      value={PrivetDropdown}
+                                      onChange={(e) => setPrivetDropdown(e.value)}
+                                      options={PrivetDropdownValues}
+                                      optionLabel="name"
+                                      placeholder="Select User Ids"
+                                      maxSelectedLabels={10}
+                                      className="w-full md:w-20remm mt-2"
+                                      display="comma"
+                                    />
+                                  </div>
+                                ) }
                               </Col>
                             </Row>
                           </div>
+
+                           {popchecked && (
+                                          <Row>
+                                            <Col xl={12} className="mt-2 mb-2">
+                                              <label className="mb-1">Minutes of Meeting</label>
+                                              <div className="schedule-editor">
+                                                <Editor
+                                                  value={scheduleText}
+                                                  onTextChange={e => setScheduleText(e.htmlValue)}
+                                                  style={{ height: "auto" }}
+                                                />
+                                              </div>
+                                            </Col>
+                                          </Row>
+                                        )}
 
                           <Row className="">
                             <Col xl={12}>
@@ -1347,7 +1206,7 @@ const CalenderActive = () => {
                       {/* Interview Dialog read only start */}
 
                       <Dialog
-                        header="Appointment - Lavankumar Kalvala"
+                        header="Schedule Call"
                         visible={interviewpop1}
                         className="interview-popup"
                         style={{ width: "50vw" }}
@@ -1366,7 +1225,7 @@ const CalenderActive = () => {
                                     id="interview"
                                     aria-describedby="username-help"
                                     value={interview1}
-                                    placeholder="Interview"
+                                    placeholder="Call"
                                     disabled
                                   />
                                 </div>
@@ -1382,7 +1241,7 @@ const CalenderActive = () => {
                                     onChange={e => setSubtype1(e.value)}
                                     options={typeCall}
                                     optionLabel="name"
-                                    placeholder="Screening Interviews"
+                                    placeholder="Introductory Call"
                                     className="w-full search-option"
                                     disabled
                                   />
@@ -1485,13 +1344,13 @@ const CalenderActive = () => {
                             <Row className="mb-2">
                               <Col xl={6}>
                                 <div className="flex flex-column">
-                                  <label For="Priority">Job</label>
+                                  <label For="Priority">Project</label>
                                   <Dropdown
                                     value={subtype1}
                                     // onChange={e => setSubtype1(e.value)}
                                     // options={typeInterview1}
                                     optionLabel="job"
-                                    placeholder="Web Developer"
+                                    placeholder="AI Generator (proj-101)"
                                     className="w-full search-option"
                                     disabled
                                   />
@@ -1501,7 +1360,7 @@ const CalenderActive = () => {
                               <Col xl={6}>
                                 <div className="p-field flex flex-column">
                                   <label For="Priority" className=" block">
-                                    Contact
+                                    Link Employees
                                   </label>
 
                                   <Dropdown
@@ -1509,7 +1368,7 @@ const CalenderActive = () => {
                                     // onChange={e => setPriority1(e.value)}
                                     // options={typeInterview1}
                                     optionLabel="name"
-                                    placeholder="Mahesh Kumar Bhoga"
+                                    placeholder="mahesh, lavan, vinay, vasanth"
                                     className="w-full search-option"
                                     disabled
                                   />
@@ -1518,30 +1377,17 @@ const CalenderActive = () => {
                             </Row>
 
                             <Row className="mb-2">
-                              <Col xl={6}>
-                                <div className="p-field flex flex-column">
-                                  <label For="Candidate">Candidate</label>
-                                  <Dropdown
-                                    value={subtype1}
-                                    // onChange={e => setSubtype1(e.value)}
-                                    // options={typeInterview1}
-                                    optionLabel="Candidate"
-                                    placeholder="Lavankumar Kalvala"
-                                    className="w-full search-option"
-                                    disabled
-                                  />
-                                </div>
-                              </Col>
-                              <Col xl={6}>
+                             
+                              <Col xl={12}>
                                 <div className="p-field flex flex-column">
                                   <label htmlFor="username">Subject</label>
 
                                   <InputText
                                     id="interview"
                                     aria-describedby="username-help"
-                                    value={subtype1}
-                                    placeholder="Select a Status"
-                                    onChange={e => setSubtype1(e.value)}
+                                    value={callsubject}
+                                    placeholder="Call Request to Discuss Project Updates"
+                                    onChange={e => setCallsubject(e.value)}
                                     disabled
                                   />
 
@@ -1561,13 +1407,14 @@ const CalenderActive = () => {
                             <Row className="mb-2 mt-3">
                               <Col xl={12}>
                                 <div className="">
+                                  <label htmlFor="username">Description</label>
                                   <InputTextarea
                                     className="w-full"
                                     value={popTextares1}
                                     onChange={e =>
                                       setPopTextares1(e.target.value)
                                     }
-                                    placeholder="Interview will be on today"
+                                    placeholder="This is to schedule a quick sync-up regarding our ongoing tasks and any blockers. We’ll keep it short and focused on progress tracking and planning ahead."
                                     rows={3}
                                     cols={20}
                                     disabled
@@ -1579,58 +1426,6 @@ const CalenderActive = () => {
 
                           <div>
                             <Row className="mb-2">
-                              <Col xl={6}>
-                                <div className="p-field">
-                                  <label htmlFor="username">
-                                    Auto Followup
-                                  </label>
-                                  <Dropdown
-                                    value={followup1}
-                                    onChange={e => setFollowup1(e.value)}
-                                    options={followupOptions1}
-                                    optionLabel="name"
-                                    placeholder="1 day"
-                                    className="w-full search-option"
-                                    disabled
-                                  />
-                                </div>
-                              </Col>
-
-                              <Col xl={6}>
-                                <Row>
-                                  <Col xl={6}>
-                                    <div className="p-field flex flex-column">
-                                      <label htmlFor="username">Repeat</label>
-                                      <Dropdown
-                                        value={repeat1}
-                                        onChange={e => setRepeat1(e.value)}
-                                        options={repeatOptions1}
-                                        optionLabel="name"
-                                        placeholder="One day"
-                                        className="w-full search-option"
-                                        disabled
-                                      />
-                                    </div>
-                                  </Col>
-
-                                  <Col xl={6}>
-                                    <div className="p-field flex flex-column">
-                                      <label htmlFor="username">Reminder</label>
-                                      <Dropdown
-                                        value={reminder1}
-                                        onChange={e => setReminder1(e.value)}
-                                        options={reminderOptions1}
-                                        optionLabel="name"
-                                        placeholder="5 minutes"
-                                        className="w-full search-option"
-                                        disabled
-                                      />
-                                    </div>
-                                  </Col>
-                                </Row>
-                              </Col>
-                            </Row>
-                            <Row className="mb-2">
                               <Col lg={6}>
                                 <Row>
                                   <Col xl={6}>
@@ -1641,7 +1436,7 @@ const CalenderActive = () => {
                                       <Dropdown
                                         value={priority1}
                                         onChange={e => setPriority1(e.value)}
-                                        options={typeInterview1}
+                                        options={priorityOptions}
                                         optionLabel="name"
                                         placeholder="Low"
                                         className="w-full search-option"
@@ -1672,8 +1467,8 @@ const CalenderActive = () => {
                                         <div className="d-flex align-items-center mt-4">
                                           <Checkbox
                                             inputId="checkbox"
-                                            checked={false}
-                                            onChange={handlePopupCheckbox2}
+                                            checked={privateDrop}
+                                            onChange={(e) => setPrivateDrop(e.checked)}
                                             disabled
                                           />
                                           <label
@@ -1689,14 +1484,22 @@ const CalenderActive = () => {
                                 </Row>
                               </Col>
                               <Col xl={6}>
-                                <label htmlFor="username">User Id's</label>
-                                <Chips
-                                  value={userid1}
-                                  onChange={e => setUserid1(e.value)}
-                                  itemTemplate={customChip1}
-                                  className="w-full"
-                                  disabled // Disable the Chips component to prevent user modification
-                                />
+                                {privateDrop && (
+                                  <div>
+                                    <label htmlFor="username">User Id's</label>
+                                    <MultiSelect
+                                      value={PrivetDropdown}
+                                      onChange={(e) => setPrivetDropdown(e.value)}
+                                      options={PrivetDropdownValues}
+                                      optionLabel="name"
+                                      placeholder="Select User Ids"
+                                      maxSelectedLabels={3}
+                                      className="w-full md:w-20rem"
+                                      display="comma"
+                                      disabled
+                                    />
+                                  </div>
+                                ) }
                               </Col>
                             </Row>
                           </div>

@@ -2758,6 +2758,17 @@ const ContactsAllActive = () => {
   const [categories1, setCategories1] = useState("Large Enterprise");
   const [group1, setGroup1] = useState("Above 250 crore");
   const [userid1, setUserid1] = useState("Harish");
+
+  // Private state variables
+  const [privateDrop, setPrivateDrop] = useState(false)
+  const [PrivetDropdown, setPrivetDropdown] = useState([])
+  const PrivetDropdownValues = [
+    { name: "Mahesh", code: "M1" },
+    { name: "Lavan", code: "L1" },
+    { name: "Vinay", code: "V1" },
+    { name: "Vasantha", code: "V2" },
+  ]
+
   const [address1, setAddress1] = useState("White house, Block-III, Begumpet, Hyderabad, Telangana, 500016, India");
   const [notes1, setNotes1] = useState("Varun Digital Media is a digital marketing agency specializing in SEO, social media marketing, and website development. They help businesses enhance their online presence and drive growth across various industries.");
 
@@ -3325,43 +3336,48 @@ const ContactsAllActive = () => {
                       </Col>
                     </Row >
 
-                    <Row className="d-flex align-items-end mb-2">
-                      <Col lg={6}>
-                        <div className="p-field">
-                          <label htmlFor="jobType">UserIDs</label>
-                          <InputText
-                            placeholder="Enter User ID" value={userid1} />
+                    <Row className="d-flex align-items-end mb-2 mt-4">
+                      <Col lg={2}>
+                        <div className="p-field d-flex align-items-center">
+                          <Checkbox
+                            inputId="privateCheckbox"
+                            checked={privateDrop}
+                            onChange={(e) => setPrivateDrop(e.checked)}
+                          />
+                          <label htmlFor="privateCheckbox" className="ms-2">Private</label>
                         </div>
                       </Col>
-                      <Col lg={6}>
-                        {/* <div className="p-field">
-                            <input
-                              type='checkbox'
-                              className="me-2"
-                              checked
+                      <Col lg={4}>
+                        {privateDrop && (
+                          <div className="p-field">
+                            <label htmlFor="userIds">User Id's</label>
+                            <MultiSelect
+                              value={PrivetDropdown}
+                              onChange={(e) => setPrivetDropdown(e.value)}
+                              options={PrivetDropdownValues}
+                              optionLabel="name"
+                              display="comma"
+                              placeholder="Select User Id's"
+                              maxSelectedLabels={10}
+                              className="w-full"
                             />
-                            <label htmlFor="jobType">Private</label>
-                          </div> */}
-
-                        <Row>
-                          <Col lg={6}><div className="p-field">
-                            <input
-                              type='checkbox'
-                              className="me-2"
-                              checked
-                            />
-                            <label htmlFor="jobType">Private</label>
-                          </div></Col>
-                          <Col lg={6}><div className="p-field">
-                            <input
-                              type='checkbox'
-                              className="me-2"
-                              checked
-                            />
-                            <label htmlFor="jobType">Is Employee</label>
-                          </div></Col>
-                        </Row>
+                          </div>
+                        )}
                       </Col>
+                      <Col lg={4}>
+                        <div className="p-field d-flex align-items-center">
+                          <Checkbox
+                            inputId="isEmployeeCheckbox"
+                            checked={false}
+                            onChange={() => {}}
+                          />
+                          <label htmlFor="isEmployeeCheckbox" className="ms-2">Is Employee</label>
+                        </div>
+                      </Col>
+                    </Row>
+
+                    <Row className="d-flex align-items-end mb-2">
+                      
                     </Row>
 
                     <Row>

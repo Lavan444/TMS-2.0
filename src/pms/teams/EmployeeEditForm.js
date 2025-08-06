@@ -27,6 +27,7 @@ import { Column } from "primereact/column";
 import { confirmDialog } from "primereact/confirmdialog";
 import { ConfirmDialog } from "primereact/confirmdialog";
 import { TriStateCheckbox } from "primereact/tristatecheckbox"
+import { Checkbox } from "primereact/checkbox";
 import { FileUpload } from 'primereact/fileupload';
 import { InputNumber } from "primereact/inputnumber";
 import { InputTextarea } from 'primereact/inputtextarea';
@@ -60,6 +61,16 @@ const EmployeeEditForm = props => {
 
   const [fullname, setFullname] = useState("Lavankumar Kalvala");
   const [fullNameDialogVisible, setFullNameDialogVisible] = useState(false);
+
+  // Private functionality state
+  const [privateDrop, setPrivateDrop] = useState(false);
+  const [PrivetDropdown, setPrivetDropdown] = useState([]);
+  const PrivetDropdownValues = [
+    { name: 'Mahesh', value: 'mahesh' },
+    { name: 'Lavan', value: 'lavan' },
+    { name: 'Vinay', value: 'vinay' },
+    { name: 'Vasantha', value: 'vasantha' }
+  ];
 
   const [company, setCompany] = useState("Varun Digital Media");
 
@@ -2042,20 +2053,33 @@ const EmployeeEditForm = props => {
                                 <Col lg={12}>
                                   <Row>
                                     <Col xl={3}>
-                                      <label
-
-                                        className=" block mb-2"
-                                      >
+                                      <label className="block mb-2">
                                         Private
                                       </label>
                                     </Col>
                                     <Col xl={9}>
-                                      <div className="relocation">
-                                        <input
-                                          type='checkbox'
-                                          className="me-2"
+                                      <div className="d-flex align-items-center">
+                                        <Checkbox
+                                          inputId="privateCheckbox"
+                                          checked={privateDrop}
+                                          onChange={(e) => setPrivateDrop(e.checked)}
                                         />
                                       </div>
+                                      {privateDrop && (
+                                        <div className="p-field mt-2">
+                                          {/* <label htmlFor="userIds">User Id's</label> */}
+                                          <MultiSelect
+                                            value={PrivetDropdown}
+                                            onChange={(e) => setPrivetDropdown(e.value)}
+                                            options={PrivetDropdownValues}
+                                            optionLabel="name"
+                                            display="comma"
+                                            placeholder="Select User Id's"
+                                            maxSelectedLabels={10}
+                                            className="w-full"
+                                          />
+                                        </div>
+                                      )}
                                     </Col>
                                   </Row>
                                 </Col>

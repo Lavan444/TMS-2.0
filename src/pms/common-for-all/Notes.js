@@ -25,25 +25,17 @@ const Notes = () => {
     const [dropdownVisible, setDropdownVisible] = useState(false);
 
     const [valueNotes, setValueNotes] = useState(['Harish']);
-    const [popchecked, setPopchecked] = useState(false)
+    const [popchecked, setPopchecked] = useState(false);
 
-    // Private functionality
-    const [privateDrop, setPrivateDrop] = useState([])
-    
+    // Private functionality state
+    const [privateDrop, setPrivateDrop] = useState(false);
+    const [PrivetDropdown, setPrivetDropdown] = useState([]);
     const PrivetDropdownValues = [
-        { name: "Harish", value: "Harish" },
-        { name: "Mahesh", value: "Mahesh" },
-        { name: "Lavan", value: "Lavan" },
-        { name: "Vinay", value: "Vinay" },
-        { name: "Vasanth", value: "Vasanth" }
-    ]
-
-    const handlePopupCheckbox = e => {
-        setPopchecked(e.checked)
-        if (!e.checked) {
-            setPrivateDrop([])
-        }
-    }
+        { name: 'Mahesh', value: 'mahesh' },
+        { name: 'Lavan', value: 'lavan' },
+        { name: 'Vinay', value: 'vinay' },
+        { name: 'Vasantha', value: 'vasantha' }
+    ];
 
     const [candidateName, setCandidateName] = useState("Anupam Diridhar, John Doe, Amith, Sagar");
     const [currentDateTime, setCurrentDateTime] = useState(new Date());
@@ -282,43 +274,34 @@ const Notes = () => {
                     <Col lg={2}>
                         <div className="d-flex align-items-center">
                             <Checkbox
-                                inputId="checkbox"
-                                checked={popchecked}
-                                onChange={handlePopupCheckbox}
+                                inputId="privateCheckbox"
+                                checked={privateDrop}
+                                onChange={(e) => setPrivateDrop(e.checked)}
                             />
-                            <label htmlFor="username" className="ms-2 mt-2">
+                            <label htmlFor="privateCheckbox" className="ms-2 mt-2">
                                 Private
                             </label>
                         </div>
                     </Col>
-                    {popchecked && (
-                        <Col lg={6}>
+                    <Col lg={6}>
+                        {privateDrop && (
                             <div className="field notes-chip">
                                 <label htmlFor="userId" className="block mb-0">
                                     User IDs
                                 </label>
                                 <MultiSelect
-                                    value={privateDrop}
-                                    onChange={e => setPrivateDrop(e.value)}
+                                    value={PrivetDropdown}
+                                    onChange={(e) => setPrivetDropdown(e.value)}
                                     options={PrivetDropdownValues}
                                     optionLabel="name"
-                                    optionValue="value"
-                                    placeholder="Select Users"
-                                    className="w-full"
-                                    style={{border: '1px solid #ced4da'}}
                                     display="comma"
+                                    placeholder="Select User Id's"
+                                    maxSelectedLabels={10}
+                                    className="w-full"
                                 />
                             </div>
-                        </Col>
-                    )}
-                    {/* <Col lg={6}>
-                        <div className="field notes-chip">
-                            <label htmlFor="userId" className="block mb-0">
-                                User IDs
-                            </label>
-                            <Chips value={valueNotes} onChange={(e) => setValueNotes(e.value)} className="w-full" />
-                        </div>
-                    </Col> */}
+                        )}
+                    </Col>
 
 
 

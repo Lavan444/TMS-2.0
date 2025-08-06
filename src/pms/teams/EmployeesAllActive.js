@@ -146,6 +146,16 @@ const EmployeeAllActive = () => {
   const [visibleRight, setVisibleRight] = useState(false)
   const [visibleViewRight, setVisibleViewRight] = useState(false)
 
+  // Private functionality state
+  const [privateDrop, setPrivateDrop] = useState(false);
+  const [PrivetDropdown, setPrivetDropdown] = useState([]);
+  const PrivetDropdownValues = [
+    { name: 'Mahesh', value: 'mahesh' },
+    { name: 'Lavan', value: 'lavan' },
+    { name: 'Vinay', value: 'vinay' },
+    { name: 'Vasantha', value: 'vasantha' }
+  ];
+
   {
     /* Side bar end */
   }
@@ -4204,16 +4214,32 @@ const EmployeeAllActive = () => {
 
                     <Row className="mb-2 align-items-end">
                      
-                      <Col lg={6}>
-                        <Row>
-                         
-                          <Col lg={6}>
-                            <div className="p-field">
-                              <input type="checkbox" className="me-2" />
-                              <label htmlFor="jobType">Private</label>
-                            </div>
-                          </Col>
-                        </Row>
+                      <Col lg={2}>
+                        <div className="p-field d-flex align-items-center">
+                          <Checkbox
+                            inputId="privateCheckbox"
+                            checked={privateDrop}
+                            onChange={(e) => setPrivateDrop(e.checked)}
+                          />
+                          <label htmlFor="privateCheckbox" className="ms-2">Private</label>
+                        </div>
+                      </Col>
+                      <Col lg={4}>
+                        {privateDrop && (
+                          <div className="p-field">
+                            <label htmlFor="userIds">User Id's</label>
+                            <MultiSelect
+                              value={PrivetDropdown}
+                              onChange={(e) => setPrivetDropdown(e.value)}
+                              options={PrivetDropdownValues}
+                              optionLabel="name"
+                              display="comma"
+                              placeholder="Select User Id's"
+                              maxSelectedLabels={10}
+                              className="w-full"
+                            />
+                          </div>
+                        )}
                       </Col>
                     </Row>
 
