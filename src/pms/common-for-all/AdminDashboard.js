@@ -2098,6 +2098,560 @@ const roleActionMenu = useRef(null);
 
   // Employee type end
 
+  // Employee type accordion section start
+  const [employeeTypeData, setEmployeeTypeData] = useState([
+    {
+      id: "1",
+      value: "Full Time",
+      description: "Full-time permanent employee",
+      type: "user",
+    },
+    {
+      id: "2", 
+      value: "Part Time",
+      description: "Part-time employee with flexible hours",
+      type: "user",
+    },
+    {
+      id: "3",
+      value: "Contract", 
+      description: "Contract-based employee for specific projects",
+      type: "user",
+    },
+    {
+      id: "4",
+      value: "Intern",
+      description: "Internship position for learning and development",
+      type: "user",
+    },
+  ])
+  const [isEmployeeTypeEditDialogVisible, setEmployeeTypeEditDialogVisible] = useState(false)
+  const [currentEmployeeType, setCurrentEmployeeType] = useState({
+    id: "",
+    value: "",
+    description: "",
+    type: "",
+  })
+  const [isEditingEmployeeType, setIsEditingEmployeeType] = useState(false)
+
+  // Define employee type options for accordion
+  const employeeTypeAccordionOptions = [
+    { label: "User", value: "user" },
+    { label: "System", value: "system" },
+  ]
+
+  // Handle saving an employee type (either add or edit)
+  const handleSaveEmployeeType = () => {
+    if (
+      currentEmployeeType.value &&
+      currentEmployeeType.description &&
+      currentEmployeeType.type
+    ) {
+      if (isEditingEmployeeType) {
+        // Update existing employee type
+        setEmployeeTypeData(prevData =>
+          prevData.map(item =>
+            item.id === currentEmployeeType.id ? { ...currentEmployeeType } : item
+          )
+        )
+      } else {
+        // Add new employee type with a unique id
+        const newEmployeeType = {
+          ...currentEmployeeType,
+          id: Date.now().toString(),
+        }
+        setEmployeeTypeData(prevData => [...prevData, newEmployeeType])
+      }
+      handleCancelEmployeeType()
+    } else {
+      alert("Please fill all fields before saving.")
+    }
+  }
+
+  // Handle canceling the operation
+  const handleCancelEmployeeType = () => {
+    setEmployeeTypeEditDialogVisible(false)
+    setCurrentEmployeeType({ id: "", value: "", description: "", type: "" })
+    setIsEditingEmployeeType(false)
+  }
+
+  // Edit button for employee type
+  const editEmployeeTypeIcon = rowData => (
+    <Button
+      icon="pi pi-pencil"
+      onClick={() => {
+        setCurrentEmployeeType({ ...rowData })
+        setEmployeeTypeEditDialogVisible(true)
+        setIsEditingEmployeeType(true)
+      }}
+      className="p-button-rounded p-button-info"
+    />
+  )
+
+  // Delete button for employee type
+  const deleteEmployeeTypeIcon = rowData => (
+    <Button
+      icon="pi pi-trash"
+      onClick={() => {
+        setEmployeeTypeData(prevData =>
+          prevData.filter(item => item.id !== rowData.id)
+        )
+      }}
+      className="p-button-rounded p-button-danger"
+    />
+  )
+
+  // Add new employee type button
+  const addNewEmployeeType = () => {
+    setCurrentEmployeeType({ id: "", value: "", description: "", type: "" })
+    setEmployeeTypeEditDialogVisible(true)
+    setIsEditingEmployeeType(false)
+  }
+
+  // Employee type accordion section end
+
+  // Work location accordion section start
+  const [workLocationData, setWorkLocationData] = useState([
+    {
+      id: "1",
+      value: "Remote",
+      description: "Work from home or any remote location",
+      type: "user",
+    },
+    {
+      id: "2", 
+      value: "Office",
+      description: "Work from company office premises",
+      type: "user",
+    },
+    {
+      id: "3",
+      value: "Hybrid", 
+      description: "Combination of remote and office work",
+      type: "user",
+    },
+    {
+      id: "4",
+      value: "Client Side",
+      description: "Work at client's location or premises",
+      type: "user",
+    },
+  ])
+  const [isWorkLocationEditDialogVisible, setWorkLocationEditDialogVisible] = useState(false)
+  const [currentWorkLocation, setCurrentWorkLocation] = useState({
+    id: "",
+    value: "",
+    description: "",
+    type: "",
+  })
+  const [isEditingWorkLocation, setIsEditingWorkLocation] = useState(false)
+
+  // Define work location options for accordion
+  const workLocationAccordionOptions = [
+    { label: "User", value: "user" },
+    { label: "System", value: "system" },
+  ]
+
+  // Handle saving a work location (either add or edit)
+  const handleSaveWorkLocation = () => {
+    if (
+      currentWorkLocation.value &&
+      currentWorkLocation.description &&
+      currentWorkLocation.type
+    ) {
+      if (isEditingWorkLocation) {
+        // Update existing work location
+        setWorkLocationData(prevData =>
+          prevData.map(item =>
+            item.id === currentWorkLocation.id ? { ...currentWorkLocation } : item
+          )
+        )
+      } else {
+        // Add new work location with a unique id
+        const newWorkLocation = {
+          ...currentWorkLocation,
+          id: Date.now().toString(),
+        }
+        setWorkLocationData(prevData => [...prevData, newWorkLocation])
+      }
+      handleCancelWorkLocation()
+    } else {
+      alert("Please fill all fields before saving.")
+    }
+  }
+
+  // Handle canceling the operation
+  const handleCancelWorkLocation = () => {
+    setWorkLocationEditDialogVisible(false)
+    setCurrentWorkLocation({ id: "", value: "", description: "", type: "" })
+    setIsEditingWorkLocation(false)
+  }
+
+  // Edit button for work location
+  const editWorkLocationIcon = rowData => (
+    <Button
+      icon="pi pi-pencil"
+      onClick={() => {
+        setCurrentWorkLocation({ ...rowData })
+        setWorkLocationEditDialogVisible(true)
+        setIsEditingWorkLocation(true)
+      }}
+      className="p-button-rounded p-button-info"
+    />
+  )
+
+  // Delete button for work location
+  const deleteWorkLocationIcon = rowData => (
+    <Button
+      icon="pi pi-trash"
+      onClick={() => {
+        setWorkLocationData(prevData =>
+          prevData.filter(item => item.id !== rowData.id)
+        )
+      }}
+      className="p-button-rounded p-button-danger"
+    />
+  )
+
+  // Add new work location button
+  const addNewWorkLocation = () => {
+    setCurrentWorkLocation({ id: "", value: "", description: "", type: "" })
+    setWorkLocationEditDialogVisible(true)
+    setIsEditingWorkLocation(false)
+  }
+
+  // Work location accordion section end
+
+  // Shift timing accordion section start
+  const [shiftTimingData, setShiftTimingData] = useState([
+    {
+      id: "1",
+      value: "Night Shift (11:00 PM - 8:00 AM)",
+      description: "Night shift working hours from 11:00 PM to 8:00 AM",
+      type: "user",
+    },
+    {
+      id: "2", 
+      value: "Evening Shift (2:00 PM - 11:00 PM)",
+      description: "Evening shift working hours from 2:00 PM to 11:00 PM",
+      type: "user",
+    },
+    {
+      id: "3",
+      value: "Day Shift (9:00 AM - 6:00 PM)", 
+      description: "Day shift working hours from 9:00 AM to 6:00 PM",
+      type: "user",
+    },
+  ])
+  const [isShiftTimingEditDialogVisible, setShiftTimingEditDialogVisible] = useState(false)
+  const [currentShiftTiming, setCurrentShiftTiming] = useState({
+    id: "",
+    value: "",
+    description: "",
+    type: "",
+  })
+  const [isEditingShiftTiming, setIsEditingShiftTiming] = useState(false)
+
+  // Define shift timing options for accordion
+  const shiftTimingAccordionOptions = [
+    { label: "User", value: "user" },
+    { label: "System", value: "system" },
+  ]
+
+  // Handle saving a shift timing (either add or edit)
+  const handleSaveShiftTiming = () => {
+    if (
+      currentShiftTiming.value &&
+      currentShiftTiming.description &&
+      currentShiftTiming.type
+    ) {
+      if (isEditingShiftTiming) {
+        // Update existing shift timing
+        setShiftTimingData(prevData =>
+          prevData.map(item =>
+            item.id === currentShiftTiming.id ? { ...currentShiftTiming } : item
+          )
+        )
+      } else {
+        // Add new shift timing with a unique id
+        const newShiftTiming = {
+          ...currentShiftTiming,
+          id: Date.now().toString(),
+        }
+        setShiftTimingData(prevData => [...prevData, newShiftTiming])
+      }
+      handleCancelShiftTiming()
+    } else {
+      alert("Please fill all fields before saving.")
+    }
+  }
+
+  // Handle canceling the operation
+  const handleCancelShiftTiming = () => {
+    setShiftTimingEditDialogVisible(false)
+    setCurrentShiftTiming({ id: "", value: "", description: "", type: "" })
+    setIsEditingShiftTiming(false)
+  }
+
+  // Edit button for shift timing
+  const editShiftTimingIcon = rowData => (
+    <Button
+      icon="pi pi-pencil"
+      onClick={() => {
+        setCurrentShiftTiming({ ...rowData })
+        setShiftTimingEditDialogVisible(true)
+        setIsEditingShiftTiming(true)
+      }}
+      className="p-button-rounded p-button-info"
+    />
+  )
+
+  // Delete button for shift timing
+  const deleteShiftTimingIcon = rowData => (
+    <Button
+      icon="pi pi-trash"
+      onClick={() => {
+        setShiftTimingData(prevData =>
+          prevData.filter(item => item.id !== rowData.id)
+        )
+      }}
+      className="p-button-rounded p-button-danger"
+    />
+  )
+
+  // Add new shift timing button
+  const addNewShiftTiming = () => {
+    setCurrentShiftTiming({ id: "", value: "", description: "", type: "" })
+    setShiftTimingEditDialogVisible(true)
+    setIsEditingShiftTiming(false)
+  }
+
+  // Shift timing accordion section end
+
+  // City accordion section start
+  const [cityAccordionData, setCityAccordionData] = useState([
+    {
+      id: "1",
+      value: "Hyderabad",
+      description: "Capital city of Telangana state, major IT hub",
+      type: "user",
+    },
+    {
+      id: "2", 
+      value: "Chennai",
+      description: "Capital city of Tamil Nadu state, automotive and IT center",
+      type: "user",
+    },
+    {
+      id: "3",
+      value: "Bangalore", 
+      description: "Capital city of Karnataka state, Silicon Valley of India",
+      type: "user",
+    },
+    {
+      id: "4",
+      value: "Mumbai",
+      description: "Capital city of Maharashtra state, financial capital of India",
+      type: "user",
+    },
+    {
+      id: "5",
+      value: "Pune",
+      description: "Major city in Maharashtra state, IT and automotive hub",
+      type: "user",
+    },
+  ])
+  const [isCityAccordionEditDialogVisible, setCityAccordionEditDialogVisible] = useState(false)
+  const [currentCityAccordion, setCurrentCityAccordion] = useState({
+    id: "",
+    value: "",
+    description: "",
+    type: "",
+  })
+  const [isEditingCityAccordion, setIsEditingCityAccordion] = useState(false)
+
+  // Define city options for accordion
+  const cityAccordionOptions = [
+    { label: "User", value: "user" },
+    { label: "System", value: "system" },
+  ]
+
+  // Handle saving a city (either add or edit)
+  const handleSaveCityAccordion = () => {
+    if (
+      currentCityAccordion.value &&
+      currentCityAccordion.description &&
+      currentCityAccordion.type
+    ) {
+      if (isEditingCityAccordion) {
+        // Update existing city
+        setCityAccordionData(prevData =>
+          prevData.map(item =>
+            item.id === currentCityAccordion.id ? { ...currentCityAccordion } : item
+          )
+        )
+      } else {
+        // Add new city with a unique id
+        const newCity = {
+          ...currentCityAccordion,
+          id: Date.now().toString(),
+        }
+        setCityAccordionData(prevData => [...prevData, newCity])
+      }
+      handleCancelCityAccordion()
+    } else {
+      alert("Please fill all fields before saving.")
+    }
+  }
+
+  // Handle canceling the operation
+  const handleCancelCityAccordion = () => {
+    setCityAccordionEditDialogVisible(false)
+    setCurrentCityAccordion({ id: "", value: "", description: "", type: "" })
+    setIsEditingCityAccordion(false)
+  }
+
+  // Edit button for city
+  const editCityAccordionIcon = rowData => (
+    <Button
+      icon="pi pi-pencil"
+      onClick={() => {
+        setCurrentCityAccordion({ ...rowData })
+        setCityAccordionEditDialogVisible(true)
+        setIsEditingCityAccordion(true)
+      }}
+      className="p-button-rounded p-button-info"
+    />
+  )
+
+  // Delete button for city
+  const deleteCityAccordionIcon = rowData => (
+    <Button
+      icon="pi pi-trash"
+      onClick={() => {
+        setCityAccordionData(prevData =>
+          prevData.filter(item => item.id !== rowData.id)
+        )
+      }}
+      className="p-button-rounded p-button-danger"
+    />
+  )
+
+  // Add new city button
+  const addNewCityAccordion = () => {
+    setCurrentCityAccordion({ id: "", value: "", description: "", type: "" })
+    setCityAccordionEditDialogVisible(true)
+    setIsEditingCityAccordion(false)
+  }
+
+  // City accordion section end
+
+  // Designation accordion section start
+  const [designationData, setDesignationData] = useState([
+    {
+      id: "1",
+      value: "Software Developer",
+      description: "Develops and maintains software applications across full stack",
+      type: "user",
+    },
+    {
+      id: "2", 
+      value: "Frontend Developer",
+      description: "Specializes in user interface and user experience development",
+      type: "user",
+    },
+    {
+      id: "3",
+      value: "Backend Developer", 
+      description: "Focuses on server-side logic, databases, and API development",
+      type: "user",
+    },
+  ])
+  const [isDesignationEditDialogVisible, setDesignationEditDialogVisible] = useState(false)
+  const [currentDesignation, setCurrentDesignation] = useState({
+    id: "",
+    value: "",
+    description: "",
+    type: "",
+  })
+  const [isEditingDesignation, setIsEditingDesignation] = useState(false)
+
+  // Define designation options for accordion
+  const designationAccordionOptions = [
+    { label: "User", value: "user" },
+    { label: "System", value: "system" },
+  ]
+
+  // Handle saving a designation (either add or edit)
+  const handleSaveDesignation = () => {
+    if (
+      currentDesignation.value &&
+      currentDesignation.description &&
+      currentDesignation.type
+    ) {
+      if (isEditingDesignation) {
+        // Update existing designation
+        setDesignationData(prevData =>
+          prevData.map(item =>
+            item.id === currentDesignation.id ? { ...currentDesignation } : item
+          )
+        )
+      } else {
+        // Add new designation with a unique id
+        const newDesignation = {
+          ...currentDesignation,
+          id: Date.now().toString(),
+        }
+        setDesignationData(prevData => [...prevData, newDesignation])
+      }
+      handleCancelDesignation()
+    } else {
+      alert("Please fill all fields before saving.")
+    }
+  }
+
+  // Handle canceling the operation
+  const handleCancelDesignation = () => {
+    setDesignationEditDialogVisible(false)
+    setCurrentDesignation({ id: "", value: "", description: "", type: "" })
+    setIsEditingDesignation(false)
+  }
+
+  // Edit button for designation
+  const editDesignationIcon = rowData => (
+    <Button
+      icon="pi pi-pencil"
+      onClick={() => {
+        setCurrentDesignation({ ...rowData })
+        setDesignationEditDialogVisible(true)
+        setIsEditingDesignation(true)
+      }}
+      className="p-button-rounded p-button-info"
+    />
+  )
+
+  // Delete button for designation
+  const deleteDesignationIcon = rowData => (
+    <Button
+      icon="pi pi-trash"
+      onClick={() => {
+        setDesignationData(prevData =>
+          prevData.filter(item => item.id !== rowData.id)
+        )
+      }}
+      className="p-button-rounded p-button-danger"
+    />
+  )
+
+  // Add new designation button
+  const addNewDesignation = () => {
+    setCurrentDesignation({ id: "", value: "", description: "", type: "" })
+    setDesignationEditDialogVisible(true)
+    setIsEditingDesignation(false)
+  }
+
+  // Designation accordion section end
+
   // Source type start
 
   const [sourcesData, setSourcesData] = useState([
@@ -2193,7 +2747,32 @@ const roleActionMenu = useRef(null);
 
   // Reffered by start
 
-  const [referredData, setReferredData] = useState([])
+  const [referredData, setReferredData] = useState([
+    {
+      id: "1",
+      value: "Project Manager",
+      description: "Manages project timelines and team coordination",
+      type: "user",
+    },
+    {
+      id: "2", 
+      value: "UI/UX Developer",
+      description: "Designs user interfaces and user experience",
+      type: "user",
+    },
+    {
+      id: "3",
+      value: "Software Developer", 
+      description: "Develops and maintains software applications",
+      type: "user",
+    },
+    {
+      id: "4",
+      value: "QA",
+      description: "Quality assurance and testing specialist",
+      type: "user",
+    },
+  ])
   const [isReferredEditDialogVisible, setReferredEditDialogVisible] =
     useState(false)
   const [currentReferred, setCurrentReferred] = useState({
@@ -8988,8 +9567,8 @@ const handlePermissionChange = (tabIdx, permIdx) => {
                           <Dialog
                             header={
                               isEditing1
-                                ? "Edit Pipeline Status"
-                                : "Add New Pipeline Status"
+                                ? "Edit Module"
+                                : "Add New Module"
                             }
                             visible={isEditDialogVisible1}
                             style={{ width: "30vw" }}
@@ -9149,8 +9728,8 @@ const handlePermissionChange = (tabIdx, permIdx) => {
                           <Dialog
                             header={
                               isEditing
-                                ? "Edit Resume Source"
-                                : "Add New Resume Source"
+                                ? "Edit Company"
+                                : "Add New Company"
                             }
                             visible={isEditDialogVisible}
                             style={{ width: "30vw" }}
@@ -9303,7 +9882,7 @@ const handlePermissionChange = (tabIdx, permIdx) => {
 
                           {/* Dialog for adding/editing city */}
                           <Dialog
-                            header={isCityEditing ? "Edit City" : "Add City"}
+                            header={isCityEditing ? "Edit Project Status" : "Add Project Status"}
                             visible={isCityEditDialogVisible}
                             style={{ width: "30vw" }}
                             onHide={handleCancelCity}
@@ -9449,7 +10028,7 @@ const handlePermissionChange = (tabIdx, permIdx) => {
 
                           {/* Dialog for adding/editing state */}
                           <Dialog
-                            header={isStateEditing ? "Edit State" : "Add State"}
+                            header={isStateEditing ? "Edit Work Type" : "Add Work Type"}
                             visible={isStateEditDialogVisible}
                             style={{ width: "30vw" }}
                             onHide={handleCancelState}
@@ -9512,7 +10091,7 @@ const handlePermissionChange = (tabIdx, permIdx) => {
                                       }))
                                     }
                                     placeholder="Select Type"
-                                    className="w-full"
+                                    className="w-full bgclr"
                                   />
                                 </Col>
                               </Row>
@@ -9599,8 +10178,8 @@ const handlePermissionChange = (tabIdx, permIdx) => {
                           <Dialog
                             header={
                               isCountryBeingEdited
-                                ? "Edit Country"
-                                : "Add Country"
+                                ? "Edit Work Type Status"
+                                : "Add Work Type Status"
                             }
                             visible={isCountryDialogVisible}
                             style={{ width: "30vw" }}
@@ -9717,12 +10296,12 @@ const handlePermissionChange = (tabIdx, permIdx) => {
                             rows={5}
                           >
                             <Column
-                              field="label"
+                              field="name"
                               header="Value"
                               style={{ width: "25%" }}
                             />
                             <Column
-                              field="output"
+                              field="description"
                               header="Description"
                               style={{ width: "25%" }}
                             />
@@ -9763,8 +10342,8 @@ const handlePermissionChange = (tabIdx, permIdx) => {
                           <Dialog
                             header={
                               isEditingAddressLabel
-                                ? "Edit Address Label"
-                                : "Add Address Label"
+                                ? "Edit Approval Status"
+                                : "Add Approval Status"
                             }
                             visible={isAddressLabelEditDialogVisible}
                             style={{ width: "30vw" }}
@@ -9781,7 +10360,7 @@ const handlePermissionChange = (tabIdx, permIdx) => {
                                   </label>
                                   <InputText
                                     id="addressLabel"
-                                    value={currentAddressLabel.label}
+                                    value={currentAddressLabel.name}
                                     onChange={e =>
                                       setCurrentAddressLabel(prev => ({
                                         ...prev,
@@ -9803,7 +10382,7 @@ const handlePermissionChange = (tabIdx, permIdx) => {
                                   </label>
                                   <InputText
                                     id="addressOutput"
-                                    value={currentAddressLabel.output}
+                                    value={currentAddressLabel.description}
                                     onChange={e =>
                                       setCurrentAddressLabel(prev => ({
                                         ...prev,
@@ -9919,7 +10498,7 @@ const handlePermissionChange = (tabIdx, permIdx) => {
                           {/* Dialog for adding/editing skill */}
                           <Dialog
                             header={
-                              isEditingSkill ? "Edit Skill" : "Add New Skill"
+                              isEditingSkill ? "Edit Priority" : "Add New Priority"
                             }
                             visible={isSkillEditDialogVisible}
                             style={{ width: "30vw" }}
@@ -10069,8 +10648,8 @@ const handlePermissionChange = (tabIdx, permIdx) => {
                           <Dialog
                             header={
                               isEditingEmployee
-                                ? "Edit Employee"
-                                : "Add Employee"
+                                ? "Edit Linked Work Type"
+                                : "Add Linked Work Type"
                             }
                             visible={isEmployeeEditDialogVisible}
                             style={{ width: "30vw" }}
@@ -10224,7 +10803,7 @@ const handlePermissionChange = (tabIdx, permIdx) => {
                           {/* Dialog for adding/editing source */}
                           <Dialog
                             header={
-                              isEditingSource ? "Edit Source" : "Add New Source"
+                              isEditingSource ? "Edit Work Item" : "Add New Work Item"
                             }
                             visible={isSourceEditDialogVisible}
                             style={{ width: "30vw" }}
@@ -10324,7 +10903,7 @@ const handlePermissionChange = (tabIdx, permIdx) => {
                       multiple={false}
                       style={{ width: "100%" }}
                     >
-                      <AccordionTab header="Reffered by">
+                      <AccordionTab header="Responsible">
                         <div>
                           {/* Data Table with Pagination */}
                           <DataTable
@@ -10381,8 +10960,8 @@ const handlePermissionChange = (tabIdx, permIdx) => {
                           <Dialog
                             header={
                               isEditingReferred
-                                ? "Edit Referred"
-                                : "Add New Referred"
+                                ? "Edit Responsible"
+                                : "Add New Responsible"
                             }
                             visible={isReferredEditDialogVisible}
                             style={{ width: "30vw" }}
@@ -10468,6 +11047,735 @@ const handlePermissionChange = (tabIdx, permIdx) => {
                         </div>
                       </AccordionTab>
                     </Accordion>
+
+                    <Accordion
+                      className="mt-3"
+                      multiple={false}
+                      style={{ width: "100%" }}
+                    >
+                      <AccordionTab header="Employee Type">
+                        <div>
+                          {/* Data Table with Pagination */}
+                          <DataTable
+                            value={employeeTypeData}
+                            responsiveLayout="scroll"
+                            paginator
+                            rows={5}
+                          >
+                            <Column
+                              field="value"
+                              header="Value"
+                              style={{ width: "30%" }}
+                            />
+                            <Column
+                              field="description"
+                              header="Description"
+                              style={{ width: "30%" }}
+                            />
+                            <Column
+                              field="type"
+                              header="Type"
+                              style={{ width: "20%" }}
+                            />
+
+                            {/* Actions column */}
+                            <Column
+                              header="Actions"
+                              body={rowData => (
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                  }}
+                                >
+                                  {editEmployeeTypeIcon(rowData)}
+                                  {deleteEmployeeTypeIcon(rowData)}
+                                </div>
+                              )}
+                              style={{ width: "20%" }}
+                            />
+                          </DataTable>
+
+                          <div className="d-flex justify-content-end">
+                            {/* Add new employee type button */}
+                            <Button
+                              label="Add More"
+                              icon="pi pi-plus"
+                              onClick={addNewEmployeeType}
+                              className="mt-3"
+                            />
+                          </div>
+
+                          {/* Dialog for adding/editing employee type */}
+                          <Dialog
+                            header={
+                              isEditingEmployeeType
+                                ? "Edit Employee Type"
+                                : "Add New Employee Type"
+                            }
+                            visible={isEmployeeTypeEditDialogVisible}
+                            style={{ width: "30vw" }}
+                            onHide={handleCancelEmployeeType}
+                          >
+                            <div>
+                              <Row className="mb-2">
+                                <Col xl={12}>
+                                  <label htmlFor="value" className="block">
+                                    Value
+                                  </label>
+                                  <InputText
+                                    id="value"
+                                    value={currentEmployeeType.value}
+                                    onChange={e =>
+                                      setCurrentEmployeeType(prev => ({
+                                        ...prev,
+                                        value: e.target.value,
+                                      }))
+                                    }
+                                    className="w-full"
+                                  />
+                                </Col>
+                              </Row>
+
+                              <Row className="mb-2">
+                                <Col xl={12}>
+                                  <label
+                                    htmlFor="description"
+                                    className="block"
+                                  >
+                                    Description
+                                  </label>
+                                  <InputText
+                                    id="description"
+                                    value={currentEmployeeType.description}
+                                    onChange={e =>
+                                      setCurrentEmployeeType(prev => ({
+                                        ...prev,
+                                        description: e.target.value,
+                                      }))
+                                    }
+                                    className="w-full"
+                                  />
+                                </Col>
+                              </Row>
+
+                              <Row className="mb-2">
+                                <Col xl={12}>
+                                  <label htmlFor="type" className="block">
+                                    Type
+                                  </label>
+                                  <Dropdown
+                                    id="type"
+                                    value={currentEmployeeType.type}
+                                    options={employeeTypeAccordionOptions}
+                                    onChange={e =>
+                                      setCurrentEmployeeType(prev => ({
+                                        ...prev,
+                                        type: e.value,
+                                      }))
+                                    }
+                                    placeholder="Select Type"
+                                    className="bgclr w-full"
+                                  />
+                                </Col>
+                              </Row>
+
+                              <Row>
+                                <Col xl={12}>
+                                  <div className="d-flex justify-content-end mt-2">
+                                    <Button
+                                      color="primary btn-main me-2"
+                                      onClick={handleSaveEmployeeType}
+                                    >
+                                      <i className="pi pi-check me-1"></i> Ok
+                                    </Button>
+                                  </div>
+                                </Col>
+                              </Row>
+                            </div>
+                          </Dialog>
+                        </div>
+                      </AccordionTab>
+                    </Accordion>
+
+                    <Accordion
+                      className="mt-3"
+                      multiple={false}
+                      style={{ width: "100%" }}
+                    >
+                      <AccordionTab header="Work Location">
+                        <div>
+                          {/* Data Table with Pagination */}
+                          <DataTable
+                            value={workLocationData}
+                            responsiveLayout="scroll"
+                            paginator
+                            rows={5}
+                          >
+                            <Column
+                              field="value"
+                              header="Value"
+                              style={{ width: "30%" }}
+                            />
+                            <Column
+                              field="description"
+                              header="Description"
+                              style={{ width: "30%" }}
+                            />
+                            <Column
+                              field="type"
+                              header="Type"
+                              style={{ width: "20%" }}
+                            />
+
+                            {/* Actions column */}
+                            <Column
+                              header="Actions"
+                              body={rowData => (
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                  }}
+                                >
+                                  {editWorkLocationIcon(rowData)}
+                                  {deleteWorkLocationIcon(rowData)}
+                                </div>
+                              )}
+                              style={{ width: "20%" }}
+                            />
+                          </DataTable>
+
+                          <div className="d-flex justify-content-end">
+                            {/* Add new work location button */}
+                            <Button
+                              label="Add More"
+                              icon="pi pi-plus"
+                              onClick={addNewWorkLocation}
+                              className="mt-3"
+                            />
+                          </div>
+
+                          {/* Dialog for adding/editing work location */}
+                          <Dialog
+                            header={
+                              isEditingWorkLocation
+                                ? "Edit Work Location"
+                                : "Add New Work Location"
+                            }
+                            visible={isWorkLocationEditDialogVisible}
+                            style={{ width: "30vw" }}
+                            onHide={handleCancelWorkLocation}
+                          >
+                            <div>
+                              <Row className="mb-2">
+                                <Col xl={12}>
+                                  <label htmlFor="value" className="block">
+                                    Value
+                                  </label>
+                                  <InputText
+                                    id="value"
+                                    value={currentWorkLocation.value}
+                                    onChange={e =>
+                                      setCurrentWorkLocation(prev => ({
+                                        ...prev,
+                                        value: e.target.value,
+                                      }))
+                                    }
+                                    className="w-full"
+                                  />
+                                </Col>
+                              </Row>
+
+                              <Row className="mb-2">
+                                <Col xl={12}>
+                                  <label
+                                    htmlFor="description"
+                                    className="block"
+                                  >
+                                    Description
+                                  </label>
+                                  <InputText
+                                    id="description"
+                                    value={currentWorkLocation.description}
+                                    onChange={e =>
+                                      setCurrentWorkLocation(prev => ({
+                                        ...prev,
+                                        description: e.target.value,
+                                      }))
+                                    }
+                                    className="w-full"
+                                  />
+                                </Col>
+                              </Row>
+
+                              <Row className="mb-2">
+                                <Col xl={12}>
+                                  <label htmlFor="type" className="block">
+                                    Type
+                                  </label>
+                                  <Dropdown
+                                    id="type"
+                                    value={currentWorkLocation.type}
+                                    options={workLocationAccordionOptions}
+                                    onChange={e =>
+                                      setCurrentWorkLocation(prev => ({
+                                        ...prev,
+                                        type: e.value,
+                                      }))
+                                    }
+                                    placeholder="Select Type"
+                                    className="bgclr w-full"
+                                  />
+                                </Col>
+                              </Row>
+
+                              <Row>
+                                <Col xl={12}>
+                                  <div className="d-flex justify-content-end mt-2">
+                                    <Button
+                                      color="primary btn-main me-2"
+                                      onClick={handleSaveWorkLocation}
+                                    >
+                                      <i className="pi pi-check me-1"></i> Ok
+                                    </Button>
+                                  </div>
+                                </Col>
+                              </Row>
+                            </div>
+                          </Dialog>
+                        </div>
+                      </AccordionTab>
+                    </Accordion>
+
+                    <Accordion
+                      className="mt-3"
+                      multiple={false}
+                      style={{ width: "100%" }}
+                    >
+                      <AccordionTab header="Shift Timing">
+                        <div>
+                          {/* Data Table with Pagination */}
+                          <DataTable
+                            value={shiftTimingData}
+                            responsiveLayout="scroll"
+                            paginator
+                            rows={5}
+                          >
+                            <Column
+                              field="value"
+                              header="Value"
+                              style={{ width: "30%" }}
+                            />
+                            <Column
+                              field="description"
+                              header="Description"
+                              style={{ width: "30%" }}
+                            />
+                            <Column
+                              field="type"
+                              header="Type"
+                              style={{ width: "20%" }}
+                            />
+
+                            {/* Actions column */}
+                            <Column
+                              header="Actions"
+                              body={rowData => (
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                  }}
+                                >
+                                  {editShiftTimingIcon(rowData)}
+                                  {deleteShiftTimingIcon(rowData)}
+                                </div>
+                              )}
+                              style={{ width: "20%" }}
+                            />
+                          </DataTable>
+
+                          <div className="d-flex justify-content-end">
+                            {/* Add new shift timing button */}
+                            <Button
+                              label="Add More"
+                              icon="pi pi-plus"
+                              onClick={addNewShiftTiming}
+                              className="mt-3"
+                            />
+                          </div>
+
+                          {/* Dialog for adding/editing shift timing */}
+                          <Dialog
+                            header={
+                              isEditingShiftTiming
+                                ? "Edit Shift Timing"
+                                : "Add New Shift Timing"
+                            }
+                            visible={isShiftTimingEditDialogVisible}
+                            style={{ width: "30vw" }}
+                            onHide={handleCancelShiftTiming}
+                          >
+                            <div>
+                              <Row className="mb-2">
+                                <Col xl={12}>
+                                  <label htmlFor="value" className="block">
+                                    Value
+                                  </label>
+                                  <InputText
+                                    id="value"
+                                    value={currentShiftTiming.value}
+                                    onChange={e =>
+                                      setCurrentShiftTiming(prev => ({
+                                        ...prev,
+                                        value: e.target.value,
+                                      }))
+                                    }
+                                    className="w-full"
+                                  />
+                                </Col>
+                              </Row>
+
+                              <Row className="mb-2">
+                                <Col xl={12}>
+                                  <label
+                                    htmlFor="description"
+                                    className="block"
+                                  >
+                                    Description
+                                  </label>
+                                  <InputText
+                                    id="description"
+                                    value={currentShiftTiming.description}
+                                    onChange={e =>
+                                      setCurrentShiftTiming(prev => ({
+                                        ...prev,
+                                        description: e.target.value,
+                                      }))
+                                    }
+                                    className="w-full"
+                                  />
+                                </Col>
+                              </Row>
+
+                              <Row className="mb-2">
+                                <Col xl={12}>
+                                  <label htmlFor="type" className="block">
+                                    Type
+                                  </label>
+                                  <Dropdown
+                                    id="type"
+                                    value={currentShiftTiming.type}
+                                    options={shiftTimingAccordionOptions}
+                                    onChange={e =>
+                                      setCurrentShiftTiming(prev => ({
+                                        ...prev,
+                                        type: e.value,
+                                      }))
+                                    }
+                                    placeholder="Select Type"
+                                    className="bgclr w-full"
+                                  />
+                                </Col>
+                              </Row>
+
+                              <Row>
+                                <Col xl={12}>
+                                  <div className="d-flex justify-content-end mt-2">
+                                    <Button
+                                      color="primary btn-main me-2"
+                                      onClick={handleSaveShiftTiming}
+                                    >
+                                      <i className="pi pi-check me-1"></i> Ok
+                                    </Button>
+                                  </div>
+                                </Col>
+                              </Row>
+                            </div>
+                          </Dialog>
+                        </div>
+                      </AccordionTab>
+                    </Accordion>
+
+                    <Accordion
+                      className="mt-3"
+                      multiple={false}
+                      style={{ width: "100%" }}
+                    >
+                      <AccordionTab header="City">
+                        <div>
+                          {/* Data Table with Pagination */}
+                          <DataTable
+                            value={cityAccordionData}
+                            responsiveLayout="scroll"
+                            paginator
+                            rows={5}
+                          >
+                            <Column
+                              field="value"
+                              header="Value"
+                              style={{ width: "30%" }}
+                            />
+                            <Column
+                              field="description"
+                              header="Description"
+                              style={{ width: "30%" }}
+                            />
+                            <Column
+                              field="type"
+                              header="Type"
+                              style={{ width: "20%" }}
+                            />
+
+                            {/* Actions column */}
+                            <Column
+                              header="Actions"
+                              body={rowData => (
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                  }}
+                                >
+                                  {editCityAccordionIcon(rowData)}
+                                  {deleteCityAccordionIcon(rowData)}
+                                </div>
+                              )}
+                              style={{ width: "20%" }}
+                            />
+                          </DataTable>
+
+                          <div className="d-flex justify-content-end">
+                            {/* Add new city button */}
+                            <Button
+                              label="Add More"
+                              icon="pi pi-plus"
+                              onClick={addNewCityAccordion}
+                              className="mt-3"
+                            />
+                          </div>
+
+                          {/* Dialog for adding/editing city */}
+                          <Dialog
+                            header={
+                              isEditingCityAccordion
+                                ? "Edit City"
+                                : "Add New City"
+                            }
+                            visible={isCityAccordionEditDialogVisible}
+                            style={{ width: "30vw" }}
+                            onHide={handleCancelCityAccordion}
+                          >
+                            <div>
+                              <Row className="mb-2">
+                                <Col xl={12}>
+                                  <label htmlFor="value" className="block">
+                                    Value
+                                  </label>
+                                  <InputText
+                                    id="value"
+                                    value={currentCityAccordion.value}
+                                    onChange={e =>
+                                      setCurrentCityAccordion(prev => ({
+                                        ...prev,
+                                        value: e.target.value,
+                                      }))
+                                    }
+                                    className="w-full"
+                                  />
+                                </Col>
+                              </Row>
+
+                              <Row className="mb-2">
+                                <Col xl={12}>
+                                  <label
+                                    htmlFor="description"
+                                    className="block"
+                                  >
+                                    Description
+                                  </label>
+                                  <InputText
+                                    id="description"
+                                    value={currentCityAccordion.description}
+                                    onChange={e =>
+                                      setCurrentCityAccordion(prev => ({
+                                        ...prev,
+                                        description: e.target.value,
+                                      }))
+                                    }
+                                    className="w-full"
+                                  />
+                                </Col>
+                              </Row>
+
+                              <Row className="mb-2">
+                                <Col xl={12}>
+                                  <label htmlFor="type" className="block">
+                                    Type
+                                  </label>
+                                  <Dropdown
+                                    id="type"
+                                    value={currentCityAccordion.type}
+                                    options={cityAccordionOptions}
+                                    onChange={e =>
+                                      setCurrentCityAccordion(prev => ({
+                                        ...prev,
+                                        type: e.value,
+                                      }))
+                                    }
+                                    placeholder="Select Type"
+                                    className="bgclr w-full"
+                                  />
+                                </Col>
+                              </Row>
+
+                              <Row>
+                                <Col xl={12}>
+                                  <div className="d-flex justify-content-end mt-2">
+                                    <Button
+                                      color="primary btn-main me-2"
+                                      onClick={handleSaveCityAccordion}
+                                    >
+                                      <i className="pi pi-check me-1"></i> Ok
+                                    </Button>
+                                  </div>
+                                </Col>
+                              </Row>
+                            </div>
+                          </Dialog>
+                        </div>
+                      </AccordionTab>
+                    </Accordion>
+
+                    <Accordion
+                      className="mt-3"
+                      multiple={false}
+                      style={{ width: "100%" }}
+                    >
+                      <AccordionTab header="Designation">
+                        <div className="p-4">
+                          <div className="d-flex justify-content-between align-items-center mb-3">
+                            <h5>Designation Management</h5>
+                            <Button
+                              label="Add New Designation"
+                              icon="pi pi-plus"
+                              onClick={addNewDesignation}
+                              className="p-button-success"
+                            />
+                          </div>
+
+                          <DataTable
+                            value={designationData}
+                            paginator
+                            rows={10}
+                            dataKey="id"
+                            emptyMessage="No designation data found."
+                          >
+                            <Column 
+                              field="value" 
+                              header="Designation Name" 
+                              sortable 
+                            />
+                            <Column 
+                              field="description" 
+                              header="Description" 
+                              sortable 
+                            />
+                            <Column 
+                              field="type" 
+                              header="Type" 
+                              sortable 
+                            />
+                            <Column
+                              header="Actions"
+                              body={rowData => (
+                                <div>
+                                  {editDesignationIcon(rowData)}
+                                  {deleteDesignationIcon(rowData)}
+                                </div>
+                              )}
+                            />
+                          </DataTable>
+                        </div>
+                      </AccordionTab>
+                    </Accordion>
+
+                    {/* Designation Edit Dialog */}
+                    <Dialog
+                      header={isEditingDesignation ? "Edit Designation" : "Add New Designation"}
+                      visible={isDesignationEditDialogVisible}
+                      onHide={handleCancelDesignation}
+                      footer={
+                        <div>
+                          <Button
+                            label="Cancel"
+                            icon="pi pi-times"
+                            onClick={handleCancelDesignation}
+                            className="p-button-text"
+                          />
+                          <Button
+                            label="Save"
+                            icon="pi pi-check"
+                            onClick={handleSaveDesignation}
+                            autoFocus
+                          />
+                        </div>
+                      }
+                    >
+                      <div className="p-fluid">
+                        <Row className="mb-2">
+                          <Col xl={12}>
+                            <label htmlFor="designation" className="block">Designation Name</label>
+                            <InputText
+                              id="designation"
+                              value={currentDesignation.value}
+                              onChange={e =>
+                                setCurrentDesignation({
+                                  ...currentDesignation,
+                                  value: e.target.value,
+                                })
+                              }
+                              className="w-full"
+                            />
+                          </Col>
+                        </Row>
+                        <Row className="mb-2">
+                          <Col xl={12}>
+                            <label htmlFor="designationDescription" className="block">Description</label>
+                            <InputText
+                              id="designationDescription"
+                              value={currentDesignation.description}
+                              onChange={e =>
+                                setCurrentDesignation({
+                                  ...currentDesignation,
+                                  description: e.target.value,
+                                })
+                              }
+                              className="w-full"
+                            />
+                          </Col>
+                        </Row>
+                        <Row className="mb-2">
+                          <Col xl={12}>
+                            <label htmlFor="designationType" className="block">Type</label>
+                            <Dropdown
+                              id="designationType"
+                              value={currentDesignation.type}
+                              onChange={e =>
+                                setCurrentDesignation({
+                                  ...currentDesignation,
+                                  type: e.value,
+                                })
+                              }
+                              options={designationAccordionOptions}
+                              placeholder="Select Type"
+                              className="bgclr w-full"
+                            />
+                          </Col>
+                        </Row>
+                      </div>
+                    </Dialog>
 
                     <Accordion
                       className="mt-3"
