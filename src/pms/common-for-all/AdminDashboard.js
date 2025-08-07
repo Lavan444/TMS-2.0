@@ -2652,6 +2652,330 @@ const roleActionMenu = useRef(null);
 
   // Designation accordion section end
 
+  // Primary Skills accordion section start
+  const [primarySkillsData, setPrimarySkillsData] = useState([
+    {
+      id: "1",
+      value: "React",
+      description: "JavaScript library for building user interfaces",
+      type: "user",
+    },
+    {
+      id: "2", 
+      value: "Django",
+      description: "Python web framework for rapid development",
+      type: "user",
+    },
+    {
+      id: "3",
+      value: "SQL", 
+      description: "Structured Query Language for database management",
+      type: "user",
+    },
+  ])
+  const [isPrimarySkillsEditDialogVisible, setPrimarySkillsEditDialogVisible] = useState(false)
+  const [currentPrimarySkill, setCurrentPrimarySkill] = useState({
+    id: "",
+    value: "",
+    description: "",
+    type: "",
+  })
+  const [isEditingPrimarySkill, setIsEditingPrimarySkill] = useState(false)
+
+  // Define primary skills options for accordion
+  const primarySkillsAccordionOptions = [
+    { label: "User", value: "user" },
+    { label: "System", value: "system" },
+  ]
+
+  // Handle saving a primary skill (either add or edit)
+  const handleSavePrimarySkill = () => {
+    if (
+      currentPrimarySkill.value &&
+      currentPrimarySkill.description &&
+      currentPrimarySkill.type
+    ) {
+      if (isEditingPrimarySkill) {
+        // Update existing primary skill
+        setPrimarySkillsData(prevData =>
+          prevData.map(item =>
+            item.id === currentPrimarySkill.id ? { ...currentPrimarySkill } : item
+          )
+        )
+      } else {
+        // Add new primary skill with a unique id
+        const newPrimarySkill = {
+          ...currentPrimarySkill,
+          id: Date.now().toString(),
+        }
+        setPrimarySkillsData(prevData => [...prevData, newPrimarySkill])
+      }
+      handleCancelPrimarySkill()
+    } else {
+      alert("Please fill all fields before saving.")
+    }
+  }
+
+  // Handle canceling the operation
+  const handleCancelPrimarySkill = () => {
+    setPrimarySkillsEditDialogVisible(false)
+    setCurrentPrimarySkill({ id: "", value: "", description: "", type: "" })
+    setIsEditingPrimarySkill(false)
+  }
+
+  // Edit button for primary skills
+  const editPrimarySkillIcon = rowData => (
+    <Button
+      icon="pi pi-pencil"
+      onClick={() => {
+        setCurrentPrimarySkill({ ...rowData })
+        setPrimarySkillsEditDialogVisible(true)
+        setIsEditingPrimarySkill(true)
+      }}
+      className="p-button-rounded p-button-info"
+    />
+  )
+
+  // Delete button for primary skills
+  const deletePrimarySkillIcon = rowData => (
+    <Button
+      icon="pi pi-trash"
+      onClick={() => {
+        setPrimarySkillsData(prevData =>
+          prevData.filter(item => item.id !== rowData.id)
+        )
+      }}
+      className="p-button-rounded p-button-danger"
+    />
+  )
+
+  // Add new primary skill button
+  const addNewPrimarySkill = () => {
+    setCurrentPrimarySkill({ id: "", value: "", description: "", type: "" })
+    setPrimarySkillsEditDialogVisible(true)
+    setIsEditingPrimarySkill(false)
+  }
+
+  // Primary Skills accordion section end
+
+  // Secondary Skills accordion section start
+  const [secondarySkillsData, setSecondarySkillsData] = useState([
+    {
+      id: "1",
+      value: "PHP",
+      description: "Server-side scripting language for web development",
+      type: "user",
+    },
+    {
+      id: "2", 
+      value: "TypeScript",
+      description: "Typed superset of JavaScript for large-scale applications",
+      type: "user",
+    },
+    {
+      id: "3",
+      value: "Java", 
+      description: "Object-oriented programming language for enterprise applications",
+      type: "user",
+    },
+  ])
+  const [isSecondarySkillsEditDialogVisible, setSecondarySkillsEditDialogVisible] = useState(false)
+  const [currentSecondarySkill, setCurrentSecondarySkill] = useState({
+    id: "",
+    value: "",
+    description: "",
+    type: "",
+  })
+  const [isEditingSecondarySkill, setIsEditingSecondarySkill] = useState(false)
+
+  // Define secondary skills options for accordion
+  const secondarySkillsAccordionOptions = [
+    { label: "User", value: "user" },
+    { label: "System", value: "system" },
+  ]
+
+  // Handle saving a secondary skill (either add or edit)
+  const handleSaveSecondarySkill = () => {
+    if (
+      currentSecondarySkill.value &&
+      currentSecondarySkill.description &&
+      currentSecondarySkill.type
+    ) {
+      if (isEditingSecondarySkill) {
+        // Update existing secondary skill
+        setSecondarySkillsData(prevData =>
+          prevData.map(item =>
+            item.id === currentSecondarySkill.id ? { ...currentSecondarySkill } : item
+          )
+        )
+      } else {
+        // Add new secondary skill with a unique id
+        const newSecondarySkill = {
+          ...currentSecondarySkill,
+          id: Date.now().toString(),
+        }
+        setSecondarySkillsData(prevData => [...prevData, newSecondarySkill])
+      }
+      handleCancelSecondarySkill()
+    } else {
+      alert("Please fill all fields before saving.")
+    }
+  }
+
+  // Handle canceling the operation
+  const handleCancelSecondarySkill = () => {
+    setSecondarySkillsEditDialogVisible(false)
+    setCurrentSecondarySkill({ id: "", value: "", description: "", type: "" })
+    setIsEditingSecondarySkill(false)
+  }
+
+  // Edit button for secondary skills
+  const editSecondarySkillIcon = rowData => (
+    <Button
+      icon="pi pi-pencil"
+      onClick={() => {
+        setCurrentSecondarySkill({ ...rowData })
+        setSecondarySkillsEditDialogVisible(true)
+        setIsEditingSecondarySkill(true)
+      }}
+      className="p-button-rounded p-button-info"
+    />
+  )
+
+  // Delete button for secondary skills
+  const deleteSecondarySkillIcon = rowData => (
+    <Button
+      icon="pi pi-trash"
+      onClick={() => {
+        setSecondarySkillsData(prevData =>
+          prevData.filter(item => item.id !== rowData.id)
+        )
+      }}
+      className="p-button-rounded p-button-danger"
+    />
+  )
+
+  // Add new secondary skill button
+  const addNewSecondarySkill = () => {
+    setCurrentSecondarySkill({ id: "", value: "", description: "", type: "" })
+    setSecondarySkillsEditDialogVisible(true)
+    setIsEditingSecondarySkill(false)
+  }
+
+  // Secondary Skills accordion section end
+
+  // Reporting Manager accordion section start
+  const [reportingManagerData, setReportingManagerData] = useState([
+    {
+      id: "1",
+      value: "Mahesh kumar Bhoga",
+      description: "Senior Project Manager with extensive experience in team leadership",
+      type: "user",
+    },
+    {
+      id: "2", 
+      value: "Aman kumar",
+      description: "Technical Lead specializing in software architecture and team coordination",
+      type: "user",
+    },
+    {
+      id: "3",
+      value: "Shwetha", 
+      description: "Operations Manager responsible for process optimization and team management",
+      type: "user",
+    },
+    {
+      id: "4",
+      value: "Sayyad Salmanuddin", 
+      description: "Engineering Manager with focus on product development and team growth",
+      type: "user",
+    },
+  ])
+  const [isReportingManagerEditDialogVisible, setReportingManagerEditDialogVisible] = useState(false)
+  const [currentReportingManager, setCurrentReportingManager] = useState({
+    id: "",
+    value: "",
+    description: "",
+    type: "",
+  })
+  const [isEditingReportingManager, setIsEditingReportingManager] = useState(false)
+
+  // Define reporting manager options for accordion
+  const reportingManagerAccordionOptions = [
+    { label: "User", value: "user" },
+    { label: "System", value: "system" },
+  ]
+
+  // Handle saving a reporting manager (either add or edit)
+  const handleSaveReportingManager = () => {
+    if (
+      currentReportingManager.value &&
+      currentReportingManager.description &&
+      currentReportingManager.type
+    ) {
+      if (isEditingReportingManager) {
+        // Update existing reporting manager
+        setReportingManagerData(prevData =>
+          prevData.map(item =>
+            item.id === currentReportingManager.id ? { ...currentReportingManager } : item
+          )
+        )
+      } else {
+        // Add new reporting manager with a unique id
+        const newReportingManager = {
+          ...currentReportingManager,
+          id: Date.now().toString(),
+        }
+        setReportingManagerData(prevData => [...prevData, newReportingManager])
+      }
+      handleCancelReportingManager()
+    } else {
+      alert("Please fill all fields before saving.")
+    }
+  }
+
+  // Handle canceling the operation
+  const handleCancelReportingManager = () => {
+    setReportingManagerEditDialogVisible(false)
+    setCurrentReportingManager({ id: "", value: "", description: "", type: "" })
+    setIsEditingReportingManager(false)
+  }
+
+  // Edit button for reporting manager
+  const editReportingManagerIcon = rowData => (
+    <Button
+      icon="pi pi-pencil"
+      onClick={() => {
+        setCurrentReportingManager({ ...rowData })
+        setReportingManagerEditDialogVisible(true)
+        setIsEditingReportingManager(true)
+      }}
+      className="p-button-rounded p-button-info"
+    />
+  )
+
+  // Delete button for reporting manager
+  const deleteReportingManagerIcon = rowData => (
+    <Button
+      icon="pi pi-trash"
+      onClick={() => {
+        setReportingManagerData(prevData =>
+          prevData.filter(item => item.id !== rowData.id)
+        )
+      }}
+      className="p-button-rounded p-button-danger"
+    />
+  )
+
+  // Add new reporting manager button
+  const addNewReportingManager = () => {
+    setCurrentReportingManager({ id: "", value: "", description: "", type: "" })
+    setReportingManagerEditDialogVisible(true)
+    setIsEditingReportingManager(false)
+  }
+
+  // Reporting Manager accordion section end
+
   // Source type start
 
   const [sourcesData, setSourcesData] = useState([
@@ -10890,165 +11214,7 @@ const handlePermissionChange = (tabIdx, permIdx) => {
                       </AccordionTab>
                     </Accordion>
 
-                  
-                  </div>
-
-                  {/* Column 2 start  */}
-
-                  <div className="col-6">
-                   
-
-                <Accordion
-                      className=""
-                      multiple={false}
-                      style={{ width: "100%" }}
-                    >
-                      <AccordionTab header="Responsible">
-                        <div>
-                          {/* Data Table with Pagination */}
-                          <DataTable
-                            value={referredData}
-                            responsiveLayout="scroll"
-                            paginator
-                            rows={5}
-                          >
-                            <Column
-                              field="value"
-                              header="Value"
-                              style={{ width: "30%" }}
-                            />
-                            <Column
-                              field="description"
-                              header="Description"
-                              style={{ width: "30%" }}
-                            />
-                            <Column
-                              field="type"
-                              header="Type"
-                              style={{ width: "20%" }}
-                            />
-
-                            {/* Actions column */}
-                            <Column
-                              header="Actions"
-                              body={rowData => (
-                                <div
-                                  style={{
-                                    display: "flex",
-                                    justifyContent: "space-between",
-                                  }}
-                                >
-                                  {editReferredIcon(rowData)}
-                                  {deleteReferredIcon(rowData)}
-                                </div>
-                              )}
-                              style={{ width: "20%" }}
-                            />
-                          </DataTable>
-
-                          <div className="d-flex justify-content-end">
-                            {/* Add new referred button */}
-                            <Button
-                              label="Add More"
-                              icon="pi pi-plus"
-                              onClick={addNewReferred}
-                              className="mt-3"
-                            />
-                          </div>
-
-                          {/* Dialog for adding/editing referred */}
-                          <Dialog
-                            header={
-                              isEditingReferred
-                                ? "Edit Responsible"
-                                : "Add New Responsible"
-                            }
-                            visible={isReferredEditDialogVisible}
-                            style={{ width: "30vw" }}
-                            onHide={handleCancelReferred}
-                          >
-                            <div>
-                              <Row className="mb-2">
-                                <Col xl={12}>
-                                  <label htmlFor="value" className="block">
-                                    Value
-                                  </label>
-                                  <InputText
-                                    id="value"
-                                    value={currentReferred.value}
-                                    onChange={e =>
-                                      setCurrentReferred(prev => ({
-                                        ...prev,
-                                        value: e.target.value,
-                                      }))
-                                    }
-                                    className="w-full"
-                                  />
-                                </Col>
-                              </Row>
-
-                              <Row className="mb-2">
-                                <Col xl={12}>
-                                  <label
-                                    htmlFor="description"
-                                    className="block"
-                                  >
-                                    Description
-                                  </label>
-                                  <InputText
-                                    id="description"
-                                    value={currentReferred.description}
-                                    onChange={e =>
-                                      setCurrentReferred(prev => ({
-                                        ...prev,
-                                        description: e.target.value,
-                                      }))
-                                    }
-                                    className="w-full"
-                                  />
-                                </Col>
-                              </Row>
-
-                              <Row className="mb-2">
-                                <Col xl={12}>
-                                  <label htmlFor="type" className="block">
-                                    Type
-                                  </label>
-                                  <Dropdown
-                                    id="type"
-                                    value={currentReferred.type}
-                                    options={referredTypeOptions}
-                                    onChange={e =>
-                                      setCurrentReferred(prev => ({
-                                        ...prev,
-                                        type: e.value,
-                                      }))
-                                    }
-                                    placeholder="Select Type"
-                                    className="bgclr w-full"
-                                  />
-                                </Col>
-                              </Row>
-
-                              <Row>
-                                <Col xl={12}>
-                                  <div className="d-flex justify-content-end mt-2">
-                                    <Button
-                                      color="primary btn-main me-2"
-                                      onClick={handleSaveReferred}
-                                    >
-                                      <i className="pi pi-check me-1"></i> Ok
-                                    </Button>
-                                  </div>
-                                </Col>
-                              </Row>
-                            </div>
-                          </Dialog>
-                        </div>
-                      </AccordionTab>
-                    </Accordion>
-
-                    <Accordion
+                     <Accordion
                       className="mt-3"
                       multiple={false}
                       style={{ width: "100%" }}
@@ -11648,6 +11814,166 @@ const handlePermissionChange = (tabIdx, permIdx) => {
                       </AccordionTab>
                     </Accordion>
 
+                  
+                  </div>
+
+                  {/* Column 2 start  */}
+
+                  <div className="col-6">
+                   
+
+                <Accordion
+                      className=""
+                      multiple={false}
+                      style={{ width: "100%" }}
+                    >
+                      <AccordionTab header="Responsible">
+                        <div>
+                          {/* Data Table with Pagination */}
+                          <DataTable
+                            value={referredData}
+                            responsiveLayout="scroll"
+                            paginator
+                            rows={5}
+                          >
+                            <Column
+                              field="value"
+                              header="Value"
+                              style={{ width: "30%" }}
+                            />
+                            <Column
+                              field="description"
+                              header="Description"
+                              style={{ width: "30%" }}
+                            />
+                            <Column
+                              field="type"
+                              header="Type"
+                              style={{ width: "20%" }}
+                            />
+
+                            {/* Actions column */}
+                            <Column
+                              header="Actions"
+                              body={rowData => (
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                  }}
+                                >
+                                  {editReferredIcon(rowData)}
+                                  {deleteReferredIcon(rowData)}
+                                </div>
+                              )}
+                              style={{ width: "20%" }}
+                            />
+                          </DataTable>
+
+                          <div className="d-flex justify-content-end">
+                            {/* Add new referred button */}
+                            <Button
+                              label="Add More"
+                              icon="pi pi-plus"
+                              onClick={addNewReferred}
+                              className="mt-3"
+                            />
+                          </div>
+
+                          {/* Dialog for adding/editing referred */}
+                          <Dialog
+                            header={
+                              isEditingReferred
+                                ? "Edit Responsible"
+                                : "Add New Responsible"
+                            }
+                            visible={isReferredEditDialogVisible}
+                            style={{ width: "30vw" }}
+                            onHide={handleCancelReferred}
+                          >
+                            <div>
+                              <Row className="mb-2">
+                                <Col xl={12}>
+                                  <label htmlFor="value" className="block">
+                                    Value
+                                  </label>
+                                  <InputText
+                                    id="value"
+                                    value={currentReferred.value}
+                                    onChange={e =>
+                                      setCurrentReferred(prev => ({
+                                        ...prev,
+                                        value: e.target.value,
+                                      }))
+                                    }
+                                    className="w-full"
+                                  />
+                                </Col>
+                              </Row>
+
+                              <Row className="mb-2">
+                                <Col xl={12}>
+                                  <label
+                                    htmlFor="description"
+                                    className="block"
+                                  >
+                                    Description
+                                  </label>
+                                  <InputText
+                                    id="description"
+                                    value={currentReferred.description}
+                                    onChange={e =>
+                                      setCurrentReferred(prev => ({
+                                        ...prev,
+                                        description: e.target.value,
+                                      }))
+                                    }
+                                    className="w-full"
+                                  />
+                                </Col>
+                              </Row>
+
+                              <Row className="mb-2">
+                                <Col xl={12}>
+                                  <label htmlFor="type" className="block">
+                                    Type
+                                  </label>
+                                  <Dropdown
+                                    id="type"
+                                    value={currentReferred.type}
+                                    options={referredTypeOptions}
+                                    onChange={e =>
+                                      setCurrentReferred(prev => ({
+                                        ...prev,
+                                        type: e.value,
+                                      }))
+                                    }
+                                    placeholder="Select Type"
+                                    className="bgclr w-full"
+                                  />
+                                </Col>
+                              </Row>
+
+                              <Row>
+                                <Col xl={12}>
+                                  <div className="d-flex justify-content-end mt-2">
+                                    <Button
+                                      color="primary btn-main me-2"
+                                      onClick={handleSaveReferred}
+                                    >
+                                      <i className="pi pi-check me-1"></i> Ok
+                                    </Button>
+                                  </div>
+                                </Col>
+                              </Row>
+                            </div>
+                          </Dialog>
+                        </div>
+                      </AccordionTab>
+                    </Accordion>
+
+                   
+
                     <Accordion
                       className="mt-3"
                       multiple={false}
@@ -11769,6 +12095,405 @@ const handlePermissionChange = (tabIdx, permIdx) => {
                                 })
                               }
                               options={designationAccordionOptions}
+                              placeholder="Select Type"
+                              className="bgclr w-full"
+                            />
+                          </Col>
+                        </Row>
+                      </div>
+                    </Dialog>
+
+                    <Accordion
+                      className="mt-3"
+                      multiple={false}
+                      style={{ width: "100%" }}
+                    >
+                      <AccordionTab header="Primary Skills">
+                        <div className="p-4">
+                          <div className="d-flex justify-content-between align-items-center mb-3">
+                            <h5>Primary Skills Management</h5>
+                            <Button
+                              label="Add New Skill"
+                              icon="pi pi-plus"
+                              onClick={addNewPrimarySkill}
+                              className="p-button-success"
+                            />
+                          </div>
+
+                          <DataTable
+                            value={primarySkillsData}
+                            paginator
+                            rows={10}
+                            dataKey="id"
+                            emptyMessage="No primary skills data found."
+                          >
+                            <Column 
+                              field="value" 
+                              header="Skill Name" 
+                              sortable 
+                            />
+                            <Column 
+                              field="description" 
+                              header="Description" 
+                              sortable 
+                              style={{ maxWidth: "300px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}
+                            />
+                            <Column 
+                              field="type" 
+                              header="Type" 
+                              sortable 
+                            />
+                            <Column
+                              header="Actions"
+                              body={rowData => (
+                                <div>
+                                  {editPrimarySkillIcon(rowData)}
+                                  {deletePrimarySkillIcon(rowData)}
+                                </div>
+                              )}
+                            />
+                          </DataTable>
+                        </div>
+                      </AccordionTab>
+                    </Accordion>
+
+                    {/* Primary Skills Edit Dialog */}
+                    <Dialog
+                      header={isEditingPrimarySkill ? "Edit Primary Skill" : "Add New Primary Skill"}
+                      visible={isPrimarySkillsEditDialogVisible}
+                      onHide={handleCancelPrimarySkill}
+                      style={{ width: "30vw", minWidth: "300px" }}
+                      modal={true}
+                      footer={
+                        <div>
+                          <Button
+                            label="Cancel"
+                            icon="pi pi-times"
+                            onClick={handleCancelPrimarySkill}
+                            className="p-button-text"
+                          />
+                          <Button
+                            label="Save"
+                            icon="pi pi-check"
+                            onClick={handleSavePrimarySkill}
+                            autoFocus
+                          />
+                        </div>
+                      }
+                    >
+                      <div className="p-fluid">
+                        <Row className="mb-3">
+                          <Col xl={12}>
+                            <label htmlFor="primarySkill" className="block mb-2">Skill Name</label>
+                            <InputText
+                              id="primarySkill"
+                              value={currentPrimarySkill.value}
+                              onChange={e =>
+                                setCurrentPrimarySkill({
+                                  ...currentPrimarySkill,
+                                  value: e.target.value,
+                                })
+                              }
+                              className="w-full"
+                              style={{ padding: "12px", fontSize: "14px" }}
+                            />
+                          </Col>
+                        </Row>
+                        <Row className="mb-3">
+                          <Col xl={12}>
+                            <label htmlFor="primarySkillDescription" className="block mb-2">Description</label>
+                            <InputText
+                              id="primarySkillDescription"
+                              value={currentPrimarySkill.description}
+                              onChange={e =>
+                                setCurrentPrimarySkill({
+                                  ...currentPrimarySkill,
+                                  description: e.target.value,
+                                })
+                              }
+                              className="w-full"
+                              style={{ padding: "12px", fontSize: "14px" }}
+                            />
+                          </Col>
+                        </Row>
+                        <Row className="mb-3">
+                          <Col xl={12}>
+                            <label htmlFor="primarySkillType" className="block mb-2">Type</label>
+                            <Dropdown
+                              id="primarySkillType"
+                              value={currentPrimarySkill.type}
+                              onChange={e =>
+                                setCurrentPrimarySkill({
+                                  ...currentPrimarySkill,
+                                  type: e.value,
+                                })
+                              }
+                              options={primarySkillsAccordionOptions}
+                              placeholder="Select Type"
+                              className="bgclr w-full"
+                              style={{ padding: "8px", fontSize: "14px" }}
+                            />
+                          </Col>
+                        </Row>
+                      </div>
+                    </Dialog>
+
+                    <Accordion
+                      className="mt-3"
+                      multiple={false}
+                      style={{ width: "100%" }}
+                    >
+                      <AccordionTab header="Secondary Skills">
+                        <div className="p-4">
+                          <div className="d-flex justify-content-between align-items-center mb-3">
+                            <h5>Secondary Skills Management</h5>
+                            <Button
+                              label="Add New Skill"
+                              icon="pi pi-plus"
+                              onClick={addNewSecondarySkill}
+                              className="p-button-success"
+                            />
+                          </div>
+
+                          <DataTable
+                            value={secondarySkillsData}
+                            paginator
+                            rows={10}
+                            dataKey="id"
+                            emptyMessage="No secondary skills data found."
+                          >
+                            <Column 
+                              field="value" 
+                              header="Skill Name" 
+                              sortable 
+                            />
+                            <Column 
+                              field="description" 
+                              header="Description" 
+                              sortable 
+                              style={{ maxWidth: "300px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}
+                            />
+                            <Column 
+                              field="type" 
+                              header="Type" 
+                              sortable 
+                            />
+                            <Column
+                              header="Actions"
+                              body={rowData => (
+                                <div>
+                                  {editSecondarySkillIcon(rowData)}
+                                  {deleteSecondarySkillIcon(rowData)}
+                                </div>
+                              )}
+                            />
+                          </DataTable>
+                        </div>
+                      </AccordionTab>
+                    </Accordion>
+
+                    {/* Secondary Skills Edit Dialog */}
+                    <Dialog
+                      header={isEditingSecondarySkill ? "Edit Secondary Skill" : "Add New Secondary Skill"}
+                      visible={isSecondarySkillsEditDialogVisible}
+                      onHide={handleCancelSecondarySkill}
+                      style={{ width: "30vw", minWidth: "500px" }}
+                      modal={true}
+                      footer={
+                        <div>
+                          <Button
+                            label="Cancel"
+                            icon="pi pi-times"
+                            onClick={handleCancelSecondarySkill}
+                            className="p-button-text"
+                          />
+                          <Button
+                            label="Save"
+                            icon="pi pi-check"
+                            onClick={handleSaveSecondarySkill}
+                            autoFocus
+                          />
+                        </div>
+                      }
+                    >
+                      <div className="p-fluid">
+                        <Row className="mb-3">
+                          <Col xl={12}>
+                            <label htmlFor="secondarySkill" className="block mb-2">Skill Name</label>
+                            <InputText
+                              id="secondarySkill"
+                              value={currentSecondarySkill.value}
+                              onChange={e =>
+                                setCurrentSecondarySkill({
+                                  ...currentSecondarySkill,
+                                  value: e.target.value,
+                                })
+                              }
+                              className="w-full"
+                              style={{ padding: "12px", fontSize: "14px" }}
+                            />
+                          </Col>
+                        </Row>
+                        <Row className="mb-3">
+                          <Col xl={12}>
+                            <label htmlFor="secondarySkillDescription" className="block mb-2">Description</label>
+                            <InputText
+                              id="secondarySkillDescription"
+                              value={currentSecondarySkill.description}
+                              onChange={e =>
+                                setCurrentSecondarySkill({
+                                  ...currentSecondarySkill,
+                                  description: e.target.value,
+                                })
+                              }
+                              className="w-full"
+                              style={{ padding: "12px", fontSize: "14px" }}
+                            />
+                          </Col>
+                        </Row>
+                        <Row className="mb-3">
+                          <Col xl={12}>
+                            <label htmlFor="secondarySkillType" className="block mb-2">Type</label>
+                            <Dropdown
+                              id="secondarySkillType"
+                              value={currentSecondarySkill.type}
+                              onChange={e =>
+                                setCurrentSecondarySkill({
+                                  ...currentSecondarySkill,
+                                  type: e.value,
+                                })
+                              }
+                              options={secondarySkillsAccordionOptions}
+                              placeholder="Select Type"
+                              className="bgclr w-full"
+                              style={{ padding: "8px", fontSize: "14px" }}
+                            />
+                          </Col>
+                        </Row>
+                      </div>
+                    </Dialog>
+
+                    <Accordion
+                      className="mt-3"
+                      multiple={false}
+                      style={{ width: "100%" }}
+                    >
+                      <AccordionTab header="Reporting Manager">
+                        <div className="p-0">
+                         
+
+                          <DataTable
+                            value={reportingManagerData}
+                            paginator
+                            rows={10}
+                            dataKey="id"
+                            emptyMessage="No reporting manager data found."
+                          >
+                            <Column 
+                              field="value" 
+                              header="Manager Name" 
+                              sortable 
+                            />
+                            <Column 
+                              field="description" 
+                              header="Description" 
+                              sortable 
+                            />
+                            <Column 
+                              field="type" 
+                              header="Type" 
+                              sortable 
+                            />
+                            <Column
+                              header="Actions"
+                              body={rowData => (
+                                <div>
+                                  {editReportingManagerIcon(rowData)}
+                                  {deleteReportingManagerIcon(rowData)}
+                                </div>
+                              )}
+                            />
+                          </DataTable>
+                           <div className="d-flex justify-content-end align-items-center mb-3 mt-1">
+                            <Button
+                              label="Add More"
+                              icon="pi pi-plus"
+                              onClick={addNewReportingManager}
+                              className="p-button-success"
+                            />
+                          </div>
+                        </div>
+                      </AccordionTab>
+                    </Accordion>
+
+                    {/* Reporting Manager Edit Dialog */}
+                    <Dialog
+                      header={isEditingReportingManager ? "Edit Reporting Manager" : "Add New Reporting Manager"}
+                      visible={isReportingManagerEditDialogVisible}
+                      onHide={handleCancelReportingManager}
+                      footer={
+                        <div>
+                          <Button
+                            label="Cancel"
+                            icon="pi pi-times"
+                            onClick={handleCancelReportingManager}
+                            className="p-button-text"
+                          />
+                          <Button
+                            label="Save"
+                            icon="pi pi-check"
+                            onClick={handleSaveReportingManager}
+                            autoFocus
+                          />
+                        </div>
+                      }
+                    >
+                      <div className="p-fluid">
+                        <Row className="mb-2">
+                          <Col xl={12}>
+                            <label htmlFor="reportingManager" className="block">Manager Name</label>
+                            <InputText
+                              id="reportingManager"
+                              value={currentReportingManager.value}
+                              onChange={e =>
+                                setCurrentReportingManager({
+                                  ...currentReportingManager,
+                                  value: e.target.value,
+                                })
+                              }
+                              className="w-full"
+                            />
+                          </Col>
+                        </Row>
+                        <Row className="mb-2">
+                          <Col xl={12}>
+                            <label htmlFor="reportingManagerDescription" className="block">Description</label>
+                            <InputText
+                              id="reportingManagerDescription"
+                              value={currentReportingManager.description}
+                              onChange={e =>
+                                setCurrentReportingManager({
+                                  ...currentReportingManager,
+                                  description: e.target.value,
+                                })
+                              }
+                              className="w-full"
+                            />
+                          </Col>
+                        </Row>
+                        <Row className="mb-2">
+                          <Col xl={12}>
+                            <label htmlFor="reportingManagerType" className="block">Type</label>
+                            <Dropdown
+                              id="reportingManagerType"
+                              value={currentReportingManager.type}
+                              onChange={e =>
+                                setCurrentReportingManager({
+                                  ...currentReportingManager,
+                                  type: e.value,
+                                })
+                              }
+                              options={reportingManagerAccordionOptions}
                               placeholder="Select Type"
                               className="bgclr w-full"
                             />

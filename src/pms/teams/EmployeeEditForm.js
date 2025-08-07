@@ -2051,13 +2051,13 @@ const EmployeeEditForm = props => {
                                   </Row>
                                 </Col> */}
                                 <Col lg={12}>
-                                  <Row>
+                                  <Row className="align-items-center">
                                     <Col xl={3}>
                                       <label className="block mb-2">
                                         Private
                                       </label>
                                     </Col>
-                                    <Col xl={9}>
+                                    <Col xl={1}>
                                       <div className="d-flex align-items-center">
                                         <Checkbox
                                           inputId="privateCheckbox"
@@ -2065,8 +2065,10 @@ const EmployeeEditForm = props => {
                                           onChange={(e) => setPrivateDrop(e.checked)}
                                         />
                                       </div>
+                                         </Col>
+                                         <Col xl={8}>
                                       {privateDrop && (
-                                        <div className="p-field mt-2">
+                                        <div className="p-field">
                                           {/* <label htmlFor="userIds">User Id's</label> */}
                                           <MultiSelect
                                             value={PrivetDropdown}

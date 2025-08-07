@@ -14,7 +14,8 @@ import { InputTextarea } from "primereact/inputtextarea"
 import { Checkbox } from "primereact/checkbox"
 import { Chips } from "primereact/chips"
 import EmailSentToContact from "./EmailSentToContact"
-
+import EmailToContact from "./EmailToContact"
+import ArchivedIcon from "./ArchivedIcon"
 import { useSelector } from "react-redux"
 
 
@@ -397,6 +398,7 @@ const SentEmails = () => {
   // interview start
 
   const [interviewpop, SetInterviewpop] = useState(false)
+  const [emailToContactVisible, setEmailToContactVisible] = useState(false)
   const [interview, setInterview] = useState("Interview")
   const [subtype, setSubtype] = useState(null)
   const [startdate, setStartdate] = useState(null)
@@ -583,13 +585,17 @@ const SentEmails = () => {
                       </button> */}
 
                       <EmailSentToContact/>
-                      <button
+                      {/* <button
                         type="button"
                         class="btn btn-secondary icons-btn ms-1"
-                        onClick={() => SetInterviewpop(true)}
+                        onClick={() => setEmailToContactVisible(true)}
                       >
-                        <i className="pi pi-pencil"></i>
-                      </button>
+                        <i className="pi pi-eye"></i>
+                      </button> */}
+                      <EmailToContact 
+                        visible={emailToContactVisible}
+                        onHide={() => setEmailToContactVisible(false)}
+                      />
                       <button
                         type="button"
                         class="btn btn-secondary icons-btn ms-1"
@@ -601,7 +607,7 @@ const SentEmails = () => {
                         type="button"
                         class="btn btn-secondary icons-btn ms-1"
                       >
-                        <i className="pi pi-eye-slash"></i>
+                        <ArchivedIcon />
                       </button>
 
                     </div>
@@ -756,7 +762,7 @@ const SentEmails = () => {
                       {/* <Button label="Show" onClick={SetInterviewpop(true)} /> */}
 
                       <Dialog
-                        header="APPOINTMENT - ANUP GOGOI"
+                        header="Schedule Call"
                         visible={interviewpop}
                         className="interview-popup"
                         style={{ width: "50vw" }}
@@ -964,55 +970,7 @@ const SentEmails = () => {
                           </div>
 
                           <div>
-                            <Row className="mb-2">
-                              <Col xl={6}>
-                                <div className="p-field">
-                                  <label htmlFor="username">
-                                    Auto Followup
-                                  </label>
-                                  <Dropdown
-                                    value={followup}
-                                    onChange={e => setFollowup(e.value)}
-                                    options={followupOptions}
-                                    optionLabel="name"
-                                    placeholder="Select a Followup Interval"
-                                    className="w-full search-option"
-                                  />
-                                </div>
-                              </Col>
-
-                              <Col xl={6}>
-                                <Row>
-                                  <Col xl={6}>
-                                    <div className="p-field flex flex-column">
-                                      <label htmlFor="username">Repeat</label>
-                                      <Dropdown
-                                        value={repeat}
-                                        onChange={e => setRepeat(e.value)}
-                                        options={repeatOptions}
-                                        optionLabel="name"
-                                        placeholder="Select a Repeat Option"
-                                        className="w-full search-option"
-                                      />
-                                    </div>
-                                  </Col>
-
-                                  <Col xl={6}>
-                                    <div className="p-field flex flex-column">
-                                      <label htmlFor="username">Reminder</label>
-                                      <Dropdown
-                                        value={reminder}
-                                        onChange={e => setReminder(e.value)}
-                                        options={reminderOptions}
-                                        optionLabel="name"
-                                        placeholder="Select a Reminder"
-                                        className="w-full search-option"
-                                      />
-                                    </div>
-                                  </Col>
-                                </Row>
-                              </Col>
-                            </Row>
+                           
                             <Row className="mb-2">
                               <Col lg={6}>
                                 <Row>
@@ -1110,7 +1068,7 @@ const SentEmails = () => {
 
 
                       <Dialog
-                        header="APPOINTMENT - ANUP GOGOI"
+                        header="Schedule Call"
                         visible={interviewpop1}
                         className="interview-popup"
                         style={{ width: "50vw" }}
@@ -1331,129 +1289,7 @@ const SentEmails = () => {
                             </Row>
                           </div>
 
-                          <div>
-                            <Row className="mb-2">
-                              <Col xl={6}>
-                                <div className="p-field">
-                                  <label htmlFor="username">
-                                    Auto Followup
-                                  </label>
-                                  <Dropdown
-                                    value={followup1}
-                                    onChange={e => setFollowup1(e.value)}
-                                    options={followupOptions1}
-                                    optionLabel="name"
-                                    placeholder="1 day"
-                                    className="w-full search-option"
-                                    disabled
-                                  />
-                                </div>
-                              </Col>
-
-                              <Col xl={6}>
-                                <Row>
-                                  <Col xl={6}>
-                                    <div className="p-field flex flex-column">
-                                      <label htmlFor="username">Repeat</label>
-                                      <Dropdown
-                                        value={repeat1}
-                                        onChange={e => setRepeat1(e.value)}
-                                        options={repeatOptions1}
-                                        optionLabel="name"
-                                        placeholder="One day"
-                                        className="w-full search-option"
-                                        disabled
-                                      />
-                                    </div>
-                                  </Col>
-
-                                  <Col xl={6}>
-                                    <div className="p-field flex flex-column">
-                                      <label htmlFor="username">Reminder</label>
-                                      <Dropdown
-                                        value={reminder1}
-                                        onChange={e => setReminder1(e.value)}
-                                        options={reminderOptions1}
-                                        optionLabel="name"
-                                        placeholder="5 minutes"
-                                        className="w-full search-option"
-                                        disabled
-                                      />
-                                    </div>
-                                  </Col>
-                                </Row>
-                              </Col>
-                            </Row>
-                            <Row className="mb-2">
-                              <Col lg={6}>
-                                <Row>
-                                  <Col xl={6}>
-                                    <div className="p-field flex flex-column">
-                                      <label For="Priority" className=" block">
-                                        Priority
-                                      </label>
-                                      <Dropdown
-                                        value={priority1}
-                                        onChange={e => setPriority1(e.value)}
-                                        options={typeInterview1}
-                                        optionLabel="name"
-                                        placeholder="Low"
-                                        className="w-full search-option"
-                                        disabled
-                                      />
-                                    </div>
-                                  </Col>
-                                  <Col xl={6}>
-                                    <Row className="mt-2">
-                                      <Col xl={6}>
-                                        <div className="d-flex align-items-center mt-4">
-                                          <Checkbox
-                                            inputId="checkbox"
-                                            checked={true}
-                                            onChange={handlePopupCheckbox}
-                                            disabled
-                                          />
-                                          <label
-                                            htmlFor="username"
-                                            className="ms-1 mt-2"
-                                          >
-                                            Completed
-                                          </label>
-                                        </div>
-                                      </Col>
-
-                                      <Col xl={6}>
-                                        <div className="d-flex align-items-center mt-4">
-                                          <Checkbox
-                                            inputId="checkbox"
-                                            checked={false}
-                                            onChange={handlePopupCheckbox2}
-                                            disabled
-                                          />
-                                          <label
-                                            htmlFor="username"
-                                            className="ms-1 mt-2"
-                                          >
-                                            Private
-                                          </label>
-                                        </div>
-                                      </Col>
-                                    </Row>
-                                  </Col>
-                                </Row>
-                              </Col>
-                              <Col xl={6}>
-                                <label htmlFor="username">User Id's</label>
-                                <Chips
-                                  value={userid1}
-                                  onChange={(e) => setUserid1(e.value)}
-                                  itemTemplate={customChip1}
-                                  className="w-full"
-                                  disabled // Disable the Chips component to prevent user modification
-                                />
-                              </Col>
-                            </Row>
-                          </div>
+                         
 
                           <Row className="">
                             <Col xl={12}>

@@ -19,7 +19,7 @@ import { ChevronRightIcon } from "primereact/icons/chevronright"
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 
-const EmailSentToContact = () => {
+const EmailToContact = ({ visible = false, onHide = () => {} }) => {
 
 
     // submit candidate to job
@@ -86,7 +86,6 @@ const EmailSentToContact = () => {
                             inputId="checkbox"
                             checked={privateDrop}
                             onChange={(e) => setPrivateDrop(e.checked)}
-                            disabled={true}
                         />
                         <label htmlFor="checkbox" className="ms-2 me-3">
                             Private
@@ -102,7 +101,6 @@ const EmailSentToContact = () => {
                                     placeholder="Select User Id's"
                                     maxSelectedLabels={5}
                                     className="w-100"
-                                    disabled
                                 />
                             </div>
                         )}
@@ -171,42 +169,16 @@ const EmailSentToContact = () => {
     const fileUploadRef = useRef(null)
 
     const [emailtextEditor, setEmailtextEditor] = useState(`
-        Dear [Contact First name], <br><br>
-        Please find below candidates with resumes attached for Web Developer (Job-101):
-        <table border="1" cellpadding="5" cellspacing="0">
-                 <tr>
-                   <th> </th>
-                   <td> <b>Lavankumar Web Developer</b> </td>
-                   <td></td>
-                 </tr>
-                 <tr>
-                   <th style="text-align: left;"></th>
-                   <td><b> Primary Skills : </b></td>
-                   <td> HTML, CSS, JavaScript, React.js, Node.js</td>
-                 </tr>
-                 <tr>
-                   <th style="text-align: left;"> </th>
-                   <td><b> Contact Details </b></td>
-                   <td> <strong>Phonenumber : </strong> 9876543210, 9123456789; <strong>Email :</strong> lavan.kumar@example.com </td>
-                 </tr>
-               
-                 <tr>
-                   <th style="text-align: left;"> </th>
-                   <td><b> Work Experience </b></td>
-                   <td>5 Years</td>
-                 </tr>
-                 <tr>
-                   <th style="text-align: left;"></th>
-                   <td><b> Details </b> </td>
-                   <td> <b>Salary Expectation:</b> RS. 9 lakhs, <b>Availability:</b> 23/03/2025, <b>Employment Type:</b> WFH</td>
-                 </tr>
-        </table><br>
-
-        Best Regards, <br>
-        Harish Jaram <br>
-        Senoir HR Recruiter <br>
-        Varun Digital Media <br>
-        Ph: +91-98765343210
+        Dear Mahesh,<br><br>
+        I hope this message finds you well.<br><br>
+        Before we get started with Capterra, I'd like to ensure we're aligned on a few key points. 
+        Kindly review the initial setup guidelines and let me know if you have any questions or if 
+        there's anything you'd like to add before we proceed.<br><br>
+        Your prompt feedback will help us get moving efficiently.<br><br>
+        Looking forward to your response.<br><br>
+        Best regards,<br>
+        Harish Jaram<br>
+        <i>Sent via Bharat PMS</i>
        `)
     const [selectedSmsOption, setSelectedSmsOption] = useState(null)
 
@@ -755,17 +727,18 @@ const EmailSentToContact = () => {
                         class="btn btn-secondary icons-btn ms-1"
                         onClick={() => handleOpenDialogs(true)}
                       >
-                        <i className="pi pi-eye"></i>
+                        <i className="pi pi-pencil"></i>
                       </button>
 
 
             {/* submit candidate to job */}
             <Dialog
-                header="Sent Email"
-                visible={jobsallpopup}
+                header="Email Edit"
+                visible={visible || jobsallpopup}
                 className="interview-popup"
                 onHide={() => {
-                    SetJobsallPopup(false)
+                    onHide();
+                    SetJobsallPopup(false);
                 }}
                 style={{ width: "75vw", height: "82%" }}
                 maximizable
@@ -792,7 +765,6 @@ const EmailSentToContact = () => {
                                             <ChevronDownIcon {...opts.iconProps} />
                                         )
                                     }}
-                                    disabled
                                 />
 
                                 <Dropdown
@@ -811,7 +783,6 @@ const EmailSentToContact = () => {
                                             <ChevronDownIcon {...opts.iconProps} />
                                         )
                                     }}
-                                    disabled
                                 />
 
                                 <div
@@ -834,7 +805,6 @@ const EmailSentToContact = () => {
                                         chooseLabel={<span>Attach Files</span>}
                                         customUpload
                                         uploadHandler={onUploadHandler1}
-                                        disabled
                                     />
                                 </div>
 
@@ -854,7 +824,6 @@ const EmailSentToContact = () => {
                                             <ChevronDownIcon {...opts.iconProps} />
                                         )
                                     }}
-                                    disabled
                                 />
                             </div>
                         </Col>
@@ -864,7 +833,6 @@ const EmailSentToContact = () => {
                                 <button
                                     type="button"
                                     class="waves-effect waves-light outlinebtn btn btn-primary me-2"
-                                    disabled
                                 >
                                     {" "}
                                     <i class="fa-regular fa-paper-plane me-2"></i>Send
@@ -883,12 +851,10 @@ const EmailSentToContact = () => {
                                         <Dropdown
                                             value={frominputemail}
                                             onChange={e => setFrominputemail(e.value)}
-                                            // options={}
+                                            options={fromEmail}
                                             optionLabel="name"
                                             placeholder="From"
                                             className="from-width w-full"
-                                            disabled
-                                            
                                         />
                                     </div>
                                 </Col>
@@ -898,7 +864,6 @@ const EmailSentToContact = () => {
                                         onChange={e => setFromemailjobs(e.value)}
                                         itemTemplate={Fromemailcontjobs}
                                         className="size-mail w-full"
-                                        disabled
                                     />
                                 </Col>
                             </Row>
@@ -909,13 +874,12 @@ const EmailSentToContact = () => {
                                         <Dropdown
                                             placeholder="To"
                                             className="from-width w-full"
-                                            // onClick={(e) => {
-                                            //     e.preventDefault();
-                                            //     setLinkContactsVisible(true);
-                                            // }}
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                setLinkContactsVisible(true);
+                                            }}
                                             showClear={false}
                                             showOnFocus={false}
-                                            disabled
                                         />
                                     </div>
                                 </Col>
@@ -925,7 +889,6 @@ const EmailSentToContact = () => {
                                         value={jobDescriptions}
                                         onChange={(e) => setJobDescriptions(e.value)}
                                         className="size-mail w-full"
-                                        disabled
                                     />
 
                                 </Col>
@@ -937,13 +900,12 @@ const EmailSentToContact = () => {
                                         <Dropdown
                                             placeholder="Cc"
                                             className="from-width w-full"
-                                            // onClick={(e) => {
-                                            //     e.preventDefault();
-                                            //     setLinkContactsVisible1(true);
-                                            // }}
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                setLinkContactsVisible1(true);
+                                            }}
                                             showClear={false}
                                             showOnFocus={false}
-                                            disabled
                                         />
                                     </div>
                                 </Col>
@@ -953,7 +915,6 @@ const EmailSentToContact = () => {
                                         value={contactDescriptions}
                                         onChange={(e) => setContactDescriptions(e.value)}
                                         className="size-mail w-full"
-                                        disabled
                                     />
                                 </Col>
                             </Row>
@@ -968,7 +929,6 @@ const EmailSentToContact = () => {
                                         aria-describedby="username-help"
                                         placeholder="Capterra Setup - Initial Guidelines Review"
                                         className="w-full"
-                                        disabled
                                     />
                                 </Col>
                             </Row>
@@ -1024,53 +984,11 @@ const EmailSentToContact = () => {
 
                     <Row>
                         <Col xl={12}>
-                            <div 
-                                style={{
-                                    backgroundColor: '#f8f9fa',
-                                    border: '1px solid #e1e5e9',
-                                    borderRadius: '8px',
-                                    padding: '20px',
-                                    fontFamily: 'Arial, sans-serif',
-                                    fontSize: '14px',
-                                    lineHeight: '1.6',
-                                    color: '#6c757d',
-                                    minHeight: '300px',
-                                    pointerEvents: 'none',
-                                    userSelect: 'none',
-                                    opacity: '0.8'
-                                }}
-                            >
-                                <div style={{ marginBottom: '20px' }}>
-                                    <p style={{ margin: '0 0 15px 0' }}>Dear Mahesh,</p>
-                                    
-                                    <p style={{ margin: '0 0 15px 0' }}>I hope this message finds you well.</p>
-                                    
-                                    <p style={{ margin: '0 0 15px 0' }}>
-                                        Before we get started with Capterra, I'd like to ensure we're aligned on a few key points. 
-                                        Kindly review the initial setup guidelines and let me know if you have any questions or if 
-                                        there's anything you'd like to add before we proceed.
-                                    </p>
-                                    
-                                    <p style={{ margin: '0 0 15px 0' }}>
-                                        Your prompt feedback will help us get moving efficiently.
-                                    </p>
-                                    
-                                    <p style={{ margin: '0 0 20px 0' }}>Looking forward to your response.</p>
-                                </div>
-                                
-                                <div style={{ 
-                                    borderTop: '1px solid #e1e5e9', 
-                                    paddingTop: '15px',
-                                    color: '#6c757d',
-                                    fontSize: '13px'
-                                }}>
-                                    <p style={{ margin: '0 0 5px 0', fontWeight: 'bold' }}>Best regards,</p>
-                                    <p style={{ margin: '0 0 5px 0' }}>Harish Jaram</p>
-                                    <p style={{ margin: '0 0 10px 0', fontStyle: 'italic', color: '#6c757d' }}>
-                                        Sent via Bharat PMS
-                                    </p>
-                                </div>
-                            </div>
+                            <Editor
+                                value={emailtextEditor}
+                                onTextChange={e => setEmailtextEditor(e.htmlValue)}
+                                className="jobsall-editor"
+                            />
                         </Col>
                     </Row>
                 </div>
@@ -1356,4 +1274,4 @@ const EmailSentToContact = () => {
         </React.Fragment>
     )
 }
-export default EmailSentToContact
+export default EmailToContact
