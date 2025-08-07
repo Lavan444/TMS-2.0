@@ -3612,7 +3612,7 @@ const EmployeeAllActive = () => {
 
                   {/* <FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*"  uploadHandler={customBase64Uploader} /> */}
 
-                  <Tooltip
+                  {/* <Tooltip
                     target=".import"
                     content="Export"
                     position="top"
@@ -3634,7 +3634,7 @@ const EmployeeAllActive = () => {
                       icon: "pi pi-file-import",
                       iconOnly: true,
                     }}
-                  />
+                  /> */}
 
                   <Tooltip
                     target=".export"
