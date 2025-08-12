@@ -67,12 +67,12 @@ const AddMenu = () => {
             subItems: [
                 {
                     name: 'Projects', code: 'EM-JO-AL',
-                    action: () => navigate('/importfromcsv-jobs')
+                    action: () => navigate('/importfromcsv-project')
 
                 },
                 {
                     name: 'Work Type', code: 'EM-JO-SE',
-                    action: () => navigate('/importfromcsv-candidates')
+                    action: () => navigate('/importfromcsv-worktype')
                 },
                 {
                     name: 'Companies', code: 'EM-JO-SE',

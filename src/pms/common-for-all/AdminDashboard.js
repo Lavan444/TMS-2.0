@@ -113,7 +113,7 @@ const AdminDashboard = () => {
     hrms: "BambooHR",
   },
   {
-    id: 3,
+    id: 3,  
     groupname: "Sales",
     username: "User3",
     role: "Sales Executive",
@@ -482,7 +482,7 @@ const actionTemplate = (rowData) => {
 
   const [userList, setUserList] = useState([
     {
-      username: "Mahesh Kumar Bhoga",
+      username: "mahesh",
       email: "mahesh@varundigitalmedia.com",
       role: "User",
       status: "Active",
@@ -490,7 +490,7 @@ const actionTemplate = (rowData) => {
       password: "password123",
     },
     {
-      username: "Lavankumar",
+      username: "lavan",
       email: "lavankumar@varundigitalmedia.com",
       role: "User",
       status: "Active",
@@ -498,7 +498,7 @@ const actionTemplate = (rowData) => {
       password: "password456",
     },
     {
-      username: "Vinay",
+      username: "vinay",
       email: "vinay@varundigitalmedia.com",
       role: "User",
       status: "Active",
@@ -506,7 +506,7 @@ const actionTemplate = (rowData) => {
       password: "password456",
     },
      {
-      username: "Vasanth",
+      username: "vasanth",
       email: "vasanth@varundigitalmedia.com",
       role: "User",
       status: "Archived",
@@ -703,14 +703,49 @@ const roleActionMenu = useRef(null);
     description: "",
     selectedOptions: [],
   })
-  const [groupList, setGroupList] = useState([])
+  // const [groupList, setGroupList] = useState([])
+
+  const [groupList, setGroupList] = useState([
+ {
+    id: 1,
+    groupName: "Project Management",
+    description: "Project coordinators and managers overseeing development lifecycle",
+    selectedOptions: ["mahesh", "lavan", "vasanth"],
+    dateCreated: "2025-01-01",
+    createdBy: "Admin",
+    status: "Active",
+    memberCount: 3
+  },
+    {
+    id: 2,
+    groupName: "Data Analytics",
+    description: "Data scientists and analysts working on business intelligence",
+    selectedOptions: ["lavan"],
+    dateCreated: "2024-12-25",
+    createdBy: "Data Lead",
+    status: "Active",
+    memberCount: 1
+  },
+  {
+    id: 3,
+    groupName: "DevOps Team",
+    description: "Infrastructure and deployment management team",
+    selectedOptions: ["vasanth"],
+    dateCreated: "2025-01-05",
+    createdBy: "Tech Lead",
+    status: "Active",
+    memberCount: 1
+  },
+])
+
+
   const [editingIndex, setEditingIndex] = useState(null) // Tracks the index of the group being edited
 
   const availableOptions = [
-    { label: "Option 1", value: "Option 1" },
-    { label: "Option 2", value: "Option 2" },
-    { label: "Option 3", value: "Option 3" },
-    { label: "Option 4", value: "Option 4" },
+    { label: "mahesh", value: "mahesh" },
+    { label: "lavan", value: "lavan" },
+    { label: "vinay", value: "vinay" },
+    { label: "vasanth", value: "vasanth" },
   ]
 
   const handleSaveGroup = () => {
@@ -7693,7 +7728,7 @@ const handlePermissionChange = (tabIdx, permIdx) => {
                                   })
                                 }
                                 placeholder="Choose options"
-                                display="chip" // Displays selected options as chips
+                                display="comma" 
                               />
                             </div>
 
@@ -7733,7 +7768,7 @@ const handlePermissionChange = (tabIdx, permIdx) => {
                             />
                             <Column field="dateCreated" header="Date Created" />
                             <Column
-                              style={{ width: "8%" }}
+                              style={{ width: "10rem" }}
                               body={(rowData, { rowIndex }) => (
                                 <div>
                                   <Button

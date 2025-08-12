@@ -19,7 +19,7 @@ import LinkContactsPopup from "pms/common-for-all/LinkContactsPopup";
 import LinkContact2Popup from "pms/common-for-all/LinkContact2Popup";
 import { useSelector } from "react-redux"
 import { Editor } from "primereact/editor"
-import LinkJobsPopup from "pms/common-for-all/LinkCandidatesPopup"
+import LinkJobsPopup from "pms/common-for-all/LinkWorkTypePopup"
 
 
 const CalenderActive = () => {

@@ -72,7 +72,7 @@ const SidebarContent = props => {
           id: 'projects',
           title: 'Projects',
           subItems: [
-            { id: 'all-active-jobs', title: 'All Active', route: '/allactive-jobs' },
+            { id: 'all-active-project', title: 'All Active', route: '/allactive-project' },
             { id: 'my-active-jobs', title: 'My Active', disabled: true },
             { id: 'assigned-to-me', title: 'Assigned to Me', disabled: true },
             { id: 'all-closed', title: 'All Closed', disabled: true },
@@ -83,12 +83,12 @@ const SidebarContent = props => {
           id: 'work-type',
           title: 'Work Type',
           subItems: [
-            { id: 'all-active-candidates', title: 'All Active', route: '/allactive-candidates' , },
-            { id: 'my-active-candidates', title: 'My Active', route: '/myactive-candidates', disabled: true },
-            { id: 'todo-list', title: 'To Do List', route: '/candidates-tasklist' , disabled: true},
-            // { id: 'added-by-me', title: 'Added by Me', route: '/candidates-added' },
-            // { id: 'opened-by-me', title: 'Opened by Me', route: '/candidates-opened' },
-            { id: 'archived-candidates', title: 'Archived', route: '/candidates-archived', disabled: true }
+            { id: 'all-active-work-type', title: 'All Active', route: '/allactive-worktype' , },
+            { id: 'my-active-work-type', title: 'My Active', route: '', disabled: true },
+            { id: 'todo-list', title: 'To Do List', route: '' , disabled: true},
+            // { id: 'added-by-me', title: 'Added by Me', route: '' },
+            // { id: 'opened-by-me', title: 'Opened by Me', route: '' },
+            { id: 'archived-work-type', title: 'Archived', route: '', disabled: true }
           ]
         }
       ]

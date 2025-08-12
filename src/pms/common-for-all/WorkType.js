@@ -14,7 +14,7 @@ import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
-import AllActiveemp from 'pms/resources/AllActiveemp';
+import WorkTypeAllActive from 'pms/resources/WorkTypeAllActive';
 
 const customStyles = `
     .p-dialog-content {
@@ -518,7 +518,7 @@ const TaskCreator = () => {
             <ConfirmDialog />
             <div style={{ display: "none" }}>
 
-                <AllActiveemp workTypes={dropdownValue} />
+                <WorkTypeAllActive workTypes={dropdownValue} />
             </div>
             <div className="formgrid grid p-fluid" >
                 <div className="field col-12   mb-0">

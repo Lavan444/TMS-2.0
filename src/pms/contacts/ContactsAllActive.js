@@ -60,12 +60,11 @@ import NotesContact from '../common-for-all/NotesContact'
 import NotesContact1 from '../common-for-all/NotesContactNames'
 import LinkContactsPopup from "pms/common-for-all/LinkContactsPopup";
 import LinkContact2Popup from "pms/common-for-all/LinkContact2Popup";
-import LinkCandidatesPopup from "pms/common-for-all/LinkCandidatesPopup";
-import LinkContactJob from "pms/common-for-all/LinkContactJob";
-import SubmitContacttoCandidate from "./SubmitContacttoCandidate";
+import LinkWorkTypePopup from "pms/common-for-all/LinkWorkTypePopup";
+import LinkContactProject from "pms/common-for-all/LinkContactProject";
+import SubmitContacttoCandidate from "./SubmitContacttoWorkType";
 import MoreACcontacts from "./MoreACcontacts";
 import EmailContacts from "./EmailContacts";
-import AddJob from "./AddJob";
 
 import { useSelector } from "react-redux"
 
@@ -2882,35 +2881,7 @@ const ContactsAllActive = () => {
                 </span>
                 <span className="drop-ac">
 
-                  {/* <SubmitContacttoCandidate /> */}
-
-                  {/* <AddJob /> */}
-
-                  {/* <EmailContacts /> */}
-
-                  {/* <CascadeSelect
-                    // value={selectedSchedule}
-                    onChange={handleScheduleChange}
-                    options={actScheduleOptions}
-                    optionLabel="name"
-                    optionGroupLabel="name"
-                    className="md:w-10rem me-1"
-                    optionGroupChildren={['subItems', 'subItems']}
-                    breakpoint="767px"
-                    placeholder="Schedule"
-                  /> */}
-
-                  {/* <CascadeSelect
-                    value={selectedActSms}
-                    // onChange={(e) => setSelectedActSms(e.value)}
-                    options={actSmsOptions}
-                    optionLabel="name"
-                    optionGroupLabel="name"
-                    optionGroupChildren={['subItems', 'subItems']}
-                    className="md:w-8rem me-1"
-                    breakpoint="767px"
-                    placeholder="SMS"
-                  /> */}
+                 
 
                   <MoreACcontacts />
 
@@ -4262,7 +4233,7 @@ const ContactsAllActive = () => {
 
 
             <div className="mb-4">
-              <LinkContactJob />
+              <LinkContactProject />
 
 
               <Row className="mb-2">
@@ -4281,7 +4252,7 @@ const ContactsAllActive = () => {
                    
                   </div>
                 </Col> */}
-                <LinkCandidatesPopup />
+                <LinkWorkTypePopup />
 
                 <Col xl={6}>
                   <div className="p-field flex flex-column">

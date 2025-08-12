@@ -44,53 +44,159 @@ const Footer = ({ callBack }) => {
     )
   }
 
-  // pick list start
-
+  // pick list start - WorkType columns configuration
   const [pick, setPick] = useState(false)
 
-  const dummyData = [
-    { id: 1, name: "First name" },
-    { id: 2, name: "Last name" },
-    { id: 3, name: "Company" },
-    { id: 4, name: "Job Title" },
-    { id: 5, name: "Status" },
-    { id: 6, name: "Primary Skills" },
-    { id: 7, name: "Secondary Skills" },
-    { id: 8, name: "Other Skills" },
-    { id: 9, name: "Email 1" },
-    { id: 10, name: "Attachment" },
-    { id: 11, name: "Email 2" },
-    { id: 12, name: "Work Phone" },
-    { id: 13, name: "Mobile Phone" },
-    { id: 14, name: "Address" },
-    { id: 15, name: "LinkedIn URL" },
-    { id: 16, name: "Facebook URL" },
-    { id: 17, name: "X URL" },
-    { id: 18, name: "Indeed URL" },
-    { id: 19, name: "Source" },
-    { id: 20, name: "Relocation" },
-    { id: 21, name: "Availability Date" },
-    { id: 22, name: "DoB" },
-    { id: 23, name: "Referred By" },
-    { id: 24, name: "Categories" },
-    { id: 25, name: "Groups" },
-    { id: 26, name: "Candidate Submitted Resume" },
-    { id: 27, name: "Type" },
-    { id: 28, name: "Subject" },
+  // Available columns for the WorkType DataTable (matching AllActiveemp structure)
+  const availableWorkTypeColumns = [
+    { id: 'task_code', name: 'Work Type Code', field: 'task_code' },
+    { id: 'task_type', name: 'Work Type', field: 'task_type' },
+    { id: 'project_name', name: 'Project Name', field: 'project_name' },
+    { id: 'module_name', name: 'Module Name', field: 'module_name' },
+    { id: 'task_name', name: 'Summary', field: 'task_name' },
+    { id: 'created_by', name: 'Created By', field: 'created_by' },
+    { id: 'assigned_by', name: 'Assigned By', field: 'assigned_by' },
+    { id: 'assigned_to', name: 'Assigned To', field: 'assigned_to' },
+    { id: 'project_manager', name: 'Project Manager', field: 'project_manager' },
+    { id: 'watchers', name: 'Watchers', field: 'watchers' },
+    { id: 'start_date', name: 'Start Date', field: 'start_date' },
+    { id: 'work_hours', name: 'Work Hours (in hours)', field: 'work_hours' },
+    { id: 'end_date', name: 'End Date', field: 'end_date' },
+    { id: 'actual_end_date', name: 'Actual End Date', field: 'actual_end_date' },
+    { id: 'task_status', name: 'Status', field: 'task_status' },
+    { id: 'priority', name: 'Priority', field: 'priority' },
+    { id: 'approval_status', name: 'Approval Status', field: 'approval_status' }
   ]
 
-  const [source, setSource] = useState(dummyData)
-  const [target, setTarget] = useState([])
+  // Default selected columns (matching AllActiveemp defaults)
+  const defaultSelectedColumns = [
+    { id: 'task_code', name: 'Work Type Code', field: 'task_code' },
+    { id: 'task_type', name: 'Work Type', field: 'task_type' },
+    { id: 'project_name', name: 'Project Name', field: 'project_name' },
+    { id: 'task_name', name: 'Summary', field: 'task_name' },
+    { id: 'assigned_to', name: 'Assigned To', field: 'assigned_to' },
+    { id: 'task_status', name: 'Status', field: 'task_status' },
+    { id: 'priority', name: 'Priority', field: 'priority' }
+  ]
 
+  // Initialize source (available) and target (selected) columns
+  const [source, setSource] = useState(
+    availableWorkTypeColumns.filter(col => 
+      !defaultSelectedColumns.some(defaultCol => defaultCol.id === col.id)
+    )
+  )
+  const [target, setTarget] = useState(defaultSelectedColumns)
+
+  // Handle column changes in PickList
   const onChange = event => {
     setSource(event.source)
     setTarget(event.target)
   }
 
+  // Handle Save button - this will apply the column selection
+  const handleSaveColumns = () => {
+    // Get the field names of selected columns
+    const selectedFields = target.map(col => col.field)
+    
+    // Store in localStorage for persistence
+    localStorage.setItem('workTypeSelectedColumns', JSON.stringify(selectedFields))
+    localStorage.setItem('workTypeSelectedColumnsData', JSON.stringify(target))
+    
+    // Dispatch custom event to notify AllActiveemp component
+    const event = new CustomEvent('footerColumnUpdate', {
+      detail: {
+        type: 'COLUMN_SELECTION',
+        selectedColumns: selectedFields,
+        selectedColumnsData: target
+      }
+    })
+    window.dispatchEvent(event)
+    
+    // If callBack function is provided, send the selected columns back to parent
+    if (callBack && typeof callBack === 'function') {
+      callBack({
+        type: 'COLUMN_SELECTION',
+        selectedColumns: selectedFields,
+        selectedColumnsData: target
+      })
+    }
+    
+    setPick(false)
+    
+    // Show success message or notification here if needed
+    console.log('Selected columns saved:', selectedFields)
+  }
+
+  // Reset to default columns
+  const handleResetColumns = () => {
+    const defaultFields = defaultSelectedColumns.map(col => col.field)
+    setTarget(defaultSelectedColumns)
+    setSource(
+      availableWorkTypeColumns.filter(col => 
+        !defaultSelectedColumns.some(defaultCol => defaultCol.id === col.id)
+      )
+    )
+    
+    // Store reset in localStorage
+    localStorage.setItem('workTypeSelectedColumns', JSON.stringify(defaultFields))
+    localStorage.setItem('workTypeSelectedColumnsData', JSON.stringify(defaultSelectedColumns))
+    
+    // Dispatch custom event to notify AllActiveemp component
+    const event = new CustomEvent('footerColumnUpdate', {
+      detail: {
+        type: 'COLUMN_RESET',
+        selectedColumns: defaultFields,
+        selectedColumnsData: defaultSelectedColumns
+      }
+    })
+    window.dispatchEvent(event)
+    
+    // Update parent component if callback exists
+    if (callBack && typeof callBack === 'function') {
+      callBack({
+        type: 'COLUMN_RESET',
+        selectedColumns: defaultFields,
+        selectedColumnsData: defaultSelectedColumns
+      })
+    }
+  }
+
+  // Load saved column configuration on component mount
+  useEffect(() => {
+    const savedColumns = localStorage.getItem('workTypeSelectedColumns')
+    const savedColumnsData = localStorage.getItem('workTypeSelectedColumnsData')
+    
+    if (savedColumns && savedColumnsData) {
+      try {
+        const parsedFields = JSON.parse(savedColumns)
+        const parsedData = JSON.parse(savedColumnsData)
+        
+        setTarget(parsedData)
+        setSource(
+          availableWorkTypeColumns.filter(col => 
+            !parsedFields.includes(col.field)
+          )
+        )
+        
+        // Notify parent component of saved selection
+        if (callBack && typeof callBack === 'function') {
+          callBack({
+            type: 'COLUMN_LOAD',
+            selectedColumns: parsedFields,
+            selectedColumnsData: parsedData
+          })
+        }
+      } catch (error) {
+        console.error('Error loading saved columns:', error)
+      }
+    }
+  }, [])
+
   const itemTemplate = item => (
     <div className="flex flex-wrap p-2 align-items-center gap-3">
       <div className="flex-1 flex flex-column gap-2">
-        <span>{item.name}</span>
+        <span className="font-bold">{item.name}</span>
+        <small className="text-muted">Field: {item.field}</small>
       </div>
     </div>
   )
@@ -115,11 +221,11 @@ const Footer = ({ callBack }) => {
     "Contacts All Active": PrimeIcons.ADDRESS_BOOK,
     "Contacts My Active": PrimeIcons.ADDRESS_BOOK,
 
-    // Candidates - all use same icon (different from Contacts)
-    Candidates: PrimeIcons.USER_EDIT,
-    "Candidates All": PrimeIcons.USER_EDIT,
-    "Candidates All Active": PrimeIcons.USER_EDIT,
-    "Candidates My Active": PrimeIcons.USER_EDIT,
+    // Worktype - all use same icon (different from Contacts)
+    Worktype: PrimeIcons.USER_EDIT,
+    "Worktype All": PrimeIcons.USER_EDIT,
+    "Worktype All Active": PrimeIcons.USER_EDIT,
+    "Worktype My Active": PrimeIcons.USER_EDIT,
   }
 
   // Assuming this exists in your app
@@ -172,7 +278,7 @@ const Footer = ({ callBack }) => {
 
       const displayName = fullTabName
         .replace(
-          /\b(Candidates|Contacts|Jobs|Recruiter|Companies|Calendar|Emails|Dashboard)\b/gi,
+          /\b(Worktype|Contacts|Projects|Recruiter|Companies|Calendar|Emails|Dashboard)\b/gi,
           ""
         )
         .trim()
@@ -278,8 +384,8 @@ const Footer = ({ callBack }) => {
   const visibleTabs = openPages.slice(0, visibleTabCount)
 
   const excludedTabs = [
-    "Candidates",
-    "Jobs",
+    "Worktype",
+    "Projects",
     "Recruiter",
     "Companies",
     "Contacts",
@@ -302,9 +408,9 @@ const Footer = ({ callBack }) => {
     console.log("Processed tab name:", tab)
 
     if (tab === "home") return PrimeIcons.HOME 
-    if (tab.includes("candidates")) return PrimeIcons.USERS
+    if (tab.includes("Worktype")) return PrimeIcons.USERS
     if (tab.includes("contacts")) return PrimeIcons.ADDRESS_BOOK
-    if (tab.includes("jobs")) return PrimeIcons.BRIEFCASE
+    if (tab.includes("Projects")) return PrimeIcons.BRIEFCASE
     // if (tab.includes("recruiter")) return PrimeIcons.CHART_LINE
     if (tab.includes("companies")) return PrimeIcons.BUILDING
     if (tab.includes("calendar")) return PrimeIcons.CALENDAR
@@ -365,14 +471,14 @@ const Footer = ({ callBack }) => {
 
                 <Tooltip
                   target=".gear"
-                  content="Field List"
+                  content="WorkType Field List"
                   position="bottom"
                   style={{ marginTop: "5px" }}
                 />
                 <span
                   className="gear-picklist gear"
                   onClick={() => setPick(true)}
-                  title="Candidate Field List"
+                  title="WorkType Field List"
                 >
                   <i class="fa-solid fa-user-gear me-2"></i>
                 </span>
@@ -560,14 +666,16 @@ const Footer = ({ callBack }) => {
         </Container>
 
         <Dialog
-          header="Candidate Field List"
+          header="WorkType Field List"
           visible={pick}
           onHide={() => setPick(false)}
-          style={{ width: "60vw" }}
-          breakpoints={{ "960px": "75vw", "641px": "100vw" }}
+          style={{ width: "70vw" }}
+          breakpoints={{ "960px": "85vw", "641px": "100vw" }}
           className="footer-popup"
         >
           <div className="card">
+            
+
             <PickList
               dataKey="id"
               source={source}
@@ -577,25 +685,85 @@ const Footer = ({ callBack }) => {
               filter
               filterBy="name"
               breakpoint="1280px"
-              sourceHeader="Available Fields"
-              targetHeader="Selected Fields"
-              sourceStyle={{ height: "24rem" }}
-              targetStyle={{ height: "24rem" }}
-              sourceFilterPlaceholder="Search..."
-              targetFilterPlaceholder="Search..."
+              sourceHeader={`Available Fields (${source.length})`}
+              targetHeader={`Selected Fields (${target.length})`}
+              sourceStyle={{ height: "28rem" }}
+              targetStyle={{ height: "28rem" }}
+              sourceFilterPlaceholder="Search available fields..."
+              targetFilterPlaceholder="Search selected fields..."
+              showSourceControls={true}
+              showTargetControls={true}
+              metaKeySelection={false}
             />
+            
+            {target.length === 0 && (
+              <div className="mt-2 p-2 bg-warning-subtle text-warning rounded">
+                <i className="pi pi-exclamation-triangle me-2"></i>
+                <strong>Warning:</strong> No columns selected. Please select at least one column to display data.
+              </div>
+            )}
           </div>
 
-          <div className="row">
-            <div className="col-xl-12">
-              <div className="d-flex justify-content-end">
-                <button
-                  type="button"
-                  className="btn btn-primary waves-effect waves-light me-2 btn-main"
-                  onClick={() => setPick(false)}
-                >
-                  <i className="pi pi-save me-1"></i>Save
-                </button>
+          <div className="row mt-3">
+
+<div className="col-xl-6">
+            <div className="mb-0">
+              <div className="row">
+               </div>
+                <div className="col-md-6 d-flex justify-content-between align-items-center">
+                  <div className="p-3 ">
+                    
+                    <div className="d-flex gap-2">
+                      <button
+                        type="button"
+                        className="btn btn-sm btn-outline-primary"
+                        onClick={handleResetColumns}
+                      >
+                        <i className="pi pi-refresh me-1"></i>
+                        Reset to Default
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-sm btn-outline-success"
+                        onClick={() => {
+                          setTarget(availableWorkTypeColumns)
+                          setSource([])
+                        }}
+                      >
+                        <i className="pi pi-check-square me-1"></i>
+                        Select All
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-xl-6">
+              <div className="d-flex justify-content-end align-items-center">
+                {/* <div className="text-muted small">
+                  <i className="pi pi-list me-1"></i>
+                  Selected columns will be applied to the WorkType table
+                </div> */}
+                <div className="d-flex gap-2">
+                  <button
+                    type="button"
+                    className="btn btn-outline-secondary waves-effect waves-light"
+                    onClick={() => setPick(false)}
+                  >
+                    <i className="pi pi-times me-1"></i>
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-primary waves-effect waves-light btn-main"
+                    onClick={handleSaveColumns}
+                    disabled={target.length === 0}
+                  >
+                    <i className="pi pi-save me-1"></i>
+                    Save & Apply ({target.length} columns)
+                  </button>
+                </div>
               </div>
             </div>
           </div>

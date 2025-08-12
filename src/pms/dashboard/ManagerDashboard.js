@@ -19,7 +19,7 @@ import { Accordion, AccordionTab } from 'primereact/accordion'; // Add this impo
 import { Badge } from "primereact/badge"
 import { InputTextarea } from "primereact/inputtextarea"
 import { TreeTable } from "primereact/treetable"
-import EstimateTable from '../..//features/projects/components/EstimateTable';;;;
+// import EstimateTable from '../../projects/components/EstimateTable';;;;
 
 
 
@@ -28,7 +28,7 @@ const ManagerDashboard = () => {
 
   // Sidebar state variables
   const [visibleRight, setVisibleRight] = useState(false);
-  const [jobid, setJobid] = useState('PROJ-2025-001');
+  const [jobid, setJobid] = useState('Proj-101');
   const [jobtitle, setJobtitle] = useState('');
   const [jobStartDate, setJobStartDate] = useState(null);
   const [jobEndDate, setJobEndDate] = useState(null);
@@ -204,7 +204,7 @@ const ManagerDashboard = () => {
     },
     {
       task_status: "Bug",
-      task_code: "Bug-102",
+      task_code: "Bug-101.1",
       task_name: "Generate Monthly Report",
       "Estimated Work Hours": "8",
       start_date: "04-05-2025",
@@ -992,20 +992,20 @@ const ManagerDashboard = () => {
 
   const openJobs = [
     {
-      project_code: "PROJ-2025-001",
-      project_name: "Customer Portal Development",
+      project_code: "Proj-101",
+      project_name: "AI Generator",
       status: "In Progress",
       start_date: "01-01-2025",
       end_date: "30-04-2025",
       extended_end_date: "15-05-2025",
-      reason_for_late: "Additional feature requests from client",
-      project_manager: "Amit Sharma",
-      company: "TechMahindra",
+      reason_for_late: "Due to some issues",
+      project_manager: "Mahesh Kumar Bhoga",
+      company: "Varun Digital Media",
       pending_tasks: 320,
       total_tasks: 600
     },
     {
-      project_code: "PROJ-2025-002",
+      project_code: "Proj-102",
       project_name: "Mobile Banking Application",
       status: "Completed",
       start_date: "15-01-2025",
@@ -1018,7 +1018,7 @@ const ManagerDashboard = () => {
       total_tasks: 600
     },
     {
-      project_code: "PROJ-2025-003",
+      project_code: "Proj-103",
       project_name: "Business Intelligence Dashboard",
       status: "In Progress",
       start_date: "01-02-2025",
@@ -1031,7 +1031,7 @@ const ManagerDashboard = () => {
       total_tasks: 600
     },
     {
-      project_code: "PROJ-2025-004",
+      project_code: "Proj-104",
       project_name: "Cloud Infrastructure Migration",
       status: "On Hold",
       start_date: "10-01-2025",
@@ -1044,7 +1044,7 @@ const ManagerDashboard = () => {
       total_tasks: 600
     },
     {
-      project_code: "PROJ-2025-005",
+      project_code: "Proj-105",
       project_name: "Employee Management System",
       status: "In Progress",
       start_date: "01-03-2025",
@@ -1057,7 +1057,7 @@ const ManagerDashboard = () => {
       total_tasks: 600
     },
     {
-      project_code: "PROJ-2025-006",
+      project_code: "Proj-106",
       project_name: "Digital Marketing Platform",
       status: "Completed",
       start_date: "15-12-2024",
@@ -1070,7 +1070,7 @@ const ManagerDashboard = () => {
       total_tasks: 600
     },
     {
-      project_code: "PROJ-2025-007",
+      project_code: "Proj-107",
       project_name: "Enterprise Content Management",
       status: "In Progress",
       start_date: "01-04-2025",
@@ -1083,7 +1083,7 @@ const ManagerDashboard = () => {
       total_tasks: 600
     },
     {
-      project_code: "PROJ-2025-008",
+      project_code: "Proj-108",
       project_name: "AI-Powered Analytics Engine",
       status: "In Progress",
       start_date: "01-02-2025",
@@ -1096,7 +1096,7 @@ const ManagerDashboard = () => {
       total_tasks: 600
     },
     {
-      project_code: "PROJ-2025-009",
+      project_code: "Proj-109",
       project_name: "Project Collaboration Suite",
       status: "Completed",
       start_date: "15-11-2024",
@@ -1109,7 +1109,7 @@ const ManagerDashboard = () => {
       total_tasks: 600
     },
     {
-      project_code: "PROJ-2025-010",
+      project_code: "Proj-110",
       project_name: "Omnichannel Marketing Solution",
       status: "In Progress",
       start_date: "01-03-2025",
@@ -1438,7 +1438,7 @@ const ManagerDashboard = () => {
                       <i className="pi pi-folder me-1"></i> Project - Project Name
                     </h3>
                     <div className="d-flex align-items-center">
-                      <Link to="/jobs-editform">
+                      <Link to="/project-editform">
                         <p className="mb-0 text-white">
                           {" "}
                           <i class="fa-regular fa-pen-to-square me-3"></i>{" "}
@@ -1688,7 +1688,7 @@ const ManagerDashboard = () => {
                     <TabPanel header="Estimates" leftIcon="pi pi-sitemap mr-2">
                       <Row>
                         <Col lg={12}>
-                          <EstimateTable />
+                          {/* <EstimateTable /> */}
 
                           <Row className="mt-5">
                             <Col lg={12}>
@@ -1733,94 +1733,7 @@ const ManagerDashboard = () => {
                     </TabPanel>
 
 
-                    <TabPanel header="Activities" leftIcon="pi pi-calendar mr-2">
-                      <Row>
-                        <Col lg={12}>
-                          <section className="job-datatable-section">
-                            <div className="card1 mt-3 mb-4 actjobsumtable">
-                              <DataTable
-                                responsive
-                                showGridlines
-                                value={activities}
-                                tableStyle={{
-                                  minWidth: "50rem",
-                                  borderRadius: "8px",
-                                  boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
-                                }}
-                                paginator
-                                rows={5}
-                                rowsPerPageOptions={[5, 10, 25, 50]}
-                                paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
-                                currentPageReportTemplate="{first} to {last} of {totalRecords}"
-                                filters={activitiesFilters}
-                                filterDisplay="row"
-                                globalFilterFields={[
-                                  "type",
-                                  "sub_type",
-                                  "priority",
-                                  "subject",
-                                  "date_time",
-                                  "user_id",
-                                ]}
-                                emptyMessage="No activities found."
-                                selection={selectedActivities}
-                                onSelectionChange={e => setSelectedActivities(e.value)}
-                                selectionMode="multiple"
-                                resizableColumns
-                                columnResizeMode="expand"
-                              >
-                                <Column
-                                  selectionMode="multiple"
-                                  headerStyle={{ width: "3em" }}
-                                />
-                                <Column
-                                  field="type"
-                                  header="Type"
-                                  sortable
-                                  filter
-                                  style={{ minWidth: "10rem" }}
-                                />
-                                <Column
-                                  field="sub_type"
-                                  header="Sub Type"
-                                  sortable
-                                  filter
-                                  style={{ minWidth: "10rem" }}
-                                />
-                                <Column
-                                  field="priority"
-                                  header="Priority"
-                                  sortable
-                                  filter
-                                  style={{ minWidth: "10rem" }}
-                                />
-                                <Column
-                                  field="subject"
-                                  header="Subject"
-                                  sortable
-                                  filter
-                                  style={{ minWidth: "10rem" }}
-                                />
-                                <Column
-                                  field="date_time"
-                                  header="Date and Time"
-                                  sortable
-                                  filter
-                                  style={{ minWidth: "10rem" }}
-                                />
-                                <Column
-                                  field="user_id"
-                                  header="User ID"
-                                  sortable
-                                  filter
-                                  style={{ minWidth: "10rem" }}
-                                />
-                              </DataTable>
-                            </div>
-                          </section>
-                        </Col>
-                      </Row>
-                    </TabPanel>
+                   
                     <TabPanel header="Work Type" leftIcon="pi pi-check-square mr-2">
                       <Row>
                         <Col lg={12}>
@@ -2674,7 +2587,95 @@ const ManagerDashboard = () => {
                         </Col>
                       </Row>
                     </TabPanel>
-                    <TabPanel header="History" leftIcon="pi pi-clock mr-2">
+                     <TabPanel header="Activities" leftIcon="pi pi-calendar mr-2" disabled>
+                      <Row>
+                        <Col lg={12}>
+                          <section className="job-datatable-section">
+                            <div className="card1 mt-3 mb-4 actjobsumtable">
+                              <DataTable
+                                responsive
+                                showGridlines
+                                value={activities}
+                                tableStyle={{
+                                  minWidth: "50rem",
+                                  borderRadius: "8px",
+                                  boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
+                                }}
+                                paginator
+                                rows={5}
+                                rowsPerPageOptions={[5, 10, 25, 50]}
+                                paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
+                                currentPageReportTemplate="{first} to {last} of {totalRecords}"
+                                filters={activitiesFilters}
+                                filterDisplay="row"
+                                globalFilterFields={[
+                                  "type",
+                                  "sub_type",
+                                  "priority",
+                                  "subject",
+                                  "date_time",
+                                  "user_id",
+                                ]}
+                                emptyMessage="No activities found."
+                                selection={selectedActivities}
+                                onSelectionChange={e => setSelectedActivities(e.value)}
+                                selectionMode="multiple"
+                                resizableColumns
+                                columnResizeMode="expand"
+                              >
+                                <Column
+                                  selectionMode="multiple"
+                                  headerStyle={{ width: "3em" }}
+                                />
+                                <Column
+                                  field="type"
+                                  header="Type"
+                                  sortable
+                                  filter
+                                  style={{ minWidth: "10rem" }}
+                                />
+                                <Column
+                                  field="sub_type"
+                                  header="Sub Type"
+                                  sortable
+                                  filter
+                                  style={{ minWidth: "10rem" }}
+                                />
+                                <Column
+                                  field="priority"
+                                  header="Priority"
+                                  sortable
+                                  filter
+                                  style={{ minWidth: "10rem" }}
+                                />
+                                <Column
+                                  field="subject"
+                                  header="Subject"
+                                  sortable
+                                  filter
+                                  style={{ minWidth: "10rem" }}
+                                />
+                                <Column
+                                  field="date_time"
+                                  header="Date and Time"
+                                  sortable
+                                  filter
+                                  style={{ minWidth: "10rem" }}
+                                />
+                                <Column
+                                  field="user_id"
+                                  header="User ID"
+                                  sortable
+                                  filter
+                                  style={{ minWidth: "10rem" }}
+                                />
+                              </DataTable>
+                            </div>
+                          </section>
+                        </Col>
+                      </Row>
+                    </TabPanel>
+                    <TabPanel header="History" leftIcon="pi pi-clock mr-2" disabled>
                       <Row>
                         <Col lg={12} sm={12}>
                           <section className="job-datatable-section">
@@ -2862,7 +2863,6 @@ const ManagerDashboard = () => {
 };
 
 export default ManagerDashboard;
-
 
 
 

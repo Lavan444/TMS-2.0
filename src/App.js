@@ -13,8 +13,6 @@ import Authmiddleware from "./routes/middleware/Authmiddleware";
 import NonAuthLayout from "./components/NonAuthLayout";
 
 import LoginPage from './features/auth/components/Login';
-import CandidateForm from './features/resources/components/CandidateForm';
-import JobsPreviewForm from './features/projects/components/JobForm1';
 import ForgotPassword from './features/auth/components/ForgotPassword';
 
 // import "./App.css"
@@ -27,9 +25,8 @@ import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 import 'primereact/resources/primereact.css';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
-import 'primereact/resources/primereact.min.css';               // Core CSS
+import 'primereact/resources/primereact.min.css';               
 import '@fortawesome/fontawesome-free/css/all.min.css';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 
@@ -62,12 +59,7 @@ const App = () => {
       <Routes>
         <Route path="/forgot-password" element={<ForgotPassword />} />
       </Routes>
-      <Routes>
-        <Route path="/apply-job/job-101" element={<CandidateForm />} />
-      </Routes>
-      <Routes>
-        <Route path="/job-details" element={<JobsPreviewForm />} />
-      </Routes>
+      
     </React.Fragment>
 
   );

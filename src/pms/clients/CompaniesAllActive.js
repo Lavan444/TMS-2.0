@@ -36,8 +36,8 @@ import NotesCompanies from "../common-for-all/NotesCompanies"
 import NotesCompanies1 from "../common-for-all/NotesCompaniesNames"
 import LinkContact2Popup from "pms/common-for-all/LinkContact2Popup"
 import LinkContactsPopup from "pms/common-for-all/LinkContactsPopup"
-import LinkCandidatesPopup from "pms/common-for-all/LinkCandidatesPopup"
-import LinkContactJob from "pms/common-for-all/LinkContactJob"
+import LinkWorkTypePopup from "pms/common-for-all/LinkWorkTypePopup"
+import LinkContactProject from "pms/common-for-all/LinkContactProject"
 import MoreACcompanies from "./MoreActionitems"
 import { FileUpload } from "primereact/fileupload"
 import AddContact from "./AddContact"
@@ -4542,7 +4542,7 @@ const CompaniesAllActive = () => {
             </div>
 
             <div className="mb-4">
-              <LinkContactJob />
+              <LinkWorkTypePopup />
 
               <Row className="mb-2">
                 {/* <Col xl={6}>
@@ -4560,7 +4560,7 @@ const CompaniesAllActive = () => {
                    
                   </div>
                 </Col> */}
-                <LinkCandidatesPopup />
+                <LinkWorkTypePopup />
 
                 <Col xl={6}>
                   <div className="p-field flex flex-column">

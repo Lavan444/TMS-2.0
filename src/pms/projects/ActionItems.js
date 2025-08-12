@@ -31,7 +31,7 @@ import { Calendar } from 'primereact/calendar';
 
 import { useForm } from "react-hook-form";
 import axios from "axios"
-import LinkCandidates from "./LinkCandidates";
+import LinkCandidates from "./LinkWorkType";
 // import { Toast } from 'primereact/toast';
 import { Accordion, AccordionTab } from "primereact/accordion";
 import { Badge } from 'primereact/badge';

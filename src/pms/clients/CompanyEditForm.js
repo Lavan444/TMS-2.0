@@ -519,31 +519,7 @@ const CompanyEditForm = () => {
                                                     </Col>
                                                 </Row>
 
-                                                <Row className="mt-2 align-items-center">
-                                                    <Col lg={6}>
-                                                        <Row>
-                                                            <Col xl={6}>
-                                                                <label htmlFor="userids" className="block mb-2">
-                                                                    UserIDs
-                                                                </label>
-                                                            </Col>
-                                                            <Col xl={6}>
-                                                                <InputText
-                                                                    placeholder="Enter User ID" value={userid1} className="w-full" />
-                                                            </Col>
-                                                        </Row>
-                                                    </Col>
-                                                    <Col lg={6}>
-                                                        <Row>
-                                                            <Col xl={12}>
-                                                                <input type="checkbox" className="me-2" checked />
-                                                                <label htmlFor="jobType">Private</label>
-                                                            </Col>
-
-                                                        </Row>
-                                                    </Col>
-
-                                                </Row>
+                                               
 
 
                                                 <Row className="mt-2 align-items-center mb-2">
@@ -751,7 +727,7 @@ const CompanyEditForm = () => {
                                                             <label htmlFor="privateCheckbox" className="ms-2">Private</label>
                                                         </div>
                                                     </Col>
-                                                    <Col xl={2}>
+                                                    <Col xl={1}>
                                                         <div className="p-field d-flex align-items-center">
                                                             <Checkbox
                                                                 inputId="privateCheckbox"
@@ -761,10 +737,10 @@ const CompanyEditForm = () => {
                                                            
                                                         </div>
                                                     </Col>
-                                                    <Col xl={7}>
+                                                    <Col xl={8}>
                                                         {privateDrop && (
                                                             <div className="p-field">
-                                                                <label htmlFor="userIds">User Id's</label>
+                                                                {/* <label htmlFor="userIds">User Id's</label> */}
                                                                 <MultiSelect
                                                                     value={PrivetDropdown}
                                                                     onChange={(e) => setPrivetDropdown(e.value)}
