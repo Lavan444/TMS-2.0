@@ -1,0 +1,170 @@
+COMPANIES MODULE - BUSINESS DOCUMENTATION
+================================================
+
+OVERVIEW
+--------
+The Companies module serves as a comprehensive client relationship management system designed to streamline business operations in talent acquisition and project management. This module enables organizations to maintain detailed company profiles, track business relationships, and manage client interactions effectively.
+
+CORE BUSINESS PURPOSE
+--------------------
+This module addresses the fundamental business need to:
+- Centralize client company information for better relationship management
+- Track business opportunities and client engagement history
+- Facilitate team collaboration on client accounts
+- Maintain compliance and audit trails for business interactions
+- Support decision-making through comprehensive client data analysis
+
+KEY BUSINESS FEATURES
+--------------------
+
+1. COMPANY PROFILE MANAGEMENT
+   - Complete company information capture including contact details, industry classification, and organizational structure
+   - Website and digital presence tracking for business intelligence
+   - Company size and revenue categorization for strategic client segmentation
+   - Founded year tracking for relationship tenure analysis
+   - Specialty and capability documentation for service alignment
+
+2. CONTACT INFORMATION SYSTEM
+   - Primary contact details management for communication efficiency
+   - Address management with geographical categorization
+   - Multi-location support for global client operations
+   - Label-based organization (WFO, WFH, Remote) reflecting modern work arrangements
+
+3. BUSINESS CATEGORIZATION & CLASSIFICATION
+   - Industry-based grouping for sector-specific business strategies
+   - Company size classification (Micro, Small, Medium, Large Enterprise)
+   - Revenue-based grouping (Up to 5 Crore, 50 Crore, 250 Crore, Above 250 Crore)
+   - Custom categories for specialized business requirements
+
+4. CLIENT RELATIONSHIP TRACKING
+   - Creation and modification audit trails with user attribution
+   - Last activity date tracking for relationship health monitoring
+   - Notes and overview sections for relationship context
+   - User assignment for account ownership and responsibility
+
+5. PROJECT & WORK TYPE INTEGRATION
+   - Active project tracking linked to client companies
+   - Work type categorization (Tasks, Sub-tasks, Bugs)
+   - Project timeline and milestone tracking
+   - Resource allocation and work hour monitoring
+   - Status tracking (To Do, In Progress, In Review, Testing/QA, Done, Blocked, Cancelled)
+
+6. ACTIVITY & COMMUNICATION MANAGEMENT
+   - Comprehensive activity logging (Calls, Meetings, Events, Tasks)
+   - Sub-type categorization for detailed interaction tracking
+   - Priority-based scheduling and follow-up management
+   - Communication history for relationship continuity
+   - User assignment for accountability
+
+7. DOCUMENT MANAGEMENT
+   - Secure document storage and organization
+   - Document type classification (Invoices, Contracts, Proposals)
+   - Version control and audit trails
+   - Easy retrieval and sharing capabilities
+
+8. SCHEDULING & APPOINTMENT SYSTEM
+   - Integrated calendar for client meetings and calls
+   - Automated reminder systems for important interactions
+   - Recurring appointment management
+   - Follow-up scheduling for business continuity
+
+BUSINESS WORKFLOWS
+-----------------
+
+1. CLIENT ONBOARDING PROCESS
+   - New company registration with complete profile creation
+   - Industry and size classification for appropriate service alignment
+   - Initial contact establishment and relationship mapping
+   - Account assignment to responsible team members
+
+2. RELATIONSHIP MANAGEMENT CYCLE
+   - Regular activity logging and interaction tracking
+   - Scheduled follow-ups and business reviews
+   - Opportunity identification and documentation
+   - Performance tracking and relationship health assessment
+
+3. PROJECT COLLABORATION
+   - Project assignment to client companies
+   - Resource allocation and work distribution
+   - Progress monitoring and milestone tracking
+   - Deliverable management and quality assurance
+
+4. COMMUNICATION WORKFLOW
+   - Structured communication planning and execution
+   - Meeting scheduling and agenda management
+   - Follow-up action items and responsibility assignment
+   - Communication history maintenance for context
+
+DATA MANAGEMENT & SECURITY
+--------------------------
+
+1. PRIVACY CONTROLS
+   - Private company marking for sensitive client information
+   - User-specific access controls for confidential data
+   - Role-based permissions for data security
+   - Audit trails for compliance requirements
+
+2. DATA EXPORT & REPORTING
+   - Multiple export formats (CSV, Excel, PDF) for business intelligence
+   - Comprehensive reporting for strategic planning
+   - Data backup and recovery capabilities
+   - Integration support for external business systems
+
+BUSINESS BENEFITS
+----------------
+
+1. OPERATIONAL EFFICIENCY
+   - Centralized client information reduces search time and improves response speed
+   - Automated scheduling and reminders minimize missed opportunities
+   - Structured workflows ensure consistent client service delivery
+   - Real-time status tracking enables proactive issue resolution
+
+2. STRATEGIC INSIGHTS
+   - Client categorization enables targeted business strategies
+   - Activity tracking provides insights into relationship health
+   - Project performance data supports capacity planning
+   - Historical data analysis guides future business decisions
+
+3. TEAM COLLABORATION
+   - Shared client information improves team coordination
+   - Clear ownership assignment ensures accountability
+   - Communication history provides context for team handovers
+   - Integrated notes system facilitates knowledge sharing
+
+4. CLIENT SATISFACTION
+   - Comprehensive client profiles enable personalized service
+   - Activity tracking ensures timely follow-ups and responses
+   - Project transparency builds client trust and confidence
+   - Professional document management enhances client experience
+
+5. BUSINESS GROWTH
+   - Systematic client management supports scaling operations
+   - Performance tracking identifies successful strategies for replication
+   - Relationship mapping reveals cross-selling and upselling opportunities
+   - Data-driven insights guide strategic business expansion
+
+COMPLIANCE & GOVERNANCE
+-----------------------
+- Complete audit trails for regulatory compliance
+- User attribution for accountability and responsibility tracking
+- Data privacy controls for sensitive client information
+- Document management for contract and agreement tracking
+- Activity logging for business process compliance
+
+USER ROLES & RESPONSIBILITIES
+-----------------------------
+- Account Managers: Client relationship ownership and strategy development
+- Project Managers: Project delivery and resource coordination
+- Business Development: New client acquisition and opportunity management
+- Operations Team: Data management and process compliance
+- Executive Leadership: Strategic oversight and performance monitoring
+
+INTEGRATION CAPABILITIES
+------------------------
+- Calendar system integration for scheduling efficiency
+- Email communication tracking for comprehensive interaction history
+- Document management system for centralized file storage
+- Reporting tools for business intelligence and analytics
+- External CRM systems for enterprise-wide client management
+
+This Companies module serves as the cornerstone of client relationship management, providing the foundation for successful business operations, strategic planning, and sustainable growth in competitive markets.

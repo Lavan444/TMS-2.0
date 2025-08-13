@@ -38,7 +38,6 @@ import { MultiSelect } from "primereact/multiselect"
 import { Tooltip } from "primereact/tooltip"
 import { FileUpload } from "primereact/fileupload"
 import { Editor } from "primereact/editor"
-import LinkJobs from "./LinkJobs"
 import { Card } from "primereact/card"
 import { CascadeSelect } from "primereact/cascadeselect"
 // import { Tooltip } from 'primereact/tooltip';
@@ -1268,28 +1267,7 @@ const EmployeeAllActive = () => {
     { label: 'Edit', icon: 'pi pi-fw pi-pencil', command: () => navigate('/candidate-editform') },
     { label: 'Archived', icon: 'pi pi-check-circle' },
     { label: 'Delete', icon: 'pi pi-fw pi-trash', command: () => deleteCandidate(selectedCandidate) },
-    {
-      label: 'Email',
-      icon: 'pi pi-envelope',
-      items: [ // Subitems for "Schedule"
-        {
-          label: 'New Email', icon: 'pi pi-calendar-plus',
-        },
-        { label: 'Selected', icon: 'pi pi-phone', },
-        { label: 'Searched', icon: 'pi pi-users', },
-        { label: 'All', icon: 'pi pi-list', },
-        {
-          label: 'Jobs', icon: 'pi pi-calendar-clock',
-          items: [ // Subitems for "Schedule"
-            {
-              label: 'All', icon: 'pi pi-calendar-plus',
-            },
-            { label: 'Selected', icon: 'pi pi-phone' },
-            { label: 'Searched', icon: 'pi pi-users' },
-          ],
-        },
-      ],
-    },
+    
     {
       label: 'Schedule', icon: 'pi pi-calendar-clock',
       items: [ // Subitems for "Schedule"
@@ -1299,32 +1277,6 @@ const EmployeeAllActive = () => {
         { label: 'Task', icon: 'pi pi-list' },
         { label: 'Event', icon: 'pi pi-calendar-clock' },
         { label: 'Other', icon: 'pi pi-ellipsis-h' },
-      ],
-    },
-    { label: 'Candidate Notes', icon: 'pi pi-clipboard' },
-    { label: 'Clear Search', icon: 'pi pi-filter-slash', command: () => handleClearSearchCandidates() },
-    {
-      label: 'Submit',
-      icon: 'pi pi-send',
-      items: [ // Subitems for "More"
-        { label: 'Submit Candidate to Job', icon: 'pi pi-user-plus' },
-        { label: 'Submit Candidate to Contact', icon: 'pi pi-user-plus' },
-      ],
-    },
-    {
-      label: 'More',
-      icon: 'pi pi-ellipsis-h',
-      items: [ // Subitems for "More"
-        {
-          label: 'Link Jobs', icon: 'pi pi-link',
-          items: [ // Subitems for "Link Jobs"
-            { label: 'Received', icon: 'pi pi-link' },
-            { label: 'Potential', icon: 'pi pi-sync' },
-            { label: 'Submitted', icon: 'pi pi-link' },
-          ],
-        },
-        { label: 'Change Status', icon: 'pi pi-link' },
-        { label: 'Merge', icon: 'pi pi-sync' },
       ],
     },
 
@@ -1896,7 +1848,7 @@ const EmployeeAllActive = () => {
 
   // view form pipeline starts
 
-  const [receivedJobsFilters, setReceivedJobsFilters] = useState({
+  const [receivedEmployeeFilters, setReceivedEmployeeFilters] = useState({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
     status: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
     jobid: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
@@ -1908,80 +1860,80 @@ const EmployeeAllActive = () => {
     user_id: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
   })
 
-  const receivedJobs = [
-    {
-      status: "Open",
-      jobid: "Job-101",
-      job_title: "Web Developer",
-      candidate: "LavanKumar Kalvala",
-      contact: "Mahesh Kumar Bhoga",
-      company: "Varun Digital Media",
-      date_time: "26-02-2025 10:00 AM",
-      user_id: "Harish",
-    },
-    // {
-    //   status: "In Progress",
-    //   jobid: "DEV002",
-    //   job_title: "Backend Developer",
-    //   candidate: "Jane Smith",
-    //   contact: "jane.smith@example.com",
-    //   company: "Innovate Ltd.",
-    //   date_time: "2024-12-15 02:30 PM",
-    //   user_id: "54321",
-    // },
-    // {
-    //   status: "Closed",
-    //   jobid: "ANA001",
-    //   job_title: "Data Analyst",
-    //   candidate: "Bob Brown",
-    //   contact: "bob.brown@example.com",
-    //   company: "Analytics Inc.",
-    //   date_time: "2025-02-01 09:00 AM",
-    //   user_id: "67890",
-    // },
-    // {
-    //   status: "Closed",
-    //   jobid: "ENG001",
-    //   job_title: "Mechanical Engineer",
-    //   candidate: "Alice Carter",
-    //   contact: "alice.carter@example.com",
-    //   company: "Engineered Solutions",
-    //   date_time: "2025-02-05 03:00 PM",
-    //   user_id: "11223",
-    // },
-    // {
-    //   status: "Closed",
-    //   jobid: "HRM001",
-    //   job_title: "HR Manager",
-    //   candidate: "Daniel Smith",
-    //   contact: "daniel.smith@example.com",
-    //   company: "PeopleFirst HR",
-    //   date_time: "2025-01-25 11:30 AM",
-    //   user_id: "33445",
-    // },
-    // {
-    //   status: "Closed",
-    //   jobid: "DEV001",
-    //   job_title: "Full Stack Developer",
-    //   candidate: "Sophia Taylor",
-    //   contact: "sophia.taylor@example.com",
-    //   company: "Code Creators",
-    //   date_time: "2025-01-15 02:15 PM",
-    //   user_id: "55667",
-    // },
-    // {
-    //   status: "Closed",
-    //   jobid: "PM001",
-    //   job_title: "Project Manager",
-    //   candidate: "James Wilson",
-    //   contact: "james.wilson@example.com",
-    //   company: "AgilePro Management",
-    //   date_time: "2025-01-30 04:45 PM",
-    //   user_id: "77889",
-    // },
-  ]
+  // const receivedEmployee = [
+  //   {
+  //     status: "Open",
+  //     jobid: "Job-101",
+  //     job_title: "Web Developer",
+  //     candidate: "LavanKumar Kalvala",
+  //     contact: "Mahesh Kumar Bhoga",
+  //     company: "Varun Digital Media",
+  //     date_time: "26-02-2025 10:00 AM",
+  //     user_id: "Harish",
+  //   },
+  //   // {
+  //   //   status: "In Progress",
+  //   //   jobid: "DEV002",
+  //   //   job_title: "Backend Developer",
+  //   //   candidate: "Jane Smith",
+  //   //   contact: "jane.smith@example.com",
+  //   //   company: "Innovate Ltd.",
+  //   //   date_time: "2024-12-15 02:30 PM",
+  //   //   user_id: "54321",
+  //   // },
+  //   // {
+  //   //   status: "Closed",
+  //   //   jobid: "ANA001",
+  //   //   job_title: "Data Analyst",
+  //   //   candidate: "Bob Brown",
+  //   //   contact: "bob.brown@example.com",
+  //   //   company: "Analytics Inc.",
+  //   //   date_time: "2025-02-01 09:00 AM",
+  //   //   user_id: "67890",
+  //   // },
+  //   // {
+  //   //   status: "Closed",
+  //   //   jobid: "ENG001",
+  //   //   job_title: "Mechanical Engineer",
+  //   //   candidate: "Alice Carter",
+  //   //   contact: "alice.carter@example.com",
+  //   //   company: "Engineered Solutions",
+  //   //   date_time: "2025-02-05 03:00 PM",
+  //   //   user_id: "11223",
+  //   // },
+  //   // {
+  //   //   status: "Closed",
+  //   //   jobid: "HRM001",
+  //   //   job_title: "HR Manager",
+  //   //   candidate: "Daniel Smith",
+  //   //   contact: "daniel.smith@example.com",
+  //   //   company: "PeopleFirst HR",
+  //   //   date_time: "2025-01-25 11:30 AM",
+  //   //   user_id: "33445",
+  //   // },
+  //   // {
+  //   //   status: "Closed",
+  //   //   jobid: "DEV001",
+  //   //   job_title: "Full Stack Developer",
+  //   //   candidate: "Sophia Taylor",
+  //   //   contact: "sophia.taylor@example.com",
+  //   //   company: "Code Creators",
+  //   //   date_time: "2025-01-15 02:15 PM",
+  //   //   user_id: "55667",
+  //   // },
+  //   // {
+  //   //   status: "Closed",
+  //   //   jobid: "PM001",
+  //   //   job_title: "Project Manager",
+  //   //   candidate: "James Wilson",
+  //   //   contact: "james.wilson@example.com",
+  //   //   company: "AgilePro Management",
+  //   //   date_time: "2025-01-30 04:45 PM",
+  //   //   user_id: "77889",
+  //   // },
+  // ]
 
-  const [selectedReceivedJobs, setSelectedReceivedJobs] = useState([])
+  const [selectedReceivedEmployee, setSelectedReceivedEmployee] = useState([])
 
   // potential
 
@@ -2849,7 +2801,7 @@ const EmployeeAllActive = () => {
     { name: "Compliance Meetings", value: "CM" },
   ]
 
-  const jobStatusDrop = [
+  const ProjectStatusDrop = [
     { name: "Open", value: "Open" },
     { name: "Closed", value: "Closed" },
     { name: "On Hold", value: "On Hold" },
@@ -2938,33 +2890,6 @@ const EmployeeAllActive = () => {
   // import resume
   const toast = useRef(null)
 
-  // const onUpload = () => {
-  //   toast.current.show({
-  //     severity: 'info',
-  //     summary: 'Success',
-  //     detail: 'File Uploaded',
-  //     Action: '/myactive-candidates'
-  //   });
-  // };
-
-  //   const customBase64Uploader = async (event ) => {
-  //     console.log("Uploading file...");
-
-  //     const file = event.files[0]; // Get the file
-  //     const reader = new FileReader();
-
-  //     reader.readAsDataURL(file);
-
-  //     reader.onloadend = function () {
-  //         const base64data = reader.result;
-  //         console.log("Base64 Data:", base64data);
-
-  //         // Perform any API upload if needed
-
-  //         // Navigate to another page after upload
-  //         navigate("/myactive-candidates");
-  //     };
-  // };
 
   const customBase64Uploader = async event => {
     try {
@@ -4182,7 +4107,7 @@ const EmployeeAllActive = () => {
 
                        <Col lg={6}>
                         <div className="p-field mt-2">
-                          <label htmlFor="jobType">UserIDs</label>
+                          <label htmlFor="EmployeeType">UserIDs</label>
                           <InputText
                             id="userIds"
                             value={userIds}
@@ -4550,7 +4475,7 @@ const EmployeeAllActive = () => {
                           <Row className="mb-2">
                             <Col lg={4}>
                               <div className="p-field">
-                                <label htmlFor="jobType">Categories</label>
+                                <label htmlFor="EmployeeType">Categories</label>
                                 <TreeSelect
                                   value={selectedNodeKey}
                                   disabled
@@ -4564,7 +4489,7 @@ const EmployeeAllActive = () => {
                             </Col>
                             <Col lg={4}>
                               <div className="p-field">
-                                <label htmlFor="jobType">Groups</label>
+                                <label htmlFor="EmployeeType">Groups</label>
                                 <TreeSelect
                                   value={selectedgroupKey}
                                   disabled
@@ -4578,7 +4503,7 @@ const EmployeeAllActive = () => {
                             </Col>
                             <Col lg={4}>
                               <div className="p-field">
-                                <label htmlFor="jobType">UserIDs</label>
+                                <label htmlFor="EmployeeType">UserIDs</label>
                                 <InputText
                                   id="userIds"
                                   value={userIds}
@@ -5250,40 +5175,11 @@ const EmployeeAllActive = () => {
 
               <div className="mb-4">
                 <Row className="mb-2">
-                  {/* <Col xl={6}>
-                    <div className="flex flex-column">
-                      <label For="Priority">Jobs List</label>
-                      <Dropdown
-                        value={subtypeget}
-                        onChange={e => setsubtypeget(e.value)}
-                        options={jobStatusDrop}
-                        optionLabel="name"
-                        placeholder="Select a Status"
-                        className="w-full search-option"
-                      />
-                    </div>
-                  </Col> */}
+                 
                   <LinkContactsPopup />
 
                   <Col xl={6}>
-                    {/* <div className="p-field flex flex-column">
-                      <label
-                        For="Priority"
-                        className=" block"
-                      >
-                        Contact
-                      </label>
-
-                      <Dropdown
-                        value={prioritycontact}
-                        onChange={(e) => setprioritycontact(e.value)}
-                        options={typeInterviewcontact}
-                        optionLabel="name"
-                        placeholder="Contact"
-                        className="w-full search-option"
-                      />
-                    </div> */}
-                    {/* <LinkContactsPopup/> */}
+                   
                     <LinkContact2Popup />
                   </Col>
                 </Row>
@@ -5304,15 +5200,7 @@ const EmployeeAllActive = () => {
                         maxSelectedLabels={0}
                         className="w-full"
                       />
-                      {/* <Dropdown
-                                                            value={condidatevalu}
-                                                            onChange={e => setcondidatevalu(e.value)}
-                                                            options={typeInterviewcondi}
-                                                            optionLabel="name"
-                                                            placeholder="Select a Status"
-                                                            className="w-full search-option"
-                                    
-                                                          /> */}
+                     
                     </div>
                   </Col>
                   <Col xl={6}>
@@ -5555,7 +5443,7 @@ const EmployeeAllActive = () => {
                       <Dropdown
                         value={subtypeget}
                         onChange={e => setsubtypeget(e.value)}
-                        options={jobStatusDrop}
+                        options={ProjectStatusDrop}
                         optionLabel="name"
                         placeholder="Select a Status"
                         className="w-full search-option"
@@ -5834,7 +5722,7 @@ const EmployeeAllActive = () => {
                       <Dropdown
                         value={subtypeget}
                         onChange={e => setsubtypeget(e.value)}
-                        options={jobStatusDrop}
+                        options={ProjectStatusDrop}
                         optionLabel="name"
                         placeholder="Select a Status"
                         className="w-full search-option"
@@ -6160,7 +6048,7 @@ const EmployeeAllActive = () => {
                       <Dropdown
                         value={subtypeget}
                         onChange={e => setsubtypeget(e.value)}
-                        options={jobStatusDrop}
+                        options={ProjectStatusDrop}
                         optionLabel="name"
                         placeholder="Select a Status"
                         className="w-full search-option"
@@ -6486,7 +6374,7 @@ const EmployeeAllActive = () => {
                       <Dropdown
                         value={subtypeget}
                         onChange={e => setsubtypeget(e.value)}
-                        options={jobStatusDrop}
+                        options={ProjectStatusDrop}
                         optionLabel="name"
                         placeholder="Select a Status"
                         className="w-full search-option"
@@ -6812,7 +6700,7 @@ const EmployeeAllActive = () => {
                       <Dropdown
                         value={subtypeget}
                         onChange={e => setsubtypeget(e.value)}
-                        options={jobStatusDrop}
+                        options={ProjectStatusDrop}
                         optionLabel="name"
                         placeholder="Select a Status"
                         className="w-full search-option"

@@ -20,7 +20,9 @@ import { Button } from "primereact/button"
 import { Dropdown } from "primereact/dropdown"
 import { BreadCrumb } from "primereact/breadcrumb"
 import { RadioButton } from "primereact/radiobutton"
+import { InputSwitch } from "primereact/inputswitch"
 import { Checkbox } from "primereact/checkbox"
+import { Tooltip } from "primereact/tooltip"
 import { Calendar } from "primereact/calendar"
 import { MultiSelect } from "primereact/multiselect"
 import { Accordion, AccordionTab } from "primereact/accordion"
@@ -30,7 +32,6 @@ import { Editor } from "primereact/editor"
 import { useForm } from "react-hook-form"
 import { useLocation } from "react-router-dom"
 import { Menu } from "primereact/menu"
-import { Tooltip } from 'primereact/tooltip';
 
 import gdrive from "../../assets/images/google-drive.png"
 import dropbox from "../../assets/images/dropbox.png"
@@ -442,6 +443,17 @@ const actionTemplate = (rowData) => {
   const [email, setEmail] = useState("")
   const [port, setPort] = useState("")
   const [address, setAddress] = useState("")
+  
+  // State for private dropdown users selection
+  const [privateDrop, setPrivateDrop] = useState([])
+  
+  // Dropdown values for private users selection
+  const PrivetDropdownValues = [
+    { name: "mahesh", value: "mahesh" },
+    { name: "lavan", value: "lavan" },
+    { name: "vinay", value: "vinay" },
+    { name: "vasanth", value: "vasanth" },
+  ]
   const [useSSL, setUseSSL] = useState(false)
   const [areaCode, setAreaCode] = useState("")
   const [accountKey, setAccountKey] = useState("")
@@ -6509,312 +6521,406 @@ const permissionTabs = [
       description: "If checked, this user can create, modify and delete users and can manager all user permissions/privileges."
     },
     {
-      label: "Export Data of All",
-      description: "If checked, this user can export all the items of the other users except his userid."
-    },
-    {
-      label: "Sync. with Outlook",
-      description: "If checked, this user can sync data (Emails, Calendar) between PMS and Outlook."
-    },
-    {
       label: "Run Reports",
-      description: "If checked, this user can run reports.  "
+      description: "If checked, this user can run reports."
     },
     {
       label: "Run Dashboard",
-      description: "If checked, this user can run the dashboard."
+      description: "If checked, this user can view Dashboard."
     },
+
     {
       label: "Allow Sending Emails",
       description: "If checked, this user can send emails from PMS."
     },
+
     {
-      label: "Disallow Sending e-Mail to more than 10 Recipients",
+      label: "Disallow Sending an EMail to more than 10 Recipients",
       description: "If checked, it will not allow this user to send email to more than 10 recipients."
     },
-    {
+     {
       label: "Allow Alert Setup",
-      description: "If checked, this user can set up alerts."
+      description: "If checked, this user can setup Alerts (Notifications) for any activity that occurs."
     },
     {
       label: "Disallow Save Password",
-      description: "If checked, this user cannot save passwords."
+      description: "If checked, it prevents the user from saving password on login screen."
     },
     {
       label: "Enable Session Timeout",
-      description: "If checked, this user will have a session timeout."
+      description: "If checked, this user session will be timed out for 60 minutes of inactivity"
     },
     {
       label: "Cannot See Other Teams' Users",
-      description: "If checked, this user cannot see other teams' users."
+      description: "If checked, this user will not be able to see other team users"
     },
+
     {
       label: "Export Reports",
-      description: "If checked, this user can export reports."
+      description: "If checked, this user will be able to export reports to PDF/Excel/CSV"
     },
+    {
+      label: "Export Data of All Tables(entities) ",
+      description: "If checked, this user can export all the items."
+    },
+    
+    
 
   ]},
 
 
-  { label: "Projects", permissions: [
+ {
+  label: "Projects",
+  permissions: [
     { 
-      label: "Manager User Accounts (Admin)", 
-      description: "If checked, this user can create, modify and delete users and can manager all user permissions/privileges."
+      label: "Modify Items of", 
+      isToggleGroup: true,
+      toggleOptions: [
+        { label: "All", description: "This user can modify all Project Items for all users." },
+        { label: "Self", description: "This user can modify Project items belonging to his userid." },
+        { label: "None", description: "This user cannot modify any Project Items." },
+        { label: "Users", description: "This user can modify Project items of only selected users." }
+      ]
     },
     {
-      label: "Export Data of All",
-      description: "If checked, this user can export all the items of the other users except his userid."
+      label: "Delete Items of", 
+      isToggleGroup: true,
+      toggleOptions: [
+        { label: "All", description: "This user can delete all Project Items for all users." },
+        { label: "Self", description: "This user can delete Project items belonging to his userid." },
+        { label: "None", description: "This user cannot delete any of the Project items." },
+        { label: "Users", description: "This user can delete Project items of only selected users." }
+      ]
     },
     {
-      label: "Sync. with Outlook",
-      description: "If checked, this user can sync data (Emails, Calendar) between PMS and Outlook."
+      label: "Mark as Private When a New Item is Created",
+      description: "If checked, it will create a private Project Item automatically for this user whenever a new Project Item is created."
     },
     {
-      label: "Run Reports",
-      description: "If checked, this user can run reports.  "
+      label: "These Users Can See My Private Items", 
+      isToggleGroup: true,
+      toggleOptions: [
+        { label: "All", description: "Everybody can see this user’s private Project Items." },
+        { label: "None", description: "Nobody can see this user’s private Project Items." },
+        { label: "Users", description: "Only selected users can see this user’s private Project Items." }
+      ]
     },
     {
-      label: "Run Dashboard",
-      description: "If checked, this user can run the dashboard."
+      label: "Can See Other Users Private Items",
+      description: "If checked, this user can see other users private Project Items."
     },
     {
-      label: "Allow Sending Emails",
-      description: "If checked, this user can send emails from PMS."
+      label: "Allow Changing UserID of Other Users Items",
+      description: "If checked, this user can modify the userIds of Project Item, i.e. ability to change to a different userid or add additional userids."
     },
     {
-      label: "Disallow Sending e-Mail to more than 10 Recipients",
-      description: "If checked, it will not allow this user to send email to more than 10 recipients."
+      label: "View Dynamic Views of", 
+      isToggleGroup: true,
+      toggleOptions: [
+        { label: "All", description: "This user can view Project items belonging to other users." },
+        { label: "Self", description: "This user can view Project items belonging to his userid." },
+        { label: "None", description: "This user cannot view any Project items." },
+        { label: "Users", description: "Only selected user's items views by this user." }
+      ]
     },
     {
-      label: "Allow Alert Setup",
-      description: "If checked, this user can set up alerts."
+      label: "Export PDF/ MS Excel (Item)",
+      description: "If checked, this user can export Project list views to PDF/Excel spreadsheets."
     },
     {
-      label: "Disallow Save Password",
-      description: "If checked, this user cannot save passwords."
+      label: "Disallow Creating Multiple Items (Bulk Import)",
+      description: "If checked, this user cannot import multiple items using 'import' feature."
     },
     {
-      label: "Enable Session Timeout",
-      description: "If checked, this user will have a session timeout."
+      label: "Allow Merge Duplicates",
+      description: "If checked, this user can merge duplicate Project records."
     },
-    {
-      label: "Cannot See Other Teams' Users",
-      description: "If checked, this user cannot see other teams' users."
-    },
-    {
-      label: "Export Reports",
-      description: "If checked, this user can export reports."
-    },
+  ]
+},
 
-  ]},
-
-  { label: "Work Type", permissions: [
+{
+  label: "Work Type",
+  permissions: [
     { 
-      label: "Manager User Accounts (Admin)", 
-      description: "If checked, this user can create, modify and delete users and can manager all user permissions/privileges."
+      label: "Modify Items of", 
+      isToggleGroup: true,
+      toggleOptions: [
+        { label: "All", description: "This user can modify all Work Type Items for all users." },
+        { label: "Self", description: "This user can modify Work Type items belonging to his userid." },
+        { label: "None", description: "This user cannot modify any Work Type Items." },
+        { label: "Users", description: "This user can modify Work Type items of only selected users." }
+      ]
     },
     {
-      label: "Export Data of All",
-      description: "If checked, this user can export all the items of the other users except his userid."
+      label: "Delete Items of", 
+      isToggleGroup: true,
+      toggleOptions: [
+        { label: "All", description: "This user can delete all Work Type Items for all users." },
+        { label: "Self", description: "This user can delete Work Type items belonging to his userid." },
+        { label: "None", description: "This user cannot delete any of the Work Type items." },
+        { label: "Users", description: "This user can delete Work Type items of only selected users." }
+      ]
     },
     {
-      label: "Sync. with Outlook",
-      description: "If checked, this user can sync data (Emails, Calendar) between PMS and Outlook."
+      label: "Mark as Private When a New Item is Created",
+      description: "If checked, it will create a private Work Type Item automatically for this user whenever a new Work Type Item is created."
     },
     {
-      label: "Run Reports",
-      description: "If checked, this user can run reports.  "
+      label: "These Users Can See My Private Items", 
+      isToggleGroup: true,
+      toggleOptions: [
+        { label: "All", description: "Everybody can see this user’s private Work Type Items." },
+        { label: "None", description: "Nobody can see this user’s private Work Type Items." },
+        { label: "Users", description: "Only selected users can see this user’s private Work Type Items." }
+      ]
     },
     {
-      label: "Run Dashboard",
-      description: "If checked, this user can run the dashboard."
+      label: "Can See Other Users Private Items",
+      description: "If checked, this user can see other users private Work Type Items."
     },
     {
-      label: "Allow Sending Emails",
-      description: "If checked, this user can send emails from PMS."
+      label: "Allow Changing UserID of Other Users Items",
+      description: "If checked, this user can modify the userIds of Work Type Item, i.e. ability to change to a different userid or add additional userids."
     },
     {
-      label: "Disallow Sending e-Mail to more than 10 Recipients",
-      description: "If checked, it will not allow this user to send email to more than 10 recipients."
+      label: "View Dynamic Views of", 
+      isToggleGroup: true,
+      toggleOptions: [
+        { label: "All", description: "This user can view Work Type items belonging to other users." },
+        { label: "Self", description: "This user can view Work Type items belonging to his userid." },
+        { label: "None", description: "This user cannot view any Work Type items." },
+        { label: "Users", description: "Only selected user's items views by this user." }
+      ]
     },
     {
-      label: "Allow Alert Setup",
-      description: "If checked, this user can set up alerts."
+      label: "Export PDF/ MS Excel (Item)",
+      description: "If checked, this user can export Work Type list views to PDF/Excel spreadsheets."
     },
     {
-      label: "Disallow Save Password",
-      description: "If checked, this user cannot save passwords."
+      label: "Disallow Creating Multiple Items (Bulk Import)",
+      description: "If checked, this user cannot import multiple items using 'import' feature."
     },
     {
-      label: "Enable Session Timeout",
-      description: "If checked, this user will have a session timeout."
+      label: "Allow Merge Duplicates",
+      description: "If checked, this user can merge duplicate Work Type records."
     },
-    {
-      label: "Cannot See Other Teams' Users",
-      description: "If checked, this user cannot see other teams' users."
-    },
-    {
-      label: "Export Reports",
-      description: "If checked, this user can export reports."
-    },
-
-  ]},
+  ]
+}
+,
 
 
   { label: "Companies", permissions: [
     { 
-      label: "Manager User Accounts (Admin)", 
-      description: "If checked, this user can create, modify and delete users and can manager all user permissions/privileges."
+      label: "Modify Items of", 
+      
+      isToggleGroup: true,
+      toggleOptions: [
+        { label: "All", description: "This user can modify all Company Items for all users." },
+        { label: "Self", description: "This user can modify Company items belonging to his userid." },
+        { label: "None", description: "This user cannot modify any Company Items." },
+        { label: "Users", description: "This user can modify Company items of only selected users." }
+      ]
     },
     {
-      label: "Export Data of All",
-      description: "If checked, this user can export all the items of the other users except his userid."
+      label: "Delete Items of", 
+      
+      isToggleGroup: true,
+      toggleOptions: [
+        { label: "All", description: "This user can delete all companies Items for all users." },
+        { label: "Self", description: "This user can delete companies items belonging to his userid." },
+        { label: "None", description: "This user cannot delete any of the companies items." },
+        { label: "Users", description: "This user can delete companies items of only selected users." }
+      ]
     },
     {
-      label: "Sync. with Outlook",
-      description: "If checked, this user can sync data (Emails, Calendar) between PMS and Outlook."
+      label: "Mark as Private When a New Item is Created",
+      description: "If checked, it will create a private company Items automatically for this user whenever a new company Item is created."
+    },
+    
+    {
+      label: "These Users Can See My Private Items", 
+      
+      isToggleGroup: true,
+      toggleOptions: [
+        { label: "All", description: "Everybody can see this user’s private company Items." },
+        // { label: "Self", description: "This user can delete companies items belonging to his userid." },
+        { label: "None", description: "Nobody can see this user’s private company Items." },
+        { label: "Users", description: "Only selected users can see this user’s private company Items." }
+      ]
+    },
+    
+    {
+      label: "Can See Other Users Private Items",
+      description: "If checked, this user can see other users private company Items."
     },
     {
-      label: "Run Reports",
-      description: "If checked, this user can run reports.  "
-    },
-    {
-      label: "Run Dashboard",
-      description: "If checked, this user can run the dashboard."
-    },
-    {
-      label: "Allow Sending Emails",
-      description: "If checked, this user can send emails from PMS."
-    },
-    {
-      label: "Disallow Sending e-Mail to more than 10 Recipients",
-      description: "If checked, it will not allow this user to send email to more than 10 recipients."
-    },
-    {
-      label: "Allow Alert Setup",
-      description: "If checked, this user can set up alerts."
-    },
-    {
-      label: "Disallow Save Password",
-      description: "If checked, this user cannot save passwords."
-    },
-    {
-      label: "Enable Session Timeout",
-      description: "If checked, this user will have a session timeout."
-    },
-    {
-      label: "Cannot See Other Teams' Users",
-      description: "If checked, this user cannot see other teams' users."
-    },
-    {
-      label: "Export Reports",
-      description: "If checked, this user can export reports."
+      label: "Allow Changing UserID of Other Users Items",
+      description: "If checked, this user can modify the userIds of company Item, i.e. ability to change to a different userid or add additional userids."
     },
 
+     {
+      label: "View Dynamic Views of", 
+      
+      isToggleGroup: true,
+      toggleOptions: [
+        { label: "All", description: "This user can view company ietsms belonging to other users." },
+        { label: "Self", description: "This user can view company ietsms belonging to his userid." },
+        { label: "None", description: "This user cannot view any company items." },
+        { label: "Users", description: "Only selected user's items views by this user." }
+      ]
+    },
+    {
+      label: "Export PDF/ MS Excel (Item)",
+      description: "If checked, this user can export companies list views to PDF/Excel spreadsheets."
+    },
+    {
+      label: "Disallow Creating Multiple Items (Bulk Import)",
+      description: "If checked, this user cannot import multiple items using 'import' feature."
+    },
+    {
+      label: "Allow Merge Duplicates",
+      description: "If checked, this user can merge duplicate company records."
+    },
   ]},
 
-  { label: "Contacts", permissions: [
+  {
+  label: "Contacts",
+  permissions: [
     { 
-      label: "Manager User Accounts (Admin)", 
-      description: "If checked, this user can create, modify and delete users and can manager all user permissions/privileges."
+      label: "Modify Items of", 
+      isToggleGroup: true,
+      toggleOptions: [
+        { label: "All", description: "This user can modify all Contact Items for all users." },
+        { label: "Self", description: "This user can modify Contact items belonging to his userid." },
+        { label: "None", description: "This user cannot modify any Contact Items." },
+        { label: "Users", description: "This user can modify Contact items of only selected users." }
+      ]
     },
     {
-      label: "Export Data of All",
-      description: "If checked, this user can export all the items of the other users except his userid."
+      label: "Delete Items of", 
+      isToggleGroup: true,
+      toggleOptions: [
+        { label: "All", description: "This user can delete all Contact Items for all users." },
+        { label: "Self", description: "This user can delete Contact items belonging to his userid." },
+        { label: "None", description: "This user cannot delete any of the Contact items." },
+        { label: "Users", description: "This user can delete Contact items of only selected users." }
+      ]
     },
     {
-      label: "Sync. with Outlook",
-      description: "If checked, this user can sync data (Emails, Calendar) between PMS and Outlook."
+      label: "Mark as Private When a New Item is Created",
+      description: "If checked, it will create a private Contact Item automatically for this user whenever a new Contact Item is created."
     },
     {
-      label: "Run Reports",
-      description: "If checked, this user can run reports.  "
+      label: "These Users Can See My Private Items", 
+      isToggleGroup: true,
+      toggleOptions: [
+        { label: "All", description: "Everybody can see this user’s private Contact Items." },
+        { label: "None", description: "Nobody can see this user’s private Contact Items." },
+        { label: "Users", description: "Only selected users can see this user’s private Contact Items." }
+      ]
     },
     {
-      label: "Run Dashboard",
-      description: "If checked, this user can run the dashboard."
+      label: "Can See Other Users Private Items",
+      description: "If checked, this user can see other users private Contact Items."
     },
     {
-      label: "Allow Sending Emails",
-      description: "If checked, this user can send emails from PMS."
+      label: "Allow Changing UserID of Other Users Items",
+      description: "If checked, this user can modify the userIds of Contact Item, i.e. ability to change to a different userid or add additional userids."
     },
     {
-      label: "Disallow Sending e-Mail to more than 10 Recipients",
-      description: "If checked, it will not allow this user to send email to more than 10 recipients."
+      label: "View Dynamic Views of", 
+      isToggleGroup: true,
+      toggleOptions: [
+        { label: "All", description: "This user can view Contact items belonging to other users." },
+        { label: "Self", description: "This user can view Contact items belonging to his userid." },
+        { label: "None", description: "This user cannot view any Contact items." },
+        { label: "Users", description: "Only selected user's items views by this user." }
+      ]
     },
     {
-      label: "Allow Alert Setup",
-      description: "If checked, this user can set up alerts."
+      label: "Export PDF/ MS Excel (Item)",
+      description: "If checked, this user can export Contact list views to PDF/Excel spreadsheets."
     },
     {
-      label: "Disallow Save Password",
-      description: "If checked, this user cannot save passwords."
+      label: "Disallow Creating Multiple Items (Bulk Import)",
+      description: "If checked, this user cannot import multiple items using 'import' feature."
     },
     {
-      label: "Enable Session Timeout",
-      description: "If checked, this user will have a session timeout."
+      label: "Allow Merge Duplicates",
+      description: "If checked, this user can merge duplicate Contact records."
     },
-    {
-      label: "Cannot See Other Teams' Users",
-      description: "If checked, this user cannot see other teams' users."
-    },
-    {
-      label: "Export Reports",
-      description: "If checked, this user can export reports."
-    },
+  ]
+},
 
-  ]},
-  { label: "Employees", permissions: [
+  {
+  label: "Employee",
+  permissions: [
     { 
-      label: "Manager User Accounts (Admin)", 
-      description: "If checked, this user can create, modify and delete users and can manager all user permissions/privileges."
+      label: "Modify Items of", 
+      isToggleGroup: true,
+      toggleOptions: [
+        { label: "All", description: "This user can modify all Employee Items for all users." },
+        { label: "Self", description: "This user can modify Employee items belonging to his userid." },
+        { label: "None", description: "This user cannot modify any Employee Items." },
+        { label: "Users", description: "This user can modify Employee items of only selected users." }
+      ]
     },
     {
-      label: "Export Data of All",
-      description: "If checked, this user can export all the items of the other users except his userid."
+      label: "Delete Items of", 
+      isToggleGroup: true,
+      toggleOptions: [
+        { label: "All", description: "This user can delete all Employee Items for all users." },
+        { label: "Self", description: "This user can delete Employee items belonging to his userid." },
+        { label: "None", description: "This user cannot delete any of the Employee items." },
+        { label: "Users", description: "This user can delete Employee items of only selected users." }
+      ]
     },
     {
-      label: "Sync. with Outlook",
-      description: "If checked, this user can sync data (Emails, Calendar) between PMS and Outlook."
+      label: "Mark as Private When a New Item is Created",
+      description: "If checked, it will create a private Employee Item automatically for this user whenever a new Employee Item is created."
     },
     {
-      label: "Run Reports",
-      description: "If checked, this user can run reports.  "
+      label: "These Users Can See My Private Items", 
+      isToggleGroup: true,
+      toggleOptions: [
+        { label: "All", description: "Everybody can see this user’s private Employee Items." },
+        { label: "None", description: "Nobody can see this user’s private Employee Items." },
+        { label: "Users", description: "Only selected users can see this user’s private Employee Items." }
+      ]
     },
     {
-      label: "Run Dashboard",
-      description: "If checked, this user can run the dashboard."
+      label: "Can See Other Users Private Items",
+      description: "If checked, this user can see other users private Employee Items."
     },
     {
-      label: "Allow Sending Emails",
-      description: "If checked, this user can send emails from PMS."
+      label: "Allow Changing UserID of Other Users Items",
+      description: "If checked, this user can modify the userIds of Employee Item, i.e. ability to change to a different userid or add additional userids."
     },
     {
-      label: "Disallow Sending e-Mail to more than 10 Recipients",
-      description: "If checked, it will not allow this user to send email to more than 10 recipients."
+      label: "View Dynamic Views of", 
+      isToggleGroup: true,
+      toggleOptions: [
+        { label: "All", description: "This user can view Employee items belonging to other users." },
+        { label: "Self", description: "This user can view Employee items belonging to his userid." },
+        { label: "None", description: "This user cannot view any Employee items." },
+        { label: "Users", description: "Only selected user's items views by this user." }
+      ]
     },
     {
-      label: "Allow Alert Setup",
-      description: "If checked, this user can set up alerts."
+      label: "Export PDF/ MS Excel (Item)",
+      description: "If checked, this user can export Employee list views to PDF/Excel spreadsheets."
     },
     {
-      label: "Disallow Save Password",
-      description: "If checked, this user cannot save passwords."
+      label: "Disallow Creating Multiple Items (Bulk Import)",
+      description: "If checked, this user cannot import multiple items using 'import' feature."
     },
     {
-      label: "Enable Session Timeout",
-      description: "If checked, this user will have a session timeout."
+      label: "Allow Merge Duplicates",
+      description: "If checked, this user can merge duplicate Employee records."
     },
-    {
-      label: "Cannot See Other Teams' Users",
-      description: "If checked, this user cannot see other teams' users."
-    },
-    {
-      label: "Export Reports",
-      description: "If checked, this user can export reports."
-    },
+  ]
+},
 
-  ]},
 
   { label: "Projects",  permissions: [
     { 
@@ -6924,12 +7030,21 @@ const permissionTabs = [
 
 // Example checked state (you can make this dynamic per user)
 const [checkedPermissions, setCheckedPermissions] = useState({})
+const [toggleSelections, setToggleSelections] = useState({}) // For exclusive toggles
 
 const handlePermissionChange = (tabIdx, permIdx) => {
   const key = `${tabIdx}-${permIdx}`
   setCheckedPermissions(prev => ({
     ...prev,
     [key]: !prev[key]
+  }))
+}
+
+const handleToggleChange = (tabIdx, permIdx, toggleIdx) => {
+  const key = `${tabIdx}-${permIdx}`
+  setToggleSelections(prev => ({
+    ...prev,
+    [key]: toggleIdx
   }))
 }
 
@@ -7280,44 +7395,128 @@ const handlePermissionChange = (tabIdx, permIdx) => {
   <div className="permission-list">
   <div className="row">
     {permissionTabs[selectedPermissionTab]?.permissions?.map((permission, i) => (
-      <div key={i} className="col-md-6 mb-2 pe-0">
+      <div key={i} className="col-md-12 mb-2 pe-0">
         <div className="d-flex" style={{ 
           border: '1px solid #eee',
           backgroundColor: '#fff',
           borderRadius: '6px',
-          fontSize: '0.85rem',
+          fontSize: '15px',
           color: '#6C757D',
           padding: '10px',
           height: '100%',
           borderLeft: '1px solid #eee',
         }}>
-          <Checkbox
-            id={`perm-${selectedPermissionTab}-${i}`}
-            checked={checkedPermissions[`${selectedPermissionTab}-${i}`] || false}
-            onChange={() => handlePermissionChange(selectedPermissionTab, i)}
-          />
-          <div className="d-flex justify-content-between ml-2" style={{ width: "100%", }}>
-            <label htmlFor={`perm-${selectedPermissionTab}-${i}`} className="d-block font-weight-bold mb-1" style={{fontWeight: '500', color: '#212529'}}>
-              {typeof permission === 'object' ? permission.label : permission}
-            </label>
-            {/* {typeof permission === 'object' && permission.description && (
-              <div 
-                className="pl-1 py-1 mt-1 line-height-1.1"
-               
-              >
-                {permission.description}
+          {permission.isToggleGroup ? (
+            // Special handling for toggle groups
+            <div style={{ width: "100%" }}>
+              <div className="row align-items-center">
+                <div className="col-3 pt-0 pb-0">
+                  <label 
+                    className={`d-block font-weight-bold permission-label-${selectedPermissionTab}-${i}`}
+                    style={{
+                      fontWeight: '500', 
+                      color: '#212529',
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      cursor: 'help'
+                    }}
+                  >
+                    {permission.label}
+                  </label>
+                  <Tooltip 
+                    target={`.permission-label-${selectedPermissionTab}-${i}`} 
+                    content={permission.label}
+                    position="top"
+                  />
+                </div>
+                <div className="col-9 pt-0 pb-0">
+                  <div className="toggle-options">
+                    <div className="row">
+                      {permission.toggleOptions?.map((toggle, toggleIdx) => (
+                        <div key={toggleIdx} className="col-3 pt-0 pb-0">
+                          <div className="" style={{ 
+                            // border: '1px solid rgb(238, 238, 238)', 
+                            // borderRadius: '6px', 
+                            // padding: '6px 8px', 
+                            // backgroundColor: 'rgb(255, 255, 255)',
+                            // minHeight: '20px'
+                          }}>
+                            <div 
+                              className={`d-flex justify-content-between align-items-center toggle-container-${selectedPermissionTab}-${i}-${toggleIdx}`}
+                              style={{ cursor: 'pointer' }}
+                            >
+                              <div className="d-flex justify-content-between align-items-center">
+                              <div className="d-flex justify-content-center">
+                                <Checkbox 
+                                  id={`toggle-${selectedPermissionTab}-${i}-${toggleIdx}`}
+                                  checked={toggleSelections[`${selectedPermissionTab}-${i}`] === toggleIdx} 
+                                  onChange={(e) => handleToggleChange(selectedPermissionTab, i, toggleIdx)} 
+                                />
+                              </div>
+                              <label htmlFor={`toggle-${selectedPermissionTab}-${i}-${toggleIdx}`} className="d-block mt-1 ml-1" style={{fontSize: '15px', fontWeight: '500'}}>
+                                {toggle.label}
+                              </label>
+                              </div>
+                            </div>
+                            <Tooltip 
+                              target={`.toggle-container-${selectedPermissionTab}-${i}-${toggleIdx}`}
+                              content={toggle.description}
+                              position="top"
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    
+                    {/* Conditional MultiSelect dropdown for "Users" option */}
+                    {toggleSelections[`${selectedPermissionTab}-${i}`] === 3 && (
+                      <div className="d-flex justify-content-end align-items-center mt-3">
+                        <label className="d-block mb-0 me-2" style={{fontSize: '15px', fontWeight: '500', color: '#212529'}}>
+                          Select Users
+                        </label>
+                        <MultiSelect
+                          value={privateDrop}
+                          onChange={e => setPrivateDrop(e.value)}
+                          options={PrivetDropdownValues}
+                          optionLabel="name"
+                          optionValue="value"
+                          placeholder="Select Users"
+                          className="w-25"
+                          style={{border: '1px solid #ced4da'}}
+                          display="comma"
+                          maxSelectedLabels={10}
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
-            )} */}
-             <span>
-              <Tooltip target={`.info-icon-${selectedPermissionTab}-${i}`} />
-              <i 
-                className={`pi pi-info-circle info-icon-${selectedPermissionTab}-${i}`} 
-                data-pr-tooltip={typeof permission === 'object' ? permission.description : ''}
-                data-pr-position="left"
-                style={{ cursor: 'pointer' }}
-              ></i>
-            </span>
-          </div>
+            </div>
+          ) : (
+            // Regular checkbox handling
+            <>
+              <Checkbox
+                id={`perm-${selectedPermissionTab}-${i}`}
+                checked={checkedPermissions[`${selectedPermissionTab}-${i}`] || false}
+                onChange={() => handlePermissionChange(selectedPermissionTab, i)}
+              />
+              <div className="d-flex justify-content-between ml-2" style={{ width: "100%", }}>
+                <label htmlFor={`perm-${selectedPermissionTab}-${i}`} className="d-block font-weight-bold mb-1" style={{fontWeight: '500', color: '#212529'}}>
+                  {typeof permission === 'object' ? permission.label : permission}
+                </label>
+                <span>
+                  <Tooltip target={`.info-icon-${selectedPermissionTab}-${i}`} />
+                  <i 
+                    className={`pi pi-info-circle info-icon-${selectedPermissionTab}-${i}`} 
+                    data-pr-tooltip={typeof permission === 'object' ? permission.description : ''}
+                    data-pr-position="left"
+                    style={{ cursor: 'pointer' }}
+                  ></i>
+                </span>
+              </div>
+            </>
+          )}
         </div>
       </div>
     )) || <p>No permissions available for this section</p>}
@@ -7541,33 +7740,105 @@ const handlePermissionChange = (tabIdx, permIdx) => {
                                     height: '100%',
                                     borderLeft: '1px solid #eee',
                                   }}>
-                                    <Checkbox
-                                      id={`perm-${selectedPermissionTab}-${i}`}
-                                      checked={checkedPermissions[`${selectedPermissionTab}-${i}`] || false}
-                                      onChange={() => handlePermissionChange(selectedPermissionTab, i)}
-                                    />
-                                    <div className="d-flex justify-content-between ml-2" style={{ width: "100%", }}>
-                                      <label htmlFor={`perm-${selectedPermissionTab}-${i}`} className="d-block font-weight-bold mb-1" style={{fontWeight: '500', color: '#212529'}}>
-                                        {typeof permission === 'object' ? permission.label : permission}
-                                      </label>
-                                      {/* {typeof permission === 'object' && permission.description && (
-                                        <div 
-                                          className="pl-1 py-1 mt-1 line-height-1.1"
-                                        
-                                        >
-                                          {permission.description}
+                                    {permission.isToggleGroup ? (
+                                      // Special handling for toggle groups
+                                      <div style={{ width: "100%" }}>
+                                        <div className="d-flex justify-content-between mb-2">
+                                          <label className="d-block font-weight-bold" style={{fontWeight: '500', color: '#212529'}}>
+                                            {permission.label}
+                                          </label>
+                                          <span>
+                                            <Tooltip target={`.info-icon-${selectedPermissionTab}-${i}`} />
+                                            <i 
+                                              className={`pi pi-info-circle info-icon-${selectedPermissionTab}-${i}`} 
+                                              data-pr-tooltip={permission.description}
+                                              data-pr-position="left"
+                                              style={{ cursor: 'pointer' }}
+                                            ></i>
+                                          </span>
                                         </div>
-                                      )} */}
-                                      <span>
-                                        <Tooltip target={`.info-icon-${selectedPermissionTab}-${i}`} />
-                                        <i 
-                                          className={`pi pi-info-circle info-icon-${selectedPermissionTab}-${i}`} 
-                                          data-pr-tooltip={typeof permission === 'object' ? permission.description : ''}
-                                          data-pr-position="left"
-                                          style={{ cursor: 'pointer' }}
-                                        ></i>
-                                      </span>
-                                    </div>
+                                        <div className="toggle-options ml-3">
+                                          <div className="row" style={{ border: '1px solid #ddd', borderRadius: '6px', padding: '10px', margin: '0', backgroundColor: '#f8f9fa' }}>
+                                            {permission.toggleOptions?.map((toggle, toggleIdx) => (
+                                              <div key={toggleIdx} className="col-3">
+                                                <div className="d-flex align-items-center justify-content-center" style={{ 
+                                                  border: '1px solid #e0e0e0', 
+                                                  borderRadius: '4px', 
+                                                  padding: '8px', 
+                                                  backgroundColor: '#fff',
+                                                  minHeight: '50px'
+                                                }}>
+                                                  <div className="text-center">
+                                                    <div className="card flex justify-content-center">
+                                                      <InputSwitch 
+                                                        checked={toggleSelections[`${selectedPermissionTab}-${i}`] === toggleIdx} 
+                                                        onChange={(e) => handleToggleChange(selectedPermissionTab, i, toggleIdx)} 
+                                                      />
+                                                    </div>
+                                                    <label htmlFor={`toggle-${selectedPermissionTab}-${i}-${toggleIdx}`} className="d-block mt-1" style={{fontSize: '0.8rem', fontWeight: '500'}}>
+                                                      {toggle.label}
+                                                    </label>
+                                                    <span className="d-block mt-1">
+                                                      <Tooltip target={`.toggle-info-icon-${selectedPermissionTab}-${i}-${toggleIdx}`} />
+                                                      <i 
+                                                        className={`pi pi-info-circle toggle-info-icon-${selectedPermissionTab}-${i}-${toggleIdx}`} 
+                                                        data-pr-tooltip={toggle.description}
+                                                        data-pr-position="top"
+                                                        style={{ cursor: 'pointer', fontSize: '0.7rem', color: '#6c757d' }}
+                                                      ></i>
+                                                    </span>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            ))}
+                                          </div>
+                                        </div>
+                                        
+                                        {/* Conditional MultiSelect dropdown for "Users" option */}
+                                        {toggleSelections[`${selectedPermissionTab}-${i}`] === 3 && (
+                                          <div className="mt-3">
+                                            <label className="d-block mb-2" style={{fontSize: '0.9rem', fontWeight: '500', color: '#212529'}}>
+                                              Select Users:
+                                            </label>
+                                            <MultiSelect
+                                              value={privateDrop}
+                                              onChange={e => setPrivateDrop(e.value)}
+                                              options={PrivetDropdownValues}
+                                              optionLabel="name"
+                                              optionValue="value"
+                                              placeholder="Select Users"
+                                              className="w-full"
+                                              style={{border: '1px solid #ced4da'}}
+                                              display="comma"
+                                              maxSelectedLabels={10}
+                                            />
+                                          </div>
+                                        )}
+                                      </div>
+                                    ) : (
+                                      // Regular checkbox handling
+                                      <>
+                                        <Checkbox
+                                          id={`perm-${selectedPermissionTab}-${i}`}
+                                          checked={checkedPermissions[`${selectedPermissionTab}-${i}`] || false}
+                                          onChange={() => handlePermissionChange(selectedPermissionTab, i)}
+                                        />
+                                        <div className="d-flex justify-content-between ml-2" style={{ width: "100%", }}>
+                                          <label htmlFor={`perm-${selectedPermissionTab}-${i}`} className="d-block font-weight-bold mb-1" style={{fontWeight: '500', color: '#212529'}}>
+                                            {typeof permission === 'object' ? permission.label : permission}
+                                          </label>
+                                          <span>
+                                            <Tooltip target={`.info-icon-${selectedPermissionTab}-${i}`} />
+                                            <i 
+                                              className={`pi pi-info-circle info-icon-${selectedPermissionTab}-${i}`} 
+                                              data-pr-tooltip={typeof permission === 'object' ? permission.description : ''}
+                                              data-pr-position="left"
+                                              style={{ cursor: 'pointer' }}
+                                            ></i>
+                                          </span>
+                                        </div>
+                                      </>
+                                    )}
                                   </div>
                                 </div>
                               )) || <p>No permissions available for this section</p>}

@@ -3468,3 +3468,8 @@ ul {
     color: #000000 !important;
     transition: all 0.3s ease;
 }
+
+.p-inputswitch {
+    width: 3rem !important;
+    height: 1.5rem !important;
+}
