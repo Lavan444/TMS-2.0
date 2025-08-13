@@ -7624,228 +7624,240 @@ const handleToggleChange = (tabIdx, permIdx, toggleIdx) => {
 
 
                                <div className="d-flex mt-2" style={{border: '1px solid #eee', padding: '10px', borderRadius: '6px'}}>
-                              {/* Left sidebar with tabs and headings */}
-                              <div className="mb-2" style={{ minWidth: 200, borderRight: '1px solid #eee', border: '1px solid #eee', borderRadius: '6px' }}>
+    {/* Left sidebar with tabs and headings */}
+    <div style={{ minWidth: 200, borderRight: '1px solid #eee' }}>
 
-                                  {/* Main Group */}
-                          <div className="permission-group">
-                            <h5 style={{ padding: '8px 16px', margin: '0', backgroundColor: '#f8f9fa', fontWeight: 'bold', borderBottom: '1px solid #eee', borderTop: '1px solid #eee' }}>General Settings</h5>
-                            <div
-                              style={{
-                                padding: '10px 16px',
-                                cursor: 'pointer',
-                                background: 0 === selectedPermissionTab ? '#e9ecef' : 'transparent',
-                                fontWeight: 0 === selectedPermissionTab ? 'bold' : 'normal'
-                              }}
-                              onClick={() => setSelectedPermissionTab(0)}
+        {/* Main Group */}
+<div className="permission-group">
+  <h5 style={{ padding: '8px 16px', margin: '0', backgroundColor: '#f8f9fa', fontWeight: 'bold', borderBottom: '1px solid #eee', borderTop: '1px solid #eee' }}>General Settings</h5>
+  <div
+    style={{
+      padding: '10px 16px',
+      cursor: 'pointer',
+      background: 0 === selectedPermissionTab ? '#e9ecef' : 'transparent',
+      fontWeight: 0 === selectedPermissionTab ? 'bold' : 'normal'
+    }}
+    onClick={() => setSelectedPermissionTab(0)}
+  >
+    General
+  </div>
+</div>
+
+
+
+
+      {/* Project Management Group */}
+      <div className="permission-group">
+        <h5 style={{ padding: '8px 16px', margin: '0', backgroundColor: '#f8f9fa', fontWeight: 'bold', borderBottom: '1px solid #eee' }}>Project Management</h5>
+        <div
+          style={{
+            padding: '10px 16px',
+            cursor: 'pointer',
+            background: 1 === selectedPermissionTab ? '#e9ecef' : 'transparent',
+            fontWeight: 1 === selectedPermissionTab ? 'bold' : 'normal'
+          }}
+          onClick={() => setSelectedPermissionTab(1)}
+        >
+          Projects
+        </div>
+        <div
+          style={{
+            padding: '10px 16px',
+            cursor: 'pointer',
+            background: 2 === selectedPermissionTab ? '#e9ecef' : 'transparent',
+            fontWeight: 2 === selectedPermissionTab ? 'bold' : 'normal'
+          }}
+          onClick={() => setSelectedPermissionTab(2)}
+        >
+          WorkType
+        </div>
+      </div>
+      
+      {/* Customer Management Group */}
+      <div className="permission-group">
+        <h5 style={{ padding: '8px 16px', margin: '0', backgroundColor: '#f8f9fa', fontWeight: 'bold', borderBottom: '1px solid #eee', borderTop: '1px solid #eee' }}>Customer Management</h5>
+        <div
+          style={{
+            padding: '10px 16px',
+            cursor: 'pointer',
+            background: 3 === selectedPermissionTab ? '#e9ecef' : 'transparent',
+            fontWeight: 3 === selectedPermissionTab ? 'bold' : 'normal'
+          }}
+          onClick={() => setSelectedPermissionTab(3)}
+        >
+          Companies
+        </div>
+        <div
+          style={{
+            padding: '10px 16px',
+            cursor: 'pointer',
+            background: 4 === selectedPermissionTab ? '#e9ecef' : 'transparent',
+            fontWeight: 4 === selectedPermissionTab ? 'bold' : 'normal'
+          }}
+          onClick={() => setSelectedPermissionTab(4)}
+        >
+          Contacts
+        </div>
+      </div>
+      
+      {/* Team Management Group */}
+      <div className="permission-group">
+        <h5 style={{ padding: '8px 16px', margin: '0', backgroundColor: '#f8f9fa', fontWeight: 'bold', borderBottom: '1px solid #eee', borderTop: '1px solid #eee' }}>Team Management</h5>
+        <div
+          style={{
+            padding: '10px 16px',
+            cursor: 'pointer',
+            background: 5 === selectedPermissionTab ? '#e9ecef' : 'transparent',
+            fontWeight: 5 === selectedPermissionTab ? 'bold' : 'normal'
+          }}
+          onClick={() => setSelectedPermissionTab(5)}
+        >
+          Employee
+        </div>
+      </div>
+
+     
+
+      
+      
+    
+    </div>
+
+    {/* Right content area for permissions */}
+   <div className="p-3" style={{ flex: 1 }}>
+  <h4>{permissionTabs[selectedPermissionTab]?.label || "General"} Permissions</h4>
+  <div className="permission-list">
+  <div className="row">
+    {permissionTabs[selectedPermissionTab]?.permissions?.map((permission, i) => (
+      <div key={i} className="col-md-12 mb-2 pe-0">
+        <div className="d-flex" style={{ 
+          border: '1px solid #eee',
+          backgroundColor: '#fff',
+          borderRadius: '6px',
+          fontSize: '15px',
+          color: '#6C757D',
+          padding: '10px',
+          height: '100%',
+          borderLeft: '1px solid #eee',
+        }}>
+          {permission.isToggleGroup ? (
+            // Special handling for toggle groups
+            <div style={{ width: "100%" }}>
+              <div className="row align-items-center">
+                <div className="col-3 pt-0 pb-0">
+                  <label 
+                    className={`d-block font-weight-bold permission-label-${selectedPermissionTab}-${i}`}
+                    style={{
+                      fontWeight: '500', 
+                      color: '#212529',
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      cursor: 'help'
+                    }}
+                  >
+                    {permission.label}
+                  </label>
+                  <Tooltip 
+                    target={`.permission-label-${selectedPermissionTab}-${i}`} 
+                    content={permission.label}
+                    position="top"
+                  />
+                </div>
+                <div className="col-9 pt-0 pb-0">
+                  <div className="toggle-options">
+                    <div className="row">
+                      {permission.toggleOptions?.map((toggle, toggleIdx) => (
+                        <div key={toggleIdx} className="col-3 pt-0 pb-0">
+                          <div className="" style={{ 
+                            // border: '1px solid rgb(238, 238, 238)', 
+                            // borderRadius: '6px', 
+                            // padding: '6px 8px', 
+                            // backgroundColor: 'rgb(255, 255, 255)',
+                            // minHeight: '20px'
+                          }}>
+                            <div 
+                              className={`d-flex justify-content-between align-items-center toggle-container-${selectedPermissionTab}-${i}-${toggleIdx}`}
+                              style={{ cursor: 'pointer' }}
                             >
-                              General
-                            </div>
-                          </div>
-
-
-
-
-                                {/* Project Management Group */}
-                                <div className="permission-group">
-                                  <h5 style={{ padding: '8px 16px', margin: '0', backgroundColor: '#f8f9fa', fontWeight: 'bold', borderBottom: '1px solid #eee' }}>Project Management</h5>
-                                  <div
-                                    style={{
-                                      padding: '10px 16px',
-                                      cursor: 'pointer',
-                                      background: 1 === selectedPermissionTab ? '#e9ecef' : 'transparent',
-                                      fontWeight: 1 === selectedPermissionTab ? 'bold' : 'normal'
-                                    }}
-                                    onClick={() => setSelectedPermissionTab(1)}
-                                  >
-                                    Projects
-                                  </div>
-                                  <div
-                                    style={{
-                                      padding: '10px 16px',
-                                      cursor: 'pointer',
-                                      background: 2 === selectedPermissionTab ? '#e9ecef' : 'transparent',
-                                      fontWeight: 2 === selectedPermissionTab ? 'bold' : 'normal'
-                                    }}
-                                    onClick={() => setSelectedPermissionTab(2)}
-                                  >
-                                    WorkType
-                                  </div>
-                                </div>
-                                
-                                {/* Customer Management Group */}
-                                <div className="permission-group">
-                                  <h5 style={{ padding: '8px 16px', margin: '0', backgroundColor: '#f8f9fa', fontWeight: 'bold', borderBottom: '1px solid #eee', borderTop: '1px solid #eee' }}>Customer Management</h5>
-                                  <div
-                                    style={{
-                                      padding: '10px 16px',
-                                      cursor: 'pointer',
-                                      background: 3 === selectedPermissionTab ? '#e9ecef' : 'transparent',
-                                      fontWeight: 3 === selectedPermissionTab ? 'bold' : 'normal'
-                                    }}
-                                    onClick={() => setSelectedPermissionTab(3)}
-                                  >
-                                    Companies
-                                  </div>
-                                  <div
-                                    style={{
-                                      padding: '10px 16px',
-                                      cursor: 'pointer',
-                                      background: 4 === selectedPermissionTab ? '#e9ecef' : 'transparent',
-                                      fontWeight: 4 === selectedPermissionTab ? 'bold' : 'normal'
-                                    }}
-                                    onClick={() => setSelectedPermissionTab(4)}
-                                  >
-                                    Contacts
-                                  </div>
-                                </div>
-                                
-                                {/* Team Management Group */}
-                                <div className="permission-group">
-                                  <h5 style={{ padding: '8px 16px', margin: '0', backgroundColor: '#f8f9fa', fontWeight: 'bold', borderBottom: '1px solid #eee', borderTop: '1px solid #eee' }}>Team Management</h5>
-                                  <div
-                                    style={{
-                                      padding: '10px 16px',
-                                      cursor: 'pointer',
-                                      background: 5 === selectedPermissionTab ? '#e9ecef' : 'transparent',
-                                      fontWeight: 5 === selectedPermissionTab ? 'bold' : 'normal'
-                                    }}
-                                    onClick={() => setSelectedPermissionTab(5)}
-                                  >
-                                    Employee
-                                  </div>
-                                </div>
-
-                              
-
-                                
-                                
-                              
+                              <div className="d-flex justify-content-between align-items-center">
+                              <div className="d-flex justify-content-center">
+                                <Checkbox 
+                                  id={`toggle-${selectedPermissionTab}-${i}-${toggleIdx}`}
+                                  checked={toggleSelections[`${selectedPermissionTab}-${i}`] === toggleIdx} 
+                                  onChange={(e) => handleToggleChange(selectedPermissionTab, i, toggleIdx)} 
+                                />
                               </div>
-
-                              {/* Right content area for permissions */}
-                            <div className="p-3" style={{ flex: 1 }}>
-                            <h4>{permissionTabs[selectedPermissionTab]?.label || "General"} Permissions</h4>
-                            <div className="permission-list">
-                            <div className="row">
-                              {permissionTabs[selectedPermissionTab]?.permissions?.map((permission, i) => (
-                                <div key={i} className="col-md-6 mb-2 pe-0">
-                                  <div className="d-flex" style={{ 
-                                    border: '1px solid #eee',
-                                    backgroundColor: '#fff',
-                                    borderRadius: '6px',
-                                    fontSize: '0.85rem',
-                                    color: '#6C757D',
-                                    padding: '10px',
-                                    height: '100%',
-                                    borderLeft: '1px solid #eee',
-                                  }}>
-                                    {permission.isToggleGroup ? (
-                                      // Special handling for toggle groups
-                                      <div style={{ width: "100%" }}>
-                                        <div className="d-flex justify-content-between mb-2">
-                                          <label className="d-block font-weight-bold" style={{fontWeight: '500', color: '#212529'}}>
-                                            {permission.label}
-                                          </label>
-                                          <span>
-                                            <Tooltip target={`.info-icon-${selectedPermissionTab}-${i}`} />
-                                            <i 
-                                              className={`pi pi-info-circle info-icon-${selectedPermissionTab}-${i}`} 
-                                              data-pr-tooltip={permission.description}
-                                              data-pr-position="left"
-                                              style={{ cursor: 'pointer' }}
-                                            ></i>
-                                          </span>
-                                        </div>
-                                        <div className="toggle-options ml-3">
-                                          <div className="row" style={{ border: '1px solid #ddd', borderRadius: '6px', padding: '10px', margin: '0', backgroundColor: '#f8f9fa' }}>
-                                            {permission.toggleOptions?.map((toggle, toggleIdx) => (
-                                              <div key={toggleIdx} className="col-3">
-                                                <div className="d-flex align-items-center justify-content-center" style={{ 
-                                                  border: '1px solid #e0e0e0', 
-                                                  borderRadius: '4px', 
-                                                  padding: '8px', 
-                                                  backgroundColor: '#fff',
-                                                  minHeight: '50px'
-                                                }}>
-                                                  <div className="text-center">
-                                                    <div className="card flex justify-content-center">
-                                                      <InputSwitch 
-                                                        checked={toggleSelections[`${selectedPermissionTab}-${i}`] === toggleIdx} 
-                                                        onChange={(e) => handleToggleChange(selectedPermissionTab, i, toggleIdx)} 
-                                                      />
-                                                    </div>
-                                                    <label htmlFor={`toggle-${selectedPermissionTab}-${i}-${toggleIdx}`} className="d-block mt-1" style={{fontSize: '0.8rem', fontWeight: '500'}}>
-                                                      {toggle.label}
-                                                    </label>
-                                                    <span className="d-block mt-1">
-                                                      <Tooltip target={`.toggle-info-icon-${selectedPermissionTab}-${i}-${toggleIdx}`} />
-                                                      <i 
-                                                        className={`pi pi-info-circle toggle-info-icon-${selectedPermissionTab}-${i}-${toggleIdx}`} 
-                                                        data-pr-tooltip={toggle.description}
-                                                        data-pr-position="top"
-                                                        style={{ cursor: 'pointer', fontSize: '0.7rem', color: '#6c757d' }}
-                                                      ></i>
-                                                    </span>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            ))}
-                                          </div>
-                                        </div>
-                                        
-                                        {/* Conditional MultiSelect dropdown for "Users" option */}
-                                        {toggleSelections[`${selectedPermissionTab}-${i}`] === 3 && (
-                                          <div className="mt-3">
-                                            <label className="d-block mb-2" style={{fontSize: '0.9rem', fontWeight: '500', color: '#212529'}}>
-                                              Select Users:
-                                            </label>
-                                            <MultiSelect
-                                              value={privateDrop}
-                                              onChange={e => setPrivateDrop(e.value)}
-                                              options={PrivetDropdownValues}
-                                              optionLabel="name"
-                                              optionValue="value"
-                                              placeholder="Select Users"
-                                              className="w-full"
-                                              style={{border: '1px solid #ced4da'}}
-                                              display="comma"
-                                              maxSelectedLabels={10}
-                                            />
-                                          </div>
-                                        )}
-                                      </div>
-                                    ) : (
-                                      // Regular checkbox handling
-                                      <>
-                                        <Checkbox
-                                          id={`perm-${selectedPermissionTab}-${i}`}
-                                          checked={checkedPermissions[`${selectedPermissionTab}-${i}`] || false}
-                                          onChange={() => handlePermissionChange(selectedPermissionTab, i)}
-                                        />
-                                        <div className="d-flex justify-content-between ml-2" style={{ width: "100%", }}>
-                                          <label htmlFor={`perm-${selectedPermissionTab}-${i}`} className="d-block font-weight-bold mb-1" style={{fontWeight: '500', color: '#212529'}}>
-                                            {typeof permission === 'object' ? permission.label : permission}
-                                          </label>
-                                          <span>
-                                            <Tooltip target={`.info-icon-${selectedPermissionTab}-${i}`} />
-                                            <i 
-                                              className={`pi pi-info-circle info-icon-${selectedPermissionTab}-${i}`} 
-                                              data-pr-tooltip={typeof permission === 'object' ? permission.description : ''}
-                                              data-pr-position="left"
-                                              style={{ cursor: 'pointer' }}
-                                            ></i>
-                                          </span>
-                                        </div>
-                                      </>
-                                    )}
-                                  </div>
-                                </div>
-                              )) || <p>No permissions available for this section</p>}
+                              <label htmlFor={`toggle-${selectedPermissionTab}-${i}-${toggleIdx}`} className="d-block mt-1 ml-1" style={{fontSize: '15px', fontWeight: '500'}}>
+                                {toggle.label}
+                              </label>
+                              </div>
                             </div>
+                            <Tooltip 
+                              target={`.toggle-container-${selectedPermissionTab}-${i}-${toggleIdx}`}
+                              content={toggle.description}
+                              position="top"
+                            />
                           </div>
-                          </div>
-                            </div>
+                        </div>
+                      ))}
+                    </div>
+                    
+                    {/* Conditional MultiSelect dropdown for "Users" option */}
+                    {toggleSelections[`${selectedPermissionTab}-${i}`] === 3 && (
+                      <div className="d-flex justify-content-end align-items-center mt-3">
+                        <label className="d-block mb-0 me-2" style={{fontSize: '15px', fontWeight: '500', color: '#212529'}}>
+                          Select Users
+                        </label>
+                        <MultiSelect
+                          value={privateDrop}
+                          onChange={e => setPrivateDrop(e.value)}
+                          options={PrivetDropdownValues}
+                          optionLabel="name"
+                          optionValue="value"
+                          placeholder="Select Users"
+                          className="w-25"
+                          style={{border: '1px solid #ced4da'}}
+                          display="comma"
+                          maxSelectedLabels={10}
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            // Regular checkbox handling
+            <>
+              <Checkbox
+                id={`perm-${selectedPermissionTab}-${i}`}
+                checked={checkedPermissions[`${selectedPermissionTab}-${i}`] || false}
+                onChange={() => handlePermissionChange(selectedPermissionTab, i)}
+              />
+              <div className="d-flex justify-content-between ml-2" style={{ width: "100%", }}>
+                <label htmlFor={`perm-${selectedPermissionTab}-${i}`} className="d-block font-weight-bold mb-1" style={{fontWeight: '500', color: '#212529'}}>
+                  {typeof permission === 'object' ? permission.label : permission}
+                </label>
+                <span>
+                  <Tooltip target={`.info-icon-${selectedPermissionTab}-${i}`} />
+                  <i 
+                    className={`pi pi-info-circle info-icon-${selectedPermissionTab}-${i}`} 
+                    data-pr-tooltip={typeof permission === 'object' ? permission.description : ''}
+                    data-pr-position="left"
+                    style={{ cursor: 'pointer' }}
+                  ></i>
+                </span>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+    )) || <p>No permissions available for this section</p>}
+  </div>
+</div>
+</div>
+  </div>
 
                             </div>
 
