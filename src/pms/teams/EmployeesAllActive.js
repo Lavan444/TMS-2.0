@@ -644,41 +644,10 @@ const EmployeeAllActive = () => {
     } catch (error) { }
   }
 
-  const [addCities, setaddCities] = useState([])
+  
 
-  const getcity = async () => {
-    try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_Jobs}/api/v1/cities/`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+ 
 
-      // Transform data if needed to match the Dropdown format
-      const transformedData = response.data.results.map(city => ({
-        name: city.name,
-        code: city.city_id,
-      }))
-      setaddCities(transformedData)
-    } catch (error) { }
-  }
-
-  useEffect(() => {
-    getcity()
-  }, [])
-
-  useEffect(() => {
-    // geteditvaluescondidates()
-    getprimary()
-    // getdocumentsitems()
-  }, [])
-
-  // const [typeInterviewval, settypeInterviewval] = useState([])
-  // const [typeInterviewcontact, settypeInterviewcontact] = useState([])
-  const [appJobStatus, setAppJobStatus] = useState([])
 
   const getjobs = async () => {
     try {
@@ -810,7 +779,7 @@ const EmployeeAllActive = () => {
     {
       id: 2,
       Firstname: "Ruchitha",
-      Lastname: "Kalvala",
+      Lastname: "Emmadi",
       Company: "Vitel Global Communications",
       JobTitle: "Frontend Developer",
       PrimarySkills: "JavaScript, React",
@@ -1937,408 +1906,30 @@ const EmployeeAllActive = () => {
 
   // potential
 
-  const [potentialJobsFilters, setPotentialJobsFilters] = useState({
-    global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-    status: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    jobid: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    job_title: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    candidate: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    contact: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    company: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    date_time: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    user_id: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-  })
+ 
 
-  const potentialJobs = [
-    {
-      status: "Open",
-      jobid: "Job-101",
-      job_title: "Web Developer",
-      candidate: "LavanKumar Kalvala",
-      contact: "Mahesh Kumar Bhoga",
-      company: "Varun Digital Media",
-      date_time: "26-02-2025 10:00 AM",
-      user_id: "Harish",
-    },
-    // {
-    //   status: "In Progress",
-    //   jobid: "POT002",
-    //   job_title: "Cloud Engineer",
-    //   candidate: "Laura Green",
-    //   contact: "laura.green@example.com",
-    //   company: "Cloud Solutions",
-    //   date_time: "2025-02-10 03:45 PM",
-    //   user_id: "77654",
-    // },
-    // {
-    //   status: "Closed",
-    //   jobid: "POT003",
-    //   job_title: "DevOps Specialist",
-    //   candidate: "Kevin Hill",
-    //   contact: "kevin.hill@example.com",
-    //   company: "TechOps Co.",
-    //   date_time: "2025-01-25 09:30 AM",
-    //   user_id: "65432",
-    // },
-  ]
+ 
+  
 
-  const [selectedPotentialJobs, setSelectedPotentialJobs] = useState([])
+ 
+  
 
-  // rejected
 
-  const [rejectedJobsFilters, setRejectedJobsFilters] = useState({
-    global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-    status: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    jobid: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    job_title: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    candidate: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    contact: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    company: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    date_time: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    user_id: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-  })
 
-  const rejectedJobs = [
-    // {
-    //   status: "Rejected",
-    //   jobid: "Job-101",
-    //   job_title: "Web Developer",
-    //   candidate: "Lavan Kumar",
-    //   contact: "Mahesh Kumar Bhoga",
-    //   company: "Varun Digital Media",
-    //   date_time: "2025-02-01 04:30 PM",
-    //   user_id: "Harish",
-    // },
-    // {
-    //   status: "Rejected",
-    //   jobid: "REJECT002",
-    //   job_title: "HR Specialist",
-    //   candidate: "Rachel Green",
-    //   contact: "rachel.green@example.com",
-    //   company: "HumanCorp",
-    //   date_time: "2025-02-02 10:00 AM",
-    //   user_id: "23456",
-    // },
-  ]
+  
 
-  const [selectedRejectedJobs, setSelectedRejectedJobs] = useState([])
+ 
 
-  // interview
-  const [interviewJobsFilters, setInterviewJobsFilters] = useState({
-    global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-    status: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    jobid: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    job_title: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    candidate: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    contact: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    company: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    date_time: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    user_id: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-  })
 
-  const interviewJobs = [
-    {
-      status: "Interview Scheduled",
-      jobid: "Job-101",
-      job_title: "Web Developer",
-      candidate: "LavanKumar Kalvala",
-      contact: "Mahesh Kumar Bhoga",
-      company: "Varun Digital Media",
-      date_time: "26-02-2025 10:00 AM",
-      user_id: "Harish",
-    },
-    // {
-    //   status: "Interview Scheduled",
-    //   jobid: "INTERVIEW002",
-    //   job_title: "UI/UX Designer",
-    //   candidate: "Chloe Brown",
-    //   contact: "chloe.brown@example.com",
-    //   company: "Creative Studios",
-    //   date_time: "2025-03-06 11:00 AM",
-    //   user_id: "67890",
-    // },
-    // {
-    //   status: "Interview Completed",
-    //   jobid: "INTERVIEW003",
-    //   job_title: "Data Scientist",
-    //   candidate: "Oliver Harris",
-    //   contact: "oliver.harris@example.com",
-    //   company: "DataWorks",
-    //   date_time: "2025-03-07 02:00 PM",
-    //   user_id: "78901",
-    // },
-    // {
-    //   status: "Interview Scheduled",
-    //   jobid: "INTERVIEW004",
-    //   job_title: "Product Manager",
-    //   candidate: "Emily Davis",
-    //   contact: "emily.davis@example.com",
-    //   company: "Productive Inc.",
-    //   date_time: "2025-03-08 04:00 PM",
-    //   user_id: "89012",
-    // },
-    // {
-    //   status: "Interview Scheduled",
-    //   jobid: "INTERVIEW004",
-    //   job_title: "Product Manager",
-    //   candidate: "Emily Davis",
-    //   contact: "emily.davis@example.com",
-    //   company: "Productive Inc.",
-    //   date_time: "2025-03-08 04:00 PM",
-    //   user_id: "89012",
-    // },
-  ]
+  
 
-  const [selectedInterviewJobs, setSelectedInterviewJobs] = useState([])
 
-  // submitted
+  
 
-  const [submittedJobsFilters, setSubmittedJobsFilters] = useState({
-    global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-    status: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    jobid: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    job_title: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    candidate: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    contact: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    company: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    date_time: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    user_id: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-  })
 
-  const submittedJobs = [
-    {
-      status: "Submitted",
-      jobid: "Job-101",
-      job_title: "Web Developer",
-      candidate: "LavanKumar Kalvala",
-      contact: "Mahesh Kumar Bhoga",
-      company: "Varun Digital Media",
-      date_time: "26-02-2025 10:00 AM",
-      user_id: "Harish",
-    },
 
-    // {
-    //   status: "Submitted",
-    //   jobid: "SUB002",
-    //   job_title: "Software Engineer",
-    //   candidate: "Jane Smith",
-    //   contact: "jane.smith@example.com",
-    //   company: "TechWorld",
-    //   date_time: "2025-03-02 11:30 AM",
-    //   user_id: "23456",
-    // },
-    // {
-    //   status: "Submitted",
-    //   jobid: "SUB003",
-    //   job_title: "Product Manager",
-    //   candidate: "Alex Lee",
-    //   contact: "alex.lee@example.com",
-    //   company: "InnovateX",
-    //   date_time: "2025-03-03 02:00 PM",
-    //   user_id: "34567",
-    // },
-    // {
-    //   status: "Submitted",
-    //   jobid: "SUB004",
-    //   job_title: "Marketing Specialist",
-    //   candidate: "Emily Davis",
-    //   contact: "emily.davis@example.com",
-    //   company: "MarketMinds",
-    //   date_time: "2025-03-04 09:15 AM",
-    //   user_id: "45678",
-    // },
-    // {
-    //   status: "Submitted",
-    //   jobid: "SUB003",
-    //   job_title: "Product Manager",
-    //   candidate: "Alex Lee",
-    //   contact: "alex.lee@example.com",
-    //   company: "InnovateX",
-    //   date_time: "2025-03-03 02:00 PM",
-    //   user_id: "34567",
-    // },
-    // {
-    //   status: "Submitted",
-    //   jobid: "SUB004",
-    //   job_title: "Marketing Specialist",
-    //   candidate: "Emily Davis",
-    //   contact: "emily.davis@example.com",
-    //   company: "MarketMinds",
-    //   date_time: "2025-03-04 09:15 AM",
-    //   user_id: "45678",
-    // },
-    // {
-    //   status: "Submitted",
-    //   jobid: "SUB003",
-    //   job_title: "Product Manager",
-    //   candidate: "Alex Lee",
-    //   contact: "alex.lee@example.com",
-    //   company: "InnovateX",
-    //   date_time: "2025-03-03 02:00 PM",
-    //   user_id: "34567",
-    // },
-    // {
-    //   status: "Submitted",
-    //   jobid: "SUB004",
-    //   job_title: "Marketing Specialist",
-    //   candidate: "Emily Davis",
-    //   contact: "emily.davis@example.com",
-    //   company: "MarketMinds",
-    //   date_time: "2025-03-04 09:15 AM",
-    //   user_id: "45678",
-    // },
-    // {
-    //   status: "Submitted",
-    //   jobid: "SUB003",
-    //   job_title: "Product Manager",
-    //   candidate: "Alex Lee",
-    //   contact: "alex.lee@example.com",
-    //   company: "InnovateX",
-    //   date_time: "2025-03-03 02:00 PM",
-    //   user_id: "34567",
-    // },
-    // {
-    //   status: "Submitted",
-    //   jobid: "SUB004",
-    //   job_title: "Marketing Specialist",
-    //   candidate: "Emily Davis",
-    //   contact: "emily.davis@example.com",
-    //   company: "MarketMinds",
-    //   date_time: "2025-03-04 09:15 AM",
-    //   user_id: "45678",
-    // },
-  ]
+  
 
-  const [selectedSubmittedJobs, setSelectedSubmittedJobs] = useState([])
-
-  // offer
-  const [offerJobsFilters, setOfferJobsFilters] = useState({
-    global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-    status: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    jobid: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    job_title: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    candidate: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    contact: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    company: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    date_time: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    user_id: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-  })
-
-  const offerJobs = [
-    {
-      status: "Offer Extended",
-      jobid: "Job-101",
-      job_title: "Web Developer",
-      candidate: "LavanKumar Kalvala",
-      contact: "Mahesh Kumar Bhoga",
-      company: "Varun Digital Media",
-      date_time: "26-02-2025 10:00 AM",
-      user_id: "Harish",
-    },
-    // {
-    //   status: "Offer Extended",
-    //   jobid: "OFFER002",
-    //   job_title: "Backend Developer",
-    //   candidate: "Sophie Turner",
-    //   contact: "sophie.turner@example.com",
-    //   company: "Tech Universe",
-    //   date_time: "2025-03-06 02:15 PM",
-    //   user_id: "67890",
-    // },
-    // {
-    //   status: "Offer Accepted",
-    //   jobid: "OFFER003",
-    //   job_title: "Frontend Developer",
-    //   candidate: "Michael Johnson",
-    //   contact: "michael.johnson@example.com",
-    //   company: "DevWorks",
-    //   date_time: "2025-03-07 11:45 AM",
-    //   user_id: "78901",
-    // },
-    // {
-    //   status: "Offer Declined",
-    //   jobid: "OFFER004",
-    //   job_title: "Project Manager",
-    //   candidate: "Olivia Adams",
-    //   contact: "olivia.adams@example.com",
-    //   company: "PM Solutions",
-    //   date_time: "2025-03-08 09:00 AM",
-    //   user_id: "89012",
-    // },
-  ]
-
-  const [selectedOfferJobs, setSelectedOfferJobs] = useState([])
-
-  // placed
-
-  const [placedJobsFilters, setPlacedJobsFilters] = useState({
-    global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-    status: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    jobid: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    job_title: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    candidate: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    contact: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    company: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    date_time: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-    user_id: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-  })
-
-  const placedJobs = [
-    {
-      status: "Placed",
-      jobid: "Job-101",
-      job_title: "Web Developer",
-      candidate: "LavanKumar Kalvala",
-      contact: "Mahesh Kumar Bhoga",
-      company: "Varun Digital Media",
-      date_time: "26-02-2025 10:00 AM",
-      user_id: "Harish",
-    },
-    // {
-    //   status: "Placed",
-    //   jobid: "PLACED002",
-    //   job_title: "Cloud Architect",
-    //   candidate: "Daniela Brooks",
-    //   contact: "daniela.brooks@example.com",
-    //   company: "Cloud Masters",
-    //   date_time: "2025-02-16 11:00 AM",
-    //   user_id: "67890",
-    // },
-    // {
-    //   status: "Placed",
-    //   jobid: "PLACED003",
-    //   job_title: "Product Designer",
-    //   candidate: "Ethan White",
-    //   contact: "ethan.white@example.com",
-    //   company: "DesignWorks",
-    //   date_time: "2025-02-17 02:30 PM",
-    //   user_id: "78901",
-    // },
-    // {
-    //   status: "Placed",
-    //   jobid: "PLACED004",
-    //   job_title: "Marketing Director",
-    //   candidate: "Olivia King",
-    //   contact: "olivia.king@example.com",
-    //   company: "Growth Strategies",
-    //   date_time: "2025-02-18 04:00 PM",
-    //   user_id: "89012",
-    // },
-    // {
-    //   status: "Placed",
-    //   jobid: "PLACED004",
-    //   job_title: "Marketing Director",
-    //   candidate: "Olivia King",
-    //   contact: "olivia.king@example.com",
-    //   company: "Growth Strategies",
-    //   date_time: "2025-02-18 04:00 PM",
-    //   user_id: "89012",
-    // },
-  ]
-
-  const [selectedPlacedJobs, setSelectedPlacedJobs] = useState([])
-
-  // view form pipeline ends
 
   // view form notes starts
   const [isEditorVisible, setEditorVisible] = useState(false) // Manage editor visibility
@@ -3472,41 +3063,7 @@ const EmployeeAllActive = () => {
                   )}
                 </span>
 
-                <span className="drop-ac">
-                  {/* <EmailAC /> */}
-
-                  {/* <CascadeSelect
-                    // value={selectedActSms}
-                    options={actSmsOptions}
-                    optionLabel="name"
-                    optionGroupLabel="name"
-                    optionGroupChildren={["subItems", "subItems"]}
-                    className="md:w-8rem me-1"
-                    breakpoint="767px"
-                    placeholder="SMS"
-                  /> */}
-{/* 
-                  <CascadeSelect
-                    // value={selectedSchedule}
-                    onChange={handleScheduleChange}
-                    options={actScheduleOptions}
-                    optionLabel="name"
-                    optionGroupLabel="name"
-                    className="md:w-10rem me-1"
-                    optionGroupChildren={["subItems", "subItems"]}
-                    breakpoint="767px"
-                    placeholder="Schedule"
-                  /> */}
-
-                  {/* <SubmitCandidatetoJob />
-
-                  {selectedCustomers.length > 1 && (
-                    <TalentScan />
-                  )}
-
-                  <LinkJobs /> */}
-
-                </span>
+               
               </Col>
 
               <Col xxl={2} xl={12} lg={12} sm={12}>
@@ -3517,49 +3074,7 @@ const EmployeeAllActive = () => {
                     <Notes />
                   )}
 
-                  {/* <div className="clr-icons">
-                    <Toast ref={toast} />
-                    <FileUpload
-                      mode="basic"
-                      name="demo[]"
-                      url="/api/upload"
-                      accept="image/*"
-                      maxFileSize={1000000}
-                      onUpload={onUpload}
-                      chooseLabel="" // Remove text
-                      chooseOptions={{
-                        className: "p-button p-button-icon-only mr-1 icons-btn",
-                        icon: "pi pi-file-import",
-                        iconOnly: true,
-                      }}
-                    />
-                  </div> */}
-
-                  {/* <FileUpload mode="basic" name="demo[]" url="/api/upload" accept="image/*"  uploadHandler={customBase64Uploader} /> */}
-
-                  {/* <Tooltip
-                    target=".import"
-                    content="Export"
-                    position="top"
-                    style={{ marginBottom: "5px" }}
-                  />
-                  <FileUpload
-                    mode="basic"
-                    accept="/"
-                    name="demo[]"
-                    customUpload
-                    data-pr-tooltip="Import Resume"
-                    tooltip="Import Resume"
-                    auto
-                    uploadHandler={customBase64Uploader}
-                    chooseLabel=""
-                    chooseOptions={{
-                      className:
-                        "p-button p-button-icon-only mr-1 icons-btn import",
-                      icon: "pi pi-file-import",
-                      iconOnly: true,
-                    }}
-                  /> */}
+                  
 
                   <Tooltip
                     target=".export"
@@ -3839,20 +3354,7 @@ const EmployeeAllActive = () => {
                           filter
                           filterPlaceholder=""
                         />
-                        {/* <Column
-                          field="AvailabilityDate"
-                          header="Availability Date"
-                          sortable
-                          filter
-                          filterPlaceholder=""
-                        /> */}
-                        {/* <Column
-                            field="ResumeAttachment"
-                            header="Resume Attachment"
-                            sortable
-                            filter
-                            filterPlaceholder=""
-                          /> */}
+                      
                       </DataTable>
                     </div>
                   </section>
